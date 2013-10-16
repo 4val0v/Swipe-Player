@@ -7,10 +7,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import net.illusor.swipeplayer.R;
+import net.illusor.swipeplayer.fragments.FolderBrowserFragment;
 import net.illusor.swipeplayer.fragments.PlaylistFragment;
+import org.apache.commons.lang.NotImplementedException;
 
 public class SwipeActivity extends FragmentActivity
 {
+    private Fragment fragmentPlaylist, fragmentFolderBrowser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -33,13 +37,31 @@ public class SwipeActivity extends FragmentActivity
         @Override
         public Fragment getItem(int i)
         {
-            return new PlaylistFragment();
+            switch (i)
+            {
+                case 0:
+                {
+                    if (fragmentPlaylist == null)
+                        fragmentPlaylist = new PlaylistFragment();
+
+                    return fragmentPlaylist;
+                }
+                case 1:
+                {
+                    if (fragmentFolderBrowser == null)
+                        fragmentFolderBrowser = new FolderBrowserFragment();
+
+                    return fragmentFolderBrowser;
+                }
+                default:
+                    throw new NotImplementedException();
+            }
         }
 
         @Override
         public int getCount()
         {
-            return 5;
+            return 2;
         }
     }
 }

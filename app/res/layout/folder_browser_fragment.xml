@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout android:id="@+id/id_fb_header"
+                  android:orientation="horizontal"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
+
+        <ImageButton android:id="@+id/id_fb_up"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:src="@drawable/icon"/>
+
+        <Spinner android:id="@+id/id_fb_folders"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <ListView android:id="@+id/id_fb_list"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"/>
+
+</LinearLayout>

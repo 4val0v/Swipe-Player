@@ -14,7 +14,7 @@
 
     <properties>
         <android.platform.version>2.3.3</android.platform.version>
-        <android.support.version>r13</android.support.version>
+        <android.support.version>18.0.0</android.support.version>
         <junit.version>4.11</junit.version>
         <commons.lang.version>2.6</commons.lang.version>
     </properties>
@@ -33,7 +33,7 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.google.android</groupId>
+            <groupId>com.android.support</groupId>
             <artifactId>support-v4</artifactId>
             <version>${android.support.version}</version>
         </dependency>

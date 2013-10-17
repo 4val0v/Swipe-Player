@@ -11,6 +11,8 @@ import android.widget.*;
 import net.illusor.swipeplayer.R;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class FolderBrowserFragment extends Fragment implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener, View.OnClickListener
 {
@@ -97,6 +99,7 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
 
         File[] files = folder.listFiles();
         if (files == null) return;
+        Arrays.sort(files, new FileSortComparator());
 
         for (File file : files)
             this.filesAdapter.add(file);
@@ -158,12 +161,38 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
         @Override
         public View getView(int position, View convertView, ViewGroup parent)
         {
-            TextView view = (TextView)super.getView(position, convertView, parent);
+            View view = super.getView(position, convertView, parent);
+            View text = this.formatTextView(view, position);
+            return text;
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent)
+        {
+            View view = super.getDropDownView(position, convertView, parent);
+            View text = this.formatTextView(view, position);
+            return text;
+        }
+
+        private View formatTextView(View view, int position)
+        {
+            TextView text = (TextView)view;
 
             File item = this.getItem(position);
-            view.setText(item.getName());
+            String content = item.getName().isEmpty() ? "Root" : item.getName();
+            text.setText(content);
 
             return view;
+        }
+    }
+
+    private class FileSortComparator implements Comparator<File>
+    {
+        @Override
+        public int compare(File file, File file2)
+        {
+            int result = file.getName().compareToIgnoreCase(file2.getName());
+            return result;
         }
     }
 }

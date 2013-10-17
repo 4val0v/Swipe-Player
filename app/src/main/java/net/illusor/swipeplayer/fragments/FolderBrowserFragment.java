@@ -1,9 +1,16 @@
 package net.illusor.swipeplayer.fragments;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.AsyncTaskLoader;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +18,10 @@ import android.widget.*;
 import net.illusor.swipeplayer.R;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 
 public class FolderBrowserFragment extends Fragment implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener, View.OnClickListener
 {
@@ -193,6 +202,65 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
         {
             int result = file.getName().compareToIgnoreCase(file2.getName());
             return result;
+        }
+    }
+
+    private class MediaContentLoader implements LoaderManager.LoaderCallbacks<List<File>>
+    {
+        @Override
+        public Loader<List<File>> onCreateLoader(int id, Bundle args)
+        {
+            return new FileLoader(getActivity());
+        }
+
+        @Override
+        public void onLoadFinished(Loader<List<File>> loader, List<File> data)
+        {
+        }
+
+        @Override
+        public void onLoaderReset(Loader<List<File>> loader)
+        {
+        }
+    }
+
+    private class FileLoader extends AsyncTaskLoader<List<File>>
+    {
+        private File directory;
+
+        private FileLoader(Context context)
+        {
+            super(context);
+        }
+
+        @Override
+        public List<File> loadInBackground()
+        {
+            List<File> result = new ArrayList<>();
+
+            File[] files = this.directory.listFiles();
+            Arrays.sort(files, new FileSortComparator());
+
+            for (File file : files)
+            {
+                if (file.isDirectory())
+                    result.add(file);
+            }
+
+            Cursor cursor = this.getContext().getContentResolver().query(MediaStore.Audio.Media.INTERNAL_CONTENT_URI,
+                    new String[] { MediaStore.Audio.Media.TITLE, MediaStore.Audio.Media.DATA, MediaStore.Audio.Media.DURATION },
+                    MediaStore.Audio.Media.DURATION + " like ?%", new String[] { directory.getAbsolutePath() }, "UPPER(" + MediaStore.Audio.Media.TITLE + ") ASC");
+
+
+
+            cursor.close();
+
+            return null;
+        }
+
+        private void setDirectory(File directory)
+        {
+            this.directory = directory;
         }
     }
 }

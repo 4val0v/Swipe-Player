@@ -1,15 +1,11 @@
 package net.illusor.swipeplayer.fragments;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
-import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +14,9 @@ import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.domain.AudioFile;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
-public class FolderBrowserFragment extends Fragment implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener, View.OnClickListener
+public class FolderBrowserFragment extends Fragment implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener
 {
     private Spinner listFolders;
     private FoldersAdapter foldersAdapter;
@@ -36,16 +31,13 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
         this.foldersAdapter = new FoldersAdapter(this.getActivity());
 
         View view = inflater.inflate(R.layout.folder_browser_fragment, container, false);
-        ListView listFiles = (ListView)view.findViewById(R.id.id_fb_list);
+        ListView listFiles = (ListView) view.findViewById(R.id.id_fb_list);
         listFiles.setAdapter(this.filesAdapter);
         listFiles.setOnItemClickListener(this);
 
-        this.listFolders = (Spinner)view.findViewById(R.id.id_fb_folders);
+        this.listFolders = (Spinner) view.findViewById(R.id.id_fb_folders);
         this.listFolders.setAdapter(this.foldersAdapter);
         this.listFolders.setOnItemSelectedListener(this);
-
-        ImageButton btnBack = (ImageButton)view.findViewById(R.id.id_fb_up);
-        btnBack.setOnClickListener(this);
 
         foldersAdapter.setFolder(currentDirectory);
 
@@ -67,20 +59,9 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
     {
-        File selected = (File)adapterView.getItemAtPosition(i);
+        File selected = (File) adapterView.getItemAtPosition(i);
         if (selected.isDirectory())
             foldersAdapter.setFolder(selected);
-    }
-
-    //endregion
-
-    //region OnClickListener
-
-    @Override
-    public void onClick(View view)
-    {
-        if (view.getId() == R.id.id_fb_up && this.currentDirectory.getParentFile() != null)
-            this.directoryOpen(this.currentDirectory.getParentFile());
     }
 
     //endregion
@@ -90,7 +71,7 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
     {
-        File selected = (File)adapterView.getSelectedItem();
+        File selected = (File) adapterView.getSelectedItem();
         this.directoryOpen(selected);
     }
 
@@ -118,7 +99,7 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
         private FilesAdapter(Context context)
         {
             super(context, 0);
-            this.inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
         @Override
@@ -133,10 +114,10 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
 
             File item = this.getItem(position);
 
-            TextView text = (TextView)view.findViewById(R.id.id_file_name);
+            TextView text = (TextView) view.findViewById(R.id.id_file_name);
             text.setText(item.getName());
 
-            ImageView image = (ImageView)view.findViewById(R.id.id_file_icon);
+            ImageView image = (ImageView) view.findViewById(R.id.id_file_icon);
             if (item.isDirectory())
                 image.setVisibility(View.VISIBLE);
             else
@@ -169,7 +150,7 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
         @Override
         public View getView(int position, View convertView, ViewGroup parent)
         {
-            TextView view = (TextView)super.getView(position, convertView, parent);
+            TextView view = (TextView) super.getView(position, convertView, parent);
             this.formatTextView(view, position);
             return view;
         }
@@ -177,7 +158,7 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
         @Override
         public View getDropDownView(int position, View convertView, ViewGroup parent)
         {
-            TextView view = (TextView)super.getDropDownView(position, convertView, parent);
+            TextView view = (TextView) super.getDropDownView(position, convertView, parent);
             this.formatTextView(view, position);
             return view;
         }
@@ -196,7 +177,7 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
         @Override
         public Loader<List<AudioFile>> onCreateLoader(int i, Bundle bundle)
         {
-            File directory = (File)bundle.getSerializable(ARGS_DIRECTORY);
+            File directory = (File) bundle.getSerializable(ARGS_DIRECTORY);
             return new AudioLoader(getActivity(), directory);
         }
 

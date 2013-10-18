@@ -10,11 +10,6 @@
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content">
 
-        <ImageButton android:id="@+id/id_fb_up"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:src="@drawable/icon"/>
-
         <Spinner android:id="@+id/id_fb_folders"
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content"/>

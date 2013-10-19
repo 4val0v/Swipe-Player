@@ -6,7 +6,7 @@ import java.io.File;
 public class AudioFile extends File
 {
     private String title, artist;
-    private Duration duration;
+    private long duration;
 
     public AudioFile(String path)
     {
@@ -14,9 +14,11 @@ public class AudioFile extends File
 
         if (this.isFile())
             throw new IllegalStateException("This constructor is for audio directories. Do not use it to declare files");
+
+        this.title = this.getName();
     }
 
-    public AudioFile(String path, String title, String artist, Duration duration)
+    public AudioFile(String path, String title, String artist, long duration)
     {
         super(path);
 
@@ -38,7 +40,7 @@ public class AudioFile extends File
         return artist;
     }
 
-    public Duration getDuration()
+    public long getDuration()
     {
         return duration;
     }

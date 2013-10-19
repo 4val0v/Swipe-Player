@@ -2,7 +2,6 @@ package net.illusor.swipeplayer.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -11,47 +10,73 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import net.illusor.swipeplayer.R;
+import net.illusor.swipeplayer.activities.SwipeActivity;
 import net.illusor.swipeplayer.domain.AudioFile;
+import net.illusor.swipeplayer.widgets.ListItemFolder;
 
 import java.io.File;
 import java.util.List;
 
 public class FolderBrowserFragment extends Fragment implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener
 {
-    private Spinner listFolders;
-    private FoldersAdapter foldersAdapter;
-    private FilesAdapter filesAdapter;
-    private File currentDirectory = Environment.getRootDirectory();
+    //region Factory
+
+    private static final String PARAM_FOLDER = "folder";
+
+    public static FolderBrowserFragment newInstance(File folder)
+    {
+        Bundle args = new Bundle();
+        args.putSerializable(PARAM_FOLDER, folder);
+        FolderBrowserFragment fragment = new FolderBrowserFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    //endregion
+
+    private Spinner navigationHistory;
+    private ListView listAudioFiles;
+
+    private File currentFolder;
     private AudioLoaderCallbacks audioLoaderCallbacks = new AudioLoaderCallbacks();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        this.filesAdapter = new FilesAdapter(this.getActivity());
-        this.foldersAdapter = new FoldersAdapter(this.getActivity());
-
         View view = inflater.inflate(R.layout.folder_browser_fragment, container, false);
-        ListView listFiles = (ListView) view.findViewById(R.id.id_fb_list);
-        listFiles.setAdapter(this.filesAdapter);
-        listFiles.setOnItemClickListener(this);
+        this.listAudioFiles = (ListView) view.findViewById(R.id.id_fb_audio_files);
+        this.listAudioFiles.setOnItemClickListener(this);
 
-        this.listFolders = (Spinner) view.findViewById(R.id.id_fb_folders);
-        this.listFolders.setAdapter(this.foldersAdapter);
-        this.listFolders.setOnItemSelectedListener(this);
-
-        foldersAdapter.setFolder(currentDirectory);
+        this.navigationHistory = (Spinner) view.findViewById(R.id.id_fb_nav_history);
+        this.currentFolder = (File)this.getArguments().getSerializable(PARAM_FOLDER);
 
         return view;
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState)
+    public void onStart()
     {
-        super.onActivityCreated(savedInstanceState);
+        super.onStart();
 
-        Bundle args = new Bundle();
-        args.putSerializable(AudioLoaderCallbacks.ARGS_DIRECTORY, this.currentDirectory);
-        this.getLoaderManager().initLoader(0, args, this.audioLoaderCallbacks);
+        List<File> navigationItems = ((SwipeActivity)getActivity()).getNavigationHistory();
+        NavigationAdapter adapter = new NavigationAdapter(this.getActivity(), navigationItems);
+
+        this.navigationHistory.setAdapter(adapter);
+        this.navigationHistory.setSelection(navigationItems.indexOf(this.currentFolder));
+        this.navigationHistory.setOnItemSelectedListener(this);
+
+        this.audioLoaderCallbacks.initLoader();
+    }
+
+    @Override
+    public void onStop()
+    {
+        super.onStop();
+
+        this.navigationHistory.setOnItemSelectedListener(null);
+        this.navigationHistory.setAdapter(null);
+
+        this.audioLoaderCallbacks.quitLoader();
     }
 
     //region OnItemClickListener
@@ -60,8 +85,7 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
     {
         File selected = (File) adapterView.getItemAtPosition(i);
-        if (selected.isDirectory())
-            foldersAdapter.setFolder(selected);
+        ((SwipeActivity)this.getActivity()).directoryOpen(selected);
     }
 
     //endregion
@@ -71,8 +95,8 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
     {
-        File selected = (File) adapterView.getSelectedItem();
-        this.directoryOpen(selected);
+        /*File selected = (File) adapterView.getItemAtPosition(i);
+        ((SwipeActivity) this.getActivity()).directoryOpen(selected);*/
     }
 
     @Override
@@ -83,68 +107,38 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
 
     //endregion
 
-    private void directoryOpen(File folder)
+    private class AudioFilesAdapter extends ArrayAdapter<AudioFile>
     {
-        this.currentDirectory = folder;
-
-        Bundle args = new Bundle();
-        args.putSerializable(AudioLoaderCallbacks.ARGS_DIRECTORY, this.currentDirectory);
-        this.getLoaderManager().restartLoader(0, args, this.audioLoaderCallbacks);
-    }
-
-    private class FilesAdapter extends ArrayAdapter<AudioFile>
-    {
-        private LayoutInflater inflater;
-
-        private FilesAdapter(Context context)
+        private AudioFilesAdapter(Context context)
         {
             super(context, 0);
-            this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent)
         {
-            View view;
+            ListItemFolder view;
 
             if (convertView != null)
-                view = convertView;
+                view = (ListItemFolder)convertView;
             else
-                view = this.inflater.inflate(R.layout.list_item_file, null);
+                view = new ListItemFolder(this.getContext());
 
-            File item = this.getItem(position);
+            AudioFile item = this.getItem(position);
 
-            TextView text = (TextView) view.findViewById(R.id.id_file_name);
-            text.setText(item.getName());
-
-            ImageView image = (ImageView) view.findViewById(R.id.id_file_icon);
-            if (item.isDirectory())
-                image.setVisibility(View.VISIBLE);
-            else
-                image.setVisibility(View.INVISIBLE);
+            view.setTitle(item.getTitle());
+            view.setIsFolder(item.isDirectory());
+            view.setHasPlaylistFiles(false);
 
             return view;
         }
     }
 
-    private class FoldersAdapter extends ArrayAdapter<File>
+    private class NavigationAdapter extends ArrayAdapter<File>
     {
-        private FoldersAdapter(Context context)
+        private NavigationAdapter(Context context, List<File> navigationHistory)
         {
-            super(context, R.layout.list_item_folder, 0);
-        }
-
-        private void setFolder(File folder)
-        {
-            this.clear();
-
-            while (folder != null)
-            {
-                this.insert(folder, 0);
-                folder = folder.getParentFile();
-            }
-
-            listFolders.setSelection(foldersAdapter.getCount());
+            super(context, R.layout.list_item_nav_history, 0, navigationHistory);
         }
 
         @Override
@@ -172,11 +166,15 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
 
     private class AudioLoaderCallbacks implements LoaderManager.LoaderCallbacks<List<AudioFile>>
     {
-        private static final String ARGS_DIRECTORY = "directory";
+        private static final String ARGS_DIRECTORY = "folder";
 
-        @Override
+        private AudioFilesAdapter audioFilesAdapter;
+
         public Loader<List<AudioFile>> onCreateLoader(int i, Bundle bundle)
         {
+            this.audioFilesAdapter = new AudioFilesAdapter(getActivity());
+            listAudioFiles.setAdapter(this.audioFilesAdapter);
+
             File directory = (File) bundle.getSerializable(ARGS_DIRECTORY);
             return new AudioLoader(getActivity(), directory);
         }
@@ -184,17 +182,28 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
         @Override
         public void onLoadFinished(Loader<List<AudioFile>> listLoader, List<AudioFile> audioFiles)
         {
-            filesAdapter.clear();
+            audioFilesAdapter.clear();
             for (AudioFile file : audioFiles)
-                filesAdapter.add(file);
+                audioFilesAdapter.add(file);
         }
 
         @Override
         public void onLoaderReset(Loader<List<AudioFile>> listLoader)
         {
-            filesAdapter.clear();
+            listAudioFiles.setAdapter(null);
+            this.audioFilesAdapter = null;
+        }
+
+        public void initLoader()
+        {
+            Bundle args = new Bundle();
+            args.putSerializable(AudioLoaderCallbacks.ARGS_DIRECTORY, currentFolder);
+            getLoaderManager().initLoader(0, args, this);
+        }
+
+        public void quitLoader()
+        {
+            getLoaderManager().destroyLoader(0);
         }
     }
-
-
 }

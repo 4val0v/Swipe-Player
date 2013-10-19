@@ -3,21 +3,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:background="#010129">
 
-    <LinearLayout android:id="@+id/id_fb_header"
-                  android:orientation="horizontal"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content">
+    <Spinner android:id="@+id/id_fb_nav_history"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"/>
 
-        <Spinner android:id="@+id/id_fb_folders"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-
-    <ListView android:id="@+id/id_fb_list"
+    <ListView android:id="@+id/id_fb_audio_files"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content"/>
+              android:layout_height="match_parent"
+              android:divider="@android:color/transparent"/>
 
 </LinearLayout>

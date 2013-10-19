@@ -1,19 +1,28 @@
 package net.illusor.swipeplayer.activities;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.view.ViewGroup;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.fragments.FolderBrowserFragment;
 import net.illusor.swipeplayer.fragments.PlaylistFragment;
-import org.apache.commons.lang.NotImplementedException;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class SwipeActivity extends FragmentActivity
 {
-    private Fragment fragmentPlaylist, fragmentFolderBrowser;
+    private SwipePagerAdapter pagerAdapter;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -22,46 +31,124 @@ public class SwipeActivity extends FragmentActivity
 
         this.setContentView(R.layout.swipe_activity);
 
-        FragmentPagerAdapter fragmentPagerAdapter = new FragmentPagerAdapter(this.getSupportFragmentManager());
-        ViewPager viewPager = (ViewPager)this.findViewById(R.id.id_swipe_view_pager);
-        viewPager.setAdapter(fragmentPagerAdapter);
+        this.pagerAdapter = new SwipePagerAdapter(this.getSupportFragmentManager());
+
+        this.viewPager = (ViewPager) this.findViewById(R.id.id_swipe_view_pager);
+        this.viewPager.setAdapter(this.pagerAdapter);
+        this.viewPager.setCurrentItem(this.pagerAdapter.getCount() - 1);
     }
 
-    private class FragmentPagerAdapter extends FragmentStatePagerAdapter
+    public void directoryOpen(File folder)
     {
-        private FragmentPagerAdapter(FragmentManager fm)
+        int index = this.pagerAdapter.open(folder);
+        this.viewPager.setCurrentItem(index, true);
+    }
+
+    public List<File> getNavigationHistory()
+    {
+        return this.pagerAdapter.getFolders();
+    }
+
+    private class SwipePagerAdapter extends ListPagerAdapter
+    {
+        private FolderBrowserController controller = new FolderBrowserController(Environment.getRootDirectory());
+
+        private SwipePagerAdapter(FragmentManager fm)
         {
             super(fm);
         }
 
         @Override
-        public Fragment getItem(int i)
+        protected Fragment getFragment(int position)
         {
-            switch (i)
+            if (position == this.getCount() - 1)
             {
-                case 0:
-                {
-                    if (fragmentPlaylist == null)
-                        fragmentPlaylist = new PlaylistFragment();
-
-                    return fragmentPlaylist;
-                }
-                case 1:
-                {
-                    if (fragmentFolderBrowser == null)
-                        fragmentFolderBrowser = new FolderBrowserFragment();
-
-                    return fragmentFolderBrowser;
-                }
-                default:
-                    throw new NotImplementedException();
+                return new PlaylistFragment();
+            }
+            else
+            {
+                File folder = this.controller.get(position);
+                return FolderBrowserFragment.newInstance(folder);
             }
         }
 
         @Override
-        public int getCount()
+        public int getItemPosition(Object object)
         {
-            return 2;
+            if (object instanceof PlaylistFragment)
+                return this.getCount() - 1;
+
+            return super.getItemPosition(object);
+        }
+
+        public List<File> getFolders()
+        {
+            return this.controller.getFolders();
+        }
+
+        public int open(File folder)
+        {
+            int index = this.controller.open(folder);
+
+            if (index < 0)
+            {
+                this.popFragmentStack(-index);
+                this.pushFragmentStack();
+                this.notifyDataSetChanged();
+                index = 0;
+            }
+            else if (index == 0)
+            {
+                this.pushFragmentStack();
+                this.notifyDataSetChanged();
+            }
+
+            return index;
+        }
+    }
+
+    private class FolderBrowserController
+    {
+        private List<File> folders = new ArrayList<>();
+
+        public FolderBrowserController(File rootFolder)
+        {
+            this.folders.add(rootFolder);
+        }
+
+        public File get(int index)
+        {
+            return this.folders.get(index);
+        }
+
+        public int open(File folder)
+        {
+            int index = this.folders.indexOf(folder);
+            if (index >= 0)
+            {
+                return index;
+            }
+            else
+            {
+                File parent = folder.getParentFile();
+                int parentIndex = this.folders.indexOf(parent);
+                if (parentIndex < 0)
+                    throw new IllegalStateException("Can not navigate to directory which is not child of the rootFolder");
+
+                for (int i = 0; i < parentIndex; i++)
+                    this.folders.remove(0);
+
+                this.folders.add(0, folder);
+
+                return -parentIndex;
+            }
+        }
+
+        public List<File> getFolders()
+        {
+            List<File> copy = new ArrayList<>(this.folders);
+            Collections.reverse(copy);
+            return copy;
         }
     }
 }

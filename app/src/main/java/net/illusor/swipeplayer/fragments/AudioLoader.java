@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class AudioLoader extends AsyncTaskLoader<List<AudioFile>>
+class AudioLoader extends AsyncTaskLoader<List<AudioFile>>
 {
     private File directory;
     private List<AudioFile> result;
@@ -36,8 +36,8 @@ public class AudioLoader extends AsyncTaskLoader<List<AudioFile>>
     public List<AudioFile> loadInBackground()
     {
         Cursor cursor = this.getContext().getContentResolver().query(MediaStore.Audio.Media.INTERNAL_CONTENT_URI,
-                new String[]{ MediaStore.Audio.Media.TITLE, MediaStore.Audio.Media.ARTIST, MediaStore.Audio.Media.DURATION, MediaStore.Audio.Media.DATA },
-                MediaStore.Audio.Media.DATA + " like ? and " + MediaStore.Audio.Media.IS_MUSIC + "=1",
+                new String[]{ MediaStore.Audio.Media.DISPLAY_NAME, MediaStore.Audio.Media.ARTIST, MediaStore.Audio.Media.DURATION, MediaStore.Audio.Media.DATA },
+                MediaStore.Audio.Media.DATA + " like ? and " + MediaStore.Audio.Media.IS_MUSIC + "!=0",
                 new String[]{ this.directory.getAbsolutePath() + "%" }, null);
 
         List<AudioFile> mediaObjects = this.getMediaObjects(cursor);
@@ -74,10 +74,10 @@ public class AudioLoader extends AsyncTaskLoader<List<AudioFile>>
         AudioFile result;
         if (separatorPos < 0)
         {
-            String title = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE));
+            String title = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME));
             String author = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));
-            String duration = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION));
-            result = new AudioFile(fileName, title, author, null);
+            long duration = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION));
+            result = new AudioFile(fileName, title, author, duration);
         }
         else
         {

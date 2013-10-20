@@ -41,7 +41,8 @@ public class SwipeActivity extends FragmentActivity
     public void directoryOpen(File folder)
     {
         int index = this.pagerAdapter.open(folder);
-        this.viewPager.setCurrentItem(index, true);
+        int currentIndex = this.viewPager.getCurrentItem();
+        this.viewPager.setCurrentItem(index, Math.abs(index - currentIndex) < 2);
     }
 
     public List<File> getNavigationHistory()

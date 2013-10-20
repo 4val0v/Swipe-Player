@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,12 +46,18 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
     {
         View view = inflater.inflate(R.layout.folder_browser_fragment, container, false);
         this.listAudioFiles = (ListView) view.findViewById(R.id.id_fb_audio_files);
-        this.listAudioFiles.setOnItemClickListener(this);
-
         this.navigationHistory = (Spinner) view.findViewById(R.id.id_fb_nav_history);
-        this.currentFolder = (File)this.getArguments().getSerializable(PARAM_FOLDER);
-
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState)
+    {
+        super.onActivityCreated(savedInstanceState);
+
+        this.navigationHistory.setOnItemSelectedListener(this);
+        this.listAudioFiles.setOnItemClickListener(this);
+        this.currentFolder = (File)this.getArguments().getSerializable(PARAM_FOLDER);
     }
 
     @Override
@@ -58,13 +65,11 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
     {
         super.onStart();
 
-        List<File> navigationItems = ((SwipeActivity)getActivity()).getNavigationHistory();
+        List<File> navigationItems = this.getSwipeActivity().getNavigationHistory();
         NavigationAdapter adapter = new NavigationAdapter(this.getActivity(), navigationItems);
 
         this.navigationHistory.setAdapter(adapter);
         this.navigationHistory.setSelection(navigationItems.indexOf(this.currentFolder));
-        this.navigationHistory.setOnItemSelectedListener(this);
-
         this.audioLoaderCallbacks.initLoader();
     }
 
@@ -72,10 +77,7 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
     public void onStop()
     {
         super.onStop();
-
-        this.navigationHistory.setOnItemSelectedListener(null);
         this.navigationHistory.setAdapter(null);
-
         this.audioLoaderCallbacks.quitLoader();
     }
 
@@ -95,8 +97,15 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
     {
-        /*File selected = (File) adapterView.getItemAtPosition(i);
-        ((SwipeActivity) this.getActivity()).directoryOpen(selected);*/
+        NavigationAdapter adapter = (NavigationAdapter)this.navigationHistory.getAdapter();
+        if (this.currentFolder == adapter.navigationHistory.get(i))
+            return;
+
+        Log.d("SWIPE", this.currentFolder.toString() + " " + i);
+        File selected = (File) adapterView.getItemAtPosition(i);
+        this.getSwipeActivity().directoryOpen(selected);
+
+        this.navigationHistory.setSelection(adapter.navigationHistory.indexOf(this.currentFolder));
     }
 
     @Override
@@ -107,11 +116,16 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
 
     //endregion
 
+    private SwipeActivity getSwipeActivity()
+    {
+        return (SwipeActivity)this.getActivity();
+    }
+
     private class AudioFilesAdapter extends ArrayAdapter<AudioFile>
     {
-        private AudioFilesAdapter(Context context)
+        private AudioFilesAdapter(Context context, List<AudioFile> files)
         {
-            super(context, 0);
+            super(context, 0, files);
         }
 
         @Override
@@ -136,9 +150,12 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
 
     private class NavigationAdapter extends ArrayAdapter<File>
     {
+        private List<File> navigationHistory;
+
         private NavigationAdapter(Context context, List<File> navigationHistory)
         {
             super(context, R.layout.list_item_nav_history, 0, navigationHistory);
+            this.navigationHistory = navigationHistory;
         }
 
         @Override
@@ -168,13 +185,8 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
     {
         private static final String ARGS_DIRECTORY = "folder";
 
-        private AudioFilesAdapter audioFilesAdapter;
-
         public Loader<List<AudioFile>> onCreateLoader(int i, Bundle bundle)
         {
-            this.audioFilesAdapter = new AudioFilesAdapter(getActivity());
-            listAudioFiles.setAdapter(this.audioFilesAdapter);
-
             File directory = (File) bundle.getSerializable(ARGS_DIRECTORY);
             return new AudioLoader(getActivity(), directory);
         }
@@ -182,16 +194,13 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
         @Override
         public void onLoadFinished(Loader<List<AudioFile>> listLoader, List<AudioFile> audioFiles)
         {
-            audioFilesAdapter.clear();
-            for (AudioFile file : audioFiles)
-                audioFilesAdapter.add(file);
+            listAudioFiles.setAdapter(new AudioFilesAdapter(getActivity(), audioFiles));
         }
 
         @Override
         public void onLoaderReset(Loader<List<AudioFile>> listLoader)
         {
             listAudioFiles.setAdapter(null);
-            this.audioFilesAdapter = null;
         }
 
         public void initLoader()

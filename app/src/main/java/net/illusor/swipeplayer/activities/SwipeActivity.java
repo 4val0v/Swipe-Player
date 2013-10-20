@@ -5,11 +5,7 @@ import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.View;
-import android.view.ViewGroup;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.fragments.FolderBrowserFragment;
 import net.illusor.swipeplayer.fragments.PlaylistFragment;
@@ -50,7 +46,7 @@ public class SwipeActivity extends FragmentActivity
         return this.pagerAdapter.getFolders();
     }
 
-    private class SwipePagerAdapter extends ListPagerAdapter
+    private static class SwipePagerAdapter extends ListPagerAdapter
     {
         private FolderBrowserController controller = new FolderBrowserController(Environment.getRootDirectory());
 
@@ -89,27 +85,39 @@ public class SwipeActivity extends FragmentActivity
 
         public int open(File folder)
         {
-            int index = this.controller.open(folder);
+            FolderBrowserController.OpenResult open = this.controller.open(folder);
 
-            if (index < 0)
+            switch (open.Result)
             {
-                this.popFragmentStack(-index);
-                this.pushFragmentStack();
-                this.notifyDataSetChanged();
-                index = 0;
+                case FolderBrowserController.OPEN_ITEM_ADDED:
+                {
+                    this.pushFragmentStack();
+                    this.notifyDataSetChanged();
+                    return 0;
+                }
+                case FolderBrowserController.OPEN_ITEMS_REMOVED:
+                {
+                    this.popFragmentStack(open.Argument);
+                    this.pushFragmentStack();
+                    this.notifyDataSetChanged();
+                    return 0;
+                }
+                case FolderBrowserController.OPEN_ITEMS_UNCHANGED:
+                {
+                    return open.Argument;
+                }
+                default:
+                    throw new IllegalStateException();
             }
-            else if (index == 0)
-            {
-                this.pushFragmentStack();
-                this.notifyDataSetChanged();
-            }
-
-            return index;
         }
     }
 
-    private class FolderBrowserController
+    private static class FolderBrowserController
     {
+        public static final int OPEN_ITEM_ADDED = -1;
+        public static final int OPEN_ITEMS_REMOVED = -2;
+        public static final int OPEN_ITEMS_UNCHANGED = -3;
+
         private List<File> folders = new ArrayList<>();
 
         public FolderBrowserController(File rootFolder)
@@ -122,12 +130,12 @@ public class SwipeActivity extends FragmentActivity
             return this.folders.get(index);
         }
 
-        public int open(File folder)
+        public OpenResult open(File folder)
         {
             int index = this.folders.indexOf(folder);
             if (index >= 0)
             {
-                return index;
+                return new OpenResult(OPEN_ITEMS_UNCHANGED, index);
             }
             else
             {
@@ -141,7 +149,7 @@ public class SwipeActivity extends FragmentActivity
 
                 this.folders.add(0, folder);
 
-                return -parentIndex;
+                return parentIndex == 0 ? new OpenResult(OPEN_ITEM_ADDED, 0) : new OpenResult(OPEN_ITEMS_REMOVED, parentIndex);
             }
         }
 
@@ -150,6 +158,18 @@ public class SwipeActivity extends FragmentActivity
             List<File> copy = new ArrayList<>(this.folders);
             Collections.reverse(copy);
             return copy;
+        }
+
+        public class OpenResult
+        {
+            public OpenResult(int result, int argument)
+            {
+                this.Result = result;
+                this.Argument = argument;
+            }
+
+            public int Result;
+            public int Argument;
         }
     }
 }

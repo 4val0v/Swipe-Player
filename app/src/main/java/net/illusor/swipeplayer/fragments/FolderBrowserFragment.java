@@ -66,7 +66,7 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
         super.onStart();
 
         List<File> navigationItems = this.getSwipeActivity().getNavigationHistory();
-        NavigationAdapter adapter = new NavigationAdapter(this.getActivity(), navigationItems);
+        NavigationHistoryAdapter adapter = new NavigationHistoryAdapter(this.getActivity(), navigationItems);
 
         this.navigationHistory.setAdapter(adapter);
         this.navigationHistory.setSelection(navigationItems.indexOf(this.currentFolder));
@@ -97,7 +97,7 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
     {
-        NavigationAdapter adapter = (NavigationAdapter)this.navigationHistory.getAdapter();
+        NavigationHistoryAdapter adapter = (NavigationHistoryAdapter)this.navigationHistory.getAdapter();
         if (this.currentFolder == adapter.navigationHistory.get(i))
             return;
 
@@ -148,11 +148,11 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
         }
     }
 
-    private class NavigationAdapter extends ArrayAdapter<File>
+    private class NavigationHistoryAdapter extends ArrayAdapter<File>
     {
         private List<File> navigationHistory;
 
-        private NavigationAdapter(Context context, List<File> navigationHistory)
+        private NavigationHistoryAdapter(Context context, List<File> navigationHistory)
         {
             super(context, R.layout.list_item_nav_history, 0, navigationHistory);
             this.navigationHistory = navigationHistory;
@@ -177,7 +177,7 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
         private void formatTextView(TextView view, int position)
         {
             File item = this.getItem(position);
-            view.setText(item.getName());
+            view.setText(item.getPath());
         }
     }
 

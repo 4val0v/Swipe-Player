@@ -33,6 +33,12 @@ public class AudioControlPanel extends LinearLayout
         this.title1 = (TextView)this.findViewById(R.id.id_audio_control_title1);
         this.title2 = (TextView)this.findViewById(R.id.id_audio_control_title2);
         this.artist = (TextView)this.findViewById(R.id.id_audio_control_artist);
+    }
+
+    @Override
+    protected void onFinishInflate()
+    {
+        super.onFinishInflate();
 
         this.title1.setTypeface(FontHelper.RobotoMedium);
         this.title2.setTypeface(FontHelper.RobotoMedium);

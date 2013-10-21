@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import net.illusor.swipeplayer.R;
+import net.illusor.swipeplayer.helpers.FontHelper;
 
 public class ListItemFolder extends LinearLayout
 {
@@ -23,10 +24,11 @@ public class ListItemFolder extends LinearLayout
         super(context, attrs);
 
         LayoutInflater.from(context).inflate(R.layout.list_item_folder, this);
-
         this.title = (TextView)this.findViewById(R.id.id_file_title);
         this.iconIsFolder = this.findViewById(R.id.id_file_is_folder);
         this.iconHasPlaylistFiles = this.findViewById(R.id.id_folder_has_playlist_files);
+
+        this.title.setTypeface(FontHelper.PTSansNarrow);
     }
 
     public void setTitle(CharSequence title)

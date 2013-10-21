@@ -27,7 +27,7 @@ public class SwipeActivity extends FragmentActivity
 
         this.setContentView(R.layout.swipe_activity);
 
-        this.pagerAdapter = new SwipePagerAdapter(this.getSupportFragmentManager());
+        this.pagerAdapter = new SwipePagerAdapter(this.getSupportFragmentManager(), Environment.getRootDirectory());
 
         this.viewPager = (ViewPager) this.findViewById(R.id.id_swipe_view_pager);
         this.viewPager.setAdapter(this.pagerAdapter);
@@ -48,11 +48,12 @@ public class SwipeActivity extends FragmentActivity
 
     private static class SwipePagerAdapter extends ListPagerAdapter
     {
-        private FolderBrowserController controller = new FolderBrowserController(Environment.getRootDirectory());
+        private FolderBrowserController controller;
 
-        private SwipePagerAdapter(FragmentManager fm)
+        private SwipePagerAdapter(FragmentManager fm, File rootDirectory)
         {
             super(fm);
+            this.controller = new FolderBrowserController(rootDirectory);
         }
 
         @Override

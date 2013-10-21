@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <drawable name="ColorWhite">#ffffff</drawable>
+    <drawable name="ColorPink">#8d004c</drawable>
+    <drawable name="ColorDarkBlue">#010129</drawable>
+    <drawable name="ColorTransparent">@android:color/transparent</drawable>
+
+</resources>

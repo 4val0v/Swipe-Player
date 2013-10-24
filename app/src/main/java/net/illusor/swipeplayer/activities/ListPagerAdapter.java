@@ -13,9 +13,9 @@ import java.util.List;
 abstract class ListPagerAdapter extends PagerAdapter
 {
     private final FragmentManager fragmentManager;
+    private final List<Fragment> fragments = new ArrayList<>();
+    private final List<Fragment.SavedState> savedStates = new ArrayList<>();
     private FragmentTransaction curTransaction = null;
-    private List<Fragment> fragments = new ArrayList<>();
-    private List<Fragment.SavedState> savedStates = new ArrayList<>();
     private Fragment primaryItem;
 
     protected ListPagerAdapter(FragmentManager mFragmentManager)

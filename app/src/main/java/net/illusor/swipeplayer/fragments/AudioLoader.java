@@ -14,7 +14,7 @@ import java.util.List;
 
 class AudioLoader extends AsyncTaskLoader<List<AudioFile>>
 {
-    private File directory;
+    private final File directory;
     private List<AudioFile> result;
 
     public AudioLoader(Context context, File directory)

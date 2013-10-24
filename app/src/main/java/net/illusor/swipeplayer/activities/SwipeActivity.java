@@ -12,7 +12,6 @@ import net.illusor.swipeplayer.fragments.PlaylistFragment;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class SwipeActivity extends FragmentActivity
@@ -32,6 +31,7 @@ public class SwipeActivity extends FragmentActivity
         this.viewPager = (ViewPager) this.findViewById(R.id.id_swipe_view_pager);
         this.viewPager.setAdapter(this.pagerAdapter);
         this.viewPager.setCurrentItem(this.pagerAdapter.getCount() - 1);
+        this.viewPager.setOnPageChangeListener(new PageChangeListener());
     }
 
     public void directoryOpen(File folder)
@@ -88,36 +88,40 @@ public class SwipeActivity extends FragmentActivity
         {
             FolderBrowserController.OpenResult open = this.controller.open(folder);
 
-            switch (open.Result)
+            switch (open.result)
             {
-                case FolderBrowserController.OPEN_ITEM_ADDED:
+                case FolderBrowserController.FOLDERS_UNCHANGED:
+                    break;
+                case FolderBrowserController.FOLDERS_REMOVED:
                 {
+                    this.popFragmentStack(open.argument);
+                    this.notifyDataSetChanged();
+                    break;
+                }
+                case FolderBrowserController.FOLDERS_RESTRUCTURED:
+                {
+                    this.popFragmentStack(open.argument);
                     this.pushFragmentStack();
                     this.notifyDataSetChanged();
-                    return 0;
+                    break;
                 }
-                case FolderBrowserController.OPEN_ITEMS_REMOVED:
-                {
-                    this.popFragmentStack(open.Argument);
-                    this.pushFragmentStack();
-                    this.notifyDataSetChanged();
-                    return 0;
-                }
-                case FolderBrowserController.OPEN_ITEMS_UNCHANGED:
-                {
-                    return open.Argument;
-                }
-                default:
-                    throw new IllegalStateException();
             }
+
+            return open.argument;
+        }
+
+        public void pop()
+        {
+            this.controller.pop();
+            this.popFragmentStack();
         }
     }
 
     private static class FolderBrowserController
     {
-        public static final int OPEN_ITEM_ADDED = -1;
-        public static final int OPEN_ITEMS_REMOVED = -2;
-        public static final int OPEN_ITEMS_UNCHANGED = -3;
+        public static final int FOLDERS_RESTRUCTURED = -1;
+        public static final int FOLDERS_REMOVED = -2;
+        public static final int FOLDERS_UNCHANGED = -3;
 
         private List<File> folders = new ArrayList<>();
 
@@ -131,12 +135,27 @@ public class SwipeActivity extends FragmentActivity
             return this.folders.get(index);
         }
 
+        public void pop()
+        {
+            this.folders.remove(this.folders.size() - 1);
+        }
+
         public OpenResult open(File folder)
         {
+            int foldersCount = this.folders.size();
             int index = this.folders.indexOf(folder);
+
+            if (index == foldersCount - 1)
+            {
+                return new OpenResult(FOLDERS_UNCHANGED, foldersCount - 1);
+            }
             if (index >= 0)
             {
-                return new OpenResult(OPEN_ITEMS_UNCHANGED, index);
+                int count = this.folders.size();
+                for (int i = index + 1; i < count; i++)
+                    this.folders.remove(this.folders.size() - 1);
+
+                return new OpenResult(FOLDERS_REMOVED, this.folders.size() - 1);
             }
             else
             {
@@ -145,32 +164,53 @@ public class SwipeActivity extends FragmentActivity
                 if (parentIndex < 0)
                     throw new IllegalStateException("Can not navigate to directory which is not child of the rootFolder");
 
-                for (int i = 0; i < parentIndex; i++)
-                    this.folders.remove(0);
+                int count = this.folders.size();
+                for (int i = parentIndex + 1; i < count; i++)
+                    this.folders.remove(this.folders.size() - 1);
 
-                this.folders.add(0, folder);
+                this.folders.add(folder);
 
-                return parentIndex == 0 ? new OpenResult(OPEN_ITEM_ADDED, 0) : new OpenResult(OPEN_ITEMS_REMOVED, parentIndex);
+                return new OpenResult(FOLDERS_RESTRUCTURED, this.folders.size() - 1);
             }
         }
 
         public List<File> getFolders()
         {
-            List<File> copy = new ArrayList<>(this.folders);
-            Collections.reverse(copy);
-            return copy;
+            return new ArrayList<>(this.folders);
         }
 
         public class OpenResult
         {
             public OpenResult(int result, int argument)
             {
-                this.Result = result;
-                this.Argument = argument;
+                this.result = result;
+                this.argument = argument;
             }
 
-            public int Result;
-            public int Argument;
+            public int result;
+            public int argument;
+        }
+    }
+
+    private class PageChangeListener implements ViewPager.OnPageChangeListener
+    {
+        private int currentPageIndex = -1;
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
+        {
+        }
+
+        @Override
+        public void onPageSelected(int position)
+        {
+            this.currentPageIndex = -1;
+
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state)
+        {
         }
     }
 }

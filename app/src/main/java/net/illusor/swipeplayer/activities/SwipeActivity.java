@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.view.ViewGroup;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.fragments.FolderBrowserFragment;
 import net.illusor.swipeplayer.fragments.PlaylistFragment;
@@ -18,6 +19,7 @@ public class SwipeActivity extends FragmentActivity
 {
     private SwipePagerAdapter pagerAdapter;
     private ViewPager viewPager;
+    private PageChangeListener pageChangeListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -27,18 +29,23 @@ public class SwipeActivity extends FragmentActivity
         this.setContentView(R.layout.swipe_activity);
 
         this.pagerAdapter = new SwipePagerAdapter(this.getSupportFragmentManager(), Environment.getRootDirectory());
+        this.pageChangeListener = new PageChangeListener();
 
         this.viewPager = (ViewPager) this.findViewById(R.id.id_swipe_view_pager);
         this.viewPager.setAdapter(this.pagerAdapter);
         this.viewPager.setCurrentItem(this.pagerAdapter.getCount() - 1);
-        this.viewPager.setOnPageChangeListener(new PageChangeListener());
+        this.viewPager.setOnPageChangeListener(this.pageChangeListener);
     }
 
     public void directoryOpen(File folder)
     {
+        this.pageChangeListener.setSuspended(true);
+
         int index = this.pagerAdapter.open(folder);
         int currentIndex = this.viewPager.getCurrentItem();
         this.viewPager.setCurrentItem(index, Math.abs(index - currentIndex) < 2);
+
+        this.pageChangeListener.setSuspended(false);
     }
 
     public List<File> getNavigationHistory()
@@ -48,12 +55,18 @@ public class SwipeActivity extends FragmentActivity
 
     private static class SwipePagerAdapter extends ListPagerAdapter
     {
-        private FolderBrowserController controller;
+        private final FolderBrowserController controller;
 
         private SwipePagerAdapter(FragmentManager fm, File rootDirectory)
         {
             super(fm);
             this.controller = new FolderBrowserController(rootDirectory);
+        }
+
+        @Override
+        public void startUpdate(ViewGroup container)
+        {
+            super.startUpdate(container);
         }
 
         @Override
@@ -110,10 +123,16 @@ public class SwipeActivity extends FragmentActivity
             return open.argument;
         }
 
-        public void pop()
+        public void back()
         {
-            this.controller.pop();
+            this.controller.back();
             this.popFragmentStack();
+            this.notifyDataSetChanged();
+        }
+
+        public int folderPagesCount()
+        {
+            return this.controller.count();
         }
     }
 
@@ -135,7 +154,7 @@ public class SwipeActivity extends FragmentActivity
             return this.folders.get(index);
         }
 
-        public void pop()
+        public void back()
         {
             this.folders.remove(this.folders.size() - 1);
         }
@@ -145,11 +164,11 @@ public class SwipeActivity extends FragmentActivity
             int foldersCount = this.folders.size();
             int index = this.folders.indexOf(folder);
 
-            if (index == foldersCount - 1)
+            if (index == foldersCount - 1)//если мы каким-то образом пытаемся открыть текущую страницу (но такой ситуации возникать не должно)
             {
                 return new OpenResult(FOLDERS_UNCHANGED, foldersCount - 1);
             }
-            if (index >= 0)
+            if (index >= 0)//если открываемая страница уже есть в списке (т.е. если мы используем комбобокс навигации)
             {
                 int count = this.folders.size();
                 for (int i = index + 1; i < count; i++)
@@ -157,7 +176,7 @@ public class SwipeActivity extends FragmentActivity
 
                 return new OpenResult(FOLDERS_REMOVED, this.folders.size() - 1);
             }
-            else
+            else//если мы открываем новую страницу (обычный клик по папке)
             {
                 File parent = folder.getParentFile();
                 int parentIndex = this.folders.indexOf(parent);
@@ -179,6 +198,11 @@ public class SwipeActivity extends FragmentActivity
             return new ArrayList<>(this.folders);
         }
 
+        public int count()
+        {
+            return this.folders.size();
+        }
+
         public class OpenResult
         {
             public OpenResult(int result, int argument)
@@ -194,7 +218,8 @@ public class SwipeActivity extends FragmentActivity
 
     private class PageChangeListener implements ViewPager.OnPageChangeListener
     {
-        private int currentPageIndex = -1;
+        private int currentPageIndex;
+        private boolean isSuspended;
 
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
@@ -204,13 +229,29 @@ public class SwipeActivity extends FragmentActivity
         @Override
         public void onPageSelected(int position)
         {
-            this.currentPageIndex = -1;
-
+            if (!this.isSuspended && this.currentPageIndex != pagerAdapter.folderPagesCount() && position < this.currentPageIndex)
+            {
+                viewPager.postDelayed(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        pagerAdapter.back();
+                    }
+                }, 250);
+            }
+            this.currentPageIndex = position;
         }
 
         @Override
         public void onPageScrollStateChanged(int state)
         {
+            return;
+        }
+
+        public void setSuspended(boolean suspended)
+        {
+            isSuspended = suspended;
         }
     }
 }

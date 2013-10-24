@@ -13,8 +13,8 @@ import net.illusor.swipeplayer.helpers.FontHelper;
 
 public class AudioControlPanel extends LinearLayout
 {
-    private TextView title1, title2, artist;
-    private SeekBar progress;
+    private final TextView title1, title2, artist;
+    private final SeekBar progress;
 
     public AudioControlPanel(Context context)
     {
@@ -30,9 +30,10 @@ public class AudioControlPanel extends LinearLayout
 
         LayoutInflater.from(context).inflate(R.layout.audio_control_panel, this);
 
-        this.title1 = (TextView)this.findViewById(R.id.id_audio_control_title1);
-        this.title2 = (TextView)this.findViewById(R.id.id_audio_control_title2);
-        this.artist = (TextView)this.findViewById(R.id.id_audio_control_artist);
+        this.title1 = (TextView) this.findViewById(R.id.id_audio_control_title1);
+        this.title2 = (TextView) this.findViewById(R.id.id_audio_control_title2);
+        this.artist = (TextView) this.findViewById(R.id.id_audio_control_artist);
+        this.progress = (SeekBar) this.findViewById(R.id.id_audio_control_progress);
     }
 
     @Override

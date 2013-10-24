@@ -39,7 +39,7 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
     private ListView listAudioFiles;
 
     private File currentFolder;
-    private AudioLoaderCallbacks audioLoaderCallbacks = new AudioLoaderCallbacks();
+    private final AudioLoaderCallbacks audioLoaderCallbacks = new AudioLoaderCallbacks();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -64,12 +64,6 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
     public void onStart()
     {
         super.onStart();
-
-        List<File> navigationItems = this.getSwipeActivity().getNavigationHistory();
-        NavigationHistoryAdapter adapter = new NavigationHistoryAdapter(this.getActivity(), navigationItems);
-
-        this.navigationHistory.setAdapter(adapter);
-        this.navigationHistory.setSelection(navigationItems.indexOf(this.currentFolder));
         this.audioLoaderCallbacks.initLoader();
     }
 
@@ -77,8 +71,22 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
     public void onStop()
     {
         super.onStop();
-        this.navigationHistory.setAdapter(null);
         this.audioLoaderCallbacks.quitLoader();
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser)
+    {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if (isVisibleToUser)
+        {
+            List<File> navigationItems = this.getSwipeActivity().getNavigationHistory();
+            NavigationHistoryAdapter adapter = new NavigationHistoryAdapter(this.getActivity(), navigationItems);
+
+            this.navigationHistory.setAdapter(adapter);
+            this.navigationHistory.setSelection(navigationItems.indexOf(this.currentFolder));
+        }
     }
 
     //region OnItemClickListener

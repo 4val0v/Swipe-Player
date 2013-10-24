@@ -126,16 +126,26 @@ abstract class ListPagerAdapter extends PagerAdapter
 
     public void pushFragmentStack()
     {
-        this.fragments.add(0, null);
-        this.savedStates.add(0, null);
+        int playlistFragmentIndex = this.fragments.size() - 1;
+        if (playlistFragmentIndex < 0) playlistFragmentIndex = 0;
+        this.fragments.add(playlistFragmentIndex, null);
+        this.savedStates.add(playlistFragmentIndex, null);
     }
 
-    public void popFragmentStack(int count)
+    public void popFragmentStack(int startIndex)
     {
-        for (int i = 0; i < count; i++)
+        int playlistFragmentIndex = this.fragments.size() - 1;
+        for (int i = startIndex + 1; i < playlistFragmentIndex; i++)
         {
-            this.fragments.remove(0);
-            this.savedStates.remove(0);
+            this.fragments.remove(this.fragments.size() - 2);
+            this.savedStates.remove(this.fragments.size() - 2);
         }
+    }
+
+    public void popFragmentStack()
+    {
+        int prelastElement = this.fragments.size() - 2;
+        this.fragments.remove(prelastElement);
+        this.savedStates.remove(prelastElement);
     }
 }

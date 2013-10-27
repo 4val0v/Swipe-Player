@@ -10,12 +10,17 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import net.illusor.swipeplayer.R;
-import net.illusor.swipeplayer.widgets.ListItemPlaylist;
+import net.illusor.swipeplayer.activities.SwipeActivity;
+import net.illusor.swipeplayer.domain.AudioFile;
+import net.illusor.swipeplayer.widgets.AudioControlView;
+import net.illusor.swipeplayer.widgets.PlaylistItemView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlaylistFragment extends Fragment implements AdapterView.OnItemClickListener
 {
     private ListView listView;
-    private ListItemPlaylist selectedItem;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -30,7 +35,14 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         super.onActivityCreated(savedInstanceState);
 
         String[] playlist = new String[]{"Speak to Me", "Breathe", "On the Run", "Time", "The Great Gig in the Sky", "Money", "Us and Them", "Any Colour You Like", "Us and Them"};
-        ArrayAdapter adapter = new PlaylistAdapter(this.getActivity(), playlist);
+        List<AudioFile> files = new ArrayList<>(playlist.length);
+        for (String item : playlist)
+        {
+            AudioFile file = new AudioFile("file://root/qwerty", item, "Artist Name", 356000);
+            files.add(file);
+        }
+
+        ArrayAdapter adapter = new PlaylistAdapter(this.getActivity(), files);
         this.listView.setAdapter(adapter);
         this.listView.setOnItemClickListener(this);
     }
@@ -38,16 +50,19 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
     {
-        if (this.selectedItem != null)
-            this.selectedItem.setPlaying(false);
-
-        this.selectedItem = (ListItemPlaylist)view;
-        this.selectedItem.setPlaying(true);
+        PlaylistItemView selectedItem = (PlaylistItemView) view;
+        this.getAudioControl().setAudioFile(selectedItem.getAudioFile());
+        this.getAudioControl().setVisibility(View.VISIBLE);
     }
 
-    private class PlaylistAdapter extends ArrayAdapter<String>
+    private AudioControlView getAudioControl()
     {
-        private PlaylistAdapter(Context context, String[] data)
+        return ((SwipeActivity) this.getActivity()).getAudioControl();
+    }
+
+    private class PlaylistAdapter extends ArrayAdapter<AudioFile>
+    {
+        private PlaylistAdapter(Context context, List<AudioFile> data)
         {
             super(context, 0, data);
         }
@@ -55,14 +70,15 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         @Override
         public View getView(int position, View convertView, ViewGroup parent)
         {
-            ListItemPlaylist view;
+            PlaylistItemView view;
 
             if (convertView != null)
-                view = (ListItemPlaylist)convertView;
+                view = (PlaylistItemView) convertView;
             else
-                view = new ListItemPlaylist(this.getContext());
+                view = new PlaylistItemView(this.getContext());
 
-            view.setTitle(this.getItem(position));
+            AudioFile file = this.getItem(position);
+            view.setAudioFile(file);
             return view;
         }
     }

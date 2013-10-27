@@ -7,19 +7,18 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import net.illusor.swipeplayer.R;
-import net.illusor.swipeplayer.helpers.FontHelper;
 
-public class ListItemFolder extends LinearLayout
+public class FolderItemView extends LinearLayout
 {
     private TextView title;
     private View iconIsFolder, iconHasPlaylistFiles;
 
-    public ListItemFolder(Context context)
+    public FolderItemView(Context context)
     {
         this(context, null);
     }
 
-    public ListItemFolder(Context context, AttributeSet attrs)
+    public FolderItemView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
 

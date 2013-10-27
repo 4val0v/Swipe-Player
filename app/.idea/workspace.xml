@@ -43,15 +43,15 @@
     <file path="/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1381334187330" ignored="false" />
     <file path="$APPLICATION_HOME_DIR$/plugins/android/lib/android.jar!/org/jetbrains/android/android.xsd" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1381334275064" ignored="false" />
     <file path="/SwipeActivity.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382635939780" ignored="false" />
-    <file path="/Dummy.txt" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382252247958" ignored="false" />
+    <file path="/Dummy.txt" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382856756795" ignored="false" />
     <file path="/SwipeActivity.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1381335237728" ignored="false" />
-    <file path="/PlaylistFragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1381335524006" ignored="false" />
+    <file path="/PlaylistFragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382861626628" ignored="false" />
     <file path="/PlaylistFragment.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1381335503279" ignored="false" />
     <file path="/fragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382629888365" ignored="false" />
     <file path="/swipe_activity.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382127445493" ignored="false" />
     <file path="/FolderBrowserFragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382635176457" ignored="false" />
-    <file path="/folder_browser_fragment.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382376021049" ignored="false" />
-    <file path="/list_item_folder.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382375140540" ignored="false" />
+    <file path="/folder_browser_fragment.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382859442066" ignored="false" />
+    <file path="/list_item_folder.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382857653926" ignored="false" />
     <file path="/a.dummy" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1381952179130" ignored="false" />
     <file path="/AudioFile.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382175856948" ignored="false" />
     <file path="/AudioLoader.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382632275470" ignored="false" />
@@ -61,19 +61,25 @@
     <file path="/seekbar_layers.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382123670355" ignored="false" />
     <file path="/seekbar_thumb.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382123804946" ignored="false" />
     <file path="/AudioControlPanel.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382632510435" ignored="false" />
-    <file path="/FontHelper.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382372751646" ignored="false" />
+    <file path="/FontHelper.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382856983012" ignored="false" />
     <file path="/SwipeApplication.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382168677427" ignored="false" />
     <file path="/folder_marker.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382173270095" ignored="false" />
     <file path="/ListItemFolder.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382375154771" ignored="false" />
-    <file path="/audio_control_panel.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382632524504" ignored="false" />
+    <file path="/audio_control_panel.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382857601924" ignored="false" />
     <file path="/NavigationFragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382176645554" ignored="false" />
     <file path="/FolderBrowserFragmentBase.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382177239287" ignored="false" />
     <file path="/FragmentStatePagerAdapter.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382193835316" ignored="false" />
     <file path="/folder_browser_item.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382375990575" ignored="false" />
-    <file path="/colors.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382376096911" ignored="false" />
+    <file path="/colors.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382859383582" ignored="false" />
     <file path="/list_item_nav_history.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382376820534" ignored="false" />
     <file path="/ListPagerAdapter.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382630275424" ignored="false" />
     <file path="/a.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382632406906" ignored="false" />
+    <file path="/FormattedTextView.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382856262780" ignored="false" />
+    <file path="/formatted_text.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382856087090" ignored="false" />
+    <file path="/playlist_fragment.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382860949176" ignored="false" />
+    <file path="/list_item_playlist.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382858167906" ignored="false" />
+    <file path="/ListItemPlaylist.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382861353436" ignored="false" />
+    <file path="/TimeFormatter.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382858739929" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,6 +94,24 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/FolderBrowserFragment.java" line="123" class="net.illusor.swipeplayer.fragments.FolderBrowserFragment" package="net.illusor.swipeplayer.fragments">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </line_breakpoints>
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -124,24 +148,6 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/FolderBrowserFragment.java" line="115" class="net.illusor.swipeplayer.fragments.FolderBrowserFragment" package="net.illusor.swipeplayer.fragments">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </line_breakpoints>
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -154,105 +160,50 @@
       <file leaf-file-name="FolderBrowserFragment.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/FolderBrowserFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="101" column="26" selection-start="3186" selection-end="3186" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#750#766#0" expanded="false" />
-                <element signature="method#newInstance#0;class#FolderBrowserFragment#0" expanded="false" />
-                <element signature="method#onCreateView#0;class#FolderBrowserFragment#0" expanded="false" />
-                <element signature="method#onActivityCreated#0;class#FolderBrowserFragment#0" expanded="false" />
-                <element signature="method#onStart#0;class#FolderBrowserFragment#0" expanded="false" />
-                <element signature="method#onStop#0;class#FolderBrowserFragment#0" expanded="false" />
-                <element signature="method#setUserVisibleHint#0;class#FolderBrowserFragment#0" expanded="false" />
-                <element signature="e#2897#2925#0" expanded="false" />
-                <element signature="method#onItemClick#0;class#FolderBrowserFragment#0" expanded="false" />
-                <element signature="e#3191#3222#0" expanded="false" />
-                <element signature="method#onItemSelected#0;class#FolderBrowserFragment#0" expanded="false" />
-                <element signature="method#onNothingSelected#0;class#FolderBrowserFragment#0" expanded="false" />
-                <element signature="method#getSwipeActivity#0;class#FolderBrowserFragment#0" expanded="false" />
-                <element signature="class#AudioFilesAdapter#0;class#FolderBrowserFragment#0" expanded="false" />
-                <element signature="method#AudioFilesAdapter#0;class#AudioFilesAdapter#0;class#FolderBrowserFragment#0" expanded="false" />
-                <element signature="method#getView#0;class#AudioFilesAdapter#0;class#FolderBrowserFragment#0" expanded="false" />
-                <element signature="class#NavigationHistoryAdapter#0;class#FolderBrowserFragment#0" expanded="false" />
-                <element signature="method#NavigationHistoryAdapter#0;class#NavigationHistoryAdapter#0;class#FolderBrowserFragment#0" expanded="false" />
-                <element signature="method#getView#0;class#NavigationHistoryAdapter#0;class#FolderBrowserFragment#0" expanded="false" />
-                <element signature="method#getDropDownView#0;class#NavigationHistoryAdapter#0;class#FolderBrowserFragment#0" expanded="false" />
-                <element signature="method#formatTextView#0;class#NavigationHistoryAdapter#0;class#FolderBrowserFragment#0" expanded="false" />
-                <element signature="class#AudioLoaderCallbacks#0;class#FolderBrowserFragment#0" expanded="false" />
-                <element signature="method#onCreateLoader#0;class#AudioLoaderCallbacks#0;class#FolderBrowserFragment#0" expanded="false" />
-                <element signature="method#onLoadFinished#0;class#AudioLoaderCallbacks#0;class#FolderBrowserFragment#0" expanded="false" />
-                <element signature="method#onLoaderReset#0;class#AudioLoaderCallbacks#0;class#FolderBrowserFragment#0" expanded="false" />
-                <element signature="method#initLoader#0;class#AudioLoaderCallbacks#0;class#FolderBrowserFragment#0" expanded="false" />
-                <element signature="method#quitLoader#0;class#AudioLoaderCallbacks#0;class#FolderBrowserFragment#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SwipeActivity.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/activities/SwipeActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="219" column="4" selection-start="6820" selection-end="6820" vertical-scroll-proportion="0.88785046">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#onCreate#0;class#SwipeActivity#0" expanded="false" />
-                <element signature="method#directoryOpen#0;class#SwipeActivity#0" expanded="false" />
-                <element signature="method#getNavigationHistory#0;class#SwipeActivity#0" expanded="false" />
-                <element signature="class#SwipePagerAdapter#0;class#SwipeActivity#0" expanded="false" />
-                <element signature="method#SwipePagerAdapter#0;class#SwipePagerAdapter#0;class#SwipeActivity#0" expanded="false" />
-                <element signature="method#getFragment#0;class#SwipePagerAdapter#0;class#SwipeActivity#0" expanded="false" />
-                <element signature="method#getItemPosition#0;class#SwipePagerAdapter#0;class#SwipeActivity#0" expanded="false" />
-                <element signature="method#getFolders#0;class#SwipePagerAdapter#0;class#SwipeActivity#0" expanded="false" />
-                <element signature="method#open#0;class#SwipePagerAdapter#0;class#SwipeActivity#0" expanded="false" />
-                <element signature="method#back#0;class#SwipePagerAdapter#0;class#SwipeActivity#0" expanded="false" />
-                <element signature="method#folderPagesCount#0;class#SwipePagerAdapter#0;class#SwipeActivity#0" expanded="false" />
-                <element signature="class#FolderBrowserController#0;class#SwipeActivity#0" expanded="false" />
-                <element signature="method#FolderBrowserController#0;class#FolderBrowserController#0;class#SwipeActivity#0" expanded="false" />
-                <element signature="method#get#0;class#FolderBrowserController#0;class#SwipeActivity#0" expanded="false" />
-                <element signature="method#back#0;class#FolderBrowserController#0;class#SwipeActivity#0" expanded="false" />
-                <element signature="method#open#0;class#FolderBrowserController#0;class#SwipeActivity#0" expanded="false" />
-                <element signature="method#getFolders#0;class#FolderBrowserController#0;class#SwipeActivity#0" expanded="false" />
-                <element signature="method#count#0;class#FolderBrowserController#0;class#SwipeActivity#0" expanded="false" />
-                <element signature="class#OpenResult#0;class#FolderBrowserController#0;class#SwipeActivity#0" expanded="false" />
-                <element signature="method#OpenResult#0;class#OpenResult#0;class#FolderBrowserController#0;class#SwipeActivity#0" expanded="false" />
-                <element signature="class#PageChangeListener#0;class#SwipeActivity#0" expanded="false" />
-                <element signature="e#7294#7501#0" expanded="true" />
-                <element signature="e#7482#7483#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ListPagerAdapter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/activities/ListPagerAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="145" column="4" selection-start="4290" selection-end="4290" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="method#ListPagerAdapter#0;class#ListPagerAdapter#0" expanded="false" />
-                <element signature="method#startUpdate#0;class#ListPagerAdapter#0" expanded="false" />
-                <element signature="method#finishUpdate#0;class#ListPagerAdapter#0" expanded="false" />
-                <element signature="method#instantiateItem#0;class#ListPagerAdapter#0" expanded="false" />
-                <element signature="method#destroyItem#0;class#ListPagerAdapter#0" expanded="false" />
-                <element signature="method#setPrimaryItem#0;class#ListPagerAdapter#0" expanded="false" />
-                <element signature="method#getItemPosition#0;class#ListPagerAdapter#0" expanded="false" />
-                <element signature="method#getCount#0;class#ListPagerAdapter#0" expanded="false" />
-                <element signature="method#isViewFromObject#0;class#ListPagerAdapter#0" expanded="false" />
-                <element signature="method#pushFragmentStack#0;class#ListPagerAdapter#0" expanded="false" />
-                <element signature="method#popFragmentStack#0;class#ListPagerAdapter#0" expanded="false" />
-                <element signature="method#popFragmentStack#1;class#ListPagerAdapter#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="list_item_folder.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/list_item_folder.xml">
-          <provider editor-type-id="text-editor">
-            <state line="44" column="0" selection-start="1505" selection-end="1505" vertical-scroll-proportion="0.0">
+            <state line="20" column="13" selection-start="626" selection-end="626" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
-          <provider selected="true" editor-type-id="android-designer">
+        </entry>
+      </file>
+      <file leaf-file-name="list_item_playlist.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/layout/list_item_playlist.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="35" column="31" selection-start="1577" selection-end="1577" vertical-scroll-proportion="-19.36">
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer">
             <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ListItemFolder.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/ListItemFolder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="28" column="89" selection-start="952" selection-end="952" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ListItemPlaylist.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/ListItemPlaylist.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="13" column="37" selection-start="429" selection-end="429" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlaylistFragment.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/PlaylistFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="44" column="43" selection-start="1640" selection-end="1640" vertical-scroll-proportion="0.6911447">
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
@@ -266,22 +217,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/res/drawable/colors.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/ListItemFolder.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/helpers/FontHelper.java" />
-        <option value="$PROJECT_DIR$/res/drawable/folder_browser_item.xml" />
-        <option value="$PROJECT_DIR$/res/values/colors.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/activities/ListPagerAdapter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/AudioLoader.java" />
-        <option value="$PROJECT_DIR$/res/layout/folder_browser_fragment.xml" />
-        <option value="$PROJECT_DIR$/res/layout/list_item_nav_history.xml" />
-        <option value="$PROJECT_DIR$/res/layout/playlist_fragment.xml" />
-        <option value="$PROJECT_DIR$/res/layout/swipe_activity.xml" />
-        <option value="$PROJECT_DIR$/res/layout/audio_control_panel.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/AudioControlPanel.java" />
-        <option value="$PROJECT_DIR$/res/layout/list_item_folder.xml" />
         <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/FolderBrowserFragment.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/activities/SwipeActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/ListItemFolder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/FormattedTextView.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/AudioControlPanel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/helpers/FontHelper.java" />
+        <option value="$PROJECT_DIR$/res/values/formatted_text.xml" />
+        <option value="$PROJECT_DIR$/res/layout/audio_control_panel.xml" />
+        <option value="$PROJECT_DIR$/res/layout/list_item_folder.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/helpers/TimeFormatter.java" />
+        <option value="$PROJECT_DIR$/res/values/colors.xml" />
+        <option value="$PROJECT_DIR$/res/layout/folder_browser_fragment.xml" />
+        <option value="$PROJECT_DIR$/res/layout/list_item_playlist.xml" />
+        <option value="$PROJECT_DIR$/res/layout/playlist_fragment.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/ListItemPlaylist.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/PlaylistFragment.java" />
       </list>
     </option>
   </component>
@@ -331,10 +282,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
-    <option name="width" value="1938" />
-    <option name="height" value="1050" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1456" />
+    <option name="height" value="886" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -362,7 +313,7 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -663,7 +614,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -676,17 +627,17 @@
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="last_opened_file_path" value="$MAVEN_REPOSITORY$/com/google/android/android/4.1.1.4/android-4.1.1.4-sources.jar!/" />
-    <property name="AndroidLayoutSelectedEditor" value="android-designer" />
+    <property name="AndroidLayoutSelectedEditor" value="text-editor" />
     <property name="project.structure.side.proportion" value="0.3487833" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="MemberChooser.showClasses" value="true" />
     <property name="FullScreen" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -866,33 +817,33 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
+    <frame x="-8" y="-8" width="1456" height="886" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21504803" sideWeight="0.6492435" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18996799" sideWeight="0.6492435" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2112069" sideWeight="0.6396149" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18534483" sideWeight="0.6396149" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294964" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32772166" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35730594" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30949107" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287483" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32855567" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287483" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287483" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19604701" sideWeight="0.663242" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21237993" sideWeight="0.64269406" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2123386" sideWeight="0.69050896" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20014347" sideWeight="0.46354884" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -959,39 +910,19 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/helpers/FontHelper.java">
+    <entry file="file://$PROJECT_DIR$/res/layout/audio_control_panel.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="124" selection-start="684" selection-end="684" vertical-scroll-proportion="0.0">
+        <state line="33" column="29" selection-start="1330" selection-end="1341" vertical-scroll-proportion="0.4260355">
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/ListItemFolder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="0" selection-start="611" selection-end="611" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/PlaylistFragment.java">
+    <entry file="file://$PROJECT_DIR$/res/layout/list_item_folder.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="13" selection-start="251" selection-end="251" vertical-scroll-proportion="0.094339624">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/drawable/folder_marker.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/folder_browser_fragment.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="52" selection-start="629" selection-end="629" vertical-scroll-proportion="0.42606518">
+        <state line="22" column="65" selection-start="1024" selection-end="1024" vertical-scroll-proportion="0.4275148">
           <folding />
         </state>
       </provider>
@@ -1001,17 +932,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/list_item_nav_history.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="33" selection-start="348" selection-end="348" vertical-scroll-proportion="0.21924482">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/playlist_fragment.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="4" selection-start="409" selection-end="409" vertical-scroll-proportion="0.29232642">
+        <state line="9" column="33" selection-start="348" selection-end="348" vertical-scroll-proportion="0.21301775">
           <folding />
         </state>
       </provider>
@@ -1021,7 +942,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/swipe_activity.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="28" selection-start="629" selection-end="629" vertical-scroll-proportion="0.4141291">
+        <state line="17" column="28" selection-start="629" selection-end="629" vertical-scroll-proportion="0.40236688">
           <folding />
         </state>
       </provider>
@@ -1029,33 +950,70 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/AudioControlPanel.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/helpers/TimeFormatter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="75" selection-start="531" selection-end="531" vertical-scroll-proportion="0.3773585">
+        <state line="14" column="81" selection-start="492" selection-end="492" vertical-scroll-proportion="0.3195435">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/folder_browser_fragment.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="56" selection-start="285" selection-end="285" vertical-scroll-proportion="0.23076923">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="69" selection-start="540" selection-end="540" vertical-scroll-proportion="0.27389443">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://E:/android-sdk-tools/platforms/android-10/android.jar!/android/content/res/Resources.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="124" column="0" selection-start="7520" selection-end="7520" vertical-scroll-proportion="0.8604651">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/activities/SwipeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="257" column="0" selection-start="7812" selection-end="7812" vertical-scroll-proportion="1.1369473">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#onCreate#0;class#SwipeActivity#0" expanded="false" />
+            <element signature="method#directoryOpen#0;class#SwipeActivity#0" expanded="false" />
+            <element signature="method#getFragment#0;class#SwipePagerAdapter#0;class#SwipeActivity#0" expanded="false" />
+            <element signature="method#getItemPosition#0;class#SwipePagerAdapter#0;class#SwipeActivity#0" expanded="false" />
+            <element signature="class#FolderBrowserController#0;class#SwipeActivity#0" expanded="false" />
+            <element signature="method#FolderBrowserController#0;class#FolderBrowserController#0;class#SwipeActivity#0" expanded="false" />
+            <element signature="method#get#0;class#FolderBrowserController#0;class#SwipeActivity#0" expanded="false" />
+            <element signature="class#PageChangeListener#0;class#SwipeActivity#0" expanded="false" />
+            <element signature="e#7294#7501#0" expanded="true" />
+            <element signature="e#7482#7483#0" expanded="true" />
+            <element signature="method#onPageScrollStateChanged#0;class#PageChangeListener#0;class#SwipeActivity#0" expanded="false" />
+            <element signature="method#setSuspended#0;class#PageChangeListener#0;class#SwipeActivity#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/FormattedTextView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="31" selection-start="938" selection-end="938" vertical-scroll-proportion="0.66191155">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/AudioLoader.java">
+    <entry file="file://$PROJECT_DIR$/res/layout/playlist_fragment.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="4" selection-start="2045" selection-end="2045" vertical-scroll-proportion="0.5660377">
-          <folding>
-            <element signature="method#AudioLoader#0;class#AudioLoader#0" expanded="false" />
-            <element signature="method#onStartLoading#0;class#AudioLoader#0" expanded="false" />
-            <element signature="method#loadInBackground#0;class#AudioLoader#0" expanded="false" />
-            <element signature="method#getMediaObjects#0;class#AudioLoader#0" expanded="false" />
-            <element signature="method#getNextLevelObject#0;class#AudioLoader#0" expanded="false" />
-            <element signature="class#AudioFileComparator#0;class#AudioLoader#0" expanded="false" />
-            <element signature="method#compare#0;class#AudioFileComparator#0;class#AudioLoader#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/audio_control_panel.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="50" selection-start="562" selection-end="562" vertical-scroll-proportion="0.08891596">
+        <state line="3" column="38" selection-start="147" selection-end="147" vertical-scroll-proportion="0.12765957">
           <folding />
         </state>
       </provider>
@@ -1063,107 +1021,43 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/list_item_folder.xml">
-      <provider editor-type-id="text-editor">
-        <state line="44" column="0" selection-start="1505" selection-end="1505" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/activities/ListPagerAdapter.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/ListItemFolder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="145" column="4" selection-start="4290" selection-end="4290" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="method#ListPagerAdapter#0;class#ListPagerAdapter#0" expanded="false" />
-            <element signature="method#startUpdate#0;class#ListPagerAdapter#0" expanded="false" />
-            <element signature="method#finishUpdate#0;class#ListPagerAdapter#0" expanded="false" />
-            <element signature="method#instantiateItem#0;class#ListPagerAdapter#0" expanded="false" />
-            <element signature="method#destroyItem#0;class#ListPagerAdapter#0" expanded="false" />
-            <element signature="method#setPrimaryItem#0;class#ListPagerAdapter#0" expanded="false" />
-            <element signature="method#getItemPosition#0;class#ListPagerAdapter#0" expanded="false" />
-            <element signature="method#getCount#0;class#ListPagerAdapter#0" expanded="false" />
-            <element signature="method#isViewFromObject#0;class#ListPagerAdapter#0" expanded="false" />
-            <element signature="method#pushFragmentStack#0;class#ListPagerAdapter#0" expanded="false" />
-            <element signature="method#popFragmentStack#0;class#ListPagerAdapter#0" expanded="false" />
-            <element signature="method#popFragmentStack#1;class#ListPagerAdapter#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://F:/android-sdk-tools/platforms/android-10/android.jar!/android/widget/Spinner.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="0" selection-start="1282" selection-end="1282" vertical-scroll-proportion="0.7757009">
+        <state line="28" column="89" selection-start="952" selection-end="952" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/FolderBrowserFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="101" column="26" selection-start="3186" selection-end="3186" vertical-scroll-proportion="0.0">
+        <state line="20" column="13" selection-start="626" selection-end="626" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/ListItemPlaylist.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="37" selection-start="429" selection-end="429" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#750#766#0" expanded="false" />
-            <element signature="method#newInstance#0;class#FolderBrowserFragment#0" expanded="false" />
-            <element signature="method#onCreateView#0;class#FolderBrowserFragment#0" expanded="false" />
-            <element signature="method#onActivityCreated#0;class#FolderBrowserFragment#0" expanded="false" />
-            <element signature="method#onStart#0;class#FolderBrowserFragment#0" expanded="false" />
-            <element signature="method#onStop#0;class#FolderBrowserFragment#0" expanded="false" />
-            <element signature="method#setUserVisibleHint#0;class#FolderBrowserFragment#0" expanded="false" />
-            <element signature="e#2897#2925#0" expanded="false" />
-            <element signature="method#onItemClick#0;class#FolderBrowserFragment#0" expanded="false" />
-            <element signature="e#3191#3222#0" expanded="false" />
-            <element signature="method#onItemSelected#0;class#FolderBrowserFragment#0" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#FolderBrowserFragment#0" expanded="false" />
-            <element signature="method#getSwipeActivity#0;class#FolderBrowserFragment#0" expanded="false" />
-            <element signature="class#AudioFilesAdapter#0;class#FolderBrowserFragment#0" expanded="false" />
-            <element signature="method#AudioFilesAdapter#0;class#AudioFilesAdapter#0;class#FolderBrowserFragment#0" expanded="false" />
-            <element signature="method#getView#0;class#AudioFilesAdapter#0;class#FolderBrowserFragment#0" expanded="false" />
-            <element signature="class#NavigationHistoryAdapter#0;class#FolderBrowserFragment#0" expanded="false" />
-            <element signature="method#NavigationHistoryAdapter#0;class#NavigationHistoryAdapter#0;class#FolderBrowserFragment#0" expanded="false" />
-            <element signature="method#getView#0;class#NavigationHistoryAdapter#0;class#FolderBrowserFragment#0" expanded="false" />
-            <element signature="method#getDropDownView#0;class#NavigationHistoryAdapter#0;class#FolderBrowserFragment#0" expanded="false" />
-            <element signature="method#formatTextView#0;class#NavigationHistoryAdapter#0;class#FolderBrowserFragment#0" expanded="false" />
-            <element signature="class#AudioLoaderCallbacks#0;class#FolderBrowserFragment#0" expanded="false" />
-            <element signature="method#onCreateLoader#0;class#AudioLoaderCallbacks#0;class#FolderBrowserFragment#0" expanded="false" />
-            <element signature="method#onLoadFinished#0;class#AudioLoaderCallbacks#0;class#FolderBrowserFragment#0" expanded="false" />
-            <element signature="method#onLoaderReset#0;class#AudioLoaderCallbacks#0;class#FolderBrowserFragment#0" expanded="false" />
-            <element signature="method#initLoader#0;class#AudioLoaderCallbacks#0;class#FolderBrowserFragment#0" expanded="false" />
-            <element signature="method#quitLoader#0;class#AudioLoaderCallbacks#0;class#FolderBrowserFragment#0" expanded="false" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/activities/SwipeActivity.java">
+    <entry file="file://$PROJECT_DIR$/res/layout/list_item_playlist.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="219" column="4" selection-start="6820" selection-end="6820" vertical-scroll-proportion="0.88785046">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#onCreate#0;class#SwipeActivity#0" expanded="false" />
-            <element signature="method#directoryOpen#0;class#SwipeActivity#0" expanded="false" />
-            <element signature="method#getNavigationHistory#0;class#SwipeActivity#0" expanded="false" />
-            <element signature="class#SwipePagerAdapter#0;class#SwipeActivity#0" expanded="false" />
-            <element signature="method#SwipePagerAdapter#0;class#SwipePagerAdapter#0;class#SwipeActivity#0" expanded="false" />
-            <element signature="method#getFragment#0;class#SwipePagerAdapter#0;class#SwipeActivity#0" expanded="false" />
-            <element signature="method#getItemPosition#0;class#SwipePagerAdapter#0;class#SwipeActivity#0" expanded="false" />
-            <element signature="method#getFolders#0;class#SwipePagerAdapter#0;class#SwipeActivity#0" expanded="false" />
-            <element signature="method#open#0;class#SwipePagerAdapter#0;class#SwipeActivity#0" expanded="false" />
-            <element signature="method#back#0;class#SwipePagerAdapter#0;class#SwipeActivity#0" expanded="false" />
-            <element signature="method#folderPagesCount#0;class#SwipePagerAdapter#0;class#SwipeActivity#0" expanded="false" />
-            <element signature="class#FolderBrowserController#0;class#SwipeActivity#0" expanded="false" />
-            <element signature="method#FolderBrowserController#0;class#FolderBrowserController#0;class#SwipeActivity#0" expanded="false" />
-            <element signature="method#get#0;class#FolderBrowserController#0;class#SwipeActivity#0" expanded="false" />
-            <element signature="method#back#0;class#FolderBrowserController#0;class#SwipeActivity#0" expanded="false" />
-            <element signature="method#open#0;class#FolderBrowserController#0;class#SwipeActivity#0" expanded="false" />
-            <element signature="method#getFolders#0;class#FolderBrowserController#0;class#SwipeActivity#0" expanded="false" />
-            <element signature="method#count#0;class#FolderBrowserController#0;class#SwipeActivity#0" expanded="false" />
-            <element signature="class#OpenResult#0;class#FolderBrowserController#0;class#SwipeActivity#0" expanded="false" />
-            <element signature="method#OpenResult#0;class#OpenResult#0;class#FolderBrowserController#0;class#SwipeActivity#0" expanded="false" />
-            <element signature="class#PageChangeListener#0;class#SwipeActivity#0" expanded="false" />
-            <element signature="e#7294#7501#0" expanded="true" />
-            <element signature="e#7482#7483#0" expanded="true" />
-          </folding>
+        <state line="35" column="31" selection-start="1577" selection-end="1577" vertical-scroll-proportion="-19.36">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/PlaylistFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="43" selection-start="1640" selection-end="1640" vertical-scroll-proportion="0.6911447">
+          <folding />
         </state>
       </provider>
     </entry>

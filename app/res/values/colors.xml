@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <drawable name="ColorWhite">#ffffff</drawable>
-    <drawable name="ColorPink">#8d004c</drawable>
-    <drawable name="ColorDarkBlue">#010129</drawable>
-    <drawable name="ColorTransparent">@android:color/transparent</drawable>
+    <drawable name="color_playlist_bg_normal">@android:color/transparent</drawable>
+    <drawable name="color_playlist_bg_playing">#ef4b4c</drawable>
+    <drawable name="color_playlist_text_normal">#000000</drawable>
+    <drawable name="color_playlist_text_playing">#ffffff</drawable>
+
+    <drawable name="color_fragment_playlist">#ffffff</drawable>
+    <drawable name="color_fragment_browser">#010129</drawable>
+    <drawable name="color_controlpanel_bg">#8d004c</drawable>
 
 </resources>

@@ -27,8 +27,6 @@ public class ListItemFolder extends LinearLayout
         this.title = (TextView)this.findViewById(R.id.id_file_title);
         this.iconIsFolder = this.findViewById(R.id.id_file_is_folder);
         this.iconHasPlaylistFiles = this.findViewById(R.id.id_folder_has_playlist_files);
-
-        this.title.setTypeface(FontHelper.PTSansNarrow);
     }
 
     public void setTitle(CharSequence title)

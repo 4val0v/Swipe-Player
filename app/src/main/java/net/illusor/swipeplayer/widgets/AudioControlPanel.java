@@ -36,16 +36,6 @@ public class AudioControlPanel extends LinearLayout
         this.progress = (SeekBar) this.findViewById(R.id.id_audio_control_progress);
     }
 
-    @Override
-    protected void onFinishInflate()
-    {
-        super.onFinishInflate();
-
-        this.title1.setTypeface(FontHelper.RobotoMedium);
-        this.title2.setTypeface(FontHelper.RobotoMedium);
-        this.artist.setTypeface(FontHelper.RobotoLight);
-    }
-
     public CharSequence getTitle()
     {
         return this.title1.getText();

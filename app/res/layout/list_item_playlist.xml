@@ -4,22 +4,13 @@
               xmlns:swp="http://schemas.android.com/apk/res/net.illusor.swipeplayer"
               android:orientation="horizontal"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="#010129">-->
+              android:layout_height="wrap_content">-->
 
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
        xmlns:swp="http://schemas.android.com/apk/res/net.illusor.swipeplayer">
 
-    <ImageView
-            android:id="@+id/id_file_is_folder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:src="@android:drawable/ic_menu_slideshow"
-            android:contentDescription="This is folder"/>
-
     <net.illusor.swipeplayer.widgets.FormattedTextView
-            android:id="@+id/id_file_title"
+            android:id="@+id/id_play_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -32,16 +23,18 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:textSize="12.4pt"
-            android:textColor="#FFFFFF"
             swp:Font="PTSansNarrow"/>
 
-    <View
-            android:id="@+id/id_folder_has_playlist_files"
-            android:layout_width="5dp"
-            android:layout_height="5dp"
-            android:background="@drawable/folder_marker"
+    <net.illusor.swipeplayer.widgets.FormattedTextView
+            android:id="@+id/id_play_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="24dp"/>
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="2dp"
+            android:text="7:48"
+            android:textSize="7pt"
+            swp:Font="PTSans"/>
 
 </merge>
 

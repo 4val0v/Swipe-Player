@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.fragments.FolderBrowserFragment;
 import net.illusor.swipeplayer.fragments.PlaylistFragment;
+import net.illusor.swipeplayer.widgets.AudioControlView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import java.util.List;
 
 public class SwipeActivity extends FragmentActivity
 {
+    private AudioControlView audioControlPanel;
     private SwipePagerAdapter pagerAdapter;
     private ViewPager viewPager;
     private PageChangeListener pageChangeListener;
@@ -35,6 +37,8 @@ public class SwipeActivity extends FragmentActivity
         this.viewPager.setAdapter(this.pagerAdapter);
         this.viewPager.setCurrentItem(this.pagerAdapter.getCount() - 1);
         this.viewPager.setOnPageChangeListener(this.pageChangeListener);
+
+        this.audioControlPanel = (AudioControlView)this.findViewById(R.id.id_swipe_control);
     }
 
     public void directoryOpen(File folder)
@@ -51,6 +55,11 @@ public class SwipeActivity extends FragmentActivity
     public List<File> getNavigationHistory()
     {
         return this.pagerAdapter.getFolders();
+    }
+
+    public AudioControlView getAudioControl()
+    {
+        return audioControlPanel;
     }
 
     private static class SwipePagerAdapter extends ListPagerAdapter

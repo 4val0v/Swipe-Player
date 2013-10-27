@@ -13,7 +13,7 @@ import android.widget.*;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.activities.SwipeActivity;
 import net.illusor.swipeplayer.domain.AudioFile;
-import net.illusor.swipeplayer.widgets.ListItemFolder;
+import net.illusor.swipeplayer.widgets.FolderItemView;
 
 import java.io.File;
 import java.util.List;
@@ -139,12 +139,12 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
         @Override
         public View getView(int position, View convertView, ViewGroup parent)
         {
-            ListItemFolder view;
+            FolderItemView view;
 
             if (convertView != null)
-                view = (ListItemFolder)convertView;
+                view = (FolderItemView)convertView;
             else
-                view = new ListItemFolder(this.getContext());
+                view = new FolderItemView(this.getContext());
 
             AudioFile item = this.getItem(position);
 

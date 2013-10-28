@@ -53,6 +53,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         PlaylistItemView selectedItem = (PlaylistItemView) view;
         this.getAudioControl().setAudioFile(selectedItem.getAudioFile());
         this.getAudioControl().setVisibility(View.VISIBLE);
+        this.listView.setItemChecked(i, true);
     }
 
     private AudioControlView getAudioControl()

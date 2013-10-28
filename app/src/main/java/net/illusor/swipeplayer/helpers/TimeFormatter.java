@@ -4,11 +4,17 @@ import java.util.concurrent.TimeUnit;
 
 public class TimeFormatter
 {
+    private static final long hourSize = 3600000;
+    private static final long minuteSize = 60000;
+    private static final long secondSize = 1000;
+
     public static String hhmmss(long milliseconds)
     {
-        long hours = TimeUnit.MILLISECONDS.toHours(milliseconds);
-        long minutes = TimeUnit.MILLISECONDS.toMinutes(milliseconds);
-        long seconds = TimeUnit.MILLISECONDS.toSeconds(milliseconds);
+        long hours = milliseconds / hourSize;
+        long h = hours * hourSize;
+        long minutes = (milliseconds - h) / minuteSize;
+        long m = minutes * minuteSize;
+        long seconds =  (milliseconds - h - m) / secondSize;
 
         String result;
         if (hours > 0)

@@ -34,6 +34,9 @@
       </GlobalState>
     </option>
   </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Swipe" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" name="Default" comment="" />
     <ignored path="swipeplayer.iws" />
@@ -47,7 +50,7 @@
     <file path="/SwipeActivity.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1381335237728" ignored="false" />
     <file path="/PlaylistFragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382943170301" ignored="false" />
     <file path="/PlaylistFragment.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1381335503279" ignored="false" />
-    <file path="/fragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382629888365" ignored="false" />
+    <file path="/fragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382962862600" ignored="false" />
     <file path="/swipe_activity.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382891252522" ignored="false" />
     <file path="/FolderBrowserFragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382635176457" ignored="false" />
     <file path="/folder_browser_fragment.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382859442066" ignored="false" />
@@ -65,7 +68,7 @@
     <file path="/SwipeApplication.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382168677427" ignored="false" />
     <file path="/folder_marker.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382173270095" ignored="false" />
     <file path="/ListItemFolder.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382890973167" ignored="false" />
-    <file path="/audio_control_panel.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382898391071" ignored="false" />
+    <file path="/audio_control_panel.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382961379050" ignored="false" />
     <file path="/NavigationFragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382176645554" ignored="false" />
     <file path="/FolderBrowserFragmentBase.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382177239287" ignored="false" />
     <file path="/FragmentStatePagerAdapter.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382193835316" ignored="false" />
@@ -87,7 +90,7 @@
     <file path="/item_playlist_bg.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382945895786" ignored="false" />
     <file path="/item_playlist_text.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382945536437" ignored="false" />
     <file path="/Trackbar.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382946826624" ignored="false" />
-    <file path="/TrackBar.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382946827792" ignored="false" />
+    <file path="/TrackBar.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382963747272" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,20 +155,10 @@
       <file leaf-file-name="TrackBar.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/TrackBar.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="0" selection-start="141" selection-end="141" vertical-scroll-proportion="-0.34506243">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="audio_control_panel.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/audio_control_panel.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="49" selection-start="751" selection-end="751" vertical-scroll-proportion="-8.32">
-              <folding />
+            <state line="98" column="74" selection-start="2550" selection-end="2550" vertical-scroll-proportion="0.44508672">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -185,7 +178,6 @@
         <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/ExtendedListView.java" />
         <option value="$PROJECT_DIR$/res/drawable/list_item_playlist.xml" />
         <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/AudioControlView.java" />
-        <option value="$PROJECT_DIR$/res/layout/audio_control_panel.xml" />
         <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/helpers/TimeFormatter.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/PlaylistFragment.java" />
         <option value="$PROJECT_DIR$/res/layout/playlist_fragment.xml" />
@@ -195,6 +187,7 @@
         <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/PlaylistItemView.java" />
         <option value="$PROJECT_DIR$/res/drawable/item_playlist_bg.xml" />
         <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/Trackbar.java" />
+        <option value="$PROJECT_DIR$/res/layout/audio_control_panel.xml" />
         <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/TrackBar.java" />
       </list>
     </option>
@@ -819,7 +812,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32745314" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39911798" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39911798" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287483" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -900,7 +893,11 @@
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/FolderBrowserFragment.java">
@@ -1014,15 +1011,17 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="49" selection-start="751" selection-end="751" vertical-scroll-proportion="-8.32">
+        <state line="49" column="49" selection-start="1987" selection-end="1987" vertical-scroll-proportion="1.1174089">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/TrackBar.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="141" selection-end="141" vertical-scroll-proportion="-0.34506243">
-          <folding />
+        <state line="98" column="74" selection-start="2550" selection-end="2550" vertical-scroll-proportion="0.44508672">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

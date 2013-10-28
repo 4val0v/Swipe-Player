@@ -9,7 +9,7 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
        xmlns:swp="http://schemas.android.com/apk/res/net.illusor.swipeplayer">
 
-    <SeekBar
+    <net.illusor.swipeplayer.widgets.TrackBar
         android:layout_width="match_parent"
         android:layout_height="7dp"
         android:layout_gravity="bottom"
@@ -24,7 +24,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/id_audio_control_title1"
-        android:text="The Great Gig in Great"
         android:textColor="@android:color/white"
         android:textSize="12.4pt"
         android:autoText="false"
@@ -37,7 +36,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/id_audio_control_title2"
-        android:text="Gig in the Sky"
         android:textColor="@android:color/transparent"
         android:textSize="8pt"
         android:layout_marginLeft="14dp"
@@ -50,7 +48,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/id_audio_control_artist"
-        android:text="The Dark Side Of The Moon"
         android:textColor="@android:color/black"
         android:textSize="8pt"
         android:layout_marginLeft="14dp"

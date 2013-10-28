@@ -6,5 +6,4 @@
     android:layout_height="match_parent"
     android:divider="@android:color/transparent"
     android:background="@drawable/color_fragment_playlist"
-    android:choiceMode="singleChoice"
-    android:listSelector="@drawable/color_playlist_bg_playing"/>
+    android:choiceMode="singleChoice"/>

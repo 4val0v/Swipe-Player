@@ -4,12 +4,16 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.widget.Checkable;
+import android.widget.CheckedTextView;
 import android.widget.TextView;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.helpers.FontHelper;
 
-public class FormattedTextView extends TextView
+public class FormattedTextView extends CheckedTextView
 {
+    private boolean isChecked;
+
     public FormattedTextView(Context context)
     {
         this(context, null);

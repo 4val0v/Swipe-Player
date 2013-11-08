@@ -2,7 +2,6 @@ package net.illusor.swipeplayer.widgets;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ViewParent;
 import android.widget.SeekBar;
@@ -10,7 +9,8 @@ import android.widget.SeekBar;
 public class TrackBar extends SeekBar
 {
     private static final float paddingThreshold = 0.15f;
-    private float lastTouchX;
+    private float initialTouchX;
+    private int initialProgress;
 
     public TrackBar(Context context)
     {
@@ -71,7 +71,7 @@ public class TrackBar extends SeekBar
         final int available = width - this.getPaddingLeft() - this.getPaddingRight();
         final int threshold = (int)(available * paddingThreshold);
 
-        final int x = (int) event.getX();
+        final float x = event.getX();
         float scale;
         if (x < this.getPaddingLeft() + threshold)
         {
@@ -85,29 +85,24 @@ public class TrackBar extends SeekBar
             }
             else
             {
-                scale = (float)(x - this.getPaddingLeft()) / (float)available;
+                scale = (x - this.getPaddingLeft()) / (float)available;
             }
         }
 
-        this.lastTouchX = event.getX();
-        this.setProgress((int)(scale * this.getMax()));
+        this.initialTouchX = event.getX();
+        this.initialProgress = (int)(scale * this.getMax());
+        this.setProgress(this.initialProgress);
     }
 
     private void trackTouch(MotionEvent event)
     {
-        /*final int width = getWidth();
+        final int width = getWidth();
         final int available = width - this.getPaddingLeft() - this.getPaddingRight();
 
-        final float dxAbs = event.getX() - this.lastTouchX;
-        final float dxRel = dxAbs / (float)available;
-
-        int offset = Math.round(dxRel * this.getMax());
-        if (offset != 0)
-        {
-            this.lastTouchX = event.getX();
-            this.setProgress(this.getProgress() + offset);
-            Log.d("SWIPE", String.format("%s / %s / %s", dxRel * this.getMax(), dxRel, this.getProgress()));
-        }*/
+        final float dX = event.getX() - this.initialTouchX;
+        final float dScale = dX / available;
+        final int dProgress = (int)(dScale * this.getMax());
+        this.setProgress(this.initialProgress + dProgress);
     }
 
     private void attemptClaimDrag()

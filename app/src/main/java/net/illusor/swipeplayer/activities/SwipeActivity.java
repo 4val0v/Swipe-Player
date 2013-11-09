@@ -1,5 +1,6 @@
 package net.illusor.swipeplayer.activities;
 
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
@@ -22,15 +23,17 @@ public class SwipeActivity extends FragmentActivity
     private SwipePagerAdapter pagerAdapter;
     private ViewPager viewPager;
     private PageChangeListener pageChangeListener;
+    private PlaylistFragment playlistFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
 
+        this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
         this.setContentView(R.layout.swipe_activity);
 
-        this.pagerAdapter = new SwipePagerAdapter(this.getSupportFragmentManager(), Environment.getRootDirectory());
+        this.pagerAdapter = new SwipePagerAdapter(this.getSupportFragmentManager(), Environment.getExternalStorageDirectory());
         this.pageChangeListener = new PageChangeListener();
 
         this.viewPager = (ViewPager) this.findViewById(R.id.id_swipe_view_pager);
@@ -39,6 +42,7 @@ public class SwipeActivity extends FragmentActivity
         this.viewPager.setOnPageChangeListener(this.pageChangeListener);
 
         this.audioControlPanel = (AudioControlView)this.findViewById(R.id.id_swipe_control);
+
     }
 
     public void directoryOpen(File folder)
@@ -52,6 +56,11 @@ public class SwipeActivity extends FragmentActivity
         this.pageChangeListener.setSuspended(false);
     }
 
+    public PlaylistFragment getPlaylistFragment()
+    {
+        return playlistFragment;
+    }
+
     public List<File> getNavigationHistory()
     {
         return this.pagerAdapter.getFolders();
@@ -62,7 +71,7 @@ public class SwipeActivity extends FragmentActivity
         return audioControlPanel;
     }
 
-    private static class SwipePagerAdapter extends ListPagerAdapter
+    private class SwipePagerAdapter extends ListPagerAdapter
     {
         private final FolderBrowserController controller;
 
@@ -83,7 +92,10 @@ public class SwipeActivity extends FragmentActivity
         {
             if (position == this.getCount() - 1)
             {
-                return new PlaylistFragment();
+                if (playlistFragment == null)
+                    playlistFragment = new PlaylistFragment();
+
+                return playlistFragment;
             }
             else
             {

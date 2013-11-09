@@ -95,7 +95,10 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
     {
         File selected = (File) adapterView.getItemAtPosition(i);
-        ((SwipeActivity)this.getActivity()).directoryOpen(selected);
+        if (selected.isDirectory())
+            this.getSwipeActivity().directoryOpen(selected);
+        else if (selected.isFile())
+            this.getSwipeActivity().getPlaylistFragment().setTargetFolder(selected.getParentFile(), (AudioFile)selected);
     }
 
     //endregion

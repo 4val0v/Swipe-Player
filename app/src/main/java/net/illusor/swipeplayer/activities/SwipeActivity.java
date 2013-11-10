@@ -33,27 +33,21 @@ public class SwipeActivity extends FragmentActivity
         this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
         this.setContentView(R.layout.swipe_activity);
 
-        this.pagerAdapter = new SwipePagerAdapter(this.getSupportFragmentManager(), Environment.getExternalStorageDirectory());
-        this.pageChangeListener = new PageChangeListener();
+        this.pagerAdapter = new SwipePagerAdapter(this.getSupportFragmentManager(), new PlaylistFragment());
+        this.pagerAdapter.addFolder(Environment.getExternalStorageDirectory());
+        /*this.pageChangeListener = new PageChangeListener();*/
 
         this.viewPager = (ViewPager) this.findViewById(R.id.id_swipe_view_pager);
         this.viewPager.setAdapter(this.pagerAdapter);
-        this.viewPager.setCurrentItem(this.pagerAdapter.getCount() - 1);
-        this.viewPager.setOnPageChangeListener(this.pageChangeListener);
+        /*this.viewPager.setCurrentItem(this.pagerAdapter.getCount() - 1);*/
+        /*this.viewPager.setOnPageChangeListener(this.pageChangeListener);*/
 
         this.audioControlPanel = (AudioControlView)this.findViewById(R.id.id_swipe_control);
-
     }
 
     public void directoryOpen(File folder)
     {
-        this.pageChangeListener.setSuspended(true);
-
-        int index = this.pagerAdapter.open(folder);
-        int currentIndex = this.viewPager.getCurrentItem();
-        this.viewPager.setCurrentItem(index, Math.abs(index - currentIndex) < 2);
-
-        this.pageChangeListener.setSuspended(false);
+        this.pagerAdapter.addFolder(folder);
     }
 
     public PlaylistFragment getPlaylistFragment()
@@ -63,7 +57,9 @@ public class SwipeActivity extends FragmentActivity
 
     public List<File> getNavigationHistory()
     {
-        return this.pagerAdapter.getFolders();
+        List<File> nav = new ArrayList<>();
+        nav.add(Environment.getExternalStorageDirectory());
+        return nav;
     }
 
     public AudioControlView getAudioControl()
@@ -71,11 +67,11 @@ public class SwipeActivity extends FragmentActivity
         return audioControlPanel;
     }
 
-    private class SwipePagerAdapter extends ListPagerAdapter
+    private class SwipePagerAdapter2 extends ListPagerAdapter
     {
         private final FolderBrowserController controller;
 
-        private SwipePagerAdapter(FragmentManager fm, File rootDirectory)
+        private SwipePagerAdapter2(FragmentManager fm, File rootDirectory)
         {
             super(fm);
             this.controller = new FolderBrowserController(rootDirectory);
@@ -250,7 +246,7 @@ public class SwipeActivity extends FragmentActivity
         @Override
         public void onPageSelected(int position)
         {
-            if (!this.isSuspended && this.currentPageIndex != pagerAdapter.folderPagesCount() && position < this.currentPageIndex)
+            /*if (!this.isSuspended && this.currentPageIndex != pagerAdapter.folderPagesCount() && position < this.currentPageIndex)
             {
                 viewPager.postDelayed(new Runnable()
                 {
@@ -261,7 +257,7 @@ public class SwipeActivity extends FragmentActivity
                     }
                 }, 250);
             }
-            this.currentPageIndex = position;
+            this.currentPageIndex = position;*/
         }
 
         @Override

@@ -79,14 +79,14 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
     {
         super.setUserVisibleHint(isVisibleToUser);
 
-        /*if (isVisibleToUser)
+        if (isVisibleToUser && this.navigationHistory != null)
         {
             List<File> navigationItems = this.getSwipeActivity().getNavigationHistory();
             NavigationHistoryAdapter adapter = new NavigationHistoryAdapter(this.getActivity(), navigationItems);
 
             this.navigationHistory.setAdapter(adapter);
             this.navigationHistory.setSelection(navigationItems.indexOf(this.currentFolder));
-        }*/
+        }
     }
 
     //region OnItemClickListener

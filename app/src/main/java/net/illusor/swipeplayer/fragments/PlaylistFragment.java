@@ -62,9 +62,10 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
             {
                 String path = preferences.getString(SHARED_PREF_PLAYLIST_KEY, "");
                 this.currentAudioFolder = new File(path);
-                this.audioLoaderCallbacks.initLoader(this.currentAudioFolder);
             }
         }
+
+        this.audioLoaderCallbacks.initLoader(this.currentAudioFolder, false);
 
         Intent intent = new Intent(this.getActivity(), SoundService.class);
         this.getActivity().bindService(intent, this.soundServiceController, Service.BIND_AUTO_CREATE);
@@ -107,7 +108,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
     {
         this.currentAudioFolder = folder;
         this.currentAudioFile = audioFile;
-        this.audioLoaderCallbacks.initLoader(folder);
+        this.audioLoaderCallbacks.initLoader(folder, true);
     }
 
     private AudioControlView getAudioControl()
@@ -160,11 +161,14 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
             listView.setAdapter(null);
         }
 
-        public void initLoader(File directory)
+        public void initLoader(File directory, boolean restart)
         {
             Bundle args = new Bundle();
             args.putSerializable(AudioLoaderCallbacks.ARGS_DIRECTORY, directory);
-            getLoaderManager().initLoader(0, args, this);
+            if (restart)
+                getLoaderManager().restartLoader(0, args, this);
+            else
+                getLoaderManager().initLoader(0, args, this);
         }
 
         public void quitLoader()

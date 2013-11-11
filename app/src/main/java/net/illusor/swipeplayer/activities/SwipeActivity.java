@@ -31,7 +31,7 @@ public class SwipeActivity extends FragmentActivity
         this.setContentView(R.layout.swipe_activity);
 
         this.pagerAdapter = new LocalPagerAdapter(this.getSupportFragmentManager());
-        this.pagerAdapter.addFolder(Environment.getRootDirectory());
+        this.pagerAdapter.addFolder(Environment.getExternalStorageDirectory());
 
         this.viewPager = (ViewPager) this.findViewById(R.id.id_swipe_view_pager);
         this.viewPager.setAdapter(this.pagerAdapter);

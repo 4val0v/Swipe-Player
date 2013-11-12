@@ -1,5 +1,7 @@
 package net.illusor.swipeplayer.activities;
 
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -10,13 +12,14 @@ import android.view.ViewGroup;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 abstract class SwipePagerAdapter extends PagerAdapter
 {
     private Fragment playlistFragment;
-    private final List<Fragment> browserFragments = new ArrayList<>();
-    private final List<Fragment.SavedState> browserStates = new ArrayList<>();
-    private final List<File> browserFolders = new ArrayList<>();
+    private final ArrayList<Fragment> browserFragments = new ArrayList<>();
+    private final ArrayList<Fragment.SavedState> browserStates = new ArrayList<>();
+    private final ArrayList<File> browserFolders = new ArrayList<>();
 
     private final FragmentManager fragmentManager;
     private FragmentTransaction curTransaction = null;
@@ -132,7 +135,7 @@ abstract class SwipePagerAdapter extends PagerAdapter
     public int getItemPosition(Object object)
     {
         if (object.equals(this.playlistFragment))
-            return this.browserFragments.size();
+            return this.browserFolders.size();
 
         int index = this.browserFragments.indexOf(object);
         return index >= 0 ? PagerAdapter.POSITION_UNCHANGED : PagerAdapter.POSITION_NONE;
@@ -141,13 +144,61 @@ abstract class SwipePagerAdapter extends PagerAdapter
     @Override
     public int getCount()
     {
-        return this.browserFragments.size() + 1;
+        return this.browserFolders.size() + 1;
     }
 
     @Override
     public boolean isViewFromObject(View view, Object object)
     {
         return ((Fragment)object).getView() == view;
+    }
+
+    public Parcelable saveObjectState()
+    {
+        Bundle state = new Bundle();
+
+        for (int i = 0; i < this.browserFolders.size(); i++)
+        {
+            Fragment fragment = this.browserFragments.get(i);
+            if (fragment == null) continue;
+
+            this.fragmentManager.putFragment(state, "fs"+i, fragment);
+        }
+
+        state.putSerializable("states", this.browserStates);
+        state.putSerializable("folders", this.browserFolders);
+
+        return state;
+    }
+
+    public void restoreObjectState(Parcelable state)
+    {
+        Bundle bundle = (Bundle)state;
+        ArrayList<Fragment.SavedState> fragmentStates = (ArrayList)bundle.getSerializable("states");
+        ArrayList<File> folderStates = (ArrayList)bundle.getSerializable("folders");
+
+        this.browserStates.clear();
+        for (Fragment.SavedState fs : fragmentStates)
+            this.browserStates.add(fs);
+
+        this.browserFragments.clear();
+        this.browserFolders.clear();
+        for (File folder : folderStates)
+        {
+            this.browserFolders.add(folder);
+            this.browserFragments.add(null);
+
+        }
+
+        Set<String> keys = ((Bundle) state).keySet();
+        for (String key : keys)
+        {
+            if (!key.startsWith("fs")) continue;
+
+            Fragment fragment = this.fragmentManager.getFragment(bundle, key);
+            int index = Integer.valueOf(key.substring(2));
+            this.browserFragments.set(index, fragment);
+        }
     }
 
     public List<File> getBrowserFolders()
@@ -184,6 +235,6 @@ abstract class SwipePagerAdapter extends PagerAdapter
 
     private boolean isPlaylistIndex(int index)
     {
-        return index == this.browserFragments.size();
+        return index == this.browserFolders.size();
     }
 }

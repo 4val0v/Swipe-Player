@@ -118,8 +118,8 @@ public class SoundService extends Service
     {
         this.mediaPlayer.release();
         this.audioManager.abandonAudioFocus(this.audioFocusChangeListener);
-        this.stopForeground(true);
-        this.stopSelf();
+        this.stopForeground(false);
+        //this.stopSelf();
     }
 
     private void setVolume(float volume)

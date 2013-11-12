@@ -3,6 +3,7 @@ package net.illusor.swipeplayer.activities;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -30,14 +31,35 @@ public class SwipeActivity extends FragmentActivity
         this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
         this.setContentView(R.layout.swipe_activity);
 
-        this.pagerAdapter = new LocalPagerAdapter(this.getSupportFragmentManager());
-        this.pagerAdapter.addFolder(Environment.getExternalStorageDirectory());
-
         this.viewPager = (ViewPager) this.findViewById(R.id.id_swipe_view_pager);
-        this.viewPager.setAdapter(this.pagerAdapter);
-        this.viewPager.setCurrentItem(5);
-
         this.audioControlPanel = (AudioControlView)this.findViewById(R.id.id_swipe_control);
+        this.pagerAdapter = new LocalPagerAdapter(this.getSupportFragmentManager());
+
+        if (savedInstanceState == null)
+        {
+            this.pagerAdapter.addFolder(Environment.getRootDirectory());
+            this.viewPager.setAdapter(this.pagerAdapter);
+            this.viewPager.setCurrentItem(1);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState)
+    {
+        super.onSaveInstanceState(outState);
+        Parcelable state = this.pagerAdapter.saveObjectState();
+        outState.putParcelable("pagerAdapter", state);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState)
+    {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        Parcelable state = savedInstanceState.getParcelable("pagerAdapter");
+        this.pagerAdapter.restoreObjectState(state);
+
+        this.viewPager.setAdapter(this.pagerAdapter);
     }
 
     public void directoryOpen(File folder)
@@ -45,7 +67,9 @@ public class SwipeActivity extends FragmentActivity
         int index = this.pagerAdapter.findFolder(folder);
         if (index >= 0)
         {
-            this.viewPager.setCurrentItem(index, true);
+            int current = this.viewPager.getCurrentItem();
+            for (int i  = current; i > index; i--)
+                this.viewPager.setCurrentItem(i - 1, false);
         }
         else
         {

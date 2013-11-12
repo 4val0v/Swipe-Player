@@ -22,7 +22,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:textSize="12.4pt"
+        android:textSize="25sp"
         swp:Font="PTSansNarrow" />
 
     <net.illusor.swipeplayer.widgets.FormattedTextView
@@ -34,7 +34,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="2dp"
         android:text="7:48"
-        android:textSize="7pt"
+        android:textSize="14sp"
         swp:Font="PTSans" />
 
 </merge>

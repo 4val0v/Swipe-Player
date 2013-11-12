@@ -65,7 +65,8 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
             }
         }
 
-        this.audioLoaderCallbacks.initLoader(this.currentAudioFolder, false);
+        if (this.currentAudioFolder != null)
+            this.audioLoaderCallbacks.initLoader(this.currentAudioFolder, false);
 
         Intent intent = new Intent(this.getActivity(), SoundService.class);
         this.getActivity().bindService(intent, this.soundServiceController, Service.BIND_AUTO_CREATE);

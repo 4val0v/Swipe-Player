@@ -1,6 +1,7 @@
 package net.illusor.swipeplayer.widgets;
 
 import android.content.Context;
+import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.Checkable;

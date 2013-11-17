@@ -12,7 +12,7 @@ import net.illusor.swipeplayer.domain.AudioFile;
 
 public class AudioControlView extends LinearLayout
 {
-    private final TextView title1, title2, artist;
+    private final FormattedTextView title1, title2, artist;
     private final SeekBar progress;
     private AudioFile audioFile;
 
@@ -30,9 +30,9 @@ public class AudioControlView extends LinearLayout
 
         LayoutInflater.from(context).inflate(R.layout.audio_control_panel, this);
 
-        this.title1 = (TextView) this.findViewById(R.id.id_audio_control_title1);
-        this.title2 = (TextView) this.findViewById(R.id.id_audio_control_title2);
-        this.artist = (TextView) this.findViewById(R.id.id_audio_control_artist);
+        this.title1 = (FormattedTextView) this.findViewById(R.id.id_audio_control_title1);
+        this.title2 = (FormattedTextView) this.findViewById(R.id.id_audio_control_title2);
+        this.artist = (FormattedTextView) this.findViewById(R.id.id_audio_control_artist);
         this.progress = (SeekBar) this.findViewById(R.id.id_audio_control_progress);
         this.progress.setOnSeekBarChangeListener(new ProgressListener());
     }

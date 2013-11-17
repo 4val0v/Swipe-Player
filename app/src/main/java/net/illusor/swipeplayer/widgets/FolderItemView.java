@@ -10,7 +10,7 @@ import net.illusor.swipeplayer.R;
 
 public class FolderItemView extends LinearLayout
 {
-    private TextView title;
+    private FormattedTextView title;
     private View iconIsFolder, iconHasPlaylistFiles;
 
     public FolderItemView(Context context)
@@ -23,7 +23,7 @@ public class FolderItemView extends LinearLayout
         super(context, attrs);
 
         LayoutInflater.from(context).inflate(R.layout.list_item_folder, this);
-        this.title = (TextView)this.findViewById(R.id.id_file_title);
+        this.title = (FormattedTextView)this.findViewById(R.id.id_file_title);
         this.iconIsFolder = this.findViewById(R.id.id_file_is_folder);
         this.iconHasPlaylistFiles = this.findViewById(R.id.id_folder_has_playlist_files);
     }

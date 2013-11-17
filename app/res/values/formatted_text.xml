@@ -9,5 +9,9 @@
             <enum name="PTSansNarrow" value="3"/>
             <enum name="PTSerifBold" value="4"/>
         </attr>
+        <attr name="HeaderTextSize" format="dimension"/>
+        <attr name="LineTextSize" format="dimension"/>
+        <attr name="IsWrapping" format="boolean"/>
+        <attr name="TextColor" format="color"/>
     </declare-styleable>
 </resources>

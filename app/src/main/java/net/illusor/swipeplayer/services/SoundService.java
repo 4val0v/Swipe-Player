@@ -17,6 +17,8 @@ import java.io.IOException;
 
 public class SoundService extends Service
 {
+    public static final String INTENT_CODE_STOP = "stop";
+
     private AudioManager audioManager;
     private MediaPlayer mediaPlayer;
     private NoisyReceiver noisyReceiver;
@@ -37,6 +39,12 @@ public class SoundService extends Service
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
+        if (intent != null && intent.getAction() == INTENT_CODE_STOP)
+        {
+            if (this.mediaPlayer != null)
+                this.stop();
+        }
+
         return Service.START_NOT_STICKY;
     }
 
@@ -116,7 +124,9 @@ public class SoundService extends Service
 
     private void stop()
     {
+        this.unregisterReceiver(this.noisyReceiver);
         this.mediaPlayer.release();
+        this.mediaPlayer = null;
         this.audioManager.abandonAudioFocus(this.audioFocusChangeListener);
         this.stopForeground(false);
         //this.stopSelf();

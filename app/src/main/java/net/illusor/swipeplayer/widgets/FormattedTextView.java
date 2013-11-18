@@ -96,7 +96,7 @@ public class FormattedTextView extends View implements Checkable
 
         Paint.FontMetricsInt metrics = this.textPaint.getFontMetricsInt();
         int requestedHeight = metrics.descent - metrics.ascent + paddingV;
-        if (needsWrap)
+        if (needsWrap && this.isWrapping)
         {
             this.textPaint.setTextSize(this.lineTextSize);
             metrics = this.textPaint.getFontMetricsInt();
@@ -149,7 +149,7 @@ public class FormattedTextView extends View implements Checkable
 
                 canvas.drawText(this.text, 0, headerCharsCount, headerOffsetLeft, headerOffsetTop, this.textPaint);
 
-                if (headerCharsCount < this.text.length())
+                if (this.isWrapping && headerCharsCount < this.text.length())
                 {
                     this.textPaint.setTextSize(this.lineTextSize);
                     CharSequence lineText = this.text.subSequence(headerCharsCount, this.text.length());

@@ -24,38 +24,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/id_audio_control_title1"
-        android:textColor="@android:color/white"
-        android:textSize="25sp"
-        android:autoText="false"
-        android:ellipsize="end"
-        android:singleLine="true"
         android:layout_marginLeft="14dp"
-        swp:Font="PTSerifBold"/>
-
-    <net.illusor.swipeplayer.widgets.FormattedTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/id_audio_control_title2"
-        android:textColor="@android:color/transparent"
-        android:textSize="16sp"
-        android:layout_marginLeft="14dp"
-        android:singleLine="true"
-        android:ellipsize="end"
-        android:visibility="gone"
-        swp:Font="PTSerifBold"/>
+        android:layout_marginRight="14dp"
+        swp:Font="PTSerifBold"
+        swp:TextColor="#ffffff"
+        swp:HeaderTextSize="25sp"
+        swp:LineTextSize="20sp"/>
 
     <net.illusor.swipeplayer.widgets.FormattedTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/id_audio_control_artist"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
         android:layout_marginLeft="14dp"
-        android:singleLine="true"
-        android:ellipsize="end"
         android:layout_marginTop="3dp"
         android:layout_marginBottom="16dp"
-        swp:Font="RobotoLight"/>
+        swp:Font="RobotoLight"
+        swp:TextColor="#000000"
+        swp:HeaderTextSize="20sp"/>
 
 </merge>
 

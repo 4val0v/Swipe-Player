@@ -11,6 +11,8 @@
         </attr>
         <attr name="HeaderTextSize" format="dimension"/>
         <attr name="LineTextSize" format="dimension"/>
+        <attr name="LineSpacing" format="dimension"/>
+        <attr name="CharsToEllipsize" format="integer"/>
         <attr name="IsWrapping" format="boolean"/>
         <attr name="TextColor" format="color"/>
     </declare-styleable>

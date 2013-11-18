@@ -1,6 +1,7 @@
 package net.illusor.swipeplayer.widgets;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +36,11 @@ public class FolderItemView extends LinearLayout
 
     public void setIsFolder(boolean isFolder)
     {
-        this.iconIsFolder.setVisibility(isFolder ? VISIBLE : GONE);
+        Resources rs = this.getResources();
+        int color = isFolder ? rs.getColor(R.color.color_folder_text_isFolder) : rs.getColor(R.color.color_folder_text_isFile);
+
+        this.title.setTextColor(color);
+        this.iconIsFolder.setVisibility(isFolder ? GONE : VISIBLE);
     }
 
     public void setHasPlaylistFiles(boolean hasPlaylistFiles)

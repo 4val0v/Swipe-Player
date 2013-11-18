@@ -29,9 +29,10 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             swp:HeaderTextSize="25sp"
-            swp:LineTextSize="10sp"
+            swp:LineTextSize="15sp"
             swp:Font="PTSansNarrow"
-            swp:TextColor="#FFFFFF"/>
+            swp:TextColor="#FFFFFF"
+            swp:IsWrapping="true"/>
 
     <View
             android:id="@+id/id_folder_has_playlist_files"

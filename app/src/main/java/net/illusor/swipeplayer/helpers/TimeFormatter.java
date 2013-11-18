@@ -18,9 +18,9 @@ public class TimeFormatter
 
         String result;
         if (hours > 0)
-            result = String.format("%d:%d:%d", hours, minutes, seconds);
+            result = String.format("%d:%02d:%02d", hours, minutes, seconds);
         else
-            result = String.format("%d:%d", minutes, seconds);
+            result = String.format("%d:%02d", minutes, seconds);
 
         return result;
     }

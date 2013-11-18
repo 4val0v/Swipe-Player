@@ -1,42 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:swp="http://schemas.android.com/apk/res/net.illusor.swipeplayer"
               android:orientation="horizontal"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content">-->
+              android:layout_height="wrap_content">
 
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:swp="http://schemas.android.com/apk/res/net.illusor.swipeplayer">
+<!--<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:swp="http://schemas.android.com/apk/res/net.illusor.swipeplayer">-->
 
     <net.illusor.swipeplayer.widgets.FormattedTextView
         android:id="@+id/id_play_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_weight="1"
-        android:textColor="@drawable/item_playlist_text"
-        android:singleLine="true"
-        android:ellipsize="end"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:textSize="25sp"
-        swp:Font="PTSansNarrow" />
+        android:layout_weight="1"
+        swp:Font="PTSansNarrow"
+        swp:HeaderTextSize="25sp"
+        swp:LineTextSize="20sp"
+        swp:TextColor="@drawable/item_playlist_text"
+        swp:IsWrapping="true"/>
 
     <net.illusor.swipeplayer.widgets.FormattedTextView
         android:id="@+id/id_play_duration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:textColor="@drawable/item_playlist_text"
         android:layout_marginRight="16dp"
         android:layout_marginTop="2dp"
-        android:text="7:48"
-        android:textSize="14sp"
+        swp:HeaderTextSize="14sp"
+        swp:TextColor="@drawable/item_playlist_text"
         swp:Font="PTSans" />
 
-</merge>
+<!--</merge>-->
 
-    <!--</LinearLayout>-->
+</LinearLayout>

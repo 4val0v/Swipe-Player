@@ -42,19 +42,19 @@
     <file path="/AndroidManifest.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1383997863012" ignored="false" />
     <file path="/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1381334187330" ignored="false" />
     <file path="$APPLICATION_HOME_DIR$/plugins/android/lib/android.jar!/org/jetbrains/android/android.xsd" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1381334275064" ignored="false" />
-    <file path="/SwipeActivity.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1384243418576" ignored="false" />
+    <file path="/SwipeActivity.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1384756528902" ignored="false" />
     <file path="/Dummy.txt" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382856756795" ignored="false" />
     <file path="/SwipeActivity.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1381335237728" ignored="false" />
     <file path="/PlaylistFragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1384234218173" ignored="false" />
     <file path="/PlaylistFragment.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1381335503279" ignored="false" />
-    <file path="/fragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1384680156969" ignored="false" />
+    <file path="/fragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1384758576126" ignored="false" />
     <file path="/swipe_activity.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382891252522" ignored="false" />
     <file path="/FolderBrowserFragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1384156168217" ignored="false" />
     <file path="/folder_browser_fragment.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1383984630211" ignored="false" />
-    <file path="/list_item_folder.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1384681855309" ignored="false" />
+    <file path="/list_item_folder.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1384754927064" ignored="false" />
     <file path="/a.dummy" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382943098296" ignored="false" />
     <file path="/AudioFile.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382175856948" ignored="false" />
-    <file path="/AudioLoader.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1384234029691" ignored="false" />
+    <file path="/AudioLoader.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1384756536821" ignored="false" />
     <file path="/AudioLoaderArgs.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382025805282" ignored="false" />
     <file path="/AudioInfoPanel.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382120067576" ignored="false" />
     <file path="/audio_info_panel.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382170031760" ignored="false" />
@@ -74,14 +74,14 @@
     <file path="/list_item_nav_history.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382376820534" ignored="false" />
     <file path="/ListPagerAdapter.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1384063295223" ignored="false" />
     <file path="/a.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382632406906" ignored="false" />
-    <file path="/FormattedTextView.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1384681578978" ignored="false" />
+    <file path="/FormattedTextView.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1384760261444" ignored="false" />
     <file path="/formatted_text.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1384680978713" ignored="false" />
     <file path="/playlist_fragment.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382901729714" ignored="false" />
-    <file path="/list_item_playlist.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1384238001940" ignored="false" />
+    <file path="/list_item_playlist.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1384760170109" ignored="false" />
     <file path="/ListItemPlaylist.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382890989735" ignored="false" />
     <file path="/TimeFormatter.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382939974709" ignored="false" />
     <file path="/SoundService.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1384237436408" ignored="false" />
-    <file path="/PlaylistItemView.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1384596845912" ignored="false" />
+    <file path="/PlaylistItemView.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1384752858776" ignored="false" />
     <file path="/AudioControlView.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1384598759882" ignored="false" />
     <file path="/ExtendedListView.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382893268451" ignored="false" />
     <file path="/item_playlist_bg.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382945895786" ignored="false" />
@@ -125,23 +125,8 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/FormattedTextView.java" line="123" class="net.illusor.swipeplayer.widgets.FormattedTextView" package="net.illusor.swipeplayer.widgets">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
     </line_breakpoints>
-    <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
+    <breakpoint_any>
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
         <option name="NOTIFY_UNCAUGHT" value="true" />
@@ -186,40 +171,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SwipeActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/activities/SwipeActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="0" selection-start="1015" selection-end="1015" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FormattedTextView.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="FormattedTextView.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/FormattedTextView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="177" column="17" selection-start="5960" selection-end="5960" vertical-scroll-proportion="0.0">
+            <state line="160" column="72" selection-start="5988" selection-end="5988" vertical-scroll-proportion="1.9887097">
               <folding>
-                <element signature="method#FormattedTextView#0;class#FormattedTextView#0" expanded="false" />
-                <element signature="method#FormattedTextView#1;class#FormattedTextView#0" expanded="false" />
-                <element signature="method#onMeasure#0;class#FormattedTextView#0" expanded="false" />
-                <element signature="method#getText#0;class#FormattedTextView#0" expanded="false" />
-                <element signature="method#setText#0;class#FormattedTextView#0" expanded="false" />
-                <element signature="method#onCreateDrawableState#0;class#FormattedTextView#0" expanded="false" />
-                <element signature="method#isChecked#0;class#FormattedTextView#0" expanded="false" />
-                <element signature="method#setChecked#0;class#FormattedTextView#0" expanded="false" />
-                <element signature="method#toggle#0;class#FormattedTextView#0" expanded="false" />
-                <element signature="method#setRawHeaderTextSize#0;class#FormattedTextView#0" expanded="false" />
-                <element signature="method#setRawLineTextSize#0;class#FormattedTextView#0" expanded="false" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#6880#6898#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="list_item_folder.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="list_item_folder.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/layout/list_item_folder.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="37" selection-start="1164" selection-end="1164" vertical-scroll-proportion="0.43148687">
+            <state line="31" column="35" selection-start="1420" selection-end="1420" vertical-scroll-proportion="-5.68">
               <folding />
             </state>
           </provider>
@@ -228,28 +195,42 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FolderItemView.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/FolderItemView.java">
+      <file leaf-file-name="list_item_playlist.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/layout/list_item_playlist.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="29" selection-start="353" selection-end="353" vertical-scroll-proportion="0.0">
+            <state line="23" column="28" selection-start="1025" selection-end="1025" vertical-scroll-proportion="-4.68">
               <folding />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AudioControlView.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/AudioControlView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="26" selection-start="437" selection-end="437" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
+          <provider editor-type-id="android-designer">
+            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="PlaylistItemView.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/PlaylistItemView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="28" selection-start="1820" selection-end="1820" vertical-scroll-proportion="0.0">
+            <state line="16" column="46" selection-start="573" selection-end="573" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#1814#1832#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="item_playlist_text.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/drawable/item_playlist_text.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="49" selection-start="377" selection-end="377" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FolderItemView.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/FolderItemView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="29" selection-start="353" selection-end="353" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -265,22 +246,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/activities/ListPagerAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/FolderBrowserFragment.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/AudioLoader.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/PlaylistFragment.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/services/SoundService.java" />
         <option value="$PROJECT_DIR$/res/layout/audio_control_panel.xml" />
-        <option value="$PROJECT_DIR$/res/layout/list_item_playlist.xml" />
         <option value="$PROJECT_DIR$/res/drawable/item_playlist_bg.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/activities/SwipeActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/activities/SwipePagerAdapter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/PlaylistItemView.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/AudioControlView.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/FolderItemView.java" />
         <option value="$PROJECT_DIR$/res/values/formatted_text.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/FormattedTextView.java" />
         <option value="$PROJECT_DIR$/res/layout/list_item_folder.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/PlaylistItemView.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/helpers/TimeFormatter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/activities/SwipeActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/AudioLoader.java" />
+        <option value="$PROJECT_DIR$/res/layout/list_item_playlist.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/FormattedTextView.java" />
       </list>
     </option>
   </component>
@@ -332,8 +313,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1452" />
-    <option name="height" value="886" />
+    <option name="width" value="1936" />
+    <option name="height" value="1066" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -361,8 +342,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -693,6 +672,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -711,11 +692,11 @@
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="MemberChooser.showClasses" value="true" />
     <property name="FullScreen" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -729,7 +710,7 @@
       <recent name="E:\Bitbucket\net.issusor.swipeplayer\trunk\app\src\main\java" />
     </key>
   </component>
-  <component name="RunManager" selected="Android Application.Phone 4&quot; (API 16)">
+  <component name="RunManager" selected="Android Application.USB">
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
       <module name="" />
       <option name="TESTING_TYPE" value="0" />
@@ -915,34 +896,34 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1452" height="886" extended-state="0" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <editor active="false" />
     <layout>
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16435432" sideWeight="0.50275636" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18516542" sideWeight="0.50275636" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294964" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32462174" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.45804676" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28776187" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287483" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32599726" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3251029" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32921812" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.50275636" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19604701" sideWeight="0.663242" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21037464" sideWeight="0.5419532" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32990867" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21077909" sideWeight="0.60088205" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21024546" sideWeight="0.71223813" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296582" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19893049" sideWeight="0.60088205" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18516542" sideWeight="0.60088205" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32462174" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1019,62 +1000,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://E:/android-sdk-tools/platforms/android-10/android.jar!/android/widget/CheckedTextView.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="157" selection-end="157" vertical-scroll-proportion="0.11379801" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/activities/SwipeActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="0" selection-start="1015" selection-end="1015" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://E:/android-sdk-tools/platforms/android-10/android.jar!/android/view/LayoutInflater.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="35" selection-start="1586" selection-end="1586" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/audio_control_panel.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="49" column="20" selection-start="1959" selection-end="1959" vertical-scroll-proportion="0.5502958">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/AudioControlView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="26" selection-start="437" selection-end="437" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/PlaylistItemView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="28" selection-start="1820" selection-end="1820" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://E:/android-sdk-tools/platforms/android-10/android.jar!/android/view/View.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="603" column="25" selection-start="25820" selection-end="25820" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/FolderItemView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="29" selection-start="353" selection-end="353" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/list_item_playlist.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="27" selection-start="792" selection-end="792" vertical-scroll-proportion="0.33174226">
           <folding />
         </state>
       </provider>
@@ -1089,20 +1017,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/drawable/item_playlist_text.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="35" selection-start="363" selection-end="363" vertical-scroll-proportion="0.17204301">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="20" selection-start="156" selection-end="156" vertical-scroll-proportion="0.17391305">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/drawable/item_playlist_bg.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -1110,33 +1024,99 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/FormattedTextView.java">
+    <entry file="jar://C:/android-sdk/platforms/android-10/android.jar!/android/view/View.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="177" column="17" selection-start="5960" selection-end="5960" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="method#FormattedTextView#0;class#FormattedTextView#0" expanded="false" />
-            <element signature="method#FormattedTextView#1;class#FormattedTextView#0" expanded="false" />
-            <element signature="method#onMeasure#0;class#FormattedTextView#0" expanded="false" />
-            <element signature="method#getText#0;class#FormattedTextView#0" expanded="false" />
-            <element signature="method#setText#0;class#FormattedTextView#0" expanded="false" />
-            <element signature="method#onCreateDrawableState#0;class#FormattedTextView#0" expanded="false" />
-            <element signature="method#isChecked#0;class#FormattedTextView#0" expanded="false" />
-            <element signature="method#setChecked#0;class#FormattedTextView#0" expanded="false" />
-            <element signature="method#toggle#0;class#FormattedTextView#0" expanded="false" />
-            <element signature="method#setRawHeaderTextSize#0;class#FormattedTextView#0" expanded="false" />
-            <element signature="method#setRawLineTextSize#0;class#FormattedTextView#0" expanded="false" />
-          </folding>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/AudioControlView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="26" selection-start="437" selection-end="437" vertical-scroll-proportion="-0.20460358">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="20" selection-start="222" selection-end="222" vertical-scroll-proportion="0.20460358">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/list_item_folder.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="37" selection-start="1164" selection-end="1164" vertical-scroll-proportion="0.43148687">
+        <state line="31" column="35" selection-start="1420" selection-end="1420" vertical-scroll-proportion="-5.68">
           <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/helpers/TimeFormatter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="0" selection-start="757" selection-end="757" vertical-scroll-proportion="0.63171357">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/FolderItemView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="29" selection-start="353" selection-end="353" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/drawable/item_playlist_text.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="49" selection-start="377" selection-end="377" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/AudioLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="112" selection-start="1029" selection-end="1029" vertical-scroll-proportion="0.55813956">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/activities/SwipeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="81" selection-start="1462" selection-end="1462" vertical-scroll-proportion="0.37209302">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/list_item_playlist.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="28" selection-start="1025" selection-end="1025" vertical-scroll-proportion="-4.68">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/PlaylistItemView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="46" selection-start="573" selection-end="573" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#1814#1832#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/FormattedTextView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="160" column="72" selection-start="5988" selection-end="5988" vertical-scroll-proportion="1.9887097">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6880#6898#0" expanded="false" />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>

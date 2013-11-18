@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:swp="http://schemas.android.com/apk/res/net.illusor.swipeplayer"
               android:orientation="horizontal"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+              android:layout_height="wrap_content">-->
 
-<!--<merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:swp="http://schemas.android.com/apk/res/net.illusor.swipeplayer">-->
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:swp="http://schemas.android.com/apk/res/net.illusor.swipeplayer">
 
     <net.illusor.swipeplayer.widgets.FormattedTextView
         android:id="@+id/id_play_title"
@@ -36,6 +36,6 @@
         swp:TextColor="@drawable/item_playlist_text"
         swp:Font="PTSans" />
 
-<!--</merge>-->
+</merge>
 
-</LinearLayout>
+<!--</LinearLayout>-->

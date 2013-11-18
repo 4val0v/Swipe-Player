@@ -31,7 +31,7 @@
             swp:HeaderTextSize="25sp"
             swp:LineTextSize="15sp"
             swp:Font="PTSansNarrow"
-            swp:TextColor="#FFFFFF"
+            swp:TextColor="@color/color_folder_text_isFolder"
             swp:IsWrapping="true"/>
 
     <View

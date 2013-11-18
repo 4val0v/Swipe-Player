@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/color_fragment_browser">
+    android:background="@drawable/drawable_fragment_browser">
 
     <Spinner
         android:id="@+id/id_fb_nav_history"

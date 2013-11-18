@@ -20,9 +20,7 @@ public class FormattedTextView extends View implements Checkable
     private static final int[] CHECKED_STATE_SET = {android.R.attr.state_checked};
     private boolean isChecked;
 
-    private float lineSpacing = 5;
-    private float headerTextSize;
-    private float lineTextSize;
+    private int headerTextSize, lineTextSize, lineSpacing, charsToEllipsize;
     private boolean isWrapping;
     private int textColor;
     private ColorStateList colorStateList;
@@ -43,8 +41,10 @@ public class FormattedTextView extends View implements Checkable
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.FormattedTextView, defStyle, 0);
         int fontName = a.getInt(R.styleable.FormattedTextView_Font, -1);
-        this.headerTextSize = a.getDimensionPixelSize(R.styleable.FormattedTextView_HeaderTextSize, 15);
-        this.lineTextSize = a.getDimensionPixelSize(R.styleable.FormattedTextView_LineTextSize, 15);
+        this.headerTextSize = a.getDimensionPixelSize(R.styleable.FormattedTextView_HeaderTextSize, 20);
+        this.lineTextSize = a.getDimensionPixelSize(R.styleable.FormattedTextView_LineTextSize, 20);
+        this.lineSpacing = a.getDimensionPixelSize(R.styleable.FormattedTextView_LineSpacing, 20);
+        this.charsToEllipsize = a.getInteger(R.styleable.FormattedTextView_CharsToEllipsize, 5);
         this.isWrapping = a.getBoolean(R.styleable.FormattedTextView_IsWrapping, false);
         this.textColor = a.getColor(R.styleable.FormattedTextView_TextColor, Color.BLACK);
         this.colorStateList = a.getColorStateList(R.styleable.FormattedTextView_TextColor);
@@ -100,7 +100,7 @@ public class FormattedTextView extends View implements Checkable
         {
             this.textPaint.setTextSize(this.lineTextSize);
             metrics = this.textPaint.getFontMetricsInt();
-            requestedHeight += metrics.descent - metrics.ascent + metrics.leading;
+            requestedHeight += metrics.descent - metrics.ascent + this.lineSpacing;
         }
 
         switch (heightMode)
@@ -145,11 +145,19 @@ public class FormattedTextView extends View implements Checkable
 
                 int headerOffsetLeft = this.getPaddingLeft() - bounds.left;
                 int headerOffsetTop = this.getPaddingTop() - metrics.ascent;
-                int metricsLeading = metrics.leading;
 
-                canvas.drawText(this.text, 0, headerCharsCount, headerOffsetLeft, headerOffsetTop, this.textPaint);
+                boolean ellipsize = (this.text.length() - headerCharsCount > this.charsToEllipsize) || !this.isWrapping;
+                if (ellipsize)
+                {
+                    CharSequence smartText = TextUtils.ellipsize(this.text, this.textPaint, maxTextWidth, TextUtils.TruncateAt.END);
+                    canvas.drawText(smartText, 0, smartText.length(), headerOffsetLeft, headerOffsetTop, this.textPaint);
+                }
+                else
+                {
+                    canvas.drawText(this.text, 0, headerCharsCount, headerOffsetLeft, headerOffsetTop, this.textPaint);
+                }
 
-                if (this.isWrapping && headerCharsCount < this.text.length())
+                if (!ellipsize && this.isWrapping && headerCharsCount < this.text.length())
                 {
                     this.textPaint.setTextSize(this.lineTextSize);
                     CharSequence lineText = this.text.subSequence(headerCharsCount, this.text.length());
@@ -158,28 +166,12 @@ public class FormattedTextView extends View implements Checkable
                     this.textPaint.getTextBounds(this.text.toString(), 0, headerCharsCount, bounds);
                     metrics = this.textPaint.getFontMetricsInt();
 
-                    int lineOffsetTop = headerOffsetTop + metricsLeading - metrics.ascent;
+                    int lineOffsetTop = headerOffsetTop + this.lineSpacing - metrics.ascent;
 
                     canvas.drawText(lineText, 0, lineText.length(), headerOffsetLeft, lineOffsetTop, this.textPaint );
                 }
             }
         }
-    }
-
-    public CharSequence getText()
-    {
-        return text;
-    }
-
-    public void setText(CharSequence text)
-    {
-        if (text == null)
-            text = "";
-
-        this.text = text;
-
-        this.requestLayout();
-        this.invalidate();
     }
 
     @Override
@@ -197,6 +189,12 @@ public class FormattedTextView extends View implements Checkable
     {
         super.drawableStateChanged();
         this.updateTextColor(true);
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.text.toString();
     }
 
     //region Checkable
@@ -236,9 +234,40 @@ public class FormattedTextView extends View implements Checkable
         }
     }
 
-    @Override
-    public String toString()
+    public CharSequence getText()
     {
-        return this.text.toString();
+        return text;
     }
+
+    public void setText(CharSequence text)
+    {
+        if (text == null)
+            text = "";
+
+        this.text = text;
+
+        this.requestLayout();
+        this.invalidate();
+    }
+
+    public void setTextColorResource(int resourceId)
+    {
+        ColorStateList stateList = this.getResources().getColorStateList(resourceId);
+        if (stateList != this.colorStateList)
+        {
+            this.colorStateList = stateList;
+            this.updateTextColor(true);
+        }
+    }
+
+    public void setTextColor(int color)
+    {
+        if (this.colorStateList != null || this.textColor != color)
+        {
+            this.colorStateList = null;
+            this.textColor = color;
+            this.updateTextColor(true);
+        }
+    }
+
 }

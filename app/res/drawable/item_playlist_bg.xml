@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android" android:constantSize="true">
-    <item android:state_pressed="true">
-        <shape>
-            <solid android:color="#000000"/>
-        </shape>
-    </item>
-    <item android:state_checked="true">
-        <shape>
-            <solid android:color="#ef4b4c"/>
-        </shape>
-    </item>
-    <item>
-        <shape>
-            <solid android:color="@android:color/transparent"/>
-        </shape>
-    </item>
+    <item android:state_pressed="true" android:drawable="@drawable/drawable_playlist_bg_pressed"/>
+    <item android:state_checked="true" android:drawable="@drawable/drawable_playlist_bg_playing"/>
+    <item android:drawable="@drawable/drawable_playlist_bg_normal"/>
 </selector>

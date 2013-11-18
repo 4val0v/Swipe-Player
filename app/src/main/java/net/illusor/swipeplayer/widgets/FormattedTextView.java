@@ -20,7 +20,6 @@ public class FormattedTextView extends View implements Checkable
     private static final int[] CHECKED_STATE_SET = {android.R.attr.state_checked};
     private boolean isChecked;
 
-    private float heightRequestedRatio = 1.2f;
     private float lineSpacing = 5;
     private float headerTextSize;
     private float lineTextSize;
@@ -44,10 +43,10 @@ public class FormattedTextView extends View implements Checkable
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.FormattedTextView, defStyle, 0);
         int fontName = a.getInt(R.styleable.FormattedTextView_Font, -1);
-        int textSizeHeader = a.getDimensionPixelSize(R.styleable.FormattedTextView_HeaderTextSize, 15);
-        int textSizeLine = a.getDimensionPixelSize(R.styleable.FormattedTextView_LineTextSize, 15);
+        this.headerTextSize = a.getDimensionPixelSize(R.styleable.FormattedTextView_HeaderTextSize, 15);
+        this.lineTextSize = a.getDimensionPixelSize(R.styleable.FormattedTextView_LineTextSize, 15);
         this.isWrapping = a.getBoolean(R.styleable.FormattedTextView_IsWrapping, false);
-        this.textColor = a.getColor(R.styleable.FormattedTextView_TextColor, 0);
+        this.textColor = a.getColor(R.styleable.FormattedTextView_TextColor, Color.BLACK);
         this.colorStateList = a.getColorStateList(R.styleable.FormattedTextView_TextColor);
         a.recycle();
 
@@ -55,23 +54,7 @@ public class FormattedTextView extends View implements Checkable
         this.textPaint.setTypeface(FontHelper.font(fontName));
         this.textPaint.density = getResources().getDisplayMetrics().density;
 
-        this.setRawHeaderTextSize(textSizeHeader);
-        this.setRawLineTextSize(textSizeLine);
         this.updateTextColor(false);
-    }
-
-    private void updateTextColor(boolean allowInvalidate)
-    {
-        if (this.colorStateList != null)
-        {
-            int color = this.colorStateList.getColorForState(this.getDrawableState(), 0);
-            if (this.textColor != color)
-            {
-                this.textColor = color;
-                if (allowInvalidate)
-                    this.invalidate();
-            }
-        }
     }
 
     @Override
@@ -82,49 +65,60 @@ public class FormattedTextView extends View implements Checkable
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
 
-        int width, height;
-        boolean needsWrap;
+        int paddingV = this.getPaddingBottom() + this.getPaddingTop();
+        int paddingH = this.getPaddingLeft() + this.getPaddingRight();
 
+        int width, height;
+        boolean needsWrap = false;
+
+        this.textPaint.setTextSize(this.headerTextSize);
+
+        int requestedWidth = (int)(this.textPaint.measureText(this.text, 0, this.text.length())) + paddingH;
         switch (widthMode)
         {
             case MeasureSpec.UNSPECIFIED:
             {
-                this.textPaint.setTextSize(this.headerTextSize);
-                width = (int) Math.ceil(this.textPaint.measureText(this.text, 0, this.text.length() - 1));
+                width = requestedWidth;
                 break;
             }
             case MeasureSpec.AT_MOST:
             {
-                this.textPaint.setTextSize(this.headerTextSize);
-                int textWidth = (int) Math.ceil(this.textPaint.measureText(this.text, 0, this.text.length() - 1));
-                width = widthSize < textWidth ? widthSize : textWidth;
+                width = widthSize < requestedWidth ? widthSize : requestedWidth;
+                needsWrap = widthSize < requestedWidth;
                 break;
             }
             default:
+            {
                 width = widthSize;
+                needsWrap = widthSize < requestedWidth;
+            }
+        }
+
+        Paint.FontMetricsInt metrics = this.textPaint.getFontMetricsInt();
+        int requestedHeight = metrics.descent - metrics.ascent + paddingV;
+        if (needsWrap)
+        {
+            this.textPaint.setTextSize(this.lineTextSize);
+            metrics = this.textPaint.getFontMetricsInt();
+            requestedHeight += metrics.descent - metrics.ascent + metrics.leading;
         }
 
         switch (heightMode)
         {
             case MeasureSpec.UNSPECIFIED:
             {
-                this.textPaint.setTextSize(this.headerTextSize);
-                Rect bounds = new Rect();
-                this.textPaint.getTextBounds(this.text.toString(), 0, this.text.length() - 1, bounds);
-                height = bounds.height();
+                height = requestedHeight;
                 break;
             }
             case MeasureSpec.AT_MOST:
             {
-                this.textPaint.setTextSize(this.headerTextSize);
-                Rect bounds = new Rect();
-                this.textPaint.getTextBounds(this.text.toString(), 0, this.text.length() - 1, bounds);
-                int textHeight = bounds.height();
-                height = heightSize < textHeight ? heightSize : textHeight;
+                height = heightSize < requestedHeight ? heightSize : requestedHeight;
                 break;
             }
             default:
+            {
                 height = heightSize;
+            }
         }
 
         this.setMeasuredDimension(width, height);
@@ -133,14 +127,43 @@ public class FormattedTextView extends View implements Checkable
     @Override
     protected void onDraw(Canvas canvas)
     {
-        this.textPaint.setTextSize(this.headerTextSize);
-        this.textPaint.setColor(this.textColor);
-        CharSequence paintText = TextUtils.ellipsize(this.text, this.textPaint, this.getWidth(), TextUtils.TruncateAt.END);
+        super.onDraw(canvas);
 
-        Rect bounds = new Rect();
-        this.textPaint.getTextBounds(paintText.toString(), 0, paintText.length() - 1, bounds);
+        if (this.text.length() != 0)
+        {
+            this.textPaint.setTextSize(this.headerTextSize);
+            this.textPaint.setColor(this.textColor);
 
-        canvas.drawText(paintText, 0, paintText.length(), -bounds.left, -bounds.top, this.textPaint);
+            int maxTextWidth = this.getWidth() - this.getPaddingLeft() - this.getPaddingRight();
+            int headerCharsCount = this.textPaint.breakText(this.text, 0, this.text.length(), true, maxTextWidth, null);
+
+            if (headerCharsCount > 0)
+            {
+                Rect bounds = new Rect();
+                this.textPaint.getTextBounds(this.text.toString(), 0, headerCharsCount, bounds);
+                Paint.FontMetricsInt metrics = this.textPaint.getFontMetricsInt();
+
+                int headerOffsetLeft = this.getPaddingLeft() - bounds.left;
+                int headerOffsetTop = this.getPaddingTop() - metrics.ascent;
+                int metricsLeading = metrics.leading;
+
+                canvas.drawText(this.text, 0, headerCharsCount, headerOffsetLeft, headerOffsetTop, this.textPaint);
+
+                if (headerCharsCount < this.text.length())
+                {
+                    this.textPaint.setTextSize(this.lineTextSize);
+                    CharSequence lineText = this.text.subSequence(headerCharsCount, this.text.length());
+                    lineText = TextUtils.ellipsize(lineText, this.textPaint, maxTextWidth, TextUtils.TruncateAt.END);
+
+                    this.textPaint.getTextBounds(this.text.toString(), 0, headerCharsCount, bounds);
+                    metrics = this.textPaint.getFontMetricsInt();
+
+                    int lineOffsetTop = headerOffsetTop + metricsLeading - metrics.ascent;
+
+                    canvas.drawText(lineText, 0, lineText.length(), headerOffsetLeft, lineOffsetTop, this.textPaint );
+                }
+            }
+        }
     }
 
     public CharSequence getText()
@@ -154,6 +177,8 @@ public class FormattedTextView extends View implements Checkable
             text = "";
 
         this.text = text;
+
+        this.requestLayout();
         this.invalidate();
     }
 
@@ -174,6 +199,8 @@ public class FormattedTextView extends View implements Checkable
         this.updateTextColor(true);
     }
 
+    //region Checkable
+
     @Override
     public boolean isChecked()
     {
@@ -193,23 +220,25 @@ public class FormattedTextView extends View implements Checkable
         this.setChecked(!this.isChecked);
     }
 
-    private void setRawHeaderTextSize(float size)
+    //endregion
+
+    private void updateTextColor(boolean allowInvalidate)
     {
-        if (this.headerTextSize != size)
+        if (this.colorStateList != null)
         {
-            this.headerTextSize = size;
-            this.requestLayout();
-            this.invalidate();
+            int color = this.colorStateList.getColorForState(this.getDrawableState(), 0);
+            if (this.textColor != color)
+            {
+                this.textColor = color;
+                if (allowInvalidate)
+                    this.invalidate();
+            }
         }
     }
 
-    private void setRawLineTextSize(float size)
+    @Override
+    public String toString()
     {
-        if (this.lineTextSize != size)
-        {
-            this.lineTextSize = size;
-            this.requestLayout();
-            this.invalidate();
-        }
+        return this.text.toString();
     }
 }

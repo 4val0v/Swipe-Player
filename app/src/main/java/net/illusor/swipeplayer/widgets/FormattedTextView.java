@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.*;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.Checkable;
 import net.illusor.swipeplayer.R;
@@ -43,8 +46,8 @@ public class FormattedTextView extends View implements Checkable
         int fontName = a.getInt(R.styleable.FormattedTextView_Font, -1);
         this.headerTextSize = a.getDimensionPixelSize(R.styleable.FormattedTextView_HeaderTextSize, 20);
         this.lineTextSize = a.getDimensionPixelSize(R.styleable.FormattedTextView_LineTextSize, 20);
-        this.lineSpacing = a.getDimensionPixelSize(R.styleable.FormattedTextView_LineSpacing, 20);
-        this.charsToEllipsize = a.getInteger(R.styleable.FormattedTextView_CharsToEllipsize, 5);
+        this.lineSpacing = a.getDimensionPixelSize(R.styleable.FormattedTextView_LineSpacing, 5);
+        this.charsToEllipsize = a.getInteger(R.styleable.FormattedTextView_CharsToEllipsize, 10);
         this.isWrapping = a.getBoolean(R.styleable.FormattedTextView_IsWrapping, false);
         this.textColor = a.getColor(R.styleable.FormattedTextView_TextColor, Color.BLACK);
         this.colorStateList = a.getColorStateList(R.styleable.FormattedTextView_TextColor);
@@ -94,13 +97,20 @@ public class FormattedTextView extends View implements Checkable
             }
         }
 
-        Paint.FontMetricsInt metrics = this.textPaint.getFontMetricsInt();
-        int requestedHeight = metrics.descent - metrics.ascent + paddingV;
-        if (needsWrap && this.isWrapping)
+        Paint.FontMetricsInt metricsHeader = this.textPaint.getFontMetricsInt();
+        int requestedHeight = metricsHeader.descent - metricsHeader.ascent + paddingV;
+
+        int maxTextWidth = width - this.getPaddingLeft() - this.getPaddingRight();
+        int headerCharsCount = this.textPaint.breakText(this.text, 0, this.text.length(), true, maxTextWidth, null);
+        boolean ellipsize = (this.text.length() - headerCharsCount < this.charsToEllipsize) || !this.isWrapping;
+
+        Log.d("Ellipsize-Measure", String.format("Text: %s || headerCharsCount: %d || length: %d || ellipsize: %b || maxTextWidth: %d", this.text, headerCharsCount, this.text.length(), ellipsize, maxTextWidth));
+
+        if (needsWrap && !ellipsize && this.isWrapping)
         {
             this.textPaint.setTextSize(this.lineTextSize);
-            metrics = this.textPaint.getFontMetricsInt();
-            requestedHeight += metrics.descent - metrics.ascent + this.lineSpacing;
+            Paint.FontMetricsInt metricsLine = this.textPaint.getFontMetricsInt();
+            requestedHeight += metricsLine.descent - metricsLine.ascent - metricsHeader.descent + this.lineSpacing;
         }
 
         switch (heightMode)
@@ -146,7 +156,7 @@ public class FormattedTextView extends View implements Checkable
                 int headerOffsetLeft = this.getPaddingLeft() - bounds.left;
                 int headerOffsetTop = this.getPaddingTop() - metrics.ascent;
 
-                boolean ellipsize = (this.text.length() - headerCharsCount > this.charsToEllipsize) || !this.isWrapping;
+                boolean ellipsize = (this.text.length() - headerCharsCount < this.charsToEllipsize) || !this.isWrapping;
                 if (ellipsize)
                 {
                     CharSequence smartText = TextUtils.ellipsize(this.text, this.textPaint, maxTextWidth, TextUtils.TruncateAt.END);
@@ -166,7 +176,7 @@ public class FormattedTextView extends View implements Checkable
                     this.textPaint.getTextBounds(this.text.toString(), 0, headerCharsCount, bounds);
                     metrics = this.textPaint.getFontMetricsInt();
 
-                    int lineOffsetTop = headerOffsetTop + this.lineSpacing - metrics.ascent;
+                    int lineOffsetTop = headerOffsetTop - metrics.ascent + this.lineSpacing;
 
                     canvas.drawText(lineText, 0, lineText.length(), headerOffsetLeft, lineOffsetTop, this.textPaint );
                 }
@@ -189,6 +199,32 @@ public class FormattedTextView extends View implements Checkable
     {
         super.drawableStateChanged();
         this.updateTextColor(true);
+    }
+
+    @Override
+    protected Parcelable onSaveInstanceState()
+    {
+        Parcelable superState = super.onSaveInstanceState();
+        SavedState state = new SavedState(superState);
+        state.text = this.text;
+        state.isChecked = this.isChecked;
+        return state;
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable superState)
+    {
+        if (!(superState instanceof SavedState))
+        {
+            super.onRestoreInstanceState(superState);
+            return;
+        }
+
+        SavedState savedState = (SavedState)superState;
+        super.onRestoreInstanceState(savedState.getSuperState());
+
+        this.text = savedState.text;
+        this.isChecked = savedState.isChecked;
     }
 
     @Override
@@ -267,6 +303,32 @@ public class FormattedTextView extends View implements Checkable
             this.colorStateList = null;
             this.textColor = color;
             this.updateTextColor(true);
+        }
+    }
+
+    private class SavedState extends BaseSavedState
+    {
+        private CharSequence text;
+        private boolean isChecked;
+
+        private SavedState(Parcel source)
+        {
+            super(source);
+            this.text = source.readString();
+            this.isChecked = source.readByte() == 1;
+        }
+
+        private SavedState(Parcelable superState)
+        {
+            super(superState);
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags)
+        {
+            super.writeToParcel(dest, flags);
+            dest.writeString(this.text.toString());
+            dest.writeByte(this.isChecked ? (byte)1 : 0);
         }
     }
 

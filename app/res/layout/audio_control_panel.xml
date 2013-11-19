@@ -29,7 +29,8 @@
         swp:Font="PTSerifBold"
         swp:TextColor="#ffffff"
         swp:HeaderTextSize="25sp"
-        swp:LineTextSize="20sp"/>
+        swp:LineTextSize="20sp"
+        swp:IsWrapping="true"/>
 
     <net.illusor.swipeplayer.widgets.FormattedTextView
         android:layout_width="wrap_content"

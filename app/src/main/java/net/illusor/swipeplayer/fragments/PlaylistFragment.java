@@ -80,6 +80,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         this.getActivity().unbindService(this.soundServiceController);
     }
 
+    @Override
     public void onPause()
     {
         super.onPause();
@@ -122,6 +123,12 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         private PlaylistAdapter(Context context, List<AudioFile> data)
         {
             super(context, 0, data);
+        }
+
+        @Override
+        public long getItemId(int position)
+        {
+            return this.getItem(position).hashCode();
         }
 
         @Override

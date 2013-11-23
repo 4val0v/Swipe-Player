@@ -1,8 +1,9 @@
 package net.illusor.swipeplayer.fragments;
 
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.app.Service;
+import android.content.*;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -15,6 +16,7 @@ import android.widget.ListView;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.activities.SwipeActivity;
 import net.illusor.swipeplayer.domain.AudioFile;
+import net.illusor.swipeplayer.services.SoundService;
 import net.illusor.swipeplayer.widgets.AudioControlView;
 import net.illusor.swipeplayer.widgets.PlaylistItemView;
 
@@ -27,7 +29,9 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
 
     private ListView listView;
     private File currentAudioFolder;
-    private AudioLoaderCallbacks audioLoaderCallbacks = new AudioLoaderCallbacks();
+    private final AudioLoaderCallbacks audioLoaderCallbacks = new AudioLoaderCallbacks();
+    private final SoundServiceConnection connection = new SoundServiceConnection();
+    private final SoundServiceReceiver receiver = new SoundServiceReceiver();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -48,6 +52,8 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
     {
         super.onStart();
         this.getAudioControl().onStart();
+        this.connection.bind();
+        this.receiver.register();
 
         if (this.currentAudioFolder == null)
         {
@@ -60,7 +66,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         }
 
         if (this.currentAudioFolder != null)
-            this.audioLoaderCallbacks.initLoader(this.currentAudioFolder, false);
+            this.audioLoaderCallbacks.initLoader(this.currentAudioFolder);
     }
 
     @Override
@@ -69,6 +75,8 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         super.onStop();
         this.getAudioControl().onStop();
         this.audioLoaderCallbacks.quitLoader();
+        this.receiver.unRegister();
+        this.connection.unbind();
     }
 
     @Override
@@ -89,15 +97,24 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
     {
         PlaylistItemView selectedItem = (PlaylistItemView) view;
         AudioFile audioFile = selectedItem.getAudioFile();
-        this.getAudioControl().setAudioFile(audioFile);
-        this.getAudioControl().setVisibility(View.VISIBLE);
-        this.listView.setItemChecked(i, true);
+        this.connection.service.play(audioFile);
     }
 
     public void setTargetFolder(File folder)
     {
         this.currentAudioFolder = folder;
-        this.audioLoaderCallbacks.initLoader(folder, true);
+        this.audioLoaderCallbacks.restartLoader(folder);
+    }
+
+    private void setItemChecked(AudioFile audioFile)
+    {
+        final PlaylistAdapter adapter = (PlaylistAdapter)listView.getAdapter();
+        final int index = adapter.getData().indexOf(audioFile);
+        if (index > 0)
+        {
+            listView.setItemChecked(index, true);
+            listView.smoothScrollToPosition(index);
+        }
     }
 
     private AudioControlView getAudioControl()
@@ -107,9 +124,12 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
 
     private class PlaylistAdapter extends ArrayAdapter<AudioFile>
     {
+        private List<AudioFile> data;
+
         private PlaylistAdapter(Context context, List<AudioFile> data)
         {
             super(context, 0, data);
+            this.data = data;
         }
 
         @Override
@@ -132,12 +152,18 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
             view.setAudioFile(file);
             return view;
         }
+
+        private List<AudioFile> getData()
+        {
+            return data;
+        }
     }
 
     private class AudioLoaderCallbacks implements LoaderManager.LoaderCallbacks<List<AudioFile>>
     {
         private static final String ARGS_DIRECTORY = "folder";
 
+        @Override
         public Loader<List<AudioFile>> onCreateLoader(int i, Bundle bundle)
         {
             File directory = (File) bundle.getSerializable(ARGS_DIRECTORY);
@@ -148,29 +174,93 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         public void onLoadFinished(Loader<List<AudioFile>> listLoader, List<AudioFile> audioFiles)
         {
             listView.setAdapter(new PlaylistAdapter(getActivity(), audioFiles));
-            getAudioControl().setPlaylist(audioFiles);
+
+            connection.service.setPlaylist(audioFiles);
+            final AudioFile audioFile = connection.service.getCurrentFile();
+            if (audioFile != null)
+                setItemChecked(audioFile);
         }
 
         @Override
         public void onLoaderReset(Loader<List<AudioFile>> listLoader)
         {
             listView.setAdapter(null);
-            getAudioControl().setPlaylist(null);
         }
 
-        public void initLoader(File directory, boolean restart)
+        public void initLoader(File directory)
         {
-            Bundle args = new Bundle();
-            args.putSerializable(AudioLoaderCallbacks.ARGS_DIRECTORY, directory);
-            if (restart)
-                getLoaderManager().restartLoader(0, args, this);
-            else
-                getLoaderManager().initLoader(0, args, this);
+            Bundle args = this.getArgs(directory);
+            getLoaderManager().initLoader(0, args, this);
+        }
+
+        public void restartLoader(File directory)
+        {
+            Bundle args = this.getArgs(directory);
+            getLoaderManager().restartLoader(0, args, this);
         }
 
         public void quitLoader()
         {
             getLoaderManager().destroyLoader(0);
+        }
+
+        private Bundle getArgs(File directory)
+        {
+            Bundle args = new Bundle();
+            args.putSerializable(AudioLoaderCallbacks.ARGS_DIRECTORY, directory);
+            return args;
+        }
+    }
+
+    private class SoundServiceConnection implements ServiceConnection
+    {
+        private SoundService.SoundServiceBinder service;
+
+        public void bind()
+        {
+            Intent intent = new Intent(getActivity(), SoundService.class);
+            getActivity().bindService(intent, this, Service.BIND_AUTO_CREATE);
+        }
+
+        public void unbind()
+        {
+            getActivity().unbindService(this);
+        }
+
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder binder)
+        {
+            this.service = (SoundService.SoundServiceBinder)binder;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName)
+        {
+            this.service = null;
+        }
+    }
+
+    private class SoundServiceReceiver extends BroadcastReceiver
+    {
+        public void register()
+        {
+            IntentFilter filter = new IntentFilter(SoundService.ACTION_NEW_AUDIO);
+            getActivity().registerReceiver(this, filter);
+        }
+
+        public void unRegister()
+        {
+            getActivity().unregisterReceiver(this);
+        }
+
+        @Override
+        public void onReceive(Context context, Intent intent)
+        {
+            if (intent.getAction() == SoundService.ACTION_NEW_AUDIO)
+            {
+                final AudioFile audioFile = (AudioFile)intent.getSerializableExtra(SoundService.ACTION_NEW_AUDIO);
+                setItemChecked(audioFile);
+            }
         }
     }
 }

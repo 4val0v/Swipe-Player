@@ -11,6 +11,7 @@ public class TrackBar extends SeekBar
     private static final float paddingThreshold = 0.15f;
     private float initialTouchX;
     private int initialProgress;
+    private OnSeekBarChangeListener seekBarChangeListener;
 
     public TrackBar(Context context)
     {
@@ -28,6 +29,13 @@ public class TrackBar extends SeekBar
     }
 
     @Override
+    public void setOnSeekBarChangeListener(OnSeekBarChangeListener l)
+    {
+        seekBarChangeListener = l;
+        super.setOnSeekBarChangeListener(l);
+    }
+
+    @Override
     public boolean onTouchEvent(MotionEvent event)
     {
         if (!this.isEnabled())
@@ -38,6 +46,7 @@ public class TrackBar extends SeekBar
             case MotionEvent.ACTION_DOWN:
             {
                 this.setPressed(true);
+                this.onStartTrackingTouch();
                 this.handleTouch(event);
                 break;
             }
@@ -50,6 +59,7 @@ public class TrackBar extends SeekBar
             case MotionEvent.ACTION_UP:
             {
                 this.trackTouch(event);
+                this.onStopTrackingTouch();
                 this.setPressed(false);
                 this.invalidate();
                 break;
@@ -57,12 +67,25 @@ public class TrackBar extends SeekBar
             case MotionEvent.ACTION_CANCEL:
             {
                 this.setPressed(false);
+                this.onStopTrackingTouch();
                 this.invalidate();
                 break;
             }
         }
 
         return true;
+    }
+
+    private void onStartTrackingTouch()
+    {
+        if (this.seekBarChangeListener != null)
+            this.seekBarChangeListener.onStartTrackingTouch(this);
+    }
+
+    private void onStopTrackingTouch()
+    {
+        if (this.seekBarChangeListener != null)
+            this.seekBarChangeListener.onStopTrackingTouch(this);
     }
 
     private void handleTouch(MotionEvent event)

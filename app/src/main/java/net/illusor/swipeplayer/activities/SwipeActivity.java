@@ -37,7 +37,7 @@ public class SwipeActivity extends FragmentActivity
 
         if (savedInstanceState == null)
         {
-            this.pagerAdapter.addFolder(Environment.getRootDirectory());
+            this.pagerAdapter.addFolder(Environment.getExternalStorageDirectory());
             this.viewPager.setAdapter(this.pagerAdapter);
             this.viewPager.setCurrentItem(1);
         }

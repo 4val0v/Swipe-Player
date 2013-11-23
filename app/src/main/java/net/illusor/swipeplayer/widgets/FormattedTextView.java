@@ -331,5 +331,4 @@ public class FormattedTextView extends View implements Checkable
             dest.writeByte(this.isChecked ? (byte)1 : 0);
         }
     }
-
 }

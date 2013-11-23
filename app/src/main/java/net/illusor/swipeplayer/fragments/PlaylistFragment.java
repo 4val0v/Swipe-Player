@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.activities.SwipeActivity;
@@ -27,6 +28,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
 {
     private static final String SHARED_PREF_PLAYLIST_KEY = "net.illusor.swipeplayer.playlist";
 
+    private Button buttonEmptyPlaylist;
     private ListView listView;
     private File currentAudioFolder;
     private final AudioLoaderCallbacks audioLoaderCallbacks = new AudioLoaderCallbacks();
@@ -36,8 +38,10 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        this.listView = (ListView) inflater.inflate(R.layout.playlist_fragment, container, false);
-        return this.listView;
+        View view = inflater.inflate(R.layout.playlist_fragment, container, false);
+        this.listView = (ListView)view.findViewById(R.id.id_playlist);
+        this.buttonEmptyPlaylist = (Button)view.findViewById(R.id.id_playlist_folder_btn);
+        return view;
     }
 
     @Override
@@ -45,6 +49,14 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
     {
         super.onActivityCreated(savedInstanceState);
         this.listView.setOnItemClickListener(this);
+        this.buttonEmptyPlaylist.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                getSwipeActivity().folderBrowserOpen();
+            }
+        });
     }
 
     @Override
@@ -67,6 +79,8 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
 
         if (this.currentAudioFolder != null)
             this.audioLoaderCallbacks.initLoader(this.currentAudioFolder);
+        else
+            this.showFolderButton(true);
     }
 
     @Override
@@ -117,9 +131,24 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         }
     }
 
+    private void showLoadingIndicator(boolean show)
+    {
+        this.getView().findViewById(R.id.id_playlist_loading).setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    private void showFolderButton(boolean show)
+    {
+        this.getView().findViewById(R.id.id_playlist_folder).setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
     private AudioControlView getAudioControl()
     {
         return ((SwipeActivity) this.getActivity()).getAudioControl();
+    }
+
+    private SwipeActivity getSwipeActivity()
+    {
+        return (SwipeActivity)this.getActivity();
     }
 
     private class PlaylistAdapter extends ArrayAdapter<AudioFile>
@@ -166,6 +195,9 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         @Override
         public Loader<List<AudioFile>> onCreateLoader(int i, Bundle bundle)
         {
+            showLoadingIndicator(true);
+            showFolderButton(false);
+
             File directory = (File) bundle.getSerializable(ARGS_DIRECTORY);
             return new AudioLoader(getActivity(), directory);
         }
@@ -173,9 +205,11 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         @Override
         public void onLoadFinished(Loader<List<AudioFile>> listLoader, List<AudioFile> audioFiles)
         {
-            listView.setAdapter(new PlaylistAdapter(getActivity(), audioFiles));
+            showLoadingIndicator(false);
 
+            listView.setAdapter(new PlaylistAdapter(getActivity(), audioFiles));
             connection.service.setPlaylist(audioFiles);
+
             final AudioFile audioFile = connection.service.getCurrentFile();
             if (audioFile != null)
                 setItemChecked(audioFile);

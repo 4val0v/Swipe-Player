@@ -62,6 +62,12 @@ public class SwipeActivity extends FragmentActivity
         this.viewPager.setAdapter(this.pagerAdapter);
     }
 
+    public void folderBrowserOpen()
+    {
+        final int count = this.pagerAdapter.getCount();
+        this.viewPager.setCurrentItem(count - 2, true);
+    }
+
     public void directoryOpen(File folder)
     {
         int index = this.pagerAdapter.findFolder(folder);

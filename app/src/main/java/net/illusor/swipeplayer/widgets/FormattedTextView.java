@@ -28,11 +28,6 @@ public class FormattedTextView extends View implements Checkable
     private int textColor;
     private ColorStateList colorStateList;
 
-    public FormattedTextView(Context context)
-    {
-        this(context, null);
-    }
-
     public FormattedTextView(Context context, AttributeSet attrs)
     {
         this(context, attrs, 0);

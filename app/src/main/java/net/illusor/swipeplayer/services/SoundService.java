@@ -19,6 +19,8 @@ import java.util.List;
 
 public class SoundService extends Service
 {
+    public static final String ACTION_NEW_AUDIO = "net.illusor.swipeplayer.services.SoundService.NewAudio";
+
     public static final String INTENT_CODE_STOP = "net.illusor.swipeplayer.services.SoundService.STOP";
     public static final String INTENT_CODE_PAUSE = "net.illusor.swipeplayer.services.SoundService.PAUSE";
     public static final String INTENT_CODE_RESUME = "net.illusor.swipeplayer.services.SoundService.PLAY";
@@ -81,7 +83,8 @@ public class SoundService extends Service
 
     private void play(AudioFile file)
     {
-        this.stop();
+        if (this.mediaPlayer != null)
+            this.mediaPlayer.release();
 
         int gain = this.audioManager.requestAudioFocus(this.audioFocusChangeListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
         if (gain != AudioManager.AUDIOFOCUS_REQUEST_GRANTED)
@@ -92,6 +95,8 @@ public class SoundService extends Service
         this.startService(new Intent(this, SoundService.class));
         this.registerReceiver(this.noisyReceiver, new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY));
         this.startForeground(NOTIFICATION_CODE, this.notificationHelper.getPlayingNotification(file));
+
+        this.broadcastNewAudioPlaying(file);
 
         try
         {
@@ -151,8 +156,11 @@ public class SoundService extends Service
 
     private void resume()
     {
-        this.resume(this.mediaPlayerPauseTime);
-        this.startForeground(NOTIFICATION_CODE, this.notificationHelper.getPlayingNotification(this.currentPlaying));
+        if (this.mediaPlayer != null)
+        {
+            this.resume(this.mediaPlayerPauseTime);
+            this.startForeground(NOTIFICATION_CODE, this.notificationHelper.getPlayingNotification(this.currentPlaying));
+        }
     }
 
     private void resume(int milliseconds)
@@ -188,10 +196,15 @@ public class SoundService extends Service
 
     private void playCompleted()
     {
-        this.stop();
-
         if (this.playlist == null || this.playlist.size() == 0)
+        {
+            this.stop();
             return;
+        }
+        else
+        {
+            this.mediaPlayer.release();
+        }
 
         int playlistSize = this.playlist.size();
         int nextIndex = this.playlist.indexOf(this.currentPlaying) + 1;
@@ -213,6 +226,13 @@ public class SoundService extends Service
             this.play(newFile);
         else
             this.stop();
+    }
+
+    private void broadcastNewAudioPlaying(AudioFile file)
+    {
+        Intent intent = new Intent(ACTION_NEW_AUDIO);
+        intent.putExtra(ACTION_NEW_AUDIO, file);
+        this.sendBroadcast(intent);
     }
 
     private class AudioFocusChangeListener implements AudioManager.OnAudioFocusChangeListener
@@ -306,6 +326,23 @@ public class SoundService extends Service
         public void setPlaylist(List<AudioFile> playlist)
         {
             this.soundService.playlist = playlist;
+        }
+
+        public AudioFile getCurrentFile()
+        {
+            return currentPlaying;
+        }
+
+        public int getProgress()
+        {
+            try
+            {
+                return mediaPlayer == null || !mediaPlayer.isPlaying()? 0 : mediaPlayer.getCurrentPosition();
+            }
+            catch (IllegalStateException e)
+            {
+                return 0;
+            }
         }
 
         public SoundServiceState getServiceState()

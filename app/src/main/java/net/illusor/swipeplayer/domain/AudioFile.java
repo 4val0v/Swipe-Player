@@ -1,6 +1,5 @@
 package net.illusor.swipeplayer.domain;
 
-import javax.xml.datatype.Duration;
 import java.io.File;
 
 public class AudioFile extends File
@@ -28,6 +27,17 @@ public class AudioFile extends File
         this.title = title;
         this.artist = artist;
         this.duration = duration;
+    }
+
+    public boolean hasSubDirectories()
+    {
+        File[] files = this.listFiles();
+        for (File file : files)
+        {
+            if (file.isDirectory())
+                return true;
+        }
+        return false;
     }
 
     public String getTitle()

@@ -94,11 +94,11 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
     {
-        File selected = (File) adapterView.getItemAtPosition(i);
-        if (selected.isDirectory())
-            this.getSwipeActivity().directoryOpen(selected);
-        else if (selected.isFile())
-            this.getSwipeActivity().getPlaylistFragment().setTargetFolder(selected.getParentFile());
+        AudioFile selected = (AudioFile) adapterView.getItemAtPosition(i);
+        if (selected.hasSubDirectories())
+            this.getSwipeActivity().openMediaDirectory(selected);
+        else
+            this.getSwipeActivity().playMediaDirectory(selected);
     }
 
     //endregion
@@ -114,7 +114,7 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
 
         Log.d("SWIPE", this.currentFolder.toString() + " " + i);
         File selected = (File) adapterView.getItemAtPosition(i);
-        this.getSwipeActivity().directoryOpen(selected);
+        this.getSwipeActivity().openMediaDirectory(selected);
 
         this.navigationHistory.setSelection(adapter.navigationHistory.indexOf(this.currentFolder));
     }
@@ -132,7 +132,7 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
         return (SwipeActivity)this.getActivity();
     }
 
-    private class AudioFilesAdapter extends ArrayAdapter<AudioFile>
+    private class AudioFilesAdapter extends ArrayAdapter<AudioFile> implements FolderItemView.OnPlayClickListener
     {
         private AudioFilesAdapter(Context context, List<AudioFile> files)
         {
@@ -145,17 +145,25 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
             FolderItemView view;
 
             if (convertView != null)
+            {
                 view = (FolderItemView)convertView;
+            }
             else
+            {
                 view = new FolderItemView(this.getContext());
+                view.setOnPlayClickListener(this);
+            }
 
             AudioFile item = this.getItem(position);
-
-            view.setTitle(item.getTitle());
-            view.setIsFolder(item.isDirectory());
-            view.setHasPlaylistFiles(false);
+            view.setAudioFile(item);
 
             return view;
+        }
+
+        @Override
+        public void onPlayClick(AudioFile audioFile)
+        {
+            getSwipeActivity().playMediaDirectory(audioFile);
         }
     }
 
@@ -200,7 +208,7 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
         public Loader<List<AudioFile>> onCreateLoader(int i, Bundle bundle)
         {
             File directory = (File) bundle.getSerializable(ARGS_DIRECTORY);
-            return new AudioLoader(getActivity(), directory);
+            return new AudioFoldersLoader(getActivity(), directory);
         }
 
         @Override

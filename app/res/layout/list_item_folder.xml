@@ -10,14 +10,6 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
        xmlns:swp="http://schemas.android.com/apk/res/net.illusor.swipeplayer">
 
-    <ImageView
-            android:id="@+id/id_file_is_folder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:src="@android:drawable/ic_menu_slideshow"
-            android:contentDescription="This is folder"/>
-
     <net.illusor.swipeplayer.widgets.FormattedTextView
             android:id="@+id/id_file_title"
             android:layout_width="match_parent"
@@ -34,13 +26,14 @@
             swp:TextColor="@color/color_folder_text_isFolder"
             swp:IsWrapping="true"/>
 
-    <View
-            android:id="@+id/id_folder_has_playlist_files"
-            android:layout_width="5dp"
-            android:layout_height="5dp"
-            android:background="@drawable/folder_marker"
+    <ImageButton
+            android:id="@+id/id_file_play_all"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="24dp"/>
+            android:layout_marginRight="10dp"
+            android:src="@android:drawable/ic_menu_slideshow"
+            android:contentDescription="Play all"/>
 
 </merge>
 

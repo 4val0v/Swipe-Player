@@ -3,7 +3,6 @@ package net.illusor.swipeplayer.widgets;
 import android.app.Service;
 import android.content.*;
 import android.os.IBinder;
-import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,7 +13,6 @@ import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.domain.AudioFile;
 import net.illusor.swipeplayer.services.SoundService;
 
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -216,7 +214,7 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
         @Override
         public void onReceive(Context context, Intent intent)
         {
-            if (intent.getAction() == SoundService.ACTION_NEW_AUDIO)
+            if (intent.getAction().equals(SoundService.ACTION_NEW_AUDIO))
             {
                 AudioFile audioFile = (AudioFile)intent.getSerializableExtra(SoundService.ACTION_NEW_AUDIO);
                 setVisualState(audioFile);

@@ -12,12 +12,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-class AudioLoader extends AsyncTaskLoader<List<AudioFile>>
+class AudioFoldersLoader extends AsyncTaskLoader<List<AudioFile>>
 {
     private final File directory;
     private List<AudioFile> result;
 
-    public AudioLoader(Context context, File directory)
+    public AudioFoldersLoader(Context context, File directory)
     {
         super(context);
         this.directory = directory;
@@ -40,28 +40,28 @@ class AudioLoader extends AsyncTaskLoader<List<AudioFile>>
                 MediaStore.Audio.Media.DATA + " like ? and " + MediaStore.Audio.Media.IS_MUSIC + "!=0",
                 new String[]{ this.directory.getAbsolutePath() + "%" }, null);
 
-        List<AudioFile> mediaObjects = this.getMediaObjects(cursor);
+        this.result = this.getMediaObjects(cursor);
 
         cursor.close();
 
-        Collections.sort(mediaObjects, new AudioFileComparator());
+        Collections.sort(this.result, new AudioFileComparator());
 
-        return mediaObjects;
+        return this.result;
     }
 
-    private List<AudioFile> getMediaObjects(Cursor cursor)
+    protected List<AudioFile> getMediaObjects(Cursor cursor)
     {
-        this.result = new ArrayList<>();
+        List<AudioFile> result = new ArrayList<>();
         if (cursor == null) return result;
 
         while (cursor.moveToNext())
         {
             AudioFile mediaObject = this.getNextLevelObject(cursor);
-            if (!this.result.contains(mediaObject))
-                this.result.add(mediaObject);
+            if (mediaObject != null && !result.contains(mediaObject))
+                result.add(mediaObject);
         }
 
-        return this.result;
+        return result;
     }
 
     private AudioFile getNextLevelObject(Cursor cursor)
@@ -71,16 +71,10 @@ class AudioLoader extends AsyncTaskLoader<List<AudioFile>>
         int length = this.directory.getAbsolutePath().length();
         int separatorPos = fileName.indexOf(File.separator, length + 1);
 
-        AudioFile result;
-        if (separatorPos < 0)
+        AudioFile result = null;
+        if (separatorPos >= 0)
         {
-            String title = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME));
-            String author = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));
-            long duration = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION));
-            result = new AudioFile(fileName, title, author, duration);
-        }
-        else
-        {
+            //means we've found a directory; we don't need to find files here
             String directory = fileName.substring(0, separatorPos);
             result = new AudioFile(directory);
         }

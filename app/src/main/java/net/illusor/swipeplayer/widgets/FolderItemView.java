@@ -1,18 +1,21 @@
 package net.illusor.swipeplayer.widgets;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import net.illusor.swipeplayer.R;
+import net.illusor.swipeplayer.domain.AudioFile;
 
-public class FolderItemView extends LinearLayout
+public class FolderItemView extends LinearLayout implements View.OnClickListener
 {
+    private AudioFile audioFile;
     private FormattedTextView title;
-    private View iconIsFolder, iconHasPlaylistFiles;
+    private ImageView iconPlayAll;
+    private OnPlayClickListener onPlayClickListener;
 
     public FolderItemView(Context context)
     {
@@ -23,28 +26,35 @@ public class FolderItemView extends LinearLayout
     {
         super(context, attrs);
 
+        this.setDescendantFocusability(FOCUS_BLOCK_DESCENDANTS);
+
         LayoutInflater.from(context).inflate(R.layout.list_item_folder, this);
         this.title = (FormattedTextView)this.findViewById(R.id.id_file_title);
-        this.iconIsFolder = this.findViewById(R.id.id_file_is_folder);
-        this.iconHasPlaylistFiles = this.findViewById(R.id.id_folder_has_playlist_files);
+        this.iconPlayAll = (ImageView)this.findViewById(R.id.id_file_play_all);
+        this.iconPlayAll.setOnClickListener(this);
     }
 
-    public void setTitle(CharSequence title)
+    @Override
+    public void onClick(View view)
     {
-        this.title.setText(title);
+        if (this.onPlayClickListener != null)
+            this.onPlayClickListener.onPlayClick(this.audioFile);
     }
 
-    public void setIsFolder(boolean isFolder)
+    public void setAudioFile(AudioFile audioFile)
     {
-        Resources rs = this.getResources();
-        int color = isFolder ? rs.getColor(R.color.color_folder_text_isFolder) : rs.getColor(R.color.color_folder_text_isFile);
-
-        this.title.setTextColor(color);
-        this.iconIsFolder.setVisibility(isFolder ? GONE : VISIBLE);
+        this.audioFile = audioFile;
+        this.title.setText(audioFile.getTitle());
+        this.iconPlayAll.setVisibility(audioFile.hasSubDirectories() ? View.VISIBLE : View.GONE);
     }
 
-    public void setHasPlaylistFiles(boolean hasPlaylistFiles)
+    public void setOnPlayClickListener(OnPlayClickListener listener)
     {
-        this.iconHasPlaylistFiles.setVisibility(hasPlaylistFiles ? VISIBLE : GONE);
+        this.onPlayClickListener = listener;
+    }
+
+    public interface OnPlayClickListener
+    {
+        void onPlayClick(AudioFile audioFile);
     }
 }

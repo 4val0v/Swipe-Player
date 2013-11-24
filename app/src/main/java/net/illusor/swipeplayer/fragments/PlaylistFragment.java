@@ -54,7 +54,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
             @Override
             public void onClick(View view)
             {
-                getSwipeActivity().folderBrowserOpen();
+                getSwipeActivity().openMediaBrowser();
             }
         });
     }
@@ -114,7 +114,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         this.connection.service.play(audioFile);
     }
 
-    public void setTargetFolder(File folder)
+    public void setMediaDirectory(File folder)
     {
         this.currentAudioFolder = folder;
         this.audioLoaderCallbacks.restartLoader(folder);
@@ -195,11 +195,13 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         @Override
         public Loader<List<AudioFile>> onCreateLoader(int i, Bundle bundle)
         {
+            listView.setAdapter(null);
+
             showLoadingIndicator(true);
             showFolderButton(false);
 
             File directory = (File) bundle.getSerializable(ARGS_DIRECTORY);
-            return new AudioLoader(getActivity(), directory);
+            return new AudioFilesLoader(getActivity(), directory);
         }
 
         @Override
@@ -208,11 +210,16 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
             showLoadingIndicator(false);
 
             listView.setAdapter(new PlaylistAdapter(getActivity(), audioFiles));
-            connection.service.setPlaylist(audioFiles);
 
-            final AudioFile audioFile = connection.service.getCurrentFile();
-            if (audioFile != null)
-                setItemChecked(audioFile);
+            //we do not know, what fires faster: music loader or service connection
+            //so we duplicate service playlist inflation code here and inside the service connection
+            if (connection.service != null)
+            {
+                connection.service.setPlaylist(audioFiles);
+
+                AudioFile audioFile = connection.service.getCurrentFile();
+                if (audioFile != null) setItemChecked(audioFile);
+            }
         }
 
         @Override
@@ -265,6 +272,17 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         public void onServiceConnected(ComponentName componentName, IBinder binder)
         {
             this.service = (SoundService.SoundServiceBinder)binder;
+
+            //we do not know, what fires faster: music loader or service connection
+            //so we duplicate service playlist inflation code here and inside the music loader
+            if (listView.getAdapter() != null && listView.getAdapter().getCount() > 0)
+            {
+                PlaylistAdapter adapter = (PlaylistAdapter)listView.getAdapter();
+                service.setPlaylist(adapter.getData());
+
+                AudioFile audioFile = connection.service.getCurrentFile();
+                if (audioFile != null) setItemChecked(audioFile);
+            }
         }
 
         @Override
@@ -290,7 +308,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         @Override
         public void onReceive(Context context, Intent intent)
         {
-            if (intent.getAction() == SoundService.ACTION_NEW_AUDIO)
+            if (intent.getAction().equals(SoundService.ACTION_NEW_AUDIO))
             {
                 final AudioFile audioFile = (AudioFile)intent.getSerializableExtra(SoundService.ACTION_NEW_AUDIO);
                 setItemChecked(audioFile);

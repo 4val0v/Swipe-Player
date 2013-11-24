@@ -62,15 +62,21 @@ public class SwipeActivity extends FragmentActivity
         this.viewPager.setAdapter(this.pagerAdapter);
     }
 
-    public void folderBrowserOpen()
+    public void openMediaBrowser()
     {
         final int count = this.pagerAdapter.getCount();
         this.viewPager.setCurrentItem(count - 2, true);
     }
 
-    public void directoryOpen(File folder)
+    public void playMediaDirectory(File directory)
     {
-        int index = this.pagerAdapter.findFolder(folder);
+        this.playlistFragment.setMediaDirectory(directory);
+        this.viewPager.setCurrentItem(this.pagerAdapter.getCount() - 1, true);
+    }
+
+    public void openMediaDirectory(File directory)
+    {
+        int index = this.pagerAdapter.findFolder(directory);
         if (index >= 0)
         {
             int current = this.viewPager.getCurrentItem();
@@ -79,15 +85,10 @@ public class SwipeActivity extends FragmentActivity
         }
         else
         {
-            this.pagerAdapter.addFolder(folder);
+            this.pagerAdapter.addFolder(directory);
             int item = this.viewPager.getCurrentItem();
             this.viewPager.setCurrentItem(item + 1, true);
         }
-    }
-
-    public PlaylistFragment getPlaylistFragment()
-    {
-        return playlistFragment;
     }
 
     public List<File> getNavigationHistory()

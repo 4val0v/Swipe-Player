@@ -217,7 +217,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
             {
                 connection.service.setPlaylist(audioFiles);
 
-                AudioFile audioFile = connection.service.getCurrentFile();
+                AudioFile audioFile = connection.service.getAudioFile();
                 if (audioFile != null) setItemChecked(audioFile);
             }
         }
@@ -280,7 +280,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
                 PlaylistAdapter adapter = (PlaylistAdapter)listView.getAdapter();
                 service.setPlaylist(adapter.getData());
 
-                AudioFile audioFile = connection.service.getCurrentFile();
+                AudioFile audioFile = connection.service.getAudioFile();
                 if (audioFile != null) setItemChecked(audioFile);
             }
         }

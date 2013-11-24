@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.domain.AudioFile;
+import net.illusor.swipeplayer.services.AudioPlayerState;
 import net.illusor.swipeplayer.services.SoundService;
 
 import java.util.Timer;
@@ -44,7 +45,7 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
     @Override
     public void onClick(View view)
     {
-        SoundService.SoundServiceState state = this.connection.service.getServiceState();
+        AudioPlayerState state = this.connection.service.getState();
         switch (state)
         {
             case Playing:
@@ -59,6 +60,14 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
                 Log.d("SWIPE", "Click: resume (service is paused now)");
                 this.startTrackingProgress();
                 this.connection.service.resume();
+                break;
+            }
+            case Stopped:
+            {
+                Log.d("SWIPE", "Click: play (service is paused now)");
+                this.startTrackingProgress();
+                AudioFile file = this.connection.service.getAudioFile();
+                this.connection.service.play(file);
                 break;
             }
         }
@@ -77,11 +86,17 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
         this.stopTrackingProgress();
     }
 
-    private void setVisualState(AudioFile audioFile)
+    private void setVisualStateEnabled(AudioFile audioFile)
     {
         this.setVisibility(VISIBLE);
         this.title1.setText(audioFile.getTitle());
         this.artist.setText(audioFile.getArtist());
+        this.progress.setEnabled(true);
+    }
+
+    private void setVisualStateIdle()
+    {
+        this.progress.setEnabled(false);
     }
 
     private void startTrackingProgress()
@@ -118,7 +133,7 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
         {
             Log.d("SWIPE", "Started manual rewind");
             stopTrackingProgress();
-            connection.service.startSeek();
+            connection.service.startRewind();
         }
 
         @Override
@@ -126,8 +141,8 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
         {
             Log.d("SWIPE", "Finished manual rewind");
             final float percent = (float)(1.0 * seekBar.getProgress() / seekBar.getMax());
-            final int milliseconds = (int)(connection.service.getCurrentFile().getDuration() * percent);
-            connection.service.endSeek(milliseconds);
+            final int milliseconds = (int)(connection.service.getDuration() * percent);
+            connection.service.finishRewind(milliseconds);
             startTrackingProgress();
         }
     }
@@ -152,12 +167,12 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
         {
             this.service = (SoundService.SoundServiceBinder)binder;
 
-            AudioFile audioFile = this.service.getCurrentFile();
+            AudioFile audioFile = this.service.getAudioFile();
             if (audioFile != null)
             {
-                setVisualState(audioFile);
-                SoundService.SoundServiceState state = this.service.getServiceState();
-                if (state == SoundService.SoundServiceState.Playing)
+                setVisualStateEnabled(audioFile);
+                AudioPlayerState state = this.service.getState();
+                if (state == AudioPlayerState.Playing)
                     startTrackingProgress();
             }
         }
@@ -181,9 +196,9 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
         @Override
         public void run()
         {
-            final AudioFile file = connection.service.getCurrentFile();
-            final int played = connection.service.getProgress();
-            final long duration = file.getDuration();
+            AudioFile file = connection.service.getAudioFile();
+            int played = connection.service.getPosition();
+            long duration = file.getDuration();
 
             final int percent = (int)(1.0 * maxProgress * played / duration);
             post(new Runnable()
@@ -202,7 +217,9 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
     {
         public void register()
         {
-            IntentFilter filter = new IntentFilter(SoundService.ACTION_NEW_AUDIO);
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(SoundService.ACTION_NEW_AUDIO);
+            filter.addAction(SoundService.ACTION_QUIT);
             getContext().registerReceiver(this, filter);
         }
 
@@ -214,11 +231,16 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
         @Override
         public void onReceive(Context context, Intent intent)
         {
-            if (intent.getAction().equals(SoundService.ACTION_NEW_AUDIO))
+            String action = intent.getAction();
+            if (action.equals(SoundService.ACTION_NEW_AUDIO))
             {
                 AudioFile audioFile = (AudioFile)intent.getSerializableExtra(SoundService.ACTION_NEW_AUDIO);
-                setVisualState(audioFile);
+                setVisualStateEnabled(audioFile);
                 startTrackingProgress();
+            }
+            else if (action.equals(SoundService.ACTION_QUIT))
+            {
+                setVisualStateIdle();
             }
         }
     }

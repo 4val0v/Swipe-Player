@@ -17,6 +17,7 @@ import android.widget.ListView;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.activities.SwipeActivity;
 import net.illusor.swipeplayer.domain.AudioFile;
+import net.illusor.swipeplayer.services.AudioBroadcastHandler;
 import net.illusor.swipeplayer.services.SoundService;
 import net.illusor.swipeplayer.widgets.AudioControlView;
 import net.illusor.swipeplayer.widgets.PlaylistItemView;
@@ -89,7 +90,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         super.onStop();
         this.getAudioControl().onStop();
         this.audioLoaderCallbacks.quitLoader();
-        this.receiver.unRegister();
+        this.receiver.unregister();
         this.connection.unbind();
     }
 
@@ -209,16 +210,23 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         {
             showLoadingIndicator(false);
 
-            listView.setAdapter(new PlaylistAdapter(getActivity(), audioFiles));
-
-            //we do not know, what fires faster: music loader or service connection
-            //so we duplicate service playlist inflation code here and inside the service connection
-            if (connection.service != null)
+            if (audioFiles.size() > 0)
             {
-                connection.service.setPlaylist(audioFiles);
+                listView.setAdapter(new PlaylistAdapter(getActivity(), audioFiles));
 
-                AudioFile audioFile = connection.service.getAudioFile();
-                if (audioFile != null) setItemChecked(audioFile);
+                //we do not know, what fires faster: music loader or service connection
+                //so we duplicate service playlist inflation code here and inside the service connection
+                if (connection.service != null)
+                {
+                    connection.service.setPlaylist(audioFiles);
+
+                    AudioFile audioFile = connection.service.getAudioFile();
+                    if (audioFile != null) setItemChecked(audioFile);
+                }
+            }
+            else
+            {
+                showFolderButton(true);
             }
         }
 
@@ -292,27 +300,19 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         }
     }
 
-    private class SoundServiceReceiver extends BroadcastReceiver
+    private class SoundServiceReceiver extends AudioBroadcastHandler
     {
-        public void register()
+        @Override
+        protected void onPlayAudioFile(AudioFile audioFile)
         {
-            IntentFilter filter = new IntentFilter(SoundService.ACTION_NEW_AUDIO);
-            getActivity().registerReceiver(this, filter);
-        }
-
-        public void unRegister()
-        {
-            getActivity().unregisterReceiver(this);
+            super.onPlayAudioFile(audioFile);
+            setItemChecked(audioFile);
         }
 
         @Override
-        public void onReceive(Context context, Intent intent)
+        protected Context getClassContext()
         {
-            if (intent.getAction().equals(SoundService.ACTION_NEW_AUDIO))
-            {
-                final AudioFile audioFile = (AudioFile)intent.getSerializableExtra(SoundService.ACTION_NEW_AUDIO);
-                setItemChecked(audioFile);
-            }
+            return getActivity();
         }
     }
 }

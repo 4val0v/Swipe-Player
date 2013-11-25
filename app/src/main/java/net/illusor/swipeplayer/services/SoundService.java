@@ -17,9 +17,6 @@ import java.util.List;
 
 public class SoundService extends Service
 {
-    public static final String ACTION_NEW_AUDIO = "net.illusor.swipeplayer.services.SoundService.NewAudio";
-    public static final String ACTION_QUIT = "net.illusor.swipeplayer.services.SoundService.Quit";
-
     public static final String INTENT_CODE_STOP = "net.illusor.swipeplayer.services.SoundService.STOP";
     public static final String INTENT_CODE_PAUSE = "net.illusor.swipeplayer.services.SoundService.PAUSE";
     public static final String INTENT_CODE_RESUME = "net.illusor.swipeplayer.services.SoundService.PLAY";
@@ -30,6 +27,7 @@ public class SoundService extends Service
     private final NoisyReceiver noisyReceiver = new NoisyReceiver();
     private final NotificationHelper notificationHelper = new NotificationHelper(this);
     private final AudioFocusChangeListener audioFocusChangeListener = new AudioFocusChangeListener();
+    private AudioBroadcastHandler audioBroadcastHandler;
     private AudioManager audioManager;
     private boolean serviceStarted;
 
@@ -37,6 +35,7 @@ public class SoundService extends Service
     public void onCreate()
     {
         super.onCreate();
+        this.audioBroadcastHandler = new AudioBroadcastHandler(this);
         this.audioManager = (AudioManager)this.getSystemService(Context.AUDIO_SERVICE);
     }
 
@@ -47,20 +46,14 @@ public class SoundService extends Service
             switch (intent.getAction())
             {
                 case INTENT_CODE_STOP:
-                {
                     this.stop();
                     break;
-                }
                 case INTENT_CODE_PAUSE:
-                {
                     this.pause();
                     break;
-                }
                 case INTENT_CODE_RESUME:
-                {
                     this.resume();
                     break;
-                }
             }
         }
 
@@ -87,7 +80,7 @@ public class SoundService extends Service
         }
 
         this.audioPlayer.play(audioFile);
-        this.broadcastNewAudioPlaying(audioFile);
+        this.audioBroadcastHandler.sendPlayAudioFile(audioFile);
 
         Notification notification = this.notificationHelper.getPlayingNotification(audioFile);
         this.startForeground(NOTIFICATION_CODE, notification);
@@ -96,6 +89,7 @@ public class SoundService extends Service
     void stop()
     {
         this.audioPlayer.stop();
+        this.audioBroadcastHandler.sendPlaybackStop();
 
         if (this.serviceStarted)
         {
@@ -104,7 +98,6 @@ public class SoundService extends Service
             this.serviceStarted = false;
         }
 
-        this.broadcastQuit();
         this.stopForeground(true);
         this.stopSelf();
 
@@ -124,19 +117,6 @@ public class SoundService extends Service
         this.audioPlayer.resume();
         Notification notification = this.notificationHelper.getPlayingNotification(this.audioPlayer.getAudioFile());
         this.startForeground(NOTIFICATION_CODE, notification);
-    }
-
-    private void broadcastNewAudioPlaying(AudioFile file)
-    {
-        Intent intent = new Intent(ACTION_NEW_AUDIO);
-        intent.putExtra(ACTION_NEW_AUDIO, file);
-        this.sendBroadcast(intent);
-    }
-
-    private void broadcastQuit()
-    {
-        Intent intent = new Intent(ACTION_QUIT);
-        this.sendBroadcast(intent);
     }
 
     private class AudioFocusChangeListener implements AudioManager.OnAudioFocusChangeListener

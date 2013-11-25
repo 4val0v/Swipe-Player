@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.domain.AudioFile;
+import net.illusor.swipeplayer.services.AudioBroadcastHandler;
 import net.illusor.swipeplayer.services.AudioPlayerState;
 import net.illusor.swipeplayer.services.SoundService;
 
@@ -64,7 +65,7 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
             }
             case Stopped:
             {
-                Log.d("SWIPE", "Click: play (service is paused now)");
+                Log.d("SWIPE", "Click: play (service is stopped now)");
                 this.startTrackingProgress();
                 AudioFile file = this.connection.service.getAudioFile();
                 this.connection.service.play(file);
@@ -81,7 +82,7 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
 
     public void onStop()
     {
-        this.receiver.unRegister();
+        this.receiver.unregister();
         this.connection.unbind();
         this.stopTrackingProgress();
     }
@@ -142,6 +143,7 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
             Log.d("SWIPE", "Finished manual rewind");
             final float percent = (float)(1.0 * seekBar.getProgress() / seekBar.getMax());
             final int milliseconds = (int)(connection.service.getDuration() * percent);
+
             connection.service.finishRewind(milliseconds);
             startTrackingProgress();
         }
@@ -184,6 +186,31 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
         }
     }
 
+    private class SoundServiceReceiver extends AudioBroadcastHandler
+    {
+        @Override
+        protected void onPlayAudioFile(AudioFile audioFile)
+        {
+            super.onPlayAudioFile(audioFile);
+            setVisualStateEnabled(audioFile);
+            startTrackingProgress();
+        }
+
+        @Override
+        protected void onPlaybackStop()
+        {
+            super.onPlaybackStop();
+            setVisualStateIdle();
+            stopTrackingProgress();
+        }
+
+        @Override
+        protected Context getClassContext()
+        {
+            return getContext();
+        }
+    }
+
     private class ProgressTrackingTask extends TimerTask
     {
         private final int maxProgress;
@@ -210,38 +237,6 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
                     Log.d("SWIPE", "Progress: " + percent);
                 }
             });
-        }
-    }
-
-    private class SoundServiceReceiver extends BroadcastReceiver
-    {
-        public void register()
-        {
-            IntentFilter filter = new IntentFilter();
-            filter.addAction(SoundService.ACTION_NEW_AUDIO);
-            filter.addAction(SoundService.ACTION_QUIT);
-            getContext().registerReceiver(this, filter);
-        }
-
-        public void unRegister()
-        {
-            getContext().unregisterReceiver(this);
-        }
-
-        @Override
-        public void onReceive(Context context, Intent intent)
-        {
-            String action = intent.getAction();
-            if (action.equals(SoundService.ACTION_NEW_AUDIO))
-            {
-                AudioFile audioFile = (AudioFile)intent.getSerializableExtra(SoundService.ACTION_NEW_AUDIO);
-                setVisualStateEnabled(audioFile);
-                startTrackingProgress();
-            }
-            else if (action.equals(SoundService.ACTION_QUIT))
-            {
-                setVisualStateIdle();
-            }
         }
     }
 }

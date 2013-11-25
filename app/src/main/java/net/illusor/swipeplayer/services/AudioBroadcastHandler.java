@@ -40,7 +40,7 @@ public class AudioBroadcastHandler extends BroadcastReceiver
     {
         if (ACTION_PLAY_AUDIO.equals(intent.getAction()))
         {
-            AudioFile audioFile = (AudioFile)intent.getParcelableExtra(ACTION_PLAY_AUDIO);
+            AudioFile audioFile = (AudioFile)intent.getSerializableExtra(ACTION_PLAY_AUDIO);
             this.onPlayAudioFile(audioFile);
         }
         else if (ACTION_PLAY_STOP.equals(intent.getAction()))

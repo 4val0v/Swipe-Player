@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="#8D004C">-->
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:swp="http://schemas.android.com/apk/res/net.illusor.swipeplayer">
+
+    <net.illusor.swipeplayer.widgets.TrackBar
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_gravity="bottom"
+        android:id="@+id/id_audio_control_progress"
+        android:progressDrawable="@drawable/seekbar_layers"
+        android:thumb="@android:color/transparent"
+        android:paddingBottom="10dp"/>
+
+    <net.illusor.swipeplayer.widgets.FormattedTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/id_audio_control_title1"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        swp:Font="PTSerifBold"
+        swp:TextColor="#ffffff"
+        swp:HeaderTextSize="25sp"
+        swp:LineTextSize="20sp"
+        swp:IsWrapping="true"/>
+
+    <net.illusor.swipeplayer.widgets.FormattedTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/id_audio_control_artist"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="16dp"
+        swp:Font="RobotoLight"
+        swp:TextColor="#000000"
+        swp:HeaderTextSize="20sp"/>
+
+</merge>
+
+    <!--</LinearLayout>-->

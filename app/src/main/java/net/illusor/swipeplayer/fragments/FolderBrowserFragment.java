@@ -44,7 +44,7 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.folder_browser_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_browser, container, false);
         this.listAudioFiles = (ListView) view.findViewById(R.id.id_fb_audio_files);
         this.navigationHistory = (Spinner) view.findViewById(R.id.id_fb_nav_history);
         return view;
@@ -127,6 +127,11 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
 
     //endregion
 
+    private void showLoadingIndicator(boolean show)
+    {
+        this.getView().findViewById(R.id.id_browser_loading).setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
     private SwipeActivity getSwipeActivity()
     {
         return (SwipeActivity)this.getActivity();
@@ -207,6 +212,7 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
         @Override
         public Loader<List<AudioFile>> onCreateLoader(int i, Bundle bundle)
         {
+            showLoadingIndicator(true);
             File directory = (File) bundle.getSerializable(ARGS_DIRECTORY);
             return new AudioFoldersLoader(getActivity(), directory);
         }
@@ -214,6 +220,7 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
         @Override
         public void onLoadFinished(Loader<List<AudioFile>> listLoader, List<AudioFile> audioFiles)
         {
+            showLoadingIndicator(false);
             listAudioFiles.setAdapter(new AudioFilesAdapter(getActivity(), audioFiles));
         }
 

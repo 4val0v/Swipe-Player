@@ -39,7 +39,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.playlist_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_playlist, container, false);
         this.listView = (ListView)view.findViewById(R.id.id_playlist);
         this.buttonEmptyPlaylist = (Button)view.findViewById(R.id.id_playlist_folder_btn);
         return view;
@@ -125,7 +125,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
     {
         final PlaylistAdapter adapter = (PlaylistAdapter)listView.getAdapter();
         final int index = adapter.getData().indexOf(audioFile);
-        if (index > 0)
+        if (index >= 0)
         {
             listView.setItemChecked(index, true);
             listView.smoothScrollToPosition(index);

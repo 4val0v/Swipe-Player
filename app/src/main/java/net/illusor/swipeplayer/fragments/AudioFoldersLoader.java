@@ -72,11 +72,12 @@ class AudioFoldersLoader extends AsyncTaskLoader<List<AudioFile>>
         int separatorPos = fileName.indexOf(File.separator, length + 1);
 
         AudioFile result = null;
+        //separatorPos >= 0 means we've found a directory; we don't need to find files here
         if (separatorPos >= 0)
         {
-            //means we've found a directory; we don't need to find files here
             String directory = fileName.substring(0, separatorPos);
-            result = new AudioFile(directory);
+            boolean hasSubDirectories = fileName.indexOf(File.separator, separatorPos + 1) >= 0;
+            result = new AudioFile(directory, hasSubDirectories);
         }
 
         return result;

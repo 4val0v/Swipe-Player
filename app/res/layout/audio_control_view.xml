@@ -9,13 +9,13 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
        xmlns:swp="http://schemas.android.com/apk/res/net.illusor.swipeplayer">
 
-    <net.illusor.swipeplayer.widgets.TrackBar
+    <SeekBar
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_gravity="bottom"
         android:id="@+id/id_audio_control_progress"
         android:progressDrawable="@drawable/seekbar_layers"
-        android:thumb="@android:color/transparent"
+        android:thumb="@drawable/seekbar_thumb"
         android:paddingBottom="10dp"/>
 
     <net.illusor.swipeplayer.widgets.FormattedTextView

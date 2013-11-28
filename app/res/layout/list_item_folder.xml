@@ -28,11 +28,11 @@
 
     <ImageButton
             android:id="@+id/id_file_play_all"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="10dp"
-            android:src="@android:drawable/ic_menu_slideshow"
+            android:src="@drawable/ic_play_folder"
+            android:background="@drawable/item_folder_bg"
             android:contentDescription="Play all"/>
 
 </merge>

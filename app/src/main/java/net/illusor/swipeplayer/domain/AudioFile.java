@@ -6,8 +6,9 @@ public class AudioFile extends File
 {
     private String title, artist;
     private long duration;
+    private boolean hasSubDirectories;
 
-    public AudioFile(String path)
+    public AudioFile(String path, boolean hasSubDirectories)
     {
         super(path);
 
@@ -15,6 +16,7 @@ public class AudioFile extends File
             throw new IllegalStateException("This constructor is for audio directories. Do not use it to declare files");
 
         this.title = this.getName();
+        this.hasSubDirectories = hasSubDirectories;
     }
 
     public AudioFile(String path, String title, String artist, long duration)
@@ -31,13 +33,7 @@ public class AudioFile extends File
 
     public boolean hasSubDirectories()
     {
-        File[] files = this.listFiles();
-        for (File file : files)
-        {
-            if (file.isDirectory())
-                return true;
-        }
-        return false;
+        return this.hasSubDirectories;
     }
 
     public String getTitle()

@@ -4,12 +4,16 @@
     <drawable name="drawable_playlist_bg_normal">@android:color/transparent</drawable>
     <drawable name="drawable_playlist_bg_pressed">#010129</drawable>
     <drawable name="drawable_playlist_bg_playing">#ef4b4c</drawable>
-    <drawable name="drawable_playlist_text_normal">#000000</drawable>
-    <drawable name="drawable_playlist_text_playing">#ffffff</drawable>
+    <color name="color_playlist_separator">#202043</color>
+    <color name="color_playlist_text_normal">#000000</color>
+    <color name="color_playlist_text_playing">#ffffff</color>
 
-    <drawable name="drawable_fragment_playlist">#ffffff</drawable>
-    <drawable name="drawable_fragment_browser">#010129</drawable>
-    <drawable name="drawable_controlpanel_bg">#8d004c</drawable>
+    <drawable name="drawable_browser_bg_normal">@android:color/transparent</drawable>
+    <drawable name="drawable_browser_bg_pressed">#fea50e</drawable>
+
+    <color name="color_fragment_playlist">#ffffff</color>
+    <color name="color_fragment_browser">#010129</color>
+    <color name="color_controlpanel_bg">#8d004c</color>
 
     <color name="color_folder_text_isFile">#808094</color>
     <color name="color_folder_text_isFolder">#ffffff</color>

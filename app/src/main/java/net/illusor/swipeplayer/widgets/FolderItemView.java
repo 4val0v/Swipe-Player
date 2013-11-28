@@ -14,7 +14,7 @@ public class FolderItemView extends LinearLayout implements View.OnClickListener
 {
     private AudioFile audioFile;
     private FormattedTextView title;
-    private ImageView iconPlayAll;
+    private View iconPlayAll;
     private OnPlayClickListener onPlayClickListener;
 
     public FolderItemView(Context context)
@@ -27,10 +27,11 @@ public class FolderItemView extends LinearLayout implements View.OnClickListener
         super(context, attrs);
 
         this.setDescendantFocusability(FOCUS_BLOCK_DESCENDANTS);
+        this.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.item_folder_bg));
 
         LayoutInflater.from(context).inflate(R.layout.list_item_folder, this);
         this.title = (FormattedTextView)this.findViewById(R.id.id_file_title);
-        this.iconPlayAll = (ImageView)this.findViewById(R.id.id_file_play_all);
+        this.iconPlayAll = this.findViewById(R.id.id_file_play_all);
         this.iconPlayAll.setOnClickListener(this);
     }
 

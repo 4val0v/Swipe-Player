@@ -31,7 +31,7 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
         super(context, attrs);
 
         this.setOrientation(LinearLayout.VERTICAL);
-        this.setBackgroundColor(this.getResources().getColor(R.drawable.drawable_controlpanel_bg));
+        this.setBackgroundColor(this.getResources().getColor(R.color.color_controlpanel_bg));
         this.setOnClickListener(this);
 
         LayoutInflater.from(context).inflate(R.layout.audio_control_view, this);
@@ -41,6 +41,7 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
         this.progress = (SeekBar) this.findViewById(R.id.id_audio_control_progress);
         this.progress.setOnSeekBarChangeListener(new ProgressListener());
         this.progress.setMax(Integer.MAX_VALUE);
+        this.progress.setThumbOffset(0);
     }
 
     @Override
@@ -123,6 +124,8 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
 
     private class ProgressListener implements SeekBar.OnSeekBarChangeListener
     {
+        private AudioPlayerState stateWhenRewindStarted;
+
         @Override
         public void onProgressChanged(SeekBar seekBar, int i, boolean b)
         {
@@ -133,7 +136,12 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
         public void onStartTrackingTouch(SeekBar seekBar)
         {
             Log.d("SWIPE", "Started manual rewind");
-            stopTrackingProgress();
+
+            this.stateWhenRewindStarted = connection.service.getState();
+
+            if (this.stateWhenRewindStarted == AudioPlayerState.Playing)
+                stopTrackingProgress();
+
             connection.service.startRewind();
         }
 
@@ -145,7 +153,9 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
             final int milliseconds = (int)(connection.service.getDuration() * percent);
 
             connection.service.finishRewind(milliseconds);
-            startTrackingProgress();
+
+            if (this.stateWhenRewindStarted == AudioPlayerState.Playing)
+                startTrackingProgress();
         }
     }
 

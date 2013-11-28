@@ -13,6 +13,7 @@ class AudioPlayer
     private AudioFile audioFile;
     private AudioPlayerOnCompleteBehavior onCompleteBehavior;
     private boolean wasPlayingWhenRewindStarted;
+    private int rewindWhilePaused;
     private float volume = 1;
 
     public void play(AudioFile audioFile)
@@ -92,6 +93,7 @@ class AudioPlayer
 
     public void finishRewind(int milliseconds)
     {
+        this.rewindWhilePaused = milliseconds;
         this.mediaPlayer.seekTo(milliseconds);
         if (this.wasPlayingWhenRewindStarted)
             this.mediaPlayer.start();

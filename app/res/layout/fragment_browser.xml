@@ -9,7 +9,8 @@
     <Spinner
         android:id="@+id/id_fb_nav_history"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_spinner_closed"/>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -19,7 +20,8 @@
             android:id="@+id/id_fb_audio_files"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="@android:color/transparent"/>
+            android:divider="@android:color/transparent"
+            android:overScrollMode="never"/>
 
         <LinearLayout
             android:id="@+id/id_browser_loading"

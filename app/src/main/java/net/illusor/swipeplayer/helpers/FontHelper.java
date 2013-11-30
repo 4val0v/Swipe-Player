@@ -11,6 +11,7 @@ public class FontHelper
     public static Typeface PTSans = Typeface.createFromAsset(SwipeApplication.getAppContext().getAssets(), "fonts/PTS55F.ttf");
     public static Typeface PTSansNarrow = Typeface.createFromAsset(SwipeApplication.getAppContext().getAssets(), "fonts/PTN57F.ttf");
     public static Typeface PTSerifBold = Typeface.createFromAsset(SwipeApplication.getAppContext().getAssets(), "fonts/PTF75F.ttf");
+    public static Typeface PTSerifItalic = Typeface.createFromAsset(SwipeApplication.getAppContext().getAssets(), "fonts/PTF56F.ttf");
 
     public static Typeface font(int value)
     {
@@ -26,6 +27,8 @@ public class FontHelper
                 return PTSansNarrow;
             case 4:
                 return PTSerifBold;
+            case 5:
+                return PTSerifItalic;
             default:
                 throw new NotImplementedException();
         }

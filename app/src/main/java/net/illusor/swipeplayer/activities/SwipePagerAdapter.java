@@ -35,11 +35,11 @@ abstract class SwipePagerAdapter extends PagerAdapter
     public void finishUpdate(ViewGroup container)
     {
         super.finishUpdate(container);
-        if (curTransaction != null)
+        if (this.curTransaction != null)
         {
-            curTransaction.commitAllowingStateLoss();
-            curTransaction = null;
-            fragmentManager.executePendingTransactions();
+            this.curTransaction.commitAllowingStateLoss();
+            this.curTransaction = null;
+            this.fragmentManager.executePendingTransactions();
         }
     }
 

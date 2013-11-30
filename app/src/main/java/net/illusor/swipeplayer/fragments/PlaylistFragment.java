@@ -210,6 +210,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
             showLoadingIndicator(false);
 
             listView.setAdapter(new PlaylistAdapter(getActivity(), audioFiles));
+            getAudioControl().setPlaylistAdapter(new TrackListAdapter(audioFiles, getFragmentManager()));
 
             //we do not know, what fires faster: music loader or service connection
             //so we duplicate service playlist inflation code here and inside the service connection
@@ -226,6 +227,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         public void onLoaderReset(Loader<List<AudioFile>> listLoader)
         {
             listView.setAdapter(null);
+            getAudioControl().setPlaylistAdapter(null);
         }
 
         public void initLoader(File directory)

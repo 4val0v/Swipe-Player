@@ -1,11 +1,15 @@
 package net.illusor.swipeplayer.fragments;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +17,7 @@ import android.widget.*;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.activities.SwipeActivity;
 import net.illusor.swipeplayer.domain.AudioFile;
+import net.illusor.swipeplayer.helpers.FontHelper;
 import net.illusor.swipeplayer.widgets.FolderItemView;
 
 import java.io.File;
@@ -186,6 +191,10 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
         public View getView(int position, View convertView, ViewGroup parent)
         {
             TextView view = (TextView) super.getView(position, convertView, parent);
+            view.setTextColor(Color.WHITE);
+            view.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            view.setTypeface(FontHelper.PTSerifItalic);
+            view.setEllipsize(TextUtils.TruncateAt.START);
             this.formatTextView(view, position);
             return view;
         }

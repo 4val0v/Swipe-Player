@@ -3,6 +3,7 @@ package net.illusor.swipeplayer.widgets;
 import android.app.Service;
 import android.content.*;
 import android.os.IBinder;
+import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.domain.AudioFile;
+import net.illusor.swipeplayer.fragments.TrackListAdapter;
 import net.illusor.swipeplayer.services.AudioBroadcastHandler;
 import net.illusor.swipeplayer.services.AudioPlayerState;
 import net.illusor.swipeplayer.services.SoundService;
@@ -20,7 +22,8 @@ import java.util.TimerTask;
 
 public class AudioControlView extends LinearLayout implements View.OnClickListener
 {
-    private final FormattedTextView title1, artist;
+    //private final FormattedTextView title1, artist;
+    private final ViewPager trackList;
     private final SeekBar progress;
     private final SoundServiceConnection connection = new SoundServiceConnection();
     private final SoundServiceReceiver receiver = new SoundServiceReceiver();
@@ -36,8 +39,9 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
 
         LayoutInflater.from(context).inflate(R.layout.audio_control_view, this);
 
-        this.title1 = (FormattedTextView) this.findViewById(R.id.id_audio_control_title1);
-        this.artist = (FormattedTextView) this.findViewById(R.id.id_audio_control_artist);
+        /*this.title1 = (FormattedTextView) this.findViewById(R.id.id_audio_control_title1);
+        this.artist = (FormattedTextView) this.findViewById(R.id.id_audio_control_artist);*/
+        this.trackList = (ViewPager)this.findViewById(R.id.id_audio_control_track);
         this.progress = (SeekBar) this.findViewById(R.id.id_audio_control_progress);
         this.progress.setOnSeekBarChangeListener(new ProgressListener());
         this.progress.setMax(Integer.MAX_VALUE);
@@ -64,14 +68,6 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
                 this.connection.service.resume();
                 break;
             }
-            case Stopped:
-            {
-                Log.d("SWIPE", "Click: play (service is stopped now)");
-                this.startTrackingProgress();
-                AudioFile file = this.connection.service.getAudioFile();
-                this.connection.service.play(file);
-                break;
-            }
         }
     }
 
@@ -88,17 +84,47 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
         this.stopTrackingProgress();
     }
 
+    public void setPlaylistAdapter(TrackListAdapter adapter)
+    {
+        this.trackList.setAdapter(adapter);
+        if (adapter != null && this.connection.service != null)
+        {
+            AudioFile audioFile = this.connection.service.getAudioFile();
+            if (audioFile != null)
+            {
+                int index = adapter.getData().indexOf(audioFile);
+                if (index >= 0)
+                    this.trackList.setCurrentItem(0, false);
+            }
+        }
+        else if (adapter == null)
+        {
+            this.setVisibility(View.GONE);
+        }
+    }
+
     private void setVisualStateEnabled(AudioFile audioFile)
     {
         this.setVisibility(VISIBLE);
-        this.title1.setText(audioFile.getTitle());
-        this.artist.setText(audioFile.getArtist());
+        /*this.title1.setText(audioFile.getTitle());
+        this.artist.setText(audioFile.getArtist());*/
         this.progress.setEnabled(true);
+
+        AudioPlayerState state = this.connection.service.getState();
+        if (state == AudioPlayerState.Playing)
+            startTrackingProgress();
+
+        if (this.trackList.getAdapter() != null)
+        {
+            int index = ((TrackListAdapter)this.trackList.getAdapter()).getData().indexOf(audioFile);
+            if (index >= 0)
+                this.trackList.setCurrentItem(0, false);
+        }
     }
 
     private void setVisualStateIdle()
     {
-        this.progress.setEnabled(false);
+        this.setVisibility(View.GONE);
     }
 
     private void startTrackingProgress()
@@ -181,12 +207,7 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
 
             AudioFile audioFile = this.service.getAudioFile();
             if (audioFile != null)
-            {
                 setVisualStateEnabled(audioFile);
-                AudioPlayerState state = this.service.getState();
-                if (state == AudioPlayerState.Playing)
-                    startTrackingProgress();
-            }
         }
 
         @Override

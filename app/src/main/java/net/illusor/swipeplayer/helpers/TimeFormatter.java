@@ -1,7 +1,5 @@
 package net.illusor.swipeplayer.helpers;
 
-import java.util.concurrent.TimeUnit;
-
 public class TimeFormatter
 {
     private static final long hourSize = 3600000;

@@ -10,6 +10,8 @@ public class AudioBroadcastHandler extends BroadcastReceiver
 {
     private static final String ACTION_PLAY_AUDIO = "net.illusor.swipeplayer.services.SoundService.Play";
     private static final String ACTION_PLAY_STOP = "net.illusor.swipeplayer.services.SoundService.Stop";
+    private static final String ACTION_PLAY_PAUSE = "net.illusor.swipeplayer.services.SoundService.Pause";
+    private static final String ACTION_PLAY_RESUME = "net.illusor.swipeplayer.services.SoundService.Resume";
 
     private Context context;
 
@@ -27,6 +29,8 @@ public class AudioBroadcastHandler extends BroadcastReceiver
         IntentFilter filter = new IntentFilter();
         filter.addAction(ACTION_PLAY_AUDIO);
         filter.addAction(ACTION_PLAY_STOP);
+        filter.addAction(ACTION_PLAY_PAUSE);
+        filter.addAction(ACTION_PLAY_RESUME);
         this.getClassContext().registerReceiver(this, filter);
     }
 
@@ -38,14 +42,29 @@ public class AudioBroadcastHandler extends BroadcastReceiver
     @Override
     public void onReceive(Context context, Intent intent)
     {
-        if (ACTION_PLAY_AUDIO.equals(intent.getAction()))
+        switch (intent.getAction())
         {
-            AudioFile audioFile = (AudioFile)intent.getSerializableExtra(ACTION_PLAY_AUDIO);
-            this.onPlayAudioFile(audioFile);
-        }
-        else if (ACTION_PLAY_STOP.equals(intent.getAction()))
-        {
-            this.onPlaybackStop();
+            case ACTION_PLAY_AUDIO:
+            {
+                AudioFile audioFile = (AudioFile)intent.getSerializableExtra(ACTION_PLAY_AUDIO);
+                this.onPlayAudioFile(audioFile);
+                break;
+            }
+            case ACTION_PLAY_STOP:
+            {
+                this.onPlaybackStop();
+                break;
+            }
+            case ACTION_PLAY_PAUSE:
+            {
+                this.onPlaybackPause();
+                break;
+            }
+            case ACTION_PLAY_RESUME:
+            {
+                this.onPlaybackResume();
+                break;
+            }
         }
     }
 
@@ -62,12 +81,34 @@ public class AudioBroadcastHandler extends BroadcastReceiver
         this.context.sendBroadcast(intent);
     }
 
+    void sendPlaybackPause()
+    {
+        Intent intent = new Intent(ACTION_PLAY_PAUSE);
+        this.context.sendBroadcast(intent);
+    }
+
+    void sendPlaybackResume()
+    {
+        Intent intent = new Intent(ACTION_PLAY_RESUME);
+        this.context.sendBroadcast(intent);
+    }
+
     protected void onPlayAudioFile(AudioFile audioFile)
     {
 
     }
 
     protected void onPlaybackStop()
+    {
+
+    }
+
+    protected void onPlaybackPause()
+    {
+
+    }
+
+    protected void onPlaybackResume()
     {
 
     }

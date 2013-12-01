@@ -1,7 +1,10 @@
 package net.illusor.swipeplayer.fragments;
 
 import android.app.Service;
-import android.content.*;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
@@ -12,11 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.activities.SwipeActivity;
 import net.illusor.swipeplayer.domain.AudioFile;
+import net.illusor.swipeplayer.helpers.PreferencesHelper;
 import net.illusor.swipeplayer.services.AudioBroadcastHandler;
 import net.illusor.swipeplayer.services.SoundService;
 import net.illusor.swipeplayer.widgets.AudioControlView;
@@ -27,11 +30,8 @@ import java.util.List;
 
 public class PlaylistFragment extends Fragment implements AdapterView.OnItemClickListener
 {
-    private static final String SHARED_PREF_PLAYLIST_KEY = "net.illusor.swipeplayer.playlist";
-
-    private Button buttonEmptyPlaylist;
     private ListView listView;
-    private File currentAudioFolder;
+    private File currentMediaDirectory;
     private final AudioLoaderCallbacks audioLoaderCallbacks = new AudioLoaderCallbacks();
     private final SoundServiceConnection connection = new SoundServiceConnection();
     private final SoundServiceReceiver receiver = new SoundServiceReceiver();
@@ -41,7 +41,6 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
     {
         View view = inflater.inflate(R.layout.fragment_playlist, container, false);
         this.listView = (ListView)view.findViewById(R.id.id_playlist);
-        this.buttonEmptyPlaylist = (Button)view.findViewById(R.id.id_playlist_folder_btn);
         return view;
     }
 
@@ -50,14 +49,6 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
     {
         super.onActivityCreated(savedInstanceState);
         this.listView.setOnItemClickListener(this);
-        this.buttonEmptyPlaylist.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                getSwipeActivity().openMediaBrowser();
-            }
-        });
     }
 
     @Override
@@ -68,18 +59,10 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         this.connection.bind();
         this.receiver.register();
 
-        if (this.currentAudioFolder == null)
-        {
-            SharedPreferences preferences = this.getActivity().getSharedPreferences(SHARED_PREF_PLAYLIST_KEY, Context.MODE_PRIVATE);
-            if (preferences.contains(SHARED_PREF_PLAYLIST_KEY))
-            {
-                String path = preferences.getString(SHARED_PREF_PLAYLIST_KEY, "");
-                this.currentAudioFolder = new File(path);
-            }
-        }
+        this.currentMediaDirectory = PreferencesHelper.getStoredPlaylist(this.getActivity());
 
-        if (this.currentAudioFolder != null)
-            this.audioLoaderCallbacks.initLoader(this.currentAudioFolder);
+        if (this.currentMediaDirectory != null)
+            this.audioLoaderCallbacks.initLoader(this.currentMediaDirectory);
         else
             this.showFolderButton(true);
     }
@@ -89,22 +72,10 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
     {
         super.onStop();
         this.getAudioControl().onStop();
-        this.audioLoaderCallbacks.quitLoader();
-        this.receiver.unregister();
         this.connection.unbind();
-    }
-
-    @Override
-    public void onPause()
-    {
-        super.onPause();
-        if (this.currentAudioFolder != null)
-        {
-            SharedPreferences preferences = this.getActivity().getSharedPreferences(SHARED_PREF_PLAYLIST_KEY, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putString(SHARED_PREF_PLAYLIST_KEY, currentAudioFolder.getAbsolutePath());
-            editor.commit();
-        }
+        this.receiver.unregister();
+        this.audioLoaderCallbacks.quitLoader();
+        PreferencesHelper.setStoredPlaylist(this.getActivity(), this.currentMediaDirectory);
     }
 
     @Override
@@ -117,7 +88,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
 
     public void setMediaDirectory(File folder)
     {
-        this.currentAudioFolder = folder;
+        this.currentMediaDirectory = folder;
         this.audioLoaderCallbacks.restartLoader(folder);
     }
 
@@ -140,6 +111,17 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
     private void showFolderButton(boolean show)
     {
         this.getView().findViewById(R.id.id_playlist_folder).setVisibility(show ? View.VISIBLE : View.GONE);
+        if (show)
+        {
+            this.getView().findViewById(R.id.id_playlist_folder_btn).setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    getSwipeActivity().openMediaBrowser();
+                }
+            });
+        }
     }
 
     private AudioControlView getAudioControl()
@@ -213,7 +195,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
             if (audioFiles.size() > 0)
             {
                 listView.setAdapter(new PlaylistAdapter(getActivity(), audioFiles));
-            getAudioControl().setPlaylistAdapter(new TrackListAdapter(audioFiles, getFragmentManager()));
+                getAudioControl().setPlaylistAdapter(new TrackListAdapter(audioFiles, getFragmentManager()));
 
                 //we do not know, what fires faster: music loader or service connection
                 //so we duplicate service playlist inflation code here and inside the service connection

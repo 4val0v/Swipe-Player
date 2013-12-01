@@ -108,6 +108,7 @@ public class SoundService extends Service
     private void pause()
     {
         this.audioPlayer.pause();
+        this.audioBroadcastHandler.sendPlaybackPause();
         Notification notification = this.notificationHelper.getPausedNotification(this.audioPlayer.getAudioFile());
         this.startForeground(NOTIFICATION_CODE, notification);
     }
@@ -115,6 +116,7 @@ public class SoundService extends Service
     private void resume()
     {
         this.audioPlayer.resume();
+        this.audioBroadcastHandler.sendPlaybackResume();
         Notification notification = this.notificationHelper.getPlayingNotification(this.audioPlayer.getAudioFile());
         this.startForeground(NOTIFICATION_CODE, notification);
     }

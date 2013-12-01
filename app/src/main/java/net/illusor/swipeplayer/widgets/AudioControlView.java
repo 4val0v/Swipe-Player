@@ -1,7 +1,10 @@
 package net.illusor.swipeplayer.widgets;
 
 import android.app.Service;
-import android.content.*;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -22,7 +25,7 @@ import java.util.TimerTask;
 
 public class AudioControlView extends LinearLayout implements View.OnClickListener
 {
-    private final ViewPager trackList;
+    private final TrackPager trackList;
     private final SeekBar progress;
     private final SoundServiceConnection connection = new SoundServiceConnection();
     private final SoundServiceReceiver receiver = new SoundServiceReceiver();
@@ -37,10 +40,9 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
 
         LayoutInflater.from(context).inflate(R.layout.audio_control_view, this);
 
-        /*this.title1 = (FormattedTextView) this.findViewById(R.id.id_audio_control_title1);
-        this.artist = (FormattedTextView) this.findViewById(R.id.id_audio_control_artist);*/
-        this.trackList = (ViewPager)this.findViewById(R.id.id_audio_control_track);
+        this.trackList = (TrackPager)this.findViewById(R.id.id_audio_control_track);
         this.trackList.setOnClickListener(this);
+        this.trackList.setOnPageChangeListener(new TrackSwipeListener());
 
         this.progress = (SeekBar) this.findViewById(R.id.id_audio_control_progress);
         this.progress.setOnSeekBarChangeListener(new ProgressListener());
@@ -57,14 +59,12 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
             case Playing:
             {
                 Log.d("SWIPE", "Click: pause (service is playing now)");
-                this.stopTrackingProgress();
                 this.connection.service.pause();
                 break;
             }
             case Paused:
             {
                 Log.d("SWIPE", "Click: resume (service is paused now)");
-                this.startTrackingProgress();
                 this.connection.service.resume();
                 break;
             }
@@ -93,29 +93,35 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
             {
                 AudioFile audioFile = this.connection.service.getAudioFile();
                 if (audioFile != null)
-                    this.setVisualState(audioFile);
+                    this.setAudioFile(audioFile);
             }
         }
         else
         {
             this.setVisibility(View.GONE);
+            stopTrackingProgress();
         }
     }
 
-    private void setVisualState(AudioFile audioFile)
+    private void setAudioFile(AudioFile audioFile)
     {
         if (this.trackList.getAdapter() != null)
         {
-            this.setVisibility(VISIBLE);
-            this.progress.setEnabled(true);
-
-            AudioPlayerState state = this.connection.service.getState();
-            if (state == AudioPlayerState.Playing)
-                startTrackingProgress();
-
-            int index = ((TrackListAdapter)this.trackList.getAdapter()).getData().indexOf(audioFile);
+            int index = this.trackList.getTrackAdapter().getData().indexOf(audioFile);
             if (index >= 0)
-                this.trackList.setCurrentItem(index, false);
+            {
+                this.setVisibility(VISIBLE);
+                this.trackList.swipeToItem(index);
+                AudioPlayerState state = this.connection.service.getState();
+                if (state == AudioPlayerState.Playing)
+                    startTrackingProgress();
+
+            }
+            else
+            {
+                this.setVisibility(GONE);
+                stopTrackingProgress();
+            }
         }
     }
 
@@ -177,6 +183,25 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
         }
     }
 
+    private class TrackSwipeListener extends ViewPager.SimpleOnPageChangeListener
+    {
+        @Override
+        public void onPageSelected(int position)
+        {
+            super.onPageSelected(position);
+            final AudioFile audioFile = trackList.getTrackAdapter().getData().get(position);
+            postDelayed(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    connection.service.play(audioFile);
+                }
+            }, 300);
+
+        }
+    }
+
     private class SoundServiceConnection implements ServiceConnection
     {
         private SoundService.SoundServiceBinder service;
@@ -199,7 +224,7 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
 
             AudioFile audioFile = this.service.getAudioFile();
             if (audioFile != null)
-                setVisualState(audioFile);
+                setAudioFile(audioFile);
         }
 
         @Override
@@ -215,7 +240,7 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
         protected void onPlayAudioFile(AudioFile audioFile)
         {
             super.onPlayAudioFile(audioFile);
-            setVisualState(audioFile);
+            setAudioFile(audioFile);
             startTrackingProgress();
         }
 
@@ -225,6 +250,20 @@ public class AudioControlView extends LinearLayout implements View.OnClickListen
             super.onPlaybackStop();
             stopTrackingProgress();
             setVisibility(View.GONE);
+        }
+
+        @Override
+        protected void onPlaybackPause()
+        {
+            super.onPlaybackPause();
+            stopTrackingProgress();
+        }
+
+        @Override
+        protected void onPlaybackResume()
+        {
+            super.onPlaybackResume();
+            startTrackingProgress();
         }
 
         @Override

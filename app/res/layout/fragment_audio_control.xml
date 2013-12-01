@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:background="#8D004C">-->
-
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
+              android:background="@color/color_controlpanel_bg">
 
     <SeekBar
             android:layout_width="match_parent"
@@ -23,6 +21,4 @@
             android:layout_height="80sp"
             android:overScrollMode="never"/>
 
-</merge>
-
-        <!--</LinearLayout>-->
+</LinearLayout>

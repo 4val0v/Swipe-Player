@@ -239,8 +239,10 @@ public class SoundService extends Service
 
         public void setPlaylist(List<AudioFile> playlist)
         {
+
             AudioPlayerOnCompleteBehavior behavior = new AudioPlayerNextTrackBehavior(playlist, this.soundService);
             this.soundService.audioPlayer.setOnCompleteBehavior(behavior);
+            this.soundService.audioBroadcastHandler.sendPlaylistChanged(playlist);
         }
    }
 }

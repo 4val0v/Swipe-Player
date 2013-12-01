@@ -9,16 +9,16 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import net.illusor.swipeplayer.R;
+import net.illusor.swipeplayer.fragments.AudioControlFragment;
 import net.illusor.swipeplayer.fragments.FolderBrowserFragment;
 import net.illusor.swipeplayer.fragments.PlaylistFragment;
-import net.illusor.swipeplayer.widgets.AudioControlView;
 
 import java.io.File;
 import java.util.List;
 
 public class SwipeActivity extends FragmentActivity
 {
-    private AudioControlView audioControlPanel;
+    private AudioControlFragment audioControlFragment;
     private LocalPagerAdapter pagerAdapter;
     private ViewPager viewPager;
     private PlaylistFragment playlistFragment;
@@ -32,7 +32,7 @@ public class SwipeActivity extends FragmentActivity
         this.setContentView(R.layout.swipe_activity);
 
         this.viewPager = (ViewPager) this.findViewById(R.id.id_swipe_view_pager);
-        this.audioControlPanel = (AudioControlView)this.findViewById(R.id.id_swipe_control);
+        this.audioControlFragment = (AudioControlFragment)this.getSupportFragmentManager().findFragmentById(R.id.id_audio_control);
         this.pagerAdapter = new LocalPagerAdapter(this.getSupportFragmentManager());
 
         if (savedInstanceState == null)
@@ -94,11 +94,6 @@ public class SwipeActivity extends FragmentActivity
     public List<File> getNavigationHistory()
     {
         return this.pagerAdapter.getBrowserFolders();
-    }
-
-    public AudioControlView getAudioControl()
-    {
-        return audioControlPanel;
     }
 
     private class LocalPagerAdapter extends SwipePagerAdapter

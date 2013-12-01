@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import net.illusor.swipeplayer.domain.AudioFile;
 import net.illusor.swipeplayer.fragments.TrackListAdapter;
 
 public class TrackPager extends ViewPager
@@ -55,14 +56,22 @@ public class TrackPager extends ViewPager
         this.listener = listener;
     }
 
-    public void swipeToItem(int item)
+    public boolean swipeToItem(AudioFile audioFile)
     {
-        if (item == this.getCurrentItem())
-            return;
+        if (this.getAdapter() == null)
+            return false;
+
+        int index = this.getTrackAdapter().getData().indexOf(audioFile);
+        if (index < 0) return false;
+
+        if (index == this.getCurrentItem())
+            return true;
 
         super.setOnPageChangeListener(null);
-        super.setCurrentItem(item, true);
+        super.setCurrentItem(index, true);
         super.setOnPageChangeListener(this.listener);
+
+        return true;
     }
 
     public TrackListAdapter getTrackAdapter()

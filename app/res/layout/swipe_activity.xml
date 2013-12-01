@@ -12,10 +12,11 @@
         android:id="@+id/id_swipe_view_pager"
         android:layout_weight="1" />
 
-    <net.illusor.swipeplayer.widgets.AudioControlView
+    <fragment
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/id_swipe_control"
+        android:id="@+id/id_audio_control"
+        android:name="net.illusor.swipeplayer.fragments.AudioControlFragment"
         android:visibility="gone"/>
 
 </LinearLayout>

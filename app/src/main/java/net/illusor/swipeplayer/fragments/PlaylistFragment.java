@@ -30,6 +30,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
 {
     private ListView listView;
     private File currentMediaDirectory;
+    private AudioControlFragment audioControlFragment;
     private final AudioLoaderCallbacks audioLoaderCallbacks = new AudioLoaderCallbacks();
     private final SoundServiceConnection connection = new SoundServiceConnection();
     private final SoundServiceReceiver receiver = new SoundServiceReceiver();
@@ -39,6 +40,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
     {
         View view = inflater.inflate(R.layout.fragment_playlist, container, false);
         this.listView = (ListView)view.findViewById(R.id.id_playlist);
+        this.audioControlFragment = (AudioControlFragment)this.getActivity().getSupportFragmentManager().findFragmentById(R.id.id_audio_control);
         return view;
     }
 
@@ -91,12 +93,17 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
 
     private void setItemChecked(AudioFile audioFile)
     {
-        final PlaylistAdapter adapter = (PlaylistAdapter)listView.getAdapter();
+        final PlaylistAdapter adapter = (PlaylistAdapter)this.listView.getAdapter();
         final int index = adapter.getData().indexOf(audioFile);
         if (index >= 0)
         {
-            listView.setItemChecked(index, true);
-            listView.smoothScrollToPosition(index);
+            this.listView.setItemChecked(index, true);
+
+            int pos = this.listView.getFirstVisiblePosition();
+            if ((Math.abs(pos - index)) < 20)
+                this.listView.smoothScrollToPosition(index);
+            else
+                this.listView.setSelection(index);
         }
     }
 
@@ -151,6 +158,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
             showLoadingIndicator(false);
 
             listView.setAdapter(new PlaylistAdapter(getActivity(), audioFiles));
+            audioControlFragment.setPlaylist(audioFiles);
 
             //we do not know, what fires faster: music loader or service connection
             //so we duplicate service playlist inflation code here and inside the service connection

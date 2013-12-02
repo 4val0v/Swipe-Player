@@ -9,7 +9,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AudioFilesLoader extends AudioFoldersLoader
+class AudioFilesLoader extends AudioFoldersLoader
 {
     public AudioFilesLoader(Context context, File directory)
     {

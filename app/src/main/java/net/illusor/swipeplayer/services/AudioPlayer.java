@@ -12,11 +12,12 @@ class AudioPlayer
     private MediaPlayer mediaPlayer;
     private AudioFile audioFile;
     private AudioPlayerOnCompleteBehavior onCompleteBehavior;
+    private OnErrorListener onErrorListener;
     private boolean wasPlayingWhenRewindStarted;
     private int pausedPosition;
     private float volume = 1;
 
-    public void play(AudioFile audioFile)
+    public void play(AudioFile audioFile) throws IOException
     {
         this.audioFile = audioFile;
 
@@ -24,47 +25,41 @@ class AudioPlayer
             this.stop();
 
         final AudioPlayer audioPlayer = this;
-        try
+        this.mediaPlayer = new MediaPlayer();
+        this.mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        this.mediaPlayer.setDataSource(audioFile.getAbsolutePath());
+        this.mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener()
         {
-            this.mediaPlayer = new MediaPlayer();
-            this.mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-            this.mediaPlayer.setDataSource(audioFile.getAbsolutePath());
-            this.mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener()
+            @Override
+            public void onPrepared(MediaPlayer player)
             {
-                @Override
-                public void onPrepared(MediaPlayer player)
-                {
-                    player.setVolume(volume, volume);
-                    player.start();
-                }
-            });
-            this.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
-            {
-                @Override
-                public void onCompletion(MediaPlayer player)
-                {
-                    if (onCompleteBehavior != null)
-                        onCompleteBehavior.onPlaybackComplete(audioPlayer);
-                    else
-                        stop();
-                }
-            });
-            this.mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener()
-            {
-                @Override
-                public boolean onError(MediaPlayer mediaPlayer, int cause, int extra)
-                {
-                    mediaPlayer.release();
-                    return true;
-                }
-            });
-            this.mediaPlayer.prepareAsync();
-        }
-        catch (IOException e)
+                player.setVolume(volume, volume);
+                player.start();
+            }
+        });
+        this.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
         {
-            stop();
-            Log.e(this.getClass().getName(), e.getMessage());
-        }
+            @Override
+            public void onCompletion(MediaPlayer player)
+            {
+                if (onCompleteBehavior != null)
+                    onCompleteBehavior.onPlaybackComplete(audioPlayer);
+                else
+                    stop();
+            }
+        });
+        this.mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener()
+        {
+            @Override
+            public boolean onError(MediaPlayer mediaPlayer, int cause, int extra)
+            {
+                if (onErrorListener != null)
+                    onErrorListener.OnError(audioPlayer.audioFile);
+                mediaPlayer.release();
+                return true;
+            }
+        });
+        this.mediaPlayer.prepareAsync();
     }
 
     public void stop()
@@ -145,5 +140,15 @@ class AudioPlayer
     public void setOnCompleteBehavior(AudioPlayerOnCompleteBehavior behavior)
     {
         this.onCompleteBehavior = behavior;
+    }
+
+    public void setOnErrorListener(OnErrorListener onErrorListener)
+    {
+        this.onErrorListener = onErrorListener;
+    }
+
+    public interface OnErrorListener
+    {
+        public void OnError(AudioFile audioFile);
     }
 }

@@ -13,6 +13,7 @@ import android.os.IBinder;
 import net.illusor.swipeplayer.domain.AudioFile;
 import net.illusor.swipeplayer.helpers.NotificationHelper;
 
+import java.io.IOException;
 import java.util.List;
 
 public class SoundService extends Service
@@ -21,7 +22,8 @@ public class SoundService extends Service
     public static final String INTENT_CODE_PAUSE = "net.illusor.swipeplayer.services.SoundService.PAUSE";
     public static final String INTENT_CODE_RESUME = "net.illusor.swipeplayer.services.SoundService.PLAY";
 
-    private static final int NOTIFICATION_CODE = 753951;
+    private static final int NOTIFICATION_CODE_STATUS = 753951;
+    private static final int NOTIFICATION_CODE_ERROR = 753950;
 
     private final AudioPlayer audioPlayer = new AudioPlayer();
     private final NoisyReceiver noisyReceiver = new NoisyReceiver();
@@ -37,6 +39,7 @@ public class SoundService extends Service
         super.onCreate();
         this.audioBroadcastHandler = new AudioBroadcastHandler(this);
         this.audioManager = (AudioManager)this.getSystemService(Context.AUDIO_SERVICE);
+        this.audioPlayer.setOnErrorListener(new OnErrorListener());
     }
 
     public int onStartCommand(Intent intent, int flags, int startId)
@@ -79,11 +82,20 @@ public class SoundService extends Service
             this.serviceStarted = true;
         }
 
-        this.audioPlayer.play(audioFile);
-        this.audioBroadcastHandler.sendPlayAudioFile(audioFile);
+        try
+        {
+            this.audioPlayer.play(audioFile);
+            this.audioBroadcastHandler.sendPlayAudioFile(audioFile);
 
-        Notification notification = this.notificationHelper.getPlayingNotification(audioFile);
-        this.startForeground(NOTIFICATION_CODE, notification);
+            Notification notification = this.notificationHelper.getPlayingNotification(audioFile);
+            this.startForeground(NOTIFICATION_CODE_STATUS, notification);
+        }
+        catch (IOException e)
+        {
+            stop();
+            NotificationManager service = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            service.notify(NOTIFICATION_CODE_ERROR, notificationHelper.getErrorNotification(audioFile));
+        }
     }
 
     void stop()
@@ -102,7 +114,7 @@ public class SoundService extends Service
         this.stopSelf();
 
         NotificationManager service = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
-        service.notify(NOTIFICATION_CODE, this.notificationHelper.getStoppedNotification());
+        service.notify(NOTIFICATION_CODE_STATUS, this.notificationHelper.getStoppedNotification());
     }
 
     private void pause()
@@ -110,7 +122,7 @@ public class SoundService extends Service
         this.audioPlayer.pause();
         this.audioBroadcastHandler.sendPlaybackPause();
         Notification notification = this.notificationHelper.getPausedNotification(this.audioPlayer.getAudioFile());
-        this.startForeground(NOTIFICATION_CODE, notification);
+        this.startForeground(NOTIFICATION_CODE_STATUS, notification);
     }
 
     private void resume()
@@ -118,7 +130,18 @@ public class SoundService extends Service
         this.audioPlayer.resume();
         this.audioBroadcastHandler.sendPlaybackResume();
         Notification notification = this.notificationHelper.getPlayingNotification(this.audioPlayer.getAudioFile());
-        this.startForeground(NOTIFICATION_CODE, notification);
+        this.startForeground(NOTIFICATION_CODE_STATUS, notification);
+    }
+
+    private class OnErrorListener implements AudioPlayer.OnErrorListener
+    {
+        @Override
+        public void OnError(AudioFile audioFile)
+        {
+            stop();
+            NotificationManager service = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            service.notify(NOTIFICATION_CODE_ERROR, notificationHelper.getErrorNotification(audioFile));
+        }
     }
 
     private class AudioFocusChangeListener implements AudioManager.OnAudioFocusChangeListener

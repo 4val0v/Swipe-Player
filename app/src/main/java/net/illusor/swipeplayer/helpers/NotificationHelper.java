@@ -69,6 +69,20 @@ public class NotificationHelper
         return notification;
     }
 
+    public Notification getErrorNotification(AudioFile file)
+    {
+        PendingIntent activityIntent = this.getActivityIntent();
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this.context);
+        Notification notification = builder.setContentTitle("Error playing file")
+                .setContentText(file.getTitle())
+                .setSmallIcon(R.drawable.ic_media_play)
+                .setContentIntent(activityIntent)
+                .build();
+
+        return notification;
+    }
+
     private PendingIntent getActivityIntent()
     {
         Intent intent = new Intent(this.context, SwipeActivity.class);

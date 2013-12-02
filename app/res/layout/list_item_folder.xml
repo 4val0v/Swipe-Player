@@ -23,7 +23,7 @@
             swp:HeaderTextSize="25sp"
             swp:LineTextSize="15sp"
             swp:Font="PTSansNarrow"
-            swp:TextColor="@color/color_folder_text_isFolder"
+            swp:TextColor="@color/color_folder_text"
             swp:IsWrapping="true"/>
 
     <ImageButton

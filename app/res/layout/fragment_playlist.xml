@@ -11,9 +11,10 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="6dp"
         android:background="@color/color_fragment_playlist"
-        android:divider="@android:color/transparent"
+        android:divider="@null"
         android:choiceMode="singleChoice"
-        android:overScrollMode="never"/>
+        android:overScrollMode="never"
+        android:cacheColorHint="@null"/>
 
     <View
         android:layout_height="match_parent"

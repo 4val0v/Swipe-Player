@@ -85,7 +85,7 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
 
         if (isVisibleToUser && this.navigationHistory != null)
         {
-            List<File> navigationItems = this.getSwipeActivity().getNavigationHistory();
+            List<File> navigationItems = this.getSwipeActivity().getBrowserHistory();
             NavigationHistoryAdapter adapter = new NavigationHistoryAdapter(this.getActivity(), navigationItems);
 
             this.navigationHistory.setAdapter(adapter);

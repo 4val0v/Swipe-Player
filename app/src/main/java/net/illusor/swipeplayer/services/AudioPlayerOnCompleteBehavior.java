@@ -1,6 +1,6 @@
 package net.illusor.swipeplayer.services;
 
-public interface AudioPlayerOnCompleteBehavior
+interface AudioPlayerOnCompleteBehavior
 {
     public void onPlaybackComplete(AudioPlayer player);
 }

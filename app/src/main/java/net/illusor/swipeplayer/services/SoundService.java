@@ -242,7 +242,6 @@ public class SoundService extends Service
 
             AudioPlayerOnCompleteBehavior behavior = new AudioPlayerNextTrackBehavior(playlist, this.soundService);
             this.soundService.audioPlayer.setOnCompleteBehavior(behavior);
-            this.soundService.audioBroadcastHandler.sendPlaylistChanged(playlist);
         }
    }
 }

@@ -18,7 +18,6 @@ import java.util.List;
 
 public class SwipeActivity extends FragmentActivity
 {
-    private AudioControlFragment audioControlFragment;
     private LocalPagerAdapter pagerAdapter;
     private ViewPager viewPager;
     private PlaylistFragment playlistFragment;
@@ -32,7 +31,6 @@ public class SwipeActivity extends FragmentActivity
         this.setContentView(R.layout.swipe_activity);
 
         this.viewPager = (ViewPager) this.findViewById(R.id.id_swipe_view_pager);
-        this.audioControlFragment = (AudioControlFragment)this.getSupportFragmentManager().findFragmentById(R.id.id_audio_control);
         this.pagerAdapter = new LocalPagerAdapter(this.getSupportFragmentManager());
 
         if (savedInstanceState == null)
@@ -91,7 +89,7 @@ public class SwipeActivity extends FragmentActivity
         }
     }
 
-    public List<File> getNavigationHistory()
+    public List<File> getBrowserHistory()
     {
         return this.pagerAdapter.getBrowserFolders();
     }

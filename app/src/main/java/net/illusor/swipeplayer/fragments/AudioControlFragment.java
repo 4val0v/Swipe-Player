@@ -93,6 +93,13 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
         this.stopTrackingProgress();
     }
 
+    public void setPlaylist(List<AudioFile> playlist)
+    {
+        trackList.setAdapter(new TrackListAdapter(playlist, getFragmentManager()));
+        if (this.connection.service != null)
+            setAudioFile(connection.service.getAudioFile());
+    }
+
     private void startTrackingProgress()
     {
         if (this.progressTimer == null)
@@ -205,6 +212,12 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
 
             AudioFile audioFile = this.service.getAudioFile();
             setAudioFile(audioFile);
+
+            AudioPlayerState state = service.getState();
+            if (state == AudioPlayerState.Playing)
+                startTrackingProgress();
+            else if (state == AudioPlayerState.Paused)
+                new ProgressTrackingTask().run();
         }
 
         @Override
@@ -244,14 +257,6 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
         {
             super.onPlaybackResume();
             startTrackingProgress();
-        }
-
-        @Override
-        protected void onPlaylistChanged(List<AudioFile> playlist)
-        {
-            super.onPlaylistChanged(playlist);
-            trackList.setAdapter(new TrackListAdapter(playlist, getFragmentManager()));
-            setAudioFile(connection.service.getAudioFile());
         }
 
         @Override

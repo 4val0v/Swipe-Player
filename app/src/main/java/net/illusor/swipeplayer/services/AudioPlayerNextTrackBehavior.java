@@ -4,7 +4,7 @@ import net.illusor.swipeplayer.domain.AudioFile;
 
 import java.util.List;
 
-public class AudioPlayerNextTrackBehavior implements AudioPlayerOnCompleteBehavior
+class AudioPlayerNextTrackBehavior implements AudioPlayerOnCompleteBehavior
 {
     private final List<AudioFile> playlist;
     private final SoundService soundService;

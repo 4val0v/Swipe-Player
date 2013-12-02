@@ -4,12 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Parcel;
-import android.os.Parcelable;
 import net.illusor.swipeplayer.domain.AudioFile;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class AudioBroadcastHandler extends BroadcastReceiver
 {
@@ -17,7 +12,6 @@ public class AudioBroadcastHandler extends BroadcastReceiver
     private static final String ACTION_PLAY_STOP = "net.illusor.swipeplayer.services.SoundService.Stop";
     private static final String ACTION_PLAY_PAUSE = "net.illusor.swipeplayer.services.SoundService.Pause";
     private static final String ACTION_PLAY_RESUME = "net.illusor.swipeplayer.services.SoundService.Resume";
-    private static final String ACTION_PLAYLIST_CHANGED = "net.illusor.swipeplayer.services.SoundService.Playlist";
 
     private Context context;
 
@@ -37,7 +31,6 @@ public class AudioBroadcastHandler extends BroadcastReceiver
         filter.addAction(ACTION_PLAY_STOP);
         filter.addAction(ACTION_PLAY_PAUSE);
         filter.addAction(ACTION_PLAY_RESUME);
-        filter.addAction(ACTION_PLAYLIST_CHANGED);
         this.getClassContext().registerReceiver(this, filter);
     }
 
@@ -72,12 +65,6 @@ public class AudioBroadcastHandler extends BroadcastReceiver
                 this.onPlaybackResume();
                 break;
             }
-            case ACTION_PLAYLIST_CHANGED:
-            {
-                PlaylistParcel parcel = intent.getParcelableExtra(ACTION_PLAYLIST_CHANGED);
-                this.onPlaylistChanged(parcel.playlist);
-                break;
-            }
         }
     }
 
@@ -106,14 +93,6 @@ public class AudioBroadcastHandler extends BroadcastReceiver
         this.context.sendBroadcast(intent);
     }
 
-    void sendPlaylistChanged(List<AudioFile> playlist)
-    {
-        PlaylistParcel parcel = new PlaylistParcel(playlist);
-        Intent intent = new Intent(ACTION_PLAYLIST_CHANGED);
-        intent.putExtra(ACTION_PLAYLIST_CHANGED, parcel);
-        this.context.sendBroadcast(intent);
-    }
-
     protected void onPlayAudioFile(AudioFile audioFile)
     {
 
@@ -134,56 +113,8 @@ public class AudioBroadcastHandler extends BroadcastReceiver
 
     }
 
-    protected void onPlaylistChanged(List<AudioFile> playlist)
-    {
-
-    }
-
     protected Context getClassContext()
     {
         return this.context;
-    }
-
-    private static class PlaylistParcel implements Parcelable
-    {
-        private List<AudioFile> playlist;
-
-        private PlaylistParcel(List<AudioFile> playlist)
-        {
-            this.playlist = playlist;
-        }
-
-        private PlaylistParcel(Parcel parcel)
-        {
-            this.playlist = new ArrayList<>();
-            parcel.readList(this.playlist, null);
-        }
-
-        @Override
-        public int describeContents()
-        {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(Parcel parcel, int i)
-        {
-            parcel.writeList(this.playlist);
-        }
-
-        public static final Parcelable.Creator<PlaylistParcel> CREATOR = new Parcelable.Creator<PlaylistParcel>()
-        {
-            @Override
-            public PlaylistParcel createFromParcel(Parcel parcel)
-            {
-                return new PlaylistParcel(parcel);
-            }
-
-            @Override
-            public PlaylistParcel[] newArray(int i)
-            {
-                return new PlaylistParcel[i];
-            }
-        };
     }
 }

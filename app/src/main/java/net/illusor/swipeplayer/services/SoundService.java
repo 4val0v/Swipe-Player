@@ -3,10 +3,7 @@ package net.illusor.swipeplayer.services;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.Service;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
+import android.content.*;
 import android.media.AudioManager;
 import android.os.Binder;
 import android.os.IBinder;
@@ -79,6 +76,7 @@ public class SoundService extends Service
         {
             this.startService(new Intent(this, SoundService.class));
             this.registerReceiver(this.noisyReceiver, new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY));
+            this.audioManager.registerMediaButtonEventReceiver(new ComponentName(this, LocalButtonReceiver.class));
             this.serviceStarted = true;
         }
 
@@ -107,6 +105,7 @@ public class SoundService extends Service
         {
             this.unregisterReceiver(this.noisyReceiver);
             this.audioManager.abandonAudioFocus(this.audioFocusChangeListener);
+            this.audioManager.unregisterMediaButtonEventReceiver(new ComponentName(this, LocalButtonReceiver.class));
             this.serviceStarted = false;
         }
 
@@ -203,6 +202,33 @@ public class SoundService extends Service
         {
             if (AudioManager.ACTION_AUDIO_BECOMING_NOISY.equals(intent.getAction()))
                 pause();
+        }
+    }
+
+    public class LocalButtonReceiver extends MediaButtonReceiver
+    {
+        @Override
+        protected void onNextTrack()
+        {
+            super.onNextTrack();
+        }
+
+        @Override
+        protected void onPreviousTrack()
+        {
+            super.onPreviousTrack();
+        }
+
+        @Override
+        protected void onPlayPause()
+        {
+            super.onPlayPause();
+        }
+
+        @Override
+        protected void onStop()
+        {
+            super.onStop();
         }
     }
 

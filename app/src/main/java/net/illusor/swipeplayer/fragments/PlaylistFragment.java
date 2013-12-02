@@ -1,10 +1,9 @@
 package net.illusor.swipeplayer.fragments;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.Service;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
+import android.content.*;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
@@ -13,14 +12,17 @@ import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.activities.SwipeActivity;
 import net.illusor.swipeplayer.domain.AudioFile;
 import net.illusor.swipeplayer.helpers.PreferencesHelper;
 import net.illusor.swipeplayer.services.AudioBroadcastHandler;
 import net.illusor.swipeplayer.services.SoundService;
+import net.illusor.swipeplayer.widgets.DropDownDialog;
 import net.illusor.swipeplayer.widgets.PlaylistItemView;
 
 import java.io.File;
@@ -122,7 +124,10 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
                 @Override
                 public void onClick(View view)
                 {
-                    getSwipeActivity().openMediaBrowser();
+                    /*getSwipeActivity().openMediaBrowser();*/
+                    Dialog dialog = new Dialog(getActivity(), R.style.full_screen_dialog);
+                    dialog.setContentView(new DropDownDialog(getActivity()));
+                    dialog.show();
                 }
             });
         }

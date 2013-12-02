@@ -15,7 +15,6 @@
     <color name="color_fragment_browser">#010129</color>
     <color name="color_controlpanel_bg">#8d004c</color>
 
-    <color name="color_folder_text_isFile">#808094</color>
-    <color name="color_folder_text_isFolder">#ffffff</color>
+    <color name="color_folder_text">#ffffff</color>
 
 </resources>

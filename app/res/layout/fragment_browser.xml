@@ -20,8 +20,9 @@
             android:id="@+id/id_fb_audio_files"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="@android:color/transparent"
-            android:overScrollMode="never"/>
+            android:divider="@null"
+            android:overScrollMode="never"
+            android:cacheColorHint="@null"/>
 
         <LinearLayout
             android:id="@+id/id_browser_loading"

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/color_fragment_browser">
 
-    <Spinner
+    <net.illusor.swipeplayer.widgets.DropDown
         android:id="@+id/id_fb_nav_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,25 +24,7 @@
             android:overScrollMode="never"
             android:cacheColorHint="@null"/>
 
-        <LinearLayout
-            android:id="@+id/id_browser_loading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center"
-            android:visibility="gone">
-
-            <ProgressBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#ffffff"
-                android:text="@string/str_playlist_loading" />
-        </LinearLayout>
+        <include layout="@layout/layout_preloader"/>
 
     </FrameLayout>
 

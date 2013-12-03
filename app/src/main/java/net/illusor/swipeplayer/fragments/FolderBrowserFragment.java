@@ -133,7 +133,7 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
 
     private void showLoadingIndicator(boolean show)
     {
-        this.getView().findViewById(R.id.id_browser_loading).setVisibility(show ? View.VISIBLE : View.GONE);
+        this.getView().findViewById(R.id.id_list_preloader).setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     private SwipeActivity getSwipeActivity()
@@ -190,10 +190,6 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
         public View getView(int position, View convertView, ViewGroup parent)
         {
             TextView view = (TextView) super.getView(position, convertView, parent);
-            view.setTextColor(Color.WHITE);
-            view.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-            view.setTypeface(FontHelper.PTSerifItalic);
-            view.setEllipsize(TextUtils.TruncateAt.START);
             this.formatTextView(view, position);
             return view;
         }
@@ -209,7 +205,11 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
         private void formatTextView(TextView view, int position)
         {
             File item = this.getItem(position);
-            view.setText(item.getPath());
+            view.setText(item.getName());
+            view.setTextColor(Color.WHITE);
+            view.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            view.setTypeface(FontHelper.PTSerifItalic);
+            view.setEllipsize(TextUtils.TruncateAt.START);
         }
     }
 

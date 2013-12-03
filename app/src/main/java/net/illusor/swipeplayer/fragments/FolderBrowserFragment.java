@@ -1,14 +1,11 @@
 package net.illusor.swipeplayer.fragments;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.text.TextUtils;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +13,6 @@ import android.widget.*;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.activities.SwipeActivity;
 import net.illusor.swipeplayer.domain.AudioFile;
-import net.illusor.swipeplayer.helpers.FontHelper;
 import net.illusor.swipeplayer.widgets.FolderItemView;
 
 import java.io.File;
@@ -112,15 +108,15 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
     {
-        NavigationHistoryAdapter adapter = (NavigationHistoryAdapter)this.navigationHistory.getAdapter();
-        if (this.currentFolder == adapter.navigationHistory.get(i))
+        NavigationHistoryAdapter adapter = (NavigationHistoryAdapter)adapterView.getAdapter();
+        if (this.currentFolder == adapter.getData().get(i))
             return;
 
         Log.d("SWIPE", this.currentFolder.toString() + " " + i);
         File selected = (File) adapterView.getItemAtPosition(i);
         this.getSwipeActivity().openMediaDirectory(selected);
 
-        this.navigationHistory.setSelection(adapter.navigationHistory.indexOf(this.currentFolder));
+        this.navigationHistory.setSelection(adapter.getData().indexOf(this.currentFolder));
     }
 
     @Override
@@ -173,43 +169,6 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
         public void onPlayClick(AudioFile audioFile)
         {
             getSwipeActivity().playMediaDirectory(audioFile);
-        }
-    }
-
-    private class NavigationHistoryAdapter extends ArrayAdapter<File>
-    {
-        private List<File> navigationHistory;
-
-        private NavigationHistoryAdapter(Context context, List<File> navigationHistory)
-        {
-            super(context, R.layout.list_item_nav_history, 0, navigationHistory);
-            this.navigationHistory = navigationHistory;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent)
-        {
-            TextView view = (TextView) super.getView(position, convertView, parent);
-            this.formatTextView(view, position);
-            return view;
-        }
-
-        @Override
-        public View getDropDownView(int position, View convertView, ViewGroup parent)
-        {
-            TextView view = (TextView) super.getDropDownView(position, convertView, parent);
-            this.formatTextView(view, position);
-            return view;
-        }
-
-        private void formatTextView(TextView view, int position)
-        {
-            File item = this.getItem(position);
-            view.setText(item.getName());
-            view.setTextColor(Color.WHITE);
-            view.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-            view.setTypeface(FontHelper.PTSerifItalic);
-            view.setEllipsize(TextUtils.TruncateAt.START);
         }
     }
 

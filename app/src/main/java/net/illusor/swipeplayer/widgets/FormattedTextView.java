@@ -304,6 +304,11 @@ public class FormattedTextView extends View implements Checkable
         }
     }
 
+    public int getHeaderTextSize()
+    {
+        return headerTextSize;
+    }
+
     private class SavedState extends BaseSavedState
     {
         private CharSequence text;

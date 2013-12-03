@@ -8,7 +8,7 @@
     <color name="color_playlist_text_normal">#000000</color>
     <color name="color_playlist_text_playing">#ffffff</color>
 
-    <drawable name="drawable_browser_bg_normal">@color/color_fragment_browser</drawable>
+    <drawable name="drawable_browser_bg_normal">@android:color/transparent</drawable>
     <drawable name="drawable_browser_bg_pressed">#fea50e</drawable>
 
     <color name="color_fragment_playlist">#ffffff</color>
@@ -16,5 +16,7 @@
     <color name="color_controlpanel_bg">#8d004c</color>
 
     <color name="color_folder_text">#ffffff</color>
+    <color name="color_trackbar_playlist">#000000</color>
+    <color name="color_trackbar_browser">#ffffff</color>
 
 </resources>

@@ -9,7 +9,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import net.illusor.swipeplayer.R;
-import net.illusor.swipeplayer.fragments.AudioControlFragment;
 import net.illusor.swipeplayer.fragments.FolderBrowserFragment;
 import net.illusor.swipeplayer.fragments.PlaylistFragment;
 
@@ -28,7 +27,7 @@ public class SwipeActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
 
         this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
-        this.setContentView(R.layout.swipe_activity);
+        this.setContentView(R.layout.activity_swipe);
 
         this.viewPager = (ViewPager) this.findViewById(R.id.id_swipe_view_pager);
         this.pagerAdapter = new LocalPagerAdapter(this.getSupportFragmentManager());

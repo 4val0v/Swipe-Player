@@ -4,8 +4,8 @@
 
     <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="16"/>
 
-    <application android:name=".SwipeApplication" android:icon="@drawable/swipe_player_icon" android:label="Swipe Player" android:theme="@android:style/Theme.Light">
-        <activity android:name=".activities.SwipeActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Light.NoTitleBar">
+    <application android:name=".SwipeApplication" android:icon="@drawable/swipe_player_icon" android:label="Swipe Player">
+        <activity android:name=".activities.SwipeActivity" android:screenOrientation="portrait" android:theme="@style/Theme.SwipePlayer">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

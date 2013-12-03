@@ -6,14 +6,24 @@
               android:layout_height="wrap_content"
               android:background="@color/color_controlpanel_bg">
 
-    <SeekBar
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_gravity="bottom"
-            android:id="@+id/id_audio_control_progress"
-            android:progressDrawable="@drawable/seekbar_layers"
-            android:thumb="@drawable/seekbar_thumb"
-            android:paddingBottom="10dp"/>
+    <FrameLayout android:layout_width="match_parent"
+                 android:layout_height="wrap_content">
+
+        <View android:layout_width="match_parent"
+              android:layout_height="6dp"
+              android:background="@color/color_fragment_browser"/>
+
+        <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="26dp"
+                android:layout_gravity="bottom"
+                android:id="@+id/id_audio_control_progress"
+                android:progressDrawable="@drawable/seekbar_layers"
+                android:thumb="@drawable/seekbar_thumb"
+                android:paddingTop="6dp"
+                android:paddingBottom="10dp"/>
+
+    </FrameLayout>
 
     <net.illusor.swipeplayer.widgets.TrackPager
             android:id="@+id/id_audio_control_track"

@@ -1,6 +1,7 @@
 package net.illusor.swipeplayer.widgets;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.DataSetObserver;
@@ -8,9 +9,8 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListAdapter;
-import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
+import android.widget.*;
+import net.illusor.swipeplayer.R;
 
 public class DropDown extends Spinner
 {
@@ -46,60 +46,72 @@ public class DropDown extends Spinner
     @Override
     public boolean performClick()
     {
-        Context context = getContext();
-        final DropDownAdapter adapter = new DropDownAdapter(getAdapter());
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        final ListAdapter adapter = new DropDownAdapter(this.getAdapter());
+        DropDownDialog dialog = new DropDownDialog(this.getContext());
+        dialog.getWindow().setGravity(Gravity.TOP);
 
-        CharSequence prompt = this.getPrompt();
-        if (prompt != null)
-            builder.setTitle(prompt);
-
-        this.popup = builder.setSingleChoiceItems(adapter, this.getSelectedItemPosition(), this).create();
-        this.popup.getWindow().setGravity(Gravity.TOP);
-        this.popup.show();
-
-        /*ViewParent parent = this.popup.getListView();
-        while (parent != null && parent instanceof View)
-        {
-            LayoutParams lp = ((View) parent).getLayoutParams();
-            if (lp instanceof ViewGroup.MarginLayoutParams)
-            {
-                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams)lp;
-                params.bottomMargin = 0;params.topMargin = 0;
-                params.leftMargin = 0;params.rightMargin = 0;
-                ((View) parent).setLayoutParams(params);
-            }
-
-            try
-            {
-                Field gravity = lp.getClass().getField("gravity");
-                gravity.set(lp, Gravity.TOP);
-            }
-            catch (Exception e)
-            {
-
-            }
-
-            ((View) parent).setPadding(0, 0, 0, 0);
-            parent = parent.getParent();
-        }
-
-        WindowManager.LayoutParams WMLP = this.popup.getWindow().getAttributes();
-        WMLP.x = 0; WMLP.y = 0;
-        WMLP.horizontalMargin = 20;
-        WMLP.gravity = Gravity.TOP | Gravity.LEFT;
-        this.popup.getWindow().setAttributes(WMLP);*/
-
+        dialog.setSingleChoiceItems(adapter, this);
+        dialog.show();
         return true;
     }
 
     @Override
     public void onClick(DialogInterface dialog, int which)
     {
-        super.onClick(dialog, which);
-
         dialog.dismiss();
-        this.popup = null;
+        this.setSelection(which);
+    }
+
+    private static class DropDownDialog extends Dialog
+    {
+        private ListView listView;
+        private OnClickListener listener;
+
+        public DropDownDialog(Context context)
+        {
+            this(context, R.style.Theme_Dialog);
+        }
+
+        public DropDownDialog(Context context, int theme)
+        {
+            super(context, theme);
+            this.initialize();
+        }
+
+        public DropDownDialog(Context context, boolean cancelable, OnCancelListener cancelListener)
+        {
+            super(context, cancelable, cancelListener);
+            this.initialize();
+        }
+
+        private void initialize()
+        {
+            this.setContentView(R.layout.dropdown_open);
+            this.listView = (ListView)this.findViewById(R.id.id_dropdown_list);
+            this.listView.setOnItemClickListener(new ItemClickListener(this));
+        }
+
+        public void setSingleChoiceItems(ListAdapter adapter, OnClickListener listener)
+        {
+            this.listView.setAdapter(adapter);
+            this.listener = listener;
+        }
+
+        private class ItemClickListener implements ListView.OnItemClickListener
+        {
+            private final DialogInterface dialog;
+
+            private ItemClickListener(DialogInterface dialog)
+            {
+                this.dialog = dialog;
+            }
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+            {
+                listener.onClick(dialog, i);
+            }
+        }
     }
 
     /**
@@ -120,9 +132,7 @@ public class DropDown extends Spinner
         {
             this.mAdapter = adapter;
             if (adapter instanceof ListAdapter)
-            {
                 this.mListAdapter = (ListAdapter) adapter;
-            }
         }
 
         public int getCount()
@@ -147,8 +157,7 @@ public class DropDown extends Spinner
 
         public View getDropDownView(int position, View convertView, ViewGroup parent)
         {
-            return mAdapter == null ? null :
-                    mAdapter.getDropDownView(position, convertView, parent);
+            return mAdapter == null ? null : mAdapter.getDropDownView(position, convertView, parent);
         }
 
         public boolean hasStableIds()
@@ -159,17 +168,13 @@ public class DropDown extends Spinner
         public void registerDataSetObserver(DataSetObserver observer)
         {
             if (mAdapter != null)
-            {
                 mAdapter.registerDataSetObserver(observer);
-            }
         }
 
         public void unregisterDataSetObserver(DataSetObserver observer)
         {
             if (mAdapter != null)
-            {
                 mAdapter.unregisterDataSetObserver(observer);
-            }
         }
 
         /**
@@ -179,7 +184,10 @@ public class DropDown extends Spinner
         public boolean areAllItemsEnabled()
         {
             final ListAdapter adapter = mListAdapter;
-            return adapter == null || adapter.areAllItemsEnabled();
+            if (adapter != null)
+                return adapter.areAllItemsEnabled();
+            else
+                return true;
         }
 
         /**
@@ -189,7 +197,10 @@ public class DropDown extends Spinner
         public boolean isEnabled(int position)
         {
             final ListAdapter adapter = mListAdapter;
-            return adapter == null || adapter.isEnabled(position);
+            if (adapter != null)
+                return adapter.isEnabled(position);
+            else
+                return true;
         }
 
         public int getItemViewType(int position)

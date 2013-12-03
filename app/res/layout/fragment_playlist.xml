@@ -21,24 +21,7 @@
         android:layout_width="12dp"
         android:background="@drawable/playlist_left_border"/>
 
-    <LinearLayout
-        android:id="@+id/id_playlist_loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center"
-        android:visibility="gone">
-
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/str_playlist_loading" />
-    </LinearLayout>
+    <include layout="@layout/layout_preloader"/>
 
     <LinearLayout
         android:id="@+id/id_playlist_folder"

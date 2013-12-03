@@ -1,7 +1,5 @@
 package net.illusor.swipeplayer.fragments;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.Service;
 import android.content.*;
 import android.os.Bundle;
@@ -12,17 +10,14 @@ import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.activities.SwipeActivity;
 import net.illusor.swipeplayer.domain.AudioFile;
 import net.illusor.swipeplayer.helpers.PreferencesHelper;
 import net.illusor.swipeplayer.services.AudioBroadcastHandler;
 import net.illusor.swipeplayer.services.SoundService;
-import net.illusor.swipeplayer.widgets.DropDownDialog;
 import net.illusor.swipeplayer.widgets.PlaylistItemView;
 
 import java.io.File;
@@ -111,7 +106,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
 
     private void showLoadingIndicator(boolean show)
     {
-        this.getView().findViewById(R.id.id_playlist_loading).setVisibility(show ? View.VISIBLE : View.GONE);
+        this.getView().findViewById(R.id.id_list_preloader).setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     private void showFolderButton(boolean show)
@@ -124,10 +119,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
                 @Override
                 public void onClick(View view)
                 {
-                    /*getSwipeActivity().openMediaBrowser();*/
-                    Dialog dialog = new Dialog(getActivity(), R.style.full_screen_dialog);
-                    dialog.setContentView(new DropDownDialog(getActivity()));
-                    dialog.show();
+                    getSwipeActivity().openMediaBrowser();
                 }
             });
         }

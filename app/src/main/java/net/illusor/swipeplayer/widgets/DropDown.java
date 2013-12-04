@@ -86,6 +86,7 @@ public class DropDown extends Spinner
 
         private void initialize()
         {
+            this.setCanceledOnTouchOutside(true);
             this.setContentView(R.layout.dropdown_open);
             this.listView = (ListView)this.findViewById(R.id.id_dropdown_list);
             this.listView.setOnItemClickListener(new ItemClickListener(this));

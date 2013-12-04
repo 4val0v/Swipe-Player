@@ -47,7 +47,14 @@ public class NavigationItemView extends LinearLayout
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        int height = this.getPaddingTop() + this.getPaddingBottom() + this.text.getVerticalSize();
-        this.setMeasuredDimension(ViewGroup.LayoutParams.MATCH_PARENT, height);
+
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+
+        if (widthMode == MeasureSpec.AT_MOST)
+        {
+            int height = this.getPaddingTop() + this.getPaddingBottom() + this.text.getVerticalSize();
+            this.setMeasuredDimension(widthSize, height);
+        }
     }
 }

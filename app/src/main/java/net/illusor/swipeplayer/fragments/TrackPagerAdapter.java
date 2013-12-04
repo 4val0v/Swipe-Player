@@ -73,7 +73,7 @@ public class TrackPagerAdapter extends PagerAdapter
     @Override
     public int getCount()
     {
-        return this.audioFiles.size() + 2;
+        return this.audioFiles.size();
     }
 
     @Override

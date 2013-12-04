@@ -64,7 +64,7 @@ public class TrackPager extends ViewPager
 
     private class TouchHandler
     {
-        private static final int TOUCH_THRESHOLD_DP = 10;
+        private static final int TOUCH_THRESHOLD_DP = 40;
 
         private boolean isPressed;
         private int touchThresholdPx;

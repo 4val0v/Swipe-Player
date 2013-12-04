@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.support.v4.content.LocalBroadcastManager;
 import net.illusor.swipeplayer.domain.AudioFile;
 
 public class AudioBroadcastHandler extends BroadcastReceiver
@@ -31,12 +32,12 @@ public class AudioBroadcastHandler extends BroadcastReceiver
         filter.addAction(ACTION_PLAY_STOP);
         filter.addAction(ACTION_PLAY_PAUSE);
         filter.addAction(ACTION_PLAY_RESUME);
-        this.getClassContext().registerReceiver(this, filter);
+        LocalBroadcastManager.getInstance(this.getClassContext()).registerReceiver(this, filter);
     }
 
     public void unregister()
     {
-        this.getClassContext().unregisterReceiver(this);
+        LocalBroadcastManager.getInstance(this.getClassContext()).unregisterReceiver(this);
     }
 
     @Override
@@ -72,25 +73,25 @@ public class AudioBroadcastHandler extends BroadcastReceiver
     {
         Intent intent = new Intent(ACTION_PLAY_AUDIO);
         intent.putExtra(ACTION_PLAY_AUDIO, audioFile);
-        this.context.sendBroadcast(intent);
+        LocalBroadcastManager.getInstance(this.context).sendBroadcast(intent);
     }
 
     void sendPlaybackStop()
     {
         Intent intent = new Intent(ACTION_PLAY_STOP);
-        this.context.sendBroadcast(intent);
+        LocalBroadcastManager.getInstance(this.context).sendBroadcast(intent);
     }
 
     void sendPlaybackPause()
     {
         Intent intent = new Intent(ACTION_PLAY_PAUSE);
-        this.context.sendBroadcast(intent);
+        LocalBroadcastManager.getInstance(this.context).sendBroadcast(intent);
     }
 
     void sendPlaybackResume()
     {
         Intent intent = new Intent(ACTION_PLAY_RESUME);
-        this.context.sendBroadcast(intent);
+        LocalBroadcastManager.getInstance(this.context).sendBroadcast(intent);
     }
 
     protected void onPlayAudioFile(AudioFile audioFile)

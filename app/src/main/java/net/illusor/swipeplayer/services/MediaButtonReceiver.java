@@ -3,59 +3,63 @@ package net.illusor.swipeplayer.services;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.KeyEvent;
 
-class MediaButtonReceiver extends BroadcastReceiver
+public class MediaButtonReceiver extends BroadcastReceiver
 {
     @Override
     public void onReceive(Context context, Intent intent)
     {
-        if (intent.ACTION_MEDIA_BUTTON.equals(intent.getAction()))
+        KeyEvent event = intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT);
+        if (event.getAction() == KeyEvent.ACTION_DOWN)
         {
-            KeyEvent event = intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT);
             switch (event.getKeyCode())
             {
                 case KeyEvent.KEYCODE_MEDIA_NEXT:
                 {
-                    this.onNextTrack();
+                    this.onNextTrack(context);
                     break;
                 }
                 case KeyEvent.KEYCODE_MEDIA_PREVIOUS:
                 {
-                    this.onPreviousTrack();
+                    this.onPreviousTrack(context);
                     break;
                 }
                 case KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE:
                 {
-                    this.onPlayPause();
+                    this.onPlayPause(context);
                     break;
                 }
                 case KeyEvent.KEYCODE_MEDIA_STOP:
                 {
-                    this.onStop();
+                    this.onStop(context);
                     break;
                 }
-
             }
         }
     }
 
-    protected void onNextTrack()
+    protected void onNextTrack(Context context)
+    {
+        Intent intent = new Intent(context, SoundService.class);
+        intent.setAction(SoundService.INTENT_CODE_NEXT);
+        context.startService(intent);
+    }
+
+    protected void onPreviousTrack(Context context)
+    {
+        Intent intent = new Intent(context, SoundService.class);
+        intent.setAction(SoundService.INTENT_CODE_PREVIOUS);
+        context.startService(intent);
+    }
+
+    protected void onPlayPause(Context context)
     {
 
     }
 
-    protected void onPreviousTrack()
-    {
-
-    }
-
-    protected void onPlayPause()
-    {
-
-    }
-
-    protected void onStop()
+    protected void onStop(Context context)
     {
 
     }

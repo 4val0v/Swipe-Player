@@ -71,13 +71,10 @@ public class NotificationHelper
 
     public Notification getErrorNotification(AudioFile file)
     {
-        PendingIntent activityIntent = this.getActivityIntent();
-
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this.context);
         Notification notification = builder.setContentTitle("Error playing file")
                 .setContentText(file.getTitle())
                 .setSmallIcon(R.drawable.ic_media_play)
-                .setContentIntent(activityIntent)
                 .build();
 
         return notification;

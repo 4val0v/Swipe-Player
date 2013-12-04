@@ -15,6 +15,7 @@ import android.widget.ListView;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.activities.SwipeActivity;
 import net.illusor.swipeplayer.domain.AudioFile;
+import net.illusor.swipeplayer.helpers.OverScrollHelper;
 import net.illusor.swipeplayer.helpers.PreferencesHelper;
 import net.illusor.swipeplayer.services.AudioBroadcastHandler;
 import net.illusor.swipeplayer.services.SoundService;
@@ -46,6 +47,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
     {
         super.onActivityCreated(savedInstanceState);
         this.listView.setOnItemClickListener(this);
+        OverScrollHelper.overScrollDisable(this.listView);
     }
 
     @Override

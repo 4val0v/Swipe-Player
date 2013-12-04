@@ -12,8 +12,8 @@
             </intent-filter>
         </activity>
         <service android:name=".services.SoundService"/>
-        <receiver android:name="net.illusor.swipeplayer.services.SoundService$LocalButtonReceiver">
-            <intent-filter>
+        <receiver android:name="net.illusor.swipeplayer.services.MediaButtonReceiver">
+            <intent-filter android:priority="2147483647">
                 <action android:name="android.intent.action.MEDIA_BUTTON"/>
             </intent-filter>
         </receiver>

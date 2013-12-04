@@ -8,9 +8,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.util.Pair;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.fragments.FolderBrowserFragment;
 import net.illusor.swipeplayer.fragments.PlaylistFragment;
+import net.illusor.swipeplayer.helpers.PreferencesHelper;
 
 import java.io.File;
 import java.util.List;
@@ -34,9 +36,14 @@ public class SwipeActivity extends FragmentActivity
 
         if (savedInstanceState == null)
         {
-            this.pagerAdapter.addFolder(Environment.getExternalStorageDirectory());
+            Pair<File, File> lastBrowsedFolder = PreferencesHelper.getBrowserFolders(this);
+            if (lastBrowsedFolder != null)
+                this.pagerAdapter.setCurrentFolder(lastBrowsedFolder);
+            else
+                this.pagerAdapter.addFolder(Environment.getExternalStorageDirectory());
+
             this.viewPager.setAdapter(this.pagerAdapter);
-            this.viewPager.setCurrentItem(1);
+            this.viewPager.setCurrentItem(this.pagerAdapter.getCount() - 1);
         }
     }
 
@@ -57,6 +64,14 @@ public class SwipeActivity extends FragmentActivity
         this.pagerAdapter.restoreObjectState(state);
 
         this.viewPager.setAdapter(this.pagerAdapter);
+    }
+
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+        Pair<File, File> browsedFolder = this.pagerAdapter.getCurrentFolder();
+        PreferencesHelper.setBrowserFolders(this, browsedFolder);
     }
 
     public void openMediaBrowser()
@@ -90,7 +105,7 @@ public class SwipeActivity extends FragmentActivity
 
     public List<File> getBrowserHistory()
     {
-        return this.pagerAdapter.getBrowserFolders();
+        return this.pagerAdapter.getData();
     }
 
     private class LocalPagerAdapter extends SwipePagerAdapter

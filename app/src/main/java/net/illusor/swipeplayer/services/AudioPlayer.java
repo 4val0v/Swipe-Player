@@ -2,7 +2,6 @@ package net.illusor.swipeplayer.services;
 
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.util.Log;
 import net.illusor.swipeplayer.domain.AudioFile;
 
 import java.io.IOException;
@@ -11,55 +10,85 @@ class AudioPlayer
 {
     private MediaPlayer mediaPlayer;
     private AudioFile audioFile;
-    private AudioPlayerOnCompleteBehavior onCompleteBehavior;
-    private OnErrorListener onErrorListener;
+    private AudioPlayerPlaylist audioPlaylist;
     private boolean wasPlayingWhenRewindStarted;
     private int pausedPosition;
     private float volume = 1;
 
     public void play(AudioFile audioFile) throws IOException
     {
-        this.audioFile = audioFile;
+        try
+        {
+            this.audioFile = audioFile;
 
-        if (this.mediaPlayer != null)
-            this.stop();
+            if (this.mediaPlayer != null)
+                this.stop();
 
-        final AudioPlayer audioPlayer = this;
-        this.mediaPlayer = new MediaPlayer();
-        this.mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        this.mediaPlayer.setDataSource(audioFile.getAbsolutePath());
-        this.mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener()
-        {
-            @Override
-            public void onPrepared(MediaPlayer player)
+            final AudioPlayer audioPlayer = this;
+            this.mediaPlayer = new MediaPlayer();
+            this.mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            this.mediaPlayer.setDataSource(audioFile.getAbsolutePath());
+            this.mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener()
             {
-                player.setVolume(volume, volume);
-                player.start();
-            }
-        });
-        this.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
-        {
-            @Override
-            public void onCompletion(MediaPlayer player)
+                @Override
+                public void onPrepared(MediaPlayer player)
+                {
+                    player.setVolume(volume, volume);
+                    player.start();
+                }
+            });
+            this.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
             {
-                if (onCompleteBehavior != null)
-                    onCompleteBehavior.onPlaybackComplete(audioPlayer);
-                else
-                    stop();
-            }
-        });
-        this.mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener()
-        {
-            @Override
-            public boolean onError(MediaPlayer mediaPlayer, int cause, int extra)
+                @Override
+                public void onCompletion(MediaPlayer player)
+                {
+                    if (audioPlaylist != null)
+                        audioPlaylist.onPlaybackComplete();
+                    else
+                        stop();
+                }
+            });
+            this.mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener()
             {
-                if (onErrorListener != null)
-                    onErrorListener.OnError(audioPlayer.audioFile);
-                mediaPlayer.release();
-                return true;
-            }
-        });
-        this.mediaPlayer.prepareAsync();
+                @Override
+                public boolean onError(MediaPlayer mediaPlayer, int cause, int extra)
+                {
+                    if (audioPlaylist != null)
+                        audioPlaylist.onError(audioPlayer.audioFile);
+
+                    mediaPlayer.release();
+                    return true;
+                }
+            });
+            this.mediaPlayer.prepareAsync();
+        }
+        catch (IOException e)
+        {
+            if (audioPlaylist != null)
+                audioPlaylist.onError(audioFile);
+
+            throw e;
+        }
+    }
+
+    public void playNext() throws IOException
+    {
+        if (audioPlaylist != null)
+        {
+            AudioFile audioFile = audioPlaylist.getNext();
+            if (audioFile != null)
+                this.play(audioFile);
+        }
+    }
+
+    public void playPrevious() throws IOException
+    {
+        if (audioPlaylist != null)
+        {
+            AudioFile audioFile = audioPlaylist.getPrevious();
+            if (audioFile != null)
+                this.play(audioFile);
+        }
     }
 
     public void stop()
@@ -137,18 +166,8 @@ class AudioPlayer
         return this.audioFile == null ? 0 : (int)this.audioFile.getDuration();
     }
 
-    public void setOnCompleteBehavior(AudioPlayerOnCompleteBehavior behavior)
+    public void setPlaylist(AudioPlayerPlaylist playlist)
     {
-        this.onCompleteBehavior = behavior;
-    }
-
-    public void setOnErrorListener(OnErrorListener onErrorListener)
-    {
-        this.onErrorListener = onErrorListener;
-    }
-
-    public interface OnErrorListener
-    {
-        public void OnError(AudioFile audioFile);
+        this.audioPlaylist = playlist;
     }
 }

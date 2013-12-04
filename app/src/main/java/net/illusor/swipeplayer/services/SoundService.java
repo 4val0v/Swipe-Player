@@ -18,6 +18,8 @@ public class SoundService extends Service
     public static final String INTENT_CODE_STOP = "net.illusor.swipeplayer.services.SoundService.STOP";
     public static final String INTENT_CODE_PAUSE = "net.illusor.swipeplayer.services.SoundService.PAUSE";
     public static final String INTENT_CODE_RESUME = "net.illusor.swipeplayer.services.SoundService.PLAY";
+    public static final String INTENT_CODE_NEXT = "net.illusor.swipeplayer.services.SoundService.NEXT";
+    public static final String INTENT_CODE_PREVIOUS = "net.illusor.swipeplayer.services.SoundService.PREVIOUS";
 
     private static final int NOTIFICATION_CODE_STATUS = 753951;
     private static final int NOTIFICATION_CODE_ERROR = 753950;
@@ -36,7 +38,6 @@ public class SoundService extends Service
         super.onCreate();
         this.audioBroadcastHandler = new AudioBroadcastHandler(this);
         this.audioManager = (AudioManager)this.getSystemService(Context.AUDIO_SERVICE);
-        this.audioPlayer.setOnErrorListener(new OnErrorListener());
     }
 
     public int onStartCommand(Intent intent, int flags, int startId)
@@ -53,6 +54,12 @@ public class SoundService extends Service
                     break;
                 case INTENT_CODE_RESUME:
                     this.resume();
+                    break;
+                case INTENT_CODE_NEXT:
+                    this.playNext();
+                    break;
+                case INTENT_CODE_PREVIOUS:
+                    this.playPrevious();
                     break;
             }
         }
@@ -76,7 +83,7 @@ public class SoundService extends Service
         {
             this.startService(new Intent(this, SoundService.class));
             this.registerReceiver(this.noisyReceiver, new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY));
-            this.audioManager.registerMediaButtonEventReceiver(new ComponentName(this, LocalButtonReceiver.class));
+            //this.audioManager.registerMediaButtonEventReceiver(new ComponentName(this, MediaButtonReceiver.class));
             this.serviceStarted = true;
         }
 
@@ -90,7 +97,6 @@ public class SoundService extends Service
         }
         catch (IOException e)
         {
-            stop();
             NotificationManager service = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             service.notify(NOTIFICATION_CODE_ERROR, notificationHelper.getErrorNotification(audioFile));
         }
@@ -105,7 +111,7 @@ public class SoundService extends Service
         {
             this.unregisterReceiver(this.noisyReceiver);
             this.audioManager.abandonAudioFocus(this.audioFocusChangeListener);
-            this.audioManager.unregisterMediaButtonEventReceiver(new ComponentName(this, LocalButtonReceiver.class));
+            //this.audioManager.unregisterMediaButtonEventReceiver(new ComponentName(this, MediaButtonReceiver.class));
             this.serviceStarted = false;
         }
 
@@ -114,6 +120,32 @@ public class SoundService extends Service
 
         NotificationManager service = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
         service.notify(NOTIFICATION_CODE_STATUS, this.notificationHelper.getStoppedNotification());
+    }
+
+    private void playNext()
+    {
+        try
+        {
+            if (this.serviceStarted)
+                this.audioPlayer.playNext();
+        }
+        catch (IOException e)
+        {
+            this.showErrorNotification(this.audioPlayer.getAudioFile());
+        }
+    }
+
+    private void playPrevious()
+    {
+        try
+        {
+            if (this.serviceStarted)
+                this.audioPlayer.playPrevious();
+        }
+        catch (IOException e)
+        {
+            this.showErrorNotification(this.audioPlayer.getAudioFile());
+        }
     }
 
     private void pause()
@@ -132,15 +164,10 @@ public class SoundService extends Service
         this.startForeground(NOTIFICATION_CODE_STATUS, notification);
     }
 
-    private class OnErrorListener implements AudioPlayer.OnErrorListener
+    private void showErrorNotification(AudioFile audioFile)
     {
-        @Override
-        public void OnError(AudioFile audioFile)
-        {
-            stop();
-            NotificationManager service = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            service.notify(NOTIFICATION_CODE_ERROR, notificationHelper.getErrorNotification(audioFile));
-        }
+        NotificationManager service = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        service.notify(NOTIFICATION_CODE_ERROR, notificationHelper.getErrorNotification(audioFile));
     }
 
     private class AudioFocusChangeListener implements AudioManager.OnAudioFocusChangeListener
@@ -205,33 +232,6 @@ public class SoundService extends Service
         }
     }
 
-    public class LocalButtonReceiver extends MediaButtonReceiver
-    {
-        @Override
-        protected void onNextTrack()
-        {
-            super.onNextTrack();
-        }
-
-        @Override
-        protected void onPreviousTrack()
-        {
-            super.onPreviousTrack();
-        }
-
-        @Override
-        protected void onPlayPause()
-        {
-            super.onPlayPause();
-        }
-
-        @Override
-        protected void onStop()
-        {
-            super.onStop();
-        }
-    }
-
     public class SoundServiceBinder extends Binder
     {
         private SoundService soundService;
@@ -244,6 +244,16 @@ public class SoundService extends Service
         public void play(AudioFile file)
         {
             this.soundService.play(file);
+        }
+
+        public void playNext()
+        {
+            this.soundService.playNext();
+        }
+
+        public void playPrevious()
+        {
+            this.soundService.playPrevious();
         }
 
         public void pause()
@@ -288,9 +298,8 @@ public class SoundService extends Service
 
         public void setPlaylist(List<AudioFile> playlist)
         {
-
-            AudioPlayerOnCompleteBehavior behavior = new AudioPlayerNextTrackBehavior(playlist, this.soundService);
-            this.soundService.audioPlayer.setOnCompleteBehavior(behavior);
+            AudioPlayerPlaylist behavior = new AudioPlayerSequentialPlaylist(playlist, this.soundService.audioPlayer, this.soundService);
+            this.soundService.audioPlayer.setPlaylist(behavior);
         }
    }
 }

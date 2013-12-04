@@ -13,6 +13,7 @@ import android.widget.*;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.activities.SwipeActivity;
 import net.illusor.swipeplayer.domain.AudioFile;
+import net.illusor.swipeplayer.helpers.OverScrollHelper;
 import net.illusor.swipeplayer.widgets.FolderItemView;
 
 import java.io.File;
@@ -58,6 +59,7 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
         this.navigationHistory.setOnItemSelectedListener(this);
         this.listAudioFiles.setOnItemClickListener(this);
         this.currentFolder = (File)this.getArguments().getSerializable(PARAM_FOLDER);
+        OverScrollHelper.overScrollDisable(this.listAudioFiles);
     }
 
     @Override

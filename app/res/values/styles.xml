@@ -5,7 +5,6 @@
         <item name="android:cacheColorHint">@null</item>
         <item name="android:divider">@null</item>
         <item name="android:listSelector">@null</item>
-        <item name="android:overScrollMode">ifContentScrolls</item>
         <item name="android:fadingEdge">none</item>
         <item name="android:overScrollFooter">@null</item>
         <item name="android:overScrollHeader">@null</item>

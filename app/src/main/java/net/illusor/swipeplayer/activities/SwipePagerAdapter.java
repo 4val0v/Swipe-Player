@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
+import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -201,7 +202,7 @@ abstract class SwipePagerAdapter extends PagerAdapter
         }
     }
 
-    public List<File> getBrowserFolders()
+    public List<File> getData()
     {
         return new ArrayList<>(this.browserFolders);
     }
@@ -223,6 +224,30 @@ abstract class SwipePagerAdapter extends PagerAdapter
         this.browserFolders.add(folder);
 
         this.notifyDataSetChanged();
+    }
+
+    public Pair<File, File> getCurrentFolder()
+    {
+        File first = this.browserFolders.get(0);
+        File second = this.browserFolders.get(this.browserFolders.size() - 1);
+        return new Pair<>(first, second);
+    }
+
+    public void setCurrentFolder(Pair<File, File> files)
+    {
+        String root = files.first.getParent();
+        File folder = files.second;
+        do
+        {
+            if (folder.exists())
+            {
+                this.browserFolders.add(0, folder);
+                this.browserFragments.add(0, null);
+                this.browserStates.add(0, null);
+            }
+            folder = folder.getParentFile();
+        }
+        while (!folder.getAbsolutePath().equals(root));
     }
 
     private void removeFolder(int position)

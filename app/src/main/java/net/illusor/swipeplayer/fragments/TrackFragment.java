@@ -42,6 +42,15 @@ public class TrackFragment extends Fragment
         AudioFile audioFile = (AudioFile)this.getArguments().getSerializable(KEY_ARGS);
 
         title1.setText(audioFile.getTitle());
-        title2.setText(audioFile.getArtist());
+
+        if (!audioFile.getArtist().equals("<unknown>"))
+        {
+            title2.setText(audioFile.getArtist());
+            title2.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            title2.setVisibility(View.GONE);
+        }
     }
 }

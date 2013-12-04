@@ -95,7 +95,7 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
 
     public void setPlaylist(List<AudioFile> playlist)
     {
-        trackList.setAdapter(new TrackListAdapter(playlist, getFragmentManager()));
+        trackList.setAdapter(new TrackPagerAdapter(playlist, getFragmentManager()));
         if (this.connection.service != null)
             setAudioFile(connection.service.getAudioFile());
     }

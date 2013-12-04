@@ -12,14 +12,14 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
 
-public class TrackListAdapter extends PagerAdapter
+public class TrackPagerAdapter extends PagerAdapter
 {
     private final List<AudioFile> audioFiles;
     private final Dictionary<AudioFile, TrackFragment> fragments = new Hashtable<>();
     private final FragmentManager fragmentManager;
     private FragmentTransaction currentTransaction;
 
-    public TrackListAdapter(List<AudioFile> audioFiles, FragmentManager fragmentManager)
+    public TrackPagerAdapter(List<AudioFile> audioFiles, FragmentManager fragmentManager)
     {
         this.audioFiles = audioFiles;
         this.fragmentManager = fragmentManager;
@@ -73,7 +73,7 @@ public class TrackListAdapter extends PagerAdapter
     @Override
     public int getCount()
     {
-        return this.audioFiles.size();
+        return this.audioFiles.size() + 2;
     }
 
     @Override
@@ -85,5 +85,17 @@ public class TrackListAdapter extends PagerAdapter
     public List<AudioFile> getData()
     {
         return this.audioFiles;
+    }
+
+    private int coercePosition(int position)
+    {
+        if (position == 0)
+            position = this.audioFiles.size() - 1;
+        else if (position == this.getCount() - 1)
+            position = 0;
+        else
+            position = position - 1;
+
+        return position;
     }
 }

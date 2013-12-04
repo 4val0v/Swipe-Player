@@ -268,11 +268,6 @@ public class FormattedTextView extends View implements Checkable
         }
     }
 
-    public CharSequence getText()
-    {
-        return text;
-    }
-
     public void setText(CharSequence text)
     {
         if (text == null)
@@ -284,29 +279,23 @@ public class FormattedTextView extends View implements Checkable
         this.invalidate();
     }
 
-    public void setTextColorResource(int resourceId)
+    public int getVerticalSize()
     {
-        ColorStateList stateList = this.getResources().getColorStateList(resourceId);
-        if (stateList != this.colorStateList)
-        {
-            this.colorStateList = stateList;
-            this.updateTextColor(true);
-        }
-    }
+        int paddingV = this.getPaddingBottom() + this.getPaddingTop();
 
-    public void setTextColor(int color)
-    {
-        if (this.colorStateList != null || this.textColor != color)
-        {
-            this.colorStateList = null;
-            this.textColor = color;
-            this.updateTextColor(true);
-        }
-    }
+        TextPaint paint = new TextPaint(this.textPaint);
+        paint.setTextSize(this.headerTextSize);
+        Paint.FontMetricsInt metricsHeader = this.textPaint.getFontMetricsInt();
+        int requestedHeight = metricsHeader.descent - metricsHeader.ascent + paddingV;
 
-    public int getHeaderTextSize()
-    {
-        return headerTextSize;
+        if (this.isWrapping)
+        {
+            paint.setTextSize(this.lineTextSize);
+            Paint.FontMetricsInt metricsLine = this.textPaint.getFontMetricsInt();
+            requestedHeight += metricsLine.descent - metricsLine.ascent - metricsHeader.descent + this.lineSpacing;
+        }
+
+        return requestedHeight;
     }
 
     private class SavedState extends BaseSavedState

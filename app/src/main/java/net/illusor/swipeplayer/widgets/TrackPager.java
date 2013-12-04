@@ -1,51 +1,34 @@
 package net.illusor.swipeplayer.widgets;
 
 import android.content.Context;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import net.illusor.swipeplayer.domain.AudioFile;
-import net.illusor.swipeplayer.fragments.TrackListAdapter;
+import net.illusor.swipeplayer.fragments.TrackPagerAdapter;
 
 public class TrackPager extends ViewPager
 {
-    private boolean isPressed;
+    private final TouchHandler touchHandler;
     private OnPageChangeListener listener;
 
     public TrackPager(Context context)
     {
-        super(context);
+        this(context, null);
     }
 
     public TrackPager(Context context, AttributeSet attrs)
     {
         super(context, attrs);
-
+        this.touchHandler = new TouchHandler(context);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev)
     {
-        switch (ev.getActionMasked())
-        {
-            case MotionEvent.ACTION_DOWN:
-            {
-                this.isPressed = true;
-                break;
-            }
-            case MotionEvent.ACTION_UP:
-            {
-                if (this.isPressed)
-                {
-                    this.isPressed = false;
-                    this.performClick();
-                }
-                break;
-            }
-            default:
-                this.isPressed = false;
-        }
-
+        this.touchHandler.handleTouch(ev);
         return super.onTouchEvent(ev);
     }
 
@@ -74,8 +57,58 @@ public class TrackPager extends ViewPager
         return true;
     }
 
-    public TrackListAdapter getTrackAdapter()
+    public TrackPagerAdapter getTrackAdapter()
     {
-        return (TrackListAdapter)this.getAdapter();
+        return (TrackPagerAdapter)this.getAdapter();
+    }
+
+    private class TouchHandler
+    {
+        private static final int TOUCH_THRESHOLD_DP = 10;
+
+        private boolean isPressed;
+        private int touchThresholdPx;
+        private float touchX, touchY;
+
+        private TouchHandler(Context context)
+        {
+            this.touchThresholdPx = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, TOUCH_THRESHOLD_DP, context.getResources().getDisplayMetrics());
+        }
+
+        public void handleTouch(MotionEvent ev)
+        {
+            switch (ev.getActionMasked())
+            {
+                case MotionEvent.ACTION_DOWN:
+                {
+                    this.isPressed = true;
+                    this.touchX = ev.getX();
+                    this.touchY = ev.getY();
+                    break;
+                }
+                case MotionEvent.ACTION_UP:
+                {
+                    if (this.isPressed)
+                    {
+                        this.isPressed = false;
+                        performClick();
+                    }
+                    break;
+                }
+                case MotionEvent.ACTION_MOVE:
+                {
+                    if (this.isPressed)
+                    {
+                        boolean xMove = Math.abs(this.touchX - ev.getX()) < this.touchThresholdPx;
+                        boolean yMove = Math.abs(this.touchY - ev.getY()) < this.touchThresholdPx;
+
+                        if (xMove || yMove)
+                            this.isPressed = false;
+                    }
+                }
+                default:
+                    this.isPressed = false;
+            }
+        }
     }
 }

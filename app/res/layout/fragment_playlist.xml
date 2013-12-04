@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@color/color_fragment_playlist">
+
+    <ListView
+            android:id="@+id/id_playlist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:choiceMode="singleChoice"
+            android:scrollbarThumbVertical="@drawable/trackbar_playlist"/>
+
+    <View
+            android:layout_height="match_parent"
+            android:layout_width="12dp"
+            android:background="@drawable/playlist_left_border"/>
+
+    <include layout="@layout/layout_preloader"/>
+
+    <LinearLayout
+            android:id="@+id/id_playlist_folder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:visibility="gone">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:gravity="center_horizontal"
+                android:text="@string/str_playlist_empty"
+                android:textSize="15sp"/>
+
+        <Button
+                android:id="@+id/id_playlist_folder_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/str_playlist_inflate"/>
+    </LinearLayout>
+
+</FrameLayout>

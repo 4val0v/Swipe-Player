@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="net.illusor.swipeplayer">
+
+    <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="16"/>
+
+    <application android:name=".SwipeApplication" android:icon="@drawable/swipe_player_icon" android:label="Swipe Player">
+        <activity android:name=".activities.SwipeActivity" android:screenOrientation="portrait" android:theme="@style/Theme.SwipePlayer">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <service android:name=".services.SoundService"/>
+        <receiver android:name="net.illusor.swipeplayer.services.SoundService$LocalButtonReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON"/>
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

@@ -83,7 +83,7 @@ public class SoundService extends Service
         {
             this.startService(new Intent(this, SoundService.class));
             this.registerReceiver(this.noisyReceiver, new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY));
-            //this.audioManager.registerMediaButtonEventReceiver(new ComponentName(this, MediaButtonReceiver.class));
+            this.audioManager.registerMediaButtonEventReceiver(new ComponentName(this, MediaButtonReceiver.class));
             this.serviceStarted = true;
         }
 
@@ -111,7 +111,7 @@ public class SoundService extends Service
         {
             this.unregisterReceiver(this.noisyReceiver);
             this.audioManager.abandonAudioFocus(this.audioFocusChangeListener);
-            //this.audioManager.unregisterMediaButtonEventReceiver(new ComponentName(this, MediaButtonReceiver.class));
+            this.audioManager.unregisterMediaButtonEventReceiver(new ComponentName(this, MediaButtonReceiver.class));
             this.serviceStarted = false;
         }
 
@@ -124,44 +124,44 @@ public class SoundService extends Service
 
     private void playNext()
     {
-        try
+        if (this.audioPlayer.getState() != AudioPlayerState.Stopped)
         {
-            if (this.serviceStarted)
-                this.audioPlayer.playNext();
-        }
-        catch (IOException e)
-        {
-            this.showErrorNotification(this.audioPlayer.getAudioFile());
+            AudioFile audioFile = this.audioPlayer.getPlaylist().getNext();
+            if (audioFile != null)
+                this.play(audioFile);
         }
     }
 
     private void playPrevious()
     {
-        try
+        if (this.audioPlayer.getState() != AudioPlayerState.Stopped)
         {
-            if (this.serviceStarted)
-                this.audioPlayer.playPrevious();
-        }
-        catch (IOException e)
-        {
-            this.showErrorNotification(this.audioPlayer.getAudioFile());
+            AudioFile audioFile = this.audioPlayer.getPlaylist().getPrevious();
+            if (audioFile != null)
+                this.play(audioFile);
         }
     }
 
     private void pause()
     {
-        this.audioPlayer.pause();
-        this.audioBroadcastHandler.sendPlaybackPause();
-        Notification notification = this.notificationHelper.getPausedNotification(this.audioPlayer.getAudioFile());
-        this.startForeground(NOTIFICATION_CODE_STATUS, notification);
+        if (this.audioPlayer.getState() == AudioPlayerState.Playing)
+        {
+            this.audioPlayer.pause();
+            this.audioBroadcastHandler.sendPlaybackPause();
+            Notification notification = this.notificationHelper.getPausedNotification(this.audioPlayer.getAudioFile());
+            this.startForeground(NOTIFICATION_CODE_STATUS, notification);
+        }
     }
 
     private void resume()
     {
-        this.audioPlayer.resume();
-        this.audioBroadcastHandler.sendPlaybackResume();
-        Notification notification = this.notificationHelper.getPlayingNotification(this.audioPlayer.getAudioFile());
-        this.startForeground(NOTIFICATION_CODE_STATUS, notification);
+        if (this.audioPlayer.getState() == AudioPlayerState.Paused)
+        {
+            this.audioPlayer.resume();
+            this.audioBroadcastHandler.sendPlaybackResume();
+            Notification notification = this.notificationHelper.getPlayingNotification(this.audioPlayer.getAudioFile());
+            this.startForeground(NOTIFICATION_CODE_STATUS, notification);
+        }
     }
 
     private void showErrorNotification(AudioFile audioFile)

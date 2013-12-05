@@ -71,26 +71,6 @@ class AudioPlayer
         }
     }
 
-    public void playNext() throws IOException
-    {
-        if (audioPlaylist != null)
-        {
-            AudioFile audioFile = audioPlaylist.getNext();
-            if (audioFile != null)
-                this.play(audioFile);
-        }
-    }
-
-    public void playPrevious() throws IOException
-    {
-        if (audioPlaylist != null)
-        {
-            AudioFile audioFile = audioPlaylist.getPrevious();
-            if (audioFile != null)
-                this.play(audioFile);
-        }
-    }
-
     public void stop()
     {
         if (this.mediaPlayer.isPlaying())
@@ -164,6 +144,11 @@ class AudioPlayer
     public int getDuration()
     {
         return this.audioFile == null ? 0 : (int)this.audioFile.getDuration();
+    }
+
+    public AudioPlayerPlaylist getPlaylist()
+    {
+        return this.audioPlaylist;
     }
 
     public void setPlaylist(AudioPlayerPlaylist playlist)

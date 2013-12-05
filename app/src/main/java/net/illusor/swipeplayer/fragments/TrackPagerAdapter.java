@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import net.illusor.swipeplayer.domain.AudioFile;
 
+import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
@@ -21,7 +22,10 @@ public class TrackPagerAdapter extends PagerAdapter
 
     public TrackPagerAdapter(List<AudioFile> audioFiles, FragmentManager fragmentManager)
     {
-        this.audioFiles = audioFiles;
+        this.audioFiles = new ArrayList<>(audioFiles.size() + 2);
+        this.audioFiles.add(null);
+        this.audioFiles.addAll(1, audioFiles);
+        this.audioFiles.add(null);
         this.fragmentManager = fragmentManager;
     }
 
@@ -40,6 +44,8 @@ public class TrackPagerAdapter extends PagerAdapter
     @Override
     public Object instantiateItem(ViewGroup container, int position)
     {
+        position = this.coerceCyclicPosition(position);
+
         AudioFile audioFile = this.audioFiles.get(position);
         TrackFragment fragment = this.fragments.get(audioFile);
         if (fragment != null)
@@ -59,6 +65,8 @@ public class TrackPagerAdapter extends PagerAdapter
     @Override
     public void destroyItem(ViewGroup container, int position, Object object)
     {
+        position = this.coerceCyclicPosition(position);
+
         AudioFile audioFile = this.audioFiles.get(position);
         this.fragments.remove(audioFile);
 
@@ -87,14 +95,12 @@ public class TrackPagerAdapter extends PagerAdapter
         return this.audioFiles;
     }
 
-    private int coercePosition(int position)
+    private int coerceCyclicPosition(int position)
     {
         if (position == 0)
-            position = this.audioFiles.size() - 1;
+            return this.getCount() - 2;
         else if (position == this.getCount() - 1)
-            position = 0;
-        else
-            position = position - 1;
+            return 1;
 
         return position;
     }

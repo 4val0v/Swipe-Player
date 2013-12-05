@@ -56,11 +56,15 @@ public class MediaButtonReceiver extends BroadcastReceiver
 
     protected void onPlayPause(Context context)
     {
-
+        Intent intent = new Intent(context, SoundService.class);
+        intent.setAction(SoundService.INTENT_CODE_PAUSE);
+        context.startService(intent);
     }
 
     protected void onStop(Context context)
     {
-
+        Intent intent = new Intent(context, SoundService.class);
+        intent.setAction(SoundService.INTENT_CODE_STOP);
+        context.startService(intent);
     }
 }

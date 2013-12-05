@@ -1,7 +1,6 @@
 package net.illusor.swipeplayer.widgets;
 
 import android.content.Context;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -12,7 +11,7 @@ import net.illusor.swipeplayer.fragments.TrackPagerAdapter;
 public class TrackPager extends ViewPager
 {
     private final TouchHandler touchHandler;
-    private OnPageChangeListener listener;
+    private PageChangeHandler listener;
 
     public TrackPager(Context context)
     {
@@ -35,8 +34,14 @@ public class TrackPager extends ViewPager
     @Override
     public void setOnPageChangeListener(OnPageChangeListener listener)
     {
-        super.setOnPageChangeListener(listener);
-        this.listener = listener;
+        this.listener = new PageChangeHandler(listener, this);
+        super.setOnPageChangeListener(this.listener);
+    }
+
+    @Override
+    public int getCurrentItem()
+    {
+        return super.getCurrentItem() - 1;
     }
 
     public boolean swipeToItem(AudioFile audioFile)
@@ -109,6 +114,63 @@ public class TrackPager extends ViewPager
                 default:
                     this.isPressed = false;
             }
+        }
+    }
+
+    private class PageChangeHandler implements OnPageChangeListener
+    {
+        private final OnPageChangeListener wrappedListener;
+        private final ViewPager control;
+
+        private PageChangeHandler(OnPageChangeListener wrappedListener, ViewPager control)
+        {
+            this.wrappedListener = wrappedListener;
+            this.control = control;
+        }
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
+        {
+            this.wrappedListener.onPageScrolled(position, positionOffset, positionOffsetPixels);
+        }
+
+        @Override
+        public void onPageSelected(int position)
+        {
+            final int count = this.control.getAdapter().getCount();
+
+            if (position == 0)
+            {
+                this.control.postDelayed(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        control.setCurrentItem(count - 2);
+                    }
+                }, 350);
+            }
+            else if (position == count - 1)
+            {
+                this.control.postDelayed(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        control.setCurrentItem(1);
+                    }
+                }, 350);
+            }
+            else
+            {
+                this.wrappedListener.onPageSelected(position);
+            }
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state)
+        {
+            this.wrappedListener.onPageScrollStateChanged(state);
         }
     }
 }

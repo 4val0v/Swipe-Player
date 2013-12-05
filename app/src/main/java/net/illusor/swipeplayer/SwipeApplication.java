@@ -18,4 +18,6 @@ public class SwipeApplication extends Application
     {
         return SwipeApplication.context;
     }
+
+
 }

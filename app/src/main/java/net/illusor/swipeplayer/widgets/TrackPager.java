@@ -3,6 +3,7 @@ package net.illusor.swipeplayer.widgets;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import net.illusor.swipeplayer.domain.AudioFile;
@@ -38,12 +39,6 @@ public class TrackPager extends ViewPager
         super.setOnPageChangeListener(this.listener);
     }
 
-    @Override
-    public int getCurrentItem()
-    {
-        return super.getCurrentItem() - 1;
-    }
-
     public boolean swipeToItem(AudioFile audioFile)
     {
         if (this.getAdapter() == null)
@@ -52,12 +47,15 @@ public class TrackPager extends ViewPager
         int index = this.getTrackAdapter().getData().indexOf(audioFile);
         if (index < 0) return false;
 
+        Log.d("SWIPE", "Current item is: " +  this.getCurrentItem());
         if (index == this.getCurrentItem())
             return true;
 
         super.setOnPageChangeListener(null);
         super.setCurrentItem(index, true);
         super.setOnPageChangeListener(this.listener);
+
+        Log.d("SWIPE", "Current item set to: " +  this.getCurrentItem());
 
         return true;
     }
@@ -117,6 +115,9 @@ public class TrackPager extends ViewPager
         }
     }
 
+    /**
+     * Wrapper class for cycling effect of the {@link TrackPager}
+     */
     private class PageChangeHandler implements OnPageChangeListener
     {
         private final OnPageChangeListener wrappedListener;
@@ -139,6 +140,8 @@ public class TrackPager extends ViewPager
         {
             final int count = this.control.getAdapter().getCount();
 
+            //if user has selected first or last items, which are "virtual",
+            //we automatically switch the viewpager to opposite item from another end of adapter
             if (position == 0)
             {
                 this.control.postDelayed(new Runnable()
@@ -146,9 +149,9 @@ public class TrackPager extends ViewPager
                     @Override
                     public void run()
                     {
-                        control.setCurrentItem(count - 2);
+                        control.setCurrentItem(count - 2, false);
                     }
-                }, 350);
+                }, 300);
             }
             else if (position == count - 1)
             {
@@ -157,12 +160,13 @@ public class TrackPager extends ViewPager
                     @Override
                     public void run()
                     {
-                        control.setCurrentItem(1);
+                        control.setCurrentItem(1, false);
                     }
-                }, 350);
+                }, 300);
             }
             else
             {
+                //otherwise we just pass call further
                 this.wrappedListener.onPageSelected(position);
             }
         }

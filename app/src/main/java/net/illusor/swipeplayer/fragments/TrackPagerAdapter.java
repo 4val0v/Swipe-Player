@@ -16,16 +16,26 @@ import java.util.List;
 public class TrackPagerAdapter extends PagerAdapter
 {
     private final List<AudioFile> audioFiles;
-    private final Dictionary<AudioFile, TrackFragment> fragments = new Hashtable<>();
+    private final Dictionary<Integer, TrackFragment> fragments = new Hashtable<>();
     private final FragmentManager fragmentManager;
     private FragmentTransaction currentTransaction;
 
     public TrackPagerAdapter(List<AudioFile> audioFiles, FragmentManager fragmentManager)
     {
-        this.audioFiles = new ArrayList<>(audioFiles.size() + 2);
-        this.audioFiles.add(null);
-        this.audioFiles.addAll(1, audioFiles);
-        this.audioFiles.add(null);
+        //adapter should support cyclic scrolling, so if we have enough items to cycle (at least 2)
+        //we add 2 fake null items at the begining and at the end of the playlist
+        if (audioFiles.size() > 1)
+        {
+            this.audioFiles = new ArrayList<>(audioFiles.size() + 2);
+            this.audioFiles.add(null);
+            this.audioFiles.addAll(1, audioFiles);
+            this.audioFiles.add(null);
+        }
+        else
+        {
+            //if we have not enough items for cycling, we just use the provided playlist
+            this.audioFiles = audioFiles;
+        }
         this.fragmentManager = fragmentManager;
     }
 
@@ -42,20 +52,21 @@ public class TrackPagerAdapter extends PagerAdapter
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position)
+    public Object instantiateItem(ViewGroup container, int fragmentPosition)
     {
-        position = this.coerceCyclicPosition(position);
+        //if we are going to cycle adapter content, we should adjust audioFile index
+        int filePosition = this.coerceCyclicPosition(fragmentPosition);
 
-        AudioFile audioFile = this.audioFiles.get(position);
-        TrackFragment fragment = this.fragments.get(audioFile);
+        TrackFragment fragment = this.fragments.get(fragmentPosition);
         if (fragment != null)
             return fragment;
 
         if (this.currentTransaction == null)
             this.currentTransaction = this.fragmentManager.beginTransaction();
 
+        AudioFile audioFile = this.audioFiles.get(filePosition);
         fragment = TrackFragment.newInstance(audioFile);
-        this.fragments.put(audioFile, fragment);
+        this.fragments.put(fragmentPosition, fragment);
 
         this.currentTransaction.add(container.getId(), fragment);
 
@@ -65,16 +76,12 @@ public class TrackPagerAdapter extends PagerAdapter
     @Override
     public void destroyItem(ViewGroup container, int position, Object object)
     {
-        position = this.coerceCyclicPosition(position);
-
-        AudioFile audioFile = this.audioFiles.get(position);
-        this.fragments.remove(audioFile);
-
-        TrackFragment fragment = (TrackFragment)object;
+        this.fragments.remove(position);
 
         if (this.currentTransaction == null)
             this.currentTransaction = this.fragmentManager.beginTransaction();
 
+        TrackFragment fragment = (TrackFragment)object;
         this.currentTransaction.remove(fragment);
     }
 
@@ -97,10 +104,15 @@ public class TrackPagerAdapter extends PagerAdapter
 
     private int coerceCyclicPosition(int position)
     {
-        if (position == 0)
-            return this.getCount() - 2;
-        else if (position == this.getCount() - 1)
-            return 1;
+        if (this.audioFiles.size() > 1)
+        {
+            //if we ViewPager requests first or last elements of the playlist, which are "virtual",
+            // we return an "opposite" item from another size of the playlist; see code of
+            if (position == 0)
+                return this.getCount() - 2;
+            else if (position == this.getCount() - 1)
+                return 1;
+        }
 
         return position;
     }

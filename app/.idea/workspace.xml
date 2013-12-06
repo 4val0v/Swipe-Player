@@ -53,8 +53,8 @@
     <ignored path="swipeplayer.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/pom.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1381336941840" ignored="false" />
-    <file path="/AndroidManifest.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386313873093" ignored="false" />
-    <file path="/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386315101724" ignored="false" />
+    <file path="/AndroidManifest.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386316672995" ignored="false" />
+    <file path="/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386315955998" ignored="false" />
     <file path="$APPLICATION_HOME_DIR$/plugins/android/lib/android.jar!/org/jetbrains/android/android.xsd" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1381334275064" ignored="false" />
     <file path="/SwipeActivity.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386177410887" ignored="false" />
     <file path="/Dummy.txt" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386239708425" ignored="false" />
@@ -119,7 +119,7 @@
     <file path="/TrackListAdapter.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386139370796" ignored="false" />
     <file path="/TrackFragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386181802392" ignored="false" />
     <file path="/fragment_track.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1385995828751" ignored="false" />
-    <file path="$PROJECT_DIR$/gen/net/illusor/swipeplayer/R.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386073995503" ignored="false" />
+    <file path="$PROJECT_DIR$/gen/net/illusor/swipeplayer/R.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386316677294" ignored="false" />
     <file path="/ClickableViewPager.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1385891913049" ignored="false" />
     <file path="/AudioBroadcastHandler.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386185014668" ignored="false" />
     <file path="/PreferencesHelper.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386177497022" ignored="false" />
@@ -233,16 +233,27 @@
       <file leaf-file-name="formatted_text.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/values/formatted_text.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="47" selection-start="381" selection-end="381" vertical-scroll-proportion="0.0">
+            <state line="18" column="127" selection-start="760" selection-end="760" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="strings.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+      <file leaf-file-name="TimeFormatter.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/helpers/TimeFormatter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="36" selection-start="514" selection-end="514" vertical-scroll-proportion="0.3966942">
+            <state line="28" column="0" selection-start="1054" selection-end="1054" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="88" selection-start="630" selection-end="630" vertical-scroll-proportion="0.3305785">
               <folding />
             </state>
           </provider>
@@ -286,15 +297,15 @@
         <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/helpers/NotificationHelper.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/FormattedTextView.java" />
         <option value="$PROJECT_DIR$/res/layout/activity_swipe.xml" />
-        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/res/layout/list_item_folder.xml" />
         <option value="$PROJECT_DIR$/res/layout/list_item_nav_history.xml" />
         <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/helpers/TimeFormatter.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/helpers/FontHelper.java" />
         <option value="$PROJECT_DIR$/res/values/formatted_text.xml" />
-        <option value="$PROJECT_DIR$/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/helpers/OverScrollHelper.java" />
+        <option value="$PROJECT_DIR$/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
       </list>
     </option>
   </component>
@@ -694,7 +705,7 @@
       <recent name="E:\Bitbucket\net.issusor.swipeplayer\trunk\app\src\main\java" />
     </key>
   </component>
-  <component name="RunManager" selected="Android Application.Phone 4&quot; (API 16)">
+  <component name="RunManager" selected="Android Application.USB">
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
       <module name="" />
       <option name="TESTING_TYPE" value="0" />
@@ -889,7 +900,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31201765" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.43770674" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.43770674" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287483" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -980,13 +991,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="57" selection-start="1172" selection-end="1172" vertical-scroll-proportion="0.47219068">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/list_item_folder.xml">
       <provider editor-type-id="android-designer">
         <state />
@@ -1007,15 +1011,6 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/helpers/NotificationHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="25" column="26" selection-start="851" selection-end="851" vertical-scroll-proportion="0.29625425">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/helpers/TimeFormatter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="120" selection-start="969" selection-end="969" vertical-scroll-proportion="0.43586832">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1099,13 +1094,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/formatted_text.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="47" selection-start="381" selection-end="381" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/helpers/OverScrollHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="44" column="33" selection-start="1701" selection-end="1701" vertical-scroll-proportion="1.4545455">
@@ -1115,9 +1103,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/helpers/TimeFormatter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="0" selection-start="1054" selection-end="1054" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="36" selection-start="514" selection-end="514" vertical-scroll-proportion="0.3966942">
+        <state line="14" column="28" selection-start="649" selection-end="649" vertical-scroll-proportion="0.46280992">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/formatted_text.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="127" selection-start="760" selection-end="760" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="88" selection-start="630" selection-end="630" vertical-scroll-proportion="0.3305785">
           <folding />
         </state>
       </provider>

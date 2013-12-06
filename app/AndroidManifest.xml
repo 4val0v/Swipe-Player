@@ -8,7 +8,7 @@
                  android:label="Swipe Player" android:allowBackup="true">
 
         <activity android:name=".activities.SwipeActivity" android:screenOrientation="portrait"
-                  android:theme="@style/Theme.SwipePlayer">
+                  android:theme="@style/Theme.SwipePlayer" android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

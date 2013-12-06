@@ -1,6 +1,5 @@
 package net.illusor.swipeplayer.helpers;
 
-import android.R;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.view.View;
@@ -37,13 +36,13 @@ public class OverScrollHelper
                 Class glowClass = edgeGlow.getClass();
                 Field edgeDrawable = glowClass.getDeclaredField("mEdge");
                 edgeDrawable.setAccessible(true);
-                edgeDrawable.set(edgeGlow, new ColorDrawable(R.color.transparent));
+                edgeDrawable.set(edgeGlow, new ColorDrawable(android.R.color.transparent));
                 Field glowDrawable = glowClass.getDeclaredField("mGlow");
                 glowDrawable.setAccessible(true);
-                glowDrawable.set(edgeGlow, new ColorDrawable(R.color.transparent));
+                glowDrawable.set(edgeGlow, new ColorDrawable(android.R.color.transparent));
             }
         }
-        catch (Exception e)
+        catch (Exception ignored)
         {
         }
     }

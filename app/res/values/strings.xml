@@ -8,6 +8,6 @@
     <string name="str_icon_play">Play all</string>
     <string name="str_icon_nav">Folder Up</string>
 
-    <string name="time_format_hhmmss">%%d:%%02d:%%02d</string>
-    <string name="time_format_mmss">%%d:%%02d</string>
+    <string name="time_format_hhmmss" formatted="false">%d:%02d:%02d</string>
+    <string name="time_format_mmss" formatted="false">%d:%02d</string>
 </resources>

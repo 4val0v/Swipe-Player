@@ -1,10 +1,16 @@
 package net.illusor.swipeplayer.helpers;
 
+import net.illusor.swipeplayer.R;
+import net.illusor.swipeplayer.SwipeApplication;
+
 public class TimeFormatter
 {
     private static final long hourSize = 3600000;
     private static final long minuteSize = 60000;
     private static final long secondSize = 1000;
+
+    private static final String timeFormatHHMMSS = SwipeApplication.getAppContext().getString(R.string.time_format_hhmmss);
+    private static final String timeFormatMMSS = SwipeApplication.getAppContext().getString(R.string.time_format_mmss);
 
     public static String hhmmss(long milliseconds)
     {
@@ -16,9 +22,9 @@ public class TimeFormatter
 
         String result;
         if (hours > 0)
-            result = String.format("%d:%02d:%02d", hours, minutes, seconds);
+            result = String.format(timeFormatHHMMSS, hours, minutes, seconds);
         else
-            result = String.format("%d:%02d", minutes, seconds);
+            result = String.format(timeFormatMMSS, minutes, seconds);
 
         return result;
     }

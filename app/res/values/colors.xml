@@ -4,7 +4,6 @@
     <drawable name="drawable_playlist_bg_normal">@android:color/transparent</drawable>
     <drawable name="drawable_playlist_bg_pressed">#010129</drawable>
     <drawable name="drawable_playlist_bg_playing">#ef4b4c</drawable>
-    <color name="color_playlist_separator">#202043</color>
     <color name="color_playlist_text_normal">#000000</color>
     <color name="color_playlist_text_playing">#ffffff</color>
 

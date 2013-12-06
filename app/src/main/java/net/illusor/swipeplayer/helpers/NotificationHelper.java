@@ -1,6 +1,5 @@
 package net.illusor.swipeplayer.helpers;
 
-import android.R;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -28,10 +27,10 @@ public class NotificationHelper
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this.context);
         Notification notification = builder.setContentTitle("Playing now")
                                            .setContentText(file.getTitle())
-                                           .setSmallIcon(R.drawable.ic_media_play)
+                                           .setSmallIcon(android.R.drawable.ic_media_play)
                                            .setContentIntent(activityIntent)
-                                           .addAction(R.drawable.ic_media_pause, "Pause", pauseIntent)
-                                           .addAction(R.drawable.ic_menu_close_clear_cancel, "Stop", stopIntent)
+                                           .addAction(android.R.drawable.ic_media_pause, "Pause", pauseIntent)
+                                           .addAction(android.R.drawable.ic_menu_close_clear_cancel, "Stop", stopIntent)
                                            .build();
 
         return notification;
@@ -46,10 +45,10 @@ public class NotificationHelper
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this.context);
         Notification notification = builder.setContentTitle("Paused")
                 .setContentText(file.getTitle())
-                .setSmallIcon(R.drawable.ic_media_play)
+                .setSmallIcon(android.R.drawable.ic_media_play)
                 .setContentIntent(activityIntent)
-                .addAction(R.drawable.ic_media_play, "Resume", resumeIntent)
-                .addAction(R.drawable.ic_menu_close_clear_cancel, "Stop", stopIntent)
+                .addAction(android.R.drawable.ic_media_play, "Resume", resumeIntent)
+                .addAction(android.R.drawable.ic_menu_close_clear_cancel, "Stop", stopIntent)
                 .build();
 
         return notification;
@@ -62,7 +61,7 @@ public class NotificationHelper
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this.context);
         Notification notification = builder.setContentTitle(this.context.getApplicationInfo().nonLocalizedLabel)
                 .setContentText("Playing stopped")
-                .setSmallIcon(R.drawable.ic_media_play)
+                .setSmallIcon(android.R.drawable.ic_media_play)
                 .setContentIntent(activityIntent)
                 .build();
 
@@ -74,7 +73,7 @@ public class NotificationHelper
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this.context);
         Notification notification = builder.setContentTitle("Error playing file")
                 .setContentText(file.getTitle())
-                .setSmallIcon(R.drawable.ic_media_play)
+                .setSmallIcon(android.R.drawable.ic_media_play)
                 .build();
 
         return notification;

@@ -35,7 +35,7 @@
             android:paddingBottom="10dp"
             android:src="@drawable/ic_play_folder"
             android:background="@drawable/item_folder_bg"
-            android:contentDescription="Play all"/>
+            android:contentDescription="@string/str_icon_play"/>
 
 </merge>
 

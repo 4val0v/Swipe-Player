@@ -19,7 +19,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginRight="16dp"
         android:src="@drawable/ic_nav_up"
-        android:contentDescription="icon_up" />
+        android:contentDescription="@string/str_icon_nav" />
 
     <net.illusor.swipeplayer.widgets.FormattedTextView
         android:id="@+id/id_nav_history_title"

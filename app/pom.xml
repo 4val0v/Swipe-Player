@@ -17,6 +17,7 @@
         <android.support.version>18.0.0</android.support.version>
         <junit.version>4.11</junit.version>
         <commons.lang.version>2.6</commons.lang.version>
+        <nineoldandroids.version>2.4.0</nineoldandroids.version>
     </properties>
 
     <build>
@@ -53,6 +54,11 @@
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>${commons.lang.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.nineoldandroids</groupId>
+            <artifactId>library</artifactId>
+            <version>${nineoldandroids.version}</version>
         </dependency>
     </dependencies>
 

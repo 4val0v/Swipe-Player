@@ -18,4 +18,7 @@
     <color name="color_trackbar_playlist">#000000</color>
     <color name="color_trackbar_browser">#ffffff</color>
 
+    <color name="color_durations_passed">#ffffff</color>
+    <color name="color_durations_left">#808094</color>
+
 </resources>

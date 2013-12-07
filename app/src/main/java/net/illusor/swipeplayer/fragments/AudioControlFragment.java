@@ -14,11 +14,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
+import com.nineoldandroids.view.ViewPropertyAnimator;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.domain.AudioFile;
 import net.illusor.swipeplayer.services.AudioBroadcastHandler;
 import net.illusor.swipeplayer.services.AudioPlayerState;
 import net.illusor.swipeplayer.services.SoundService;
+import net.illusor.swipeplayer.widgets.DurationDisplayView;
 import net.illusor.swipeplayer.widgets.TrackPager;
 
 import java.util.List;
@@ -134,14 +136,35 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
         }
     }
 
+    private void animatePause()
+    {
+        ViewPropertyAnimator.animate(this.progress).alpha(0.5f).setStartDelay(50).setDuration(300);
+        ViewPropertyAnimator.animate(this.trackList).alpha(0.5f).setStartDelay(50).setDuration(300);
+    }
+
+    private void animatePlay()
+    {
+        ViewPropertyAnimator.animate(this.progress).alpha(1.0f).setStartDelay(50).setDuration(300);
+        ViewPropertyAnimator.animate(this.trackList).alpha(1.0f).setStartDelay(50).setDuration(300);
+    }
+
     private class ProgressListener implements SeekBar.OnSeekBarChangeListener
     {
+        private final DurationDisplayView display = (DurationDisplayView)getActivity().findViewById(R.id.id_audio_durations);
+        private boolean isRewinding;
         private AudioPlayerState stateWhenRewindStarted;
 
         @Override
         public void onProgressChanged(SeekBar seekBar, int i, boolean b)
         {
             Log.d("SWIPE", "Manual rewind " + i + " of " + seekBar.getMax() + " b=" + b);
+            if (this.isRewinding)
+            {
+                AudioFile file = connection.service.getAudioFile();
+                int duration = (int)file.getDuration();
+                int played = (int)(duration * (1.0f * i / seekBar.getMax()));
+                this.display.setDuration(played, duration);
+            }
         }
 
         @Override
@@ -155,6 +178,9 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
                 stopTrackingProgress();
 
             connection.service.startRewind();
+
+            this.isRewinding = true;
+            this.display.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -168,6 +194,9 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
 
             if (this.stateWhenRewindStarted == AudioPlayerState.Playing)
                 startTrackingProgress();
+
+            this.isRewinding = false;
+            this.display.setVisibility(View.GONE);
         }
     }
 
@@ -235,6 +264,7 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
             super.onPlayAudioFile(audioFile);
             setAudioFile(audioFile);
             startTrackingProgress();
+            animatePlay();
         }
 
         @Override
@@ -250,6 +280,7 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
         {
             super.onPlaybackPause();
             stopTrackingProgress();
+            animatePause();
         }
 
         @Override
@@ -257,6 +288,7 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
         {
             super.onPlaybackResume();
             startTrackingProgress();
+            animatePlay();
         }
 
         @Override

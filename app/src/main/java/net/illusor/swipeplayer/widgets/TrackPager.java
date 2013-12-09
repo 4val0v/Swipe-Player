@@ -98,19 +98,17 @@ public class TrackPager extends ViewPager
                     }
                     break;
                 }
-                case MotionEvent.ACTION_MOVE:
+                default:
                 {
                     if (this.isPressed)
                     {
-                        boolean xMove = Math.abs(this.touchX - ev.getX()) < this.touchThresholdPx;
-                        boolean yMove = Math.abs(this.touchY - ev.getY()) < this.touchThresholdPx;
+                        boolean xMove = Math.abs(this.touchX - ev.getX()) > this.touchThresholdPx;
+                        boolean yMove = Math.abs(this.touchY - ev.getY()) > this.touchThresholdPx;
 
                         if (xMove || yMove)
                             this.isPressed = false;
                     }
                 }
-                default:
-                    this.isPressed = false;
             }
         }
     }

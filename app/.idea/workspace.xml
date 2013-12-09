@@ -60,7 +60,7 @@
     <file path="/SwipeActivity.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1381335237728" ignored="false" />
     <file path="/PlaylistFragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386174163115" ignored="false" />
     <file path="/PlaylistFragment.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1381335503279" ignored="false" />
-    <file path="/fragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386415095348" ignored="false" />
+    <file path="/fragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386613451310" ignored="false" />
     <file path="/swipe_activity.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1385921817482" ignored="false" />
     <file path="/FolderBrowserFragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386174208607" ignored="false" />
     <file path="/folder_browser_fragment.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1383984630211" ignored="false" />
@@ -159,7 +159,7 @@
     <file path="/anim_fade_in.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386412654034" ignored="false" />
     <file path="/anim_fade_out.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386413260362" ignored="false" />
     <file path="/durations_display.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386416553281" ignored="false" />
-    <file path="/SlidingDrawer.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386608666405" ignored="false" />
+    <file path="/SlidingDrawer.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386618038854" ignored="false" />
     <file path="/sliding_drawer.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386607676166" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -258,8 +258,9 @@
       <file leaf-file-name="SlidingDrawer.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/SlidingDrawer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="294" column="62" selection-start="10878" selection-end="10878" vertical-scroll-proportion="0.49646226">
+            <state line="407" column="30" selection-start="13831" selection-end="13841" vertical-scroll-proportion="0.7042079">
               <folding>
+                <element signature="docComment;class#SlidingDrawer#0" expanded="false" />
                 <element signature="docComment;class#OnDrawerOpenListener#0;class#SlidingDrawer#0" expanded="false" />
                 <element signature="class#OnDrawerOpenListener#0;class#SlidingDrawer#0" expanded="false" />
                 <element signature="docComment;method#onDrawerOpened#0;class#OnDrawerOpenListener#0;class#SlidingDrawer#0" expanded="false" />
@@ -273,24 +274,17 @@
                 <element signature="docComment;method#SlidingDrawer#0;class#SlidingDrawer#0" expanded="false" />
                 <element signature="method#SlidingDrawer#0;class#SlidingDrawer#0" expanded="false" />
                 <element signature="docComment;method#SlidingDrawer#1;class#SlidingDrawer#0" expanded="false" />
-                <element signature="method#SlidingDrawer#1;class#SlidingDrawer#0" expanded="false" />
                 <element signature="method#onFinishInflate#0;class#SlidingDrawer#0" expanded="false" />
-                <element signature="method#onMeasure#0;class#SlidingDrawer#0" expanded="false" />
+                <element signature="method#dispatchDraw#0;class#SlidingDrawer#0" expanded="false" />
                 <element signature="method#onLayout#0;class#SlidingDrawer#0" expanded="false" />
                 <element signature="method#onInterceptTouchEvent#0;class#SlidingDrawer#0" expanded="false" />
-                <element signature="method#onTouchEvent#0;class#SlidingDrawer#0" expanded="false" />
-                <element signature="method#animateClose#0;class#SlidingDrawer#0" expanded="false" />
                 <element signature="method#animateOpen#0;class#SlidingDrawer#0" expanded="false" />
                 <element signature="method#performFling#0;class#SlidingDrawer#0" expanded="false" />
-                <element signature="e#18305#18367#0" expanded="false" />
-                <element signature="e#19494#19557#0" expanded="false" />
-                <element signature="method#prepareTracking#0;class#SlidingDrawer#0" expanded="false" />
-                <element signature="method#moveHandle#0;class#SlidingDrawer#0" expanded="false" />
+                <element signature="e#18701#18764#0" expanded="false" />
                 <element signature="method#prepareContent#0;class#SlidingDrawer#0" expanded="false" />
-                <element signature="e#24635#24707#0" expanded="false" />
-                <element signature="e#25850#25915#0" expanded="false" />
+                <element signature="e#23662#23734#0" expanded="false" />
+                <element signature="e#24831#24896#0" expanded="false" />
                 <element signature="method#stopTracking#0;class#SlidingDrawer#0" expanded="false" />
-                <element signature="method#doAnimation#0;class#SlidingDrawer#0" expanded="false" />
                 <element signature="method#incrementAnimation#0;class#SlidingDrawer#0" expanded="false" />
                 <element signature="docComment;method#toggle#0;class#SlidingDrawer#0" expanded="false" />
                 <element signature="method#toggle#0;class#SlidingDrawer#0" expanded="false" />
@@ -304,8 +298,6 @@
                 <element signature="method#animateClose#1;class#SlidingDrawer#0" expanded="false" />
                 <element signature="docComment;method#animateOpen#1;class#SlidingDrawer#0" expanded="false" />
                 <element signature="method#animateOpen#1;class#SlidingDrawer#0" expanded="false" />
-                <element signature="method#closeDrawer#0;class#SlidingDrawer#0" expanded="false" />
-                <element signature="method#openDrawer#0;class#SlidingDrawer#0" expanded="false" />
                 <element signature="docComment;method#setOnDrawerOpenListener#0;class#SlidingDrawer#0" expanded="false" />
                 <element signature="method#setOnDrawerOpenListener#0;class#SlidingDrawer#0" expanded="false" />
                 <element signature="docComment;method#setOnDrawerCloseListener#0;class#SlidingDrawer#0" expanded="false" />
@@ -326,7 +318,7 @@
                 <element signature="method#isMoving#0;class#SlidingDrawer#0" expanded="false" />
                 <element signature="class#DrawerToggler#0;class#SlidingDrawer#0" expanded="false" />
                 <element signature="method#onClick#0;class#DrawerToggler#0;class#SlidingDrawer#0" expanded="false" />
-                <element signature="e#34057#34112#0" expanded="false" />
+                <element signature="e#33037#33092#0" expanded="false" />
                 <element signature="class#SlidingHandler#0;class#SlidingDrawer#0" expanded="false" />
                 <element signature="method#handleMessage#0;class#SlidingHandler#0;class#SlidingDrawer#0" expanded="false" />
               </folding>
@@ -1196,8 +1188,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/SlidingDrawer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="294" column="62" selection-start="10878" selection-end="10878" vertical-scroll-proportion="0.49646226">
+        <state line="407" column="30" selection-start="13831" selection-end="13841" vertical-scroll-proportion="0.7042079">
           <folding>
+            <element signature="docComment;class#SlidingDrawer#0" expanded="false" />
             <element signature="docComment;class#OnDrawerOpenListener#0;class#SlidingDrawer#0" expanded="false" />
             <element signature="class#OnDrawerOpenListener#0;class#SlidingDrawer#0" expanded="false" />
             <element signature="docComment;method#onDrawerOpened#0;class#OnDrawerOpenListener#0;class#SlidingDrawer#0" expanded="false" />
@@ -1211,24 +1204,17 @@
             <element signature="docComment;method#SlidingDrawer#0;class#SlidingDrawer#0" expanded="false" />
             <element signature="method#SlidingDrawer#0;class#SlidingDrawer#0" expanded="false" />
             <element signature="docComment;method#SlidingDrawer#1;class#SlidingDrawer#0" expanded="false" />
-            <element signature="method#SlidingDrawer#1;class#SlidingDrawer#0" expanded="false" />
             <element signature="method#onFinishInflate#0;class#SlidingDrawer#0" expanded="false" />
-            <element signature="method#onMeasure#0;class#SlidingDrawer#0" expanded="false" />
+            <element signature="method#dispatchDraw#0;class#SlidingDrawer#0" expanded="false" />
             <element signature="method#onLayout#0;class#SlidingDrawer#0" expanded="false" />
             <element signature="method#onInterceptTouchEvent#0;class#SlidingDrawer#0" expanded="false" />
-            <element signature="method#onTouchEvent#0;class#SlidingDrawer#0" expanded="false" />
-            <element signature="method#animateClose#0;class#SlidingDrawer#0" expanded="false" />
             <element signature="method#animateOpen#0;class#SlidingDrawer#0" expanded="false" />
             <element signature="method#performFling#0;class#SlidingDrawer#0" expanded="false" />
-            <element signature="e#18305#18367#0" expanded="false" />
-            <element signature="e#19494#19557#0" expanded="false" />
-            <element signature="method#prepareTracking#0;class#SlidingDrawer#0" expanded="false" />
-            <element signature="method#moveHandle#0;class#SlidingDrawer#0" expanded="false" />
+            <element signature="e#18701#18764#0" expanded="false" />
             <element signature="method#prepareContent#0;class#SlidingDrawer#0" expanded="false" />
-            <element signature="e#24635#24707#0" expanded="false" />
-            <element signature="e#25850#25915#0" expanded="false" />
+            <element signature="e#23662#23734#0" expanded="false" />
+            <element signature="e#24831#24896#0" expanded="false" />
             <element signature="method#stopTracking#0;class#SlidingDrawer#0" expanded="false" />
-            <element signature="method#doAnimation#0;class#SlidingDrawer#0" expanded="false" />
             <element signature="method#incrementAnimation#0;class#SlidingDrawer#0" expanded="false" />
             <element signature="docComment;method#toggle#0;class#SlidingDrawer#0" expanded="false" />
             <element signature="method#toggle#0;class#SlidingDrawer#0" expanded="false" />
@@ -1242,8 +1228,6 @@
             <element signature="method#animateClose#1;class#SlidingDrawer#0" expanded="false" />
             <element signature="docComment;method#animateOpen#1;class#SlidingDrawer#0" expanded="false" />
             <element signature="method#animateOpen#1;class#SlidingDrawer#0" expanded="false" />
-            <element signature="method#closeDrawer#0;class#SlidingDrawer#0" expanded="false" />
-            <element signature="method#openDrawer#0;class#SlidingDrawer#0" expanded="false" />
             <element signature="docComment;method#setOnDrawerOpenListener#0;class#SlidingDrawer#0" expanded="false" />
             <element signature="method#setOnDrawerOpenListener#0;class#SlidingDrawer#0" expanded="false" />
             <element signature="docComment;method#setOnDrawerCloseListener#0;class#SlidingDrawer#0" expanded="false" />
@@ -1264,7 +1248,7 @@
             <element signature="method#isMoving#0;class#SlidingDrawer#0" expanded="false" />
             <element signature="class#DrawerToggler#0;class#SlidingDrawer#0" expanded="false" />
             <element signature="method#onClick#0;class#DrawerToggler#0;class#SlidingDrawer#0" expanded="false" />
-            <element signature="e#34057#34112#0" expanded="false" />
+            <element signature="e#33037#33092#0" expanded="false" />
             <element signature="class#SlidingHandler#0;class#SlidingDrawer#0" expanded="false" />
             <element signature="method#handleMessage#0;class#SlidingHandler#0;class#SlidingDrawer#0" expanded="false" />
           </folding>

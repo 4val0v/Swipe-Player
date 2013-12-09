@@ -138,14 +138,14 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
 
     private void animatePause()
     {
-        ViewPropertyAnimator.animate(this.progress).alpha(0.5f).setStartDelay(50).setDuration(300);
-        ViewPropertyAnimator.animate(this.trackList).alpha(0.5f).setStartDelay(50).setDuration(300);
+        ViewPropertyAnimator.animate(this.progress).alpha(0.5f).setDuration(100);
+        ViewPropertyAnimator.animate(this.trackList).alpha(0.5f).setDuration(100);
     }
 
     private void animatePlay()
     {
-        ViewPropertyAnimator.animate(this.progress).alpha(1.0f).setStartDelay(50).setDuration(300);
-        ViewPropertyAnimator.animate(this.trackList).alpha(1.0f).setStartDelay(50).setDuration(300);
+        ViewPropertyAnimator.animate(this.progress).alpha(1.0f).setDuration(100);
+        ViewPropertyAnimator.animate(this.trackList).alpha(1.0f).setDuration(100);
     }
 
     private class ProgressListener implements SeekBar.OnSeekBarChangeListener

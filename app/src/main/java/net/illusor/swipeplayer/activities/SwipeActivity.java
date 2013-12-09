@@ -31,7 +31,7 @@ public class SwipeActivity extends FragmentActivity
         this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
         this.setContentView(R.layout.activity_swipe);
 
-        this.viewPager = (ViewPager) this.findViewById(R.id.id_swipe_view_pager);
+        this.viewPager = (ViewPager) this.findViewById(R.id.id_slider_browser_content);
         this.pagerAdapter = new LocalPagerAdapter(this.getSupportFragmentManager());
 
         if (savedInstanceState == null)

@@ -12,11 +12,6 @@
             android:choiceMode="singleChoice"
             android:scrollbarThumbVertical="@drawable/trackbar_playlist"/>
 
-    <View
-            android:layout_height="match_parent"
-            android:layout_width="12dp"
-            android:background="@drawable/playlist_left_border"/>
-
     <include layout="@layout/layout_preloader"/>
 
     <LinearLayout

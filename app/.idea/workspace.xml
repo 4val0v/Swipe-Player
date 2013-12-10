@@ -45,7 +45,8 @@
     </option>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="ERROR" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="DEBUG" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Swipe" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" name="Default" comment="" />
@@ -60,7 +61,7 @@
     <file path="/SwipeActivity.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1381335237728" ignored="false" />
     <file path="/PlaylistFragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386174163115" ignored="false" />
     <file path="/PlaylistFragment.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1381335503279" ignored="false" />
-    <file path="/fragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386415095348" ignored="false" />
+    <file path="/fragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386656855905" ignored="false" />
     <file path="/swipe_activity.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1385921817482" ignored="false" />
     <file path="/FolderBrowserFragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386174208607" ignored="false" />
     <file path="/folder_browser_fragment.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1383984630211" ignored="false" />
@@ -146,7 +147,7 @@
     <file path="/AudioPlayerPlaylist.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386178379868" ignored="false" />
     <file path="/AudioPlayerSequentualPlaylist.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386178845992" ignored="false" />
     <file path="/AudioPlayerSequentialPlaylist.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386180825702" ignored="false" />
-    <file path="/activity_swipe.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386608750932" ignored="false" />
+    <file path="/activity_swipe.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386655276970" ignored="false" />
     <file path="/anim_control_fadeout.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386404005182" ignored="false" />
     <file path="/anim_control_fadein.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386404464578" ignored="false" />
     <file path="/AnimatedSeekBar.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386407984849" ignored="false" />
@@ -159,7 +160,7 @@
     <file path="/anim_fade_in.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386412654034" ignored="false" />
     <file path="/anim_fade_out.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386413260362" ignored="false" />
     <file path="/durations_display.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386416553281" ignored="false" />
-    <file path="/SlidingDrawer.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386608666405" ignored="false" />
+    <file path="/SlidingDrawer.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386657851913" ignored="false" />
     <file path="/sliding_drawer.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386607676166" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -180,7 +181,6 @@
     <sortChildren value="false" />
   </component>
   <component name="DebuggerManager">
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -234,6 +234,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </line_breakpoints>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -245,11 +246,20 @@
     <leaf>
       <file leaf-file-name="activity_swipe.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/layout/activity_swipe.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="22" column="48" selection-start="887" selection-end="887" vertical-scroll-proportion="-10.12">
+              <folding />
+            </state>
+          </provider>
           <provider editor-type-id="android-designer">
             <state />
           </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SwipeActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/activities/SwipeActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="29" selection-start="1364" selection-end="1364" vertical-scroll-proportion="-17.777779">
+            <state line="33" column="71" selection-start="1120" selection-end="1120" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -258,7 +268,7 @@
       <file leaf-file-name="SlidingDrawer.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/SlidingDrawer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="294" column="62" selection-start="10878" selection-end="10878" vertical-scroll-proportion="0.49646226">
+            <state line="72" column="3" selection-start="2545" selection-end="2545" vertical-scroll-proportion="-3.3634539">
               <folding>
                 <element signature="docComment;class#OnDrawerOpenListener#0;class#SlidingDrawer#0" expanded="false" />
                 <element signature="class#OnDrawerOpenListener#0;class#SlidingDrawer#0" expanded="false" />
@@ -275,20 +285,16 @@
                 <element signature="docComment;method#SlidingDrawer#1;class#SlidingDrawer#0" expanded="false" />
                 <element signature="method#SlidingDrawer#1;class#SlidingDrawer#0" expanded="false" />
                 <element signature="method#onFinishInflate#0;class#SlidingDrawer#0" expanded="false" />
-                <element signature="method#onMeasure#0;class#SlidingDrawer#0" expanded="false" />
-                <element signature="method#onLayout#0;class#SlidingDrawer#0" expanded="false" />
-                <element signature="method#onInterceptTouchEvent#0;class#SlidingDrawer#0" expanded="false" />
-                <element signature="method#onTouchEvent#0;class#SlidingDrawer#0" expanded="false" />
                 <element signature="method#animateClose#0;class#SlidingDrawer#0" expanded="false" />
                 <element signature="method#animateOpen#0;class#SlidingDrawer#0" expanded="false" />
                 <element signature="method#performFling#0;class#SlidingDrawer#0" expanded="false" />
-                <element signature="e#18305#18367#0" expanded="false" />
-                <element signature="e#19494#19557#0" expanded="false" />
+                <element signature="e#15275#15337#0" expanded="false" />
+                <element signature="e#16280#16343#0" expanded="false" />
                 <element signature="method#prepareTracking#0;class#SlidingDrawer#0" expanded="false" />
                 <element signature="method#moveHandle#0;class#SlidingDrawer#0" expanded="false" />
                 <element signature="method#prepareContent#0;class#SlidingDrawer#0" expanded="false" />
-                <element signature="e#24635#24707#0" expanded="false" />
-                <element signature="e#25850#25915#0" expanded="false" />
+                <element signature="e#19365#19437#0" expanded="false" />
+                <element signature="e#19981#20046#0" expanded="false" />
                 <element signature="method#stopTracking#0;class#SlidingDrawer#0" expanded="false" />
                 <element signature="method#doAnimation#0;class#SlidingDrawer#0" expanded="false" />
                 <element signature="method#incrementAnimation#0;class#SlidingDrawer#0" expanded="false" />
@@ -326,28 +332,10 @@
                 <element signature="method#isMoving#0;class#SlidingDrawer#0" expanded="false" />
                 <element signature="class#DrawerToggler#0;class#SlidingDrawer#0" expanded="false" />
                 <element signature="method#onClick#0;class#DrawerToggler#0;class#SlidingDrawer#0" expanded="false" />
-                <element signature="e#34057#34112#0" expanded="false" />
+                <element signature="e#27995#28050#0" expanded="false" />
                 <element signature="class#SlidingHandler#0;class#SlidingDrawer#0" expanded="false" />
                 <element signature="method#handleMessage#0;class#SlidingHandler#0;class#SlidingDrawer#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sliding_drawer.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/values/sliding_drawer.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="51" selection-start="347" selection-end="347" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SwipeActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/activities/SwipeActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="71" selection-start="1120" selection-end="1120" vertical-scroll-proportion="0.0">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -373,11 +361,11 @@
         <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/DurationDisplayView.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/AudioControlFragment.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/TrackPager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/activities/SwipeActivity.java" />
         <option value="$PROJECT_DIR$/res/layout/fragment_playlist.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/activities/SwipeActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/SlidingDrawer.java" />
         <option value="$PROJECT_DIR$/res/values/sliding_drawer.xml" />
         <option value="$PROJECT_DIR$/res/layout/activity_swipe.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/SlidingDrawer.java" />
       </list>
     </option>
   </component>
@@ -399,10 +387,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
-    <option name="width" value="1938" />
-    <option name="height" value="1050" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1932" />
+    <option name="height" value="1066" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -415,7 +403,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectReloadState">
-    <option name="STATE" value="0" />
+    <option name="STATE" value="1" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
@@ -430,6 +418,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -724,8 +714,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -744,11 +732,11 @@
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="MemberChooser.showClasses" value="true" />
     <property name="FullScreen" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -766,7 +754,7 @@
       <recent name="E:\Bitbucket\net.issusor.swipeplayer\trunk\app\src\main\java" />
     </key>
   </component>
-  <component name="RunManager" selected="Android Application.USB">
+  <component name="RunManager" selected="Android Application.Phone 4&quot; (API 16)">
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
       <module name="" />
       <option name="TESTING_TYPE" value="0" />
@@ -952,35 +940,35 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
+    <frame x="-8" y="-8" width="1932" height="1066" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294964" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30981258" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.42237443" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.42227122" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287483" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31849316" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31753033" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4429161" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.44211686" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32921812" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19423692" sideWeight="0.57662624" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20651014" sideWeight="0.5776256" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20641711" sideWeight="0.57772875" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19786096" sideWeight="0.59246576" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287483" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2087518" sideWeight="0.5639615" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="DSM" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="60" y="131" width="1256" height="686" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19797225" sideWeight="0.59246576" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18292683" sideWeight="0.5639615" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31086656" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Module Dependencies" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Duplicates" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296582" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1074,33 +1062,33 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/list_item_folder.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.65217394">
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/list_item_nav_history.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/list_item_nav_history.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.7826087">
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/list_item_playlist.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/list_item_playlist.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/NavigationItemView.java">
@@ -1151,24 +1139,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/activities/SwipeActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="71" selection-start="1120" selection-end="1120" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="14" selection-start="516" selection-end="516" vertical-scroll-proportion="0.23584905">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/fragment_playlist.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="74" selection-start="551" selection-end="551" vertical-scroll-proportion="0.29232642">
           <folding>
@@ -1176,27 +1147,44 @@
           </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/activity_swipe.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/styles.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="29" selection-start="1364" selection-end="1364" vertical-scroll-proportion="-17.777779">
+        <state line="3" column="60" selection-start="171" selection-end="171" vertical-scroll-proportion="0.05448354">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/values/sliding_drawer.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="51" selection-start="347" selection-end="347" vertical-scroll-proportion="0.0">
+        <state line="3" column="44" selection-start="96" selection-end="96" vertical-scroll-proportion="0.05448354">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/activity_swipe.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="48" selection-start="887" selection-end="887" vertical-scroll-proportion="-10.12">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/activities/SwipeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="71" selection-start="1120" selection-end="1120" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/SlidingDrawer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="294" column="62" selection-start="10878" selection-end="10878" vertical-scroll-proportion="0.49646226">
+        <state line="72" column="3" selection-start="2545" selection-end="2545" vertical-scroll-proportion="-3.3634539">
           <folding>
             <element signature="docComment;class#OnDrawerOpenListener#0;class#SlidingDrawer#0" expanded="false" />
             <element signature="class#OnDrawerOpenListener#0;class#SlidingDrawer#0" expanded="false" />
@@ -1213,20 +1201,16 @@
             <element signature="docComment;method#SlidingDrawer#1;class#SlidingDrawer#0" expanded="false" />
             <element signature="method#SlidingDrawer#1;class#SlidingDrawer#0" expanded="false" />
             <element signature="method#onFinishInflate#0;class#SlidingDrawer#0" expanded="false" />
-            <element signature="method#onMeasure#0;class#SlidingDrawer#0" expanded="false" />
-            <element signature="method#onLayout#0;class#SlidingDrawer#0" expanded="false" />
-            <element signature="method#onInterceptTouchEvent#0;class#SlidingDrawer#0" expanded="false" />
-            <element signature="method#onTouchEvent#0;class#SlidingDrawer#0" expanded="false" />
             <element signature="method#animateClose#0;class#SlidingDrawer#0" expanded="false" />
             <element signature="method#animateOpen#0;class#SlidingDrawer#0" expanded="false" />
             <element signature="method#performFling#0;class#SlidingDrawer#0" expanded="false" />
-            <element signature="e#18305#18367#0" expanded="false" />
-            <element signature="e#19494#19557#0" expanded="false" />
+            <element signature="e#15275#15337#0" expanded="false" />
+            <element signature="e#16280#16343#0" expanded="false" />
             <element signature="method#prepareTracking#0;class#SlidingDrawer#0" expanded="false" />
             <element signature="method#moveHandle#0;class#SlidingDrawer#0" expanded="false" />
             <element signature="method#prepareContent#0;class#SlidingDrawer#0" expanded="false" />
-            <element signature="e#24635#24707#0" expanded="false" />
-            <element signature="e#25850#25915#0" expanded="false" />
+            <element signature="e#19365#19437#0" expanded="false" />
+            <element signature="e#19981#20046#0" expanded="false" />
             <element signature="method#stopTracking#0;class#SlidingDrawer#0" expanded="false" />
             <element signature="method#doAnimation#0;class#SlidingDrawer#0" expanded="false" />
             <element signature="method#incrementAnimation#0;class#SlidingDrawer#0" expanded="false" />
@@ -1264,7 +1248,7 @@
             <element signature="method#isMoving#0;class#SlidingDrawer#0" expanded="false" />
             <element signature="class#DrawerToggler#0;class#SlidingDrawer#0" expanded="false" />
             <element signature="method#onClick#0;class#DrawerToggler#0;class#SlidingDrawer#0" expanded="false" />
-            <element signature="e#34057#34112#0" expanded="false" />
+            <element signature="e#27995#28050#0" expanded="false" />
             <element signature="class#SlidingHandler#0;class#SlidingDrawer#0" expanded="false" />
             <element signature="method#handleMessage#0;class#SlidingHandler#0;class#SlidingDrawer#0" expanded="false" />
           </folding>

@@ -2,12 +2,6 @@
 <resources>
 
     <declare-styleable name="SlidingDrawer">
-        <attr name="orientation">
-            <enum name="horizontal" value="0"/>
-            <enum name="vertical" value="1"/>
-        </attr>
-        <attr name="bottomOffset" format="dimension"/>
-        <attr name="topOffset" format="dimension"/>
         <attr name="handle" format="reference"/>
         <attr name="content" format="reference"/>
         <attr name="allowSingleTap" format="boolean"/>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="SlidingDrawer">
+    <declare-styleable name="SimpleSlidingDrawer">
         <attr name="handle" format="reference"/>
         <attr name="content" format="reference"/>
         <attr name="allowSingleTap" format="boolean"/>

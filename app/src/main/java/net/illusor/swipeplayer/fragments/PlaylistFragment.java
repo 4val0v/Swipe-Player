@@ -38,7 +38,6 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
     {
         View view = inflater.inflate(R.layout.fragment_playlist, container, false);
         this.listView = (ListView)view.findViewById(R.id.id_playlist);
-        this.audioControlFragment = (AudioControlFragment)this.getActivity().getSupportFragmentManager().findFragmentById(R.id.id_audio_control);
         return view;
     }
 
@@ -132,6 +131,13 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         return (SwipeActivity)this.getActivity();
     }
 
+    private AudioControlFragment getAudioControlFragment()
+    {
+        if (this.audioControlFragment == null)
+            this.audioControlFragment = (AudioControlFragment)this.getActivity().getSupportFragmentManager().findFragmentById(R.id.id_audio_control);
+        return this.audioControlFragment;
+    }
+
     private class AudioLoaderCallbacks implements LoaderManager.LoaderCallbacks<List<AudioFile>>
     {
         private static final String ARGS_DIRECTORY = "folder";
@@ -157,7 +163,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
             showLoadingIndicator(false);
 
             listView.setAdapter(new PlaylistAdapter(getActivity(), audioFiles));
-            audioControlFragment.setPlaylist(audioFiles);
+            getAudioControlFragment().setPlaylist(audioFiles);
 
             //we do not know, what fires faster: music loader or service connection
             //so we duplicate service playlist inflation code here and inside the service connection

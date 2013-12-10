@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:name="net.illusor.swipeplayer.fragments.PlaylistFragment" />
 
-        <net.illusor.swipeplayer.widgets.SlidingDrawer
+        <net.illusor.swipeplayer.widgets.SimpleSlidingDrawer
             android:id="@+id/id_slider_browser"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-        </net.illusor.swipeplayer.widgets.SlidingDrawer>
+        </net.illusor.swipeplayer.widgets.SimpleSlidingDrawer>
 
         <net.illusor.swipeplayer.widgets.DurationDisplayView
             android:id="@+id/id_audio_durations"

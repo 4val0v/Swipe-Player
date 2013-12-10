@@ -34,22 +34,22 @@ import android.view.accessibility.AccessibilityEvent;
 import net.illusor.swipeplayer.R;
 
 /**
- * SlidingDrawer hides content out of the screen and allows the user to drag a handle
- * to bring the content on screen. SlidingDrawer can be used vertically or horizontally.
+ * SimpleSlidingDrawer hides content out of the screen and allows the user to drag a handle
+ * to bring the content on screen. SimpleSlidingDrawer can be used vertically or horizontally.
  * <p/>
  * A special widget composed of two children views: the handle, that the users drags,
  * and the content, attached to the handle and dragged with it.
  * <p/>
- * SlidingDrawer should be used as an overlay inside layouts. This means SlidingDrawer
+ * SimpleSlidingDrawer should be used as an overlay inside layouts. This means SimpleSlidingDrawer
  * should only be used inside of a FrameLayout or a RelativeLayout for instance. The
- * size of the SlidingDrawer defines how much space the content will occupy once slid
- * out so SlidingDrawer should usually use match_parent for both its dimensions.
+ * size of the SimpleSlidingDrawer defines how much space the content will occupy once slid
+ * out so SimpleSlidingDrawer should usually use match_parent for both its dimensions.
  * <p/>
- * Inside an XML layout, SlidingDrawer must define the id of the handle and of the
+ * Inside an XML layout, SimpleSlidingDrawer must define the id of the handle and of the
  * content:
  * <p/>
  * <pre class="prettyprint">
- * &lt;SlidingDrawer
+ * &lt;SimpleSlidingDrawer
  * android:id="@+id/drawer"
  * android:layout_width="match_parent"
  * android:layout_height="match_parent"
@@ -67,18 +67,10 @@ import net.illusor.swipeplayer.R;
  * android:layout_width="match_parent"
  * android:layout_height="match_parent" /&gt;
  * <p/>
- * &lt;/SlidingDrawer&gt;
+ * &lt;/SimpleSlidingDrawer&gt;
  * </pre>
- *
- * @attr ref R.styleable#SlidingDrawer_content
- * @attr ref R.styleable#SlidingDrawer_handle
- * @attr ref R.styleable#SlidingDrawer_topOffset
- * @attr ref R.styleable#SlidingDrawer_bottomOffset
- * @attr ref R.styleable#SlidingDrawer_orientation
- * @attr ref R.styleable#SlidingDrawer_allowSingleTap
- * @attr ref R.styleable#SlidingDrawer_animateOnClick
  */
-public class SlidingDrawer extends ViewGroup
+public class SimpleSlidingDrawer extends ViewGroup
 {
     private static final int TAP_THRESHOLD = 6;
     private static final float MAXIMUM_TAP_VELOCITY = 100.0f;
@@ -169,36 +161,36 @@ public class SlidingDrawer extends ViewGroup
     }
 
     /**
-     * Creates a new SlidingDrawer from a specified set of attributes defined in XML.
+     * Creates a new SimpleSlidingDrawer from a specified set of attributes defined in XML.
      *
      * @param context The application's environment.
      * @param attrs   The attributes defined in XML.
      */
-    public SlidingDrawer(Context context, AttributeSet attrs)
+    public SimpleSlidingDrawer(Context context, AttributeSet attrs)
     {
         this(context, attrs, 0);
     }
 
     /**
-     * Creates a new SlidingDrawer from a specified set of attributes defined in XML.
+     * Creates a new SimpleSlidingDrawer from a specified set of attributes defined in XML.
      *
      * @param context  The application's environment.
      * @param attrs    The attributes defined in XML.
      * @param defStyle The style to apply to this widget.
      */
-    public SlidingDrawer(Context context, AttributeSet attrs, int defStyle)
+    public SimpleSlidingDrawer(Context context, AttributeSet attrs, int defStyle)
     {
         super(context, attrs, defStyle);
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SlidingDrawer, defStyle, 0);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SimpleSlidingDrawer, defStyle, 0);
 
-        mAllowSingleTap = a.getBoolean(R.styleable.SlidingDrawer_allowSingleTap, true);
-        mAnimateOnClick = a.getBoolean(R.styleable.SlidingDrawer_animateOnClick, true);
+        mAllowSingleTap = a.getBoolean(R.styleable.SimpleSlidingDrawer_allowSingleTap, true);
+        mAnimateOnClick = a.getBoolean(R.styleable.SimpleSlidingDrawer_animateOnClick, true);
 
-        int handleId = a.getResourceId(R.styleable.SlidingDrawer_handle, 0);
+        int handleId = a.getResourceId(R.styleable.SimpleSlidingDrawer_handle, 0);
         if (handleId == 0)
             throw new IllegalArgumentException("The handle attribute is required and must refer to a valid child.");
 
-        int contentId = a.getResourceId(R.styleable.SlidingDrawer_content, 0);
+        int contentId = a.getResourceId(R.styleable.SimpleSlidingDrawer_content, 0);
         if (contentId == 0)
             throw new IllegalArgumentException("The content attribute is required and must refer to a valid child.");
 
@@ -431,13 +423,13 @@ public class SlidingDrawer extends ViewGroup
     private void animateClose(int position)
     {
         prepareTracking(position);
-        performFling(position, mMaximumAcceleration, true);
+        performFling(position, -mMaximumAcceleration, true);
     }
 
     private void animateOpen(int position)
     {
         prepareTracking(position);
-        performFling(position, -mMaximumAcceleration, true);
+        performFling(position, mMaximumAcceleration, true);
     }
 
     private void performFling(int position, float velocity, boolean always)
@@ -447,7 +439,7 @@ public class SlidingDrawer extends ViewGroup
 
         if (mExpanded)
         {
-            if (always || (velocity > mMaximumMajorVelocity || (position > getWidth() / 2 && velocity > -mMaximumMajorVelocity)))
+            if (!always && (velocity > mMaximumMajorVelocity || (position > getWidth() / 2 && velocity > -mMaximumMajorVelocity)))
             {
                 // We are expanded, but they didn't move sufficiently to cause
                 // us to retract.  Animate back to the expanded position.
@@ -465,7 +457,7 @@ public class SlidingDrawer extends ViewGroup
         }
         else
         {
-            if (!always && (velocity > mMaximumMajorVelocity || (position > mHandleWidth && velocity > -mMaximumMajorVelocity)))
+            if (always || (velocity > mMaximumMajorVelocity || (position > mHandleWidth && velocity > -mMaximumMajorVelocity)))
             {
                 // We are collapsed, and they moved enough to allow us to expand.
                 mAnimatedAcceleration = mMaximumAcceleration;
@@ -766,15 +758,11 @@ public class SlidingDrawer extends ViewGroup
         mContent.destroyDrawingCache();
 
         if (!mExpanded)
-        {
             return;
-        }
 
         mExpanded = false;
         if (mOnDrawerCloseListener != null)
-        {
             mOnDrawerCloseListener.onDrawerClosed();
-        }
     }
 
     private void openDrawer()
@@ -783,16 +771,12 @@ public class SlidingDrawer extends ViewGroup
         mContent.setVisibility(View.VISIBLE);
 
         if (mExpanded)
-        {
             return;
-        }
 
         mExpanded = true;
 
         if (mOnDrawerOpenListener != null)
-        {
             mOnDrawerOpenListener.onDrawerOpened();
-        }
     }
 
     /**
@@ -851,7 +835,7 @@ public class SlidingDrawer extends ViewGroup
     }
 
     /**
-     * Unlocks the SlidingDrawer so that touch events are processed.
+     * Unlocks the SimpleSlidingDrawer so that touch events are processed.
      *
      * @see #lock()
      */
@@ -861,7 +845,7 @@ public class SlidingDrawer extends ViewGroup
     }
 
     /**
-     * Locks the SlidingDrawer so that touch events are ignores.
+     * Locks the SimpleSlidingDrawer so that touch events are ignores.
      *
      * @see #unlock()
      */

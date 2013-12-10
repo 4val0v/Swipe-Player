@@ -17,7 +17,6 @@ import java.util.Set;
 
 abstract class SwipePagerAdapter extends PagerAdapter
 {
-    private Fragment playlistFragment;
     private final ArrayList<Fragment> browserFragments = new ArrayList<>();
     private final ArrayList<Fragment.SavedState> browserStates = new ArrayList<>();
     private final ArrayList<File> browserFolders = new ArrayList<>();
@@ -28,7 +27,6 @@ abstract class SwipePagerAdapter extends PagerAdapter
 
     public SwipePagerAdapter(FragmentManager fragmentManager)
     {
-        this.primaryFragment = playlistFragment;
         this.fragmentManager = fragmentManager;
     }
 
@@ -49,10 +47,7 @@ abstract class SwipePagerAdapter extends PagerAdapter
     {
         Fragment fragment;
 
-        if (this.isPlaylistIndex(position))
-            fragment = this.playlistFragment;
-        else
-            fragment = this.browserFragments.get(position);
+        fragment = this.browserFragments.get(position);
 
         if (fragment != null)
             return fragment;
@@ -60,23 +55,15 @@ abstract class SwipePagerAdapter extends PagerAdapter
         if (this.curTransaction == null)
             this.curTransaction = this.fragmentManager.beginTransaction();
 
-        if (this.isPlaylistIndex(position))
-        {
-            fragment = this.getPlaylistFragment();
-            this.playlistFragment = fragment;
-        }
-        else
-        {
-            File folder = this.browserFolders.get(position);
-            fragment = this.getBrowserFragment(folder);
+        File folder = this.browserFolders.get(position);
+        fragment = this.getBrowserFragment(folder);
 
-            Fragment.SavedState savedState = this.browserStates.get(position);
-            if (savedState != null)
-                fragment.setInitialSavedState(savedState);
+        Fragment.SavedState savedState = this.browserStates.get(position);
+        if (savedState != null)
+            fragment.setInitialSavedState(savedState);
 
-            this.browserFragments.set(position, fragment);
-            this.browserStates.set(position, null);
-        }
+        this.browserFragments.set(position, fragment);
+        this.browserStates.set(position, null);
 
         fragment.setMenuVisibility(false);
         fragment.setUserVisibleHint(false);
@@ -90,8 +77,6 @@ abstract class SwipePagerAdapter extends PagerAdapter
     public void destroyItem(ViewGroup container, int position, Object object)
     {
         Fragment fragment = (Fragment)object;
-        if (fragment == this.playlistFragment)
-            return;
 
         if (this.curTransaction == null)
             this.curTransaction = this.fragmentManager.beginTransaction();
@@ -110,7 +95,7 @@ abstract class SwipePagerAdapter extends PagerAdapter
     public void setPrimaryItem(ViewGroup container, int position, Object object)
     {
         Fragment fragment = (Fragment)object;
-        if (!fragment.equals(this.primaryFragment))
+        if (!fragment.equals(this.primaryFragment) && fragment.isVisible())
         {
             if (this.primaryFragment != null)
             {
@@ -121,13 +106,6 @@ abstract class SwipePagerAdapter extends PagerAdapter
             fragment.setMenuVisibility(true);
             fragment.setUserVisibleHint(true);
 
-            if (primaryFragment != this.playlistFragment)
-            {
-                int index = this.browserFragments.indexOf(primaryFragment);
-                if (index > position)
-                    this.removeFolder(index);
-            }
-
             this.primaryFragment = fragment;
         }
     }
@@ -135,9 +113,6 @@ abstract class SwipePagerAdapter extends PagerAdapter
     @Override
     public int getItemPosition(Object object)
     {
-        if (object.equals(this.playlistFragment))
-            return this.browserFolders.size();
-
         int index = this.browserFragments.indexOf(object);
         return index >= 0 ? PagerAdapter.POSITION_UNCHANGED : PagerAdapter.POSITION_NONE;
     }
@@ -145,7 +120,7 @@ abstract class SwipePagerAdapter extends PagerAdapter
     @Override
     public int getCount()
     {
-        return this.browserFolders.size() + 1;
+        return this.browserFolders.size();
     }
 
     @Override
@@ -207,23 +182,35 @@ abstract class SwipePagerAdapter extends PagerAdapter
         return new ArrayList<>(this.browserFolders);
     }
 
-    protected abstract Fragment getPlaylistFragment();
-
     protected abstract Fragment getBrowserFragment(File folder);
 
     public int findFolder(File folder)
     {
-        int value = this.browserFolders.indexOf(folder);
-        return value;
+        int index = this.browserFolders.indexOf(folder);
+        return index;
     }
 
-    public void addFolder(File folder)
+    public void setFolder(File folder)
     {
+        int index = this.browserFolders.indexOf(folder.getParentFile());
+        if (this.browserFolders.size() > 0 && index < 0)
+            throw new IllegalArgumentException("Attempt to open illegal folder, which is not part of navigation history: " + folder);
+
+        for (int i = index + 1; i < this.browserFolders.size(); i++)
+            this.removeFolder(i);
+
         this.browserFragments.add(null);
         this.browserStates.add(null);
         this.browserFolders.add(folder);
 
         this.notifyDataSetChanged();
+    }
+
+    private void removeFolder(int position)
+    {
+        this.browserFragments.remove(position);
+        this.browserStates.remove(position);
+        this.browserFolders.remove(position);
     }
 
     public Pair<File, File> getCurrentFolder()
@@ -248,18 +235,5 @@ abstract class SwipePagerAdapter extends PagerAdapter
             folder = folder.getParentFile();
         }
         while (!folder.getAbsolutePath().equals(root));
-    }
-
-    private void removeFolder(int position)
-    {
-        this.browserFragments.remove(position);
-        this.browserStates.remove(position);
-        this.browserFolders.remove(position);
-        this.notifyDataSetChanged();
-    }
-
-    private boolean isPlaylistIndex(int index)
-    {
-        return index == this.browserFolders.size();
     }
 }

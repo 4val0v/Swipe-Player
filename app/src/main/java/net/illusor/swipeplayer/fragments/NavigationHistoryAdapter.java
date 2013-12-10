@@ -19,14 +19,24 @@ import java.util.List;
 
 class NavigationHistoryAdapter extends ArrayAdapter<File>
 {
-    private Context context;
-    private List<File> navigationHistory;
+    private final Context context;
+    private final List<File> navigationHistory;
+    private final File currentDirectory;
 
-    NavigationHistoryAdapter(Context context, List<File> navigationHistory)
+    NavigationHistoryAdapter(Context context, List<File> navigationHistory, File currentDirectory)
     {
         super(context, 0, navigationHistory);
         this.context = context;
         this.navigationHistory = navigationHistory;
+        this.currentDirectory = currentDirectory;
+    }
+
+    @Override
+    public int getCount()
+    {
+        int index = this.navigationHistory.indexOf(this.currentDirectory);
+        if (index < 0) throw new IllegalStateException("Current directory is not a member of navigation history: " + this.currentDirectory);
+        return index + 1;
     }
 
     @Override

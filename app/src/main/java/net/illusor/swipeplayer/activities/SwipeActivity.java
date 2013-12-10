@@ -13,15 +13,17 @@ import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.fragments.FolderBrowserFragment;
 import net.illusor.swipeplayer.fragments.PlaylistFragment;
 import net.illusor.swipeplayer.helpers.PreferencesHelper;
+import net.illusor.swipeplayer.widgets.SimpleSlidingDrawer;
 
 import java.io.File;
 import java.util.List;
 
 public class SwipeActivity extends FragmentActivity
 {
-    private LocalPagerAdapter pagerAdapter;
-    private ViewPager viewPager;
     private PlaylistFragment playlistFragment;
+    private SimpleSlidingDrawer slidingDrawer;
+    private ViewPager viewPager;
+    private LocalPagerAdapter pagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -33,6 +35,8 @@ public class SwipeActivity extends FragmentActivity
 
         this.viewPager = (ViewPager) this.findViewById(R.id.id_slider_browser_content);
         this.pagerAdapter = new LocalPagerAdapter(this.getSupportFragmentManager());
+        this.playlistFragment = (PlaylistFragment)this.getSupportFragmentManager().findFragmentById(R.id.id_fragment_playlist);
+        this.slidingDrawer = (SimpleSlidingDrawer)this.findViewById(R.id.id_slider_browser);
 
         if (savedInstanceState == null)
         {
@@ -40,10 +44,9 @@ public class SwipeActivity extends FragmentActivity
             if (lastBrowsedFolder != null)
                 this.pagerAdapter.setCurrentFolder(lastBrowsedFolder);
             else
-                this.pagerAdapter.addFolder(Environment.getExternalStorageDirectory());
+                this.pagerAdapter.setFolder(Environment.getExternalStorageDirectory());
 
             this.viewPager.setAdapter(this.pagerAdapter);
-            this.viewPager.setCurrentItem(this.pagerAdapter.getCount() - 1);
         }
     }
 
@@ -76,30 +79,27 @@ public class SwipeActivity extends FragmentActivity
 
     public void openMediaBrowser()
     {
-        final int count = this.pagerAdapter.getCount();
-        this.viewPager.setCurrentItem(count - 2, true);
+        this.slidingDrawer.animateOpen();
     }
 
     public void playMediaDirectory(File directory)
     {
         this.playlistFragment.setMediaDirectory(directory);
-        this.viewPager.setCurrentItem(this.pagerAdapter.getCount() - 1, true);
+        this.slidingDrawer.animateClose();
     }
 
     public void openMediaDirectory(File directory)
     {
         int index = this.pagerAdapter.findFolder(directory);
-        if (index >= 0)
+        if (index < 0)
         {
-            int current = this.viewPager.getCurrentItem();
-            for (int i  = current; i > index; i--)
-                this.viewPager.setCurrentItem(i - 1, false);
+            this.pagerAdapter.setFolder(directory);
+            int item = this.viewPager.getCurrentItem();
+            this.viewPager.setCurrentItem(item + 1, true);
         }
         else
         {
-            this.pagerAdapter.addFolder(directory);
-            int item = this.viewPager.getCurrentItem();
-            this.viewPager.setCurrentItem(item + 1, true);
+             this.viewPager.setCurrentItem(index, true);
         }
     }
 
@@ -113,15 +113,6 @@ public class SwipeActivity extends FragmentActivity
         private LocalPagerAdapter(FragmentManager fragmentManager)
         {
             super(fragmentManager);
-        }
-
-        @Override
-        protected Fragment getPlaylistFragment()
-        {
-            if (playlistFragment == null)
-                playlistFragment = new PlaylistFragment();
-
-            return playlistFragment;
         }
 
         @Override

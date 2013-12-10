@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:swp="http://schemas.android.com/apk/res/net.illusor.swipeplayer"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1">
+
+        <fragment
+            android:id="@+id/id_fragment_playlist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="net.illusor.swipeplayer.fragments.PlaylistFragment" />
+
+        <net.illusor.swipeplayer.widgets.SlidingDrawer
+            android:id="@+id/id_slider_browser"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            swp:orientation="horizontal"
+            swp:content="@+id/id_slider_browser_content"
+            swp:handle="@+id/id_slider_browser_handle">
+
+            <View
+                android:id="@id/id_slider_browser_handle"
+                android:layout_width="12dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/playlist_left_border" />
+
+            <android.support.v4.view.ViewPager
+                android:id="@id/id_slider_browser_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </net.illusor.swipeplayer.widgets.SlidingDrawer>
+
+        <net.illusor.swipeplayer.widgets.DurationDisplayView
+            android:id="@+id/id_audio_durations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+    <fragment
+        android:id="@+id/id_audio_control"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="net.illusor.swipeplayer.fragments.AudioControlFragment" />
+
+</LinearLayout>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:swp="http://schemas.android.com/apk/res/net.illusor.swipeplayer"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="#010129">-->
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:swp="http://schemas.android.com/apk/res/net.illusor.swipeplayer">
+
+    <net.illusor.swipeplayer.widgets.FormattedTextView
+            android:id="@+id/id_file_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            swp:HeaderTextSize="25sp"
+            swp:LineTextSize="15sp"
+            swp:Font="PTSansNarrow"
+            swp:TextColor="@color/color_folder_text"
+            swp:IsWrapping="true"/>
+
+    <ImageButton
+            android:id="@+id/id_file_play_all"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:src="@drawable/ic_play_folder"
+            android:background="@drawable/item_folder_bg"
+            android:contentDescription="@string/str_icon_play"/>
+
+</merge>
+
+<!--</LinearLayout>-->

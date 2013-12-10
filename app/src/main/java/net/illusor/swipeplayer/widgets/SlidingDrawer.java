@@ -269,12 +269,12 @@ public class SlidingDrawer extends ViewGroup
             final Bitmap cache = mContent.getDrawingCache();
             if (cache != null)
             {
-                canvas.drawBitmap(cache, handle.getRight(), 0, null);
+                canvas.drawBitmap(cache, handle.getLeft() - cache.getWidth(), 0, null);
             }
             else
             {
                 canvas.save();
-                canvas.translate(handle.getLeft(), 0);
+                canvas.translate(handle.getRight() - canvas.getWidth(), 0);
                 drawChild(canvas, mContent, drawingTime);
                 canvas.restore();
             }
@@ -305,10 +305,10 @@ public class SlidingDrawer extends ViewGroup
 
         final View content = mContent;
 
-        childLeft = mExpanded ? 0 : width - childWidth;
+        childLeft = mExpanded ? width - childWidth : 0 ;
         childTop = (height - childHeight) / 2;
 
-        content.layout(childWidth, 0, childWidth + content.getMeasuredWidth(), content.getMeasuredHeight());
+        content.layout(0, 0, content.getMeasuredWidth(), content.getMeasuredHeight());
 
         handle.layout(childLeft, childTop, childLeft + childWidth, childTop + childHeight);
         mHandleWidth = handle.getWidth();
@@ -394,9 +394,8 @@ public class SlidingDrawer extends ViewGroup
 
                     if (Math.abs(velocity) < mMaximumTapVelocity)
                     {
-                        if ((mExpanded && left < mTapThreshold) || (!mExpanded && left > getRight() - getLeft() - mHandleWidth - mTapThreshold))
+                        if ((!mExpanded && left < mTapThreshold) || (mExpanded && left > getRight() - getLeft() - mHandleWidth - mTapThreshold))
                         {
-
                             if (mAllowSingleTap)
                             {
                                 playSoundEffect(SoundEffectConstants.CLICK);
@@ -448,7 +447,7 @@ public class SlidingDrawer extends ViewGroup
 
         if (mExpanded)
         {
-            if (always || (velocity > mMaximumMajorVelocity || (position > mHandleWidth && velocity > -mMaximumMajorVelocity)))
+            if (always || (velocity > mMaximumMajorVelocity || (position > getWidth() / 2 && velocity > -mMaximumMajorVelocity)))
             {
                 // We are expanded, but they didn't move sufficiently to cause
                 // us to retract.  Animate back to the expanded position.
@@ -466,7 +465,7 @@ public class SlidingDrawer extends ViewGroup
         }
         else
         {
-            if (!always && (velocity > mMaximumMajorVelocity || (position > getWidth() / 2 && velocity > -mMaximumMajorVelocity)))
+            if (!always && (velocity > mMaximumMajorVelocity || (position > mHandleWidth && velocity > -mMaximumMajorVelocity)))
             {
                 // We are collapsed, and they moved enough to allow us to expand.
                 mAnimatedAcceleration = mMaximumAcceleration;
@@ -501,7 +500,7 @@ public class SlidingDrawer extends ViewGroup
         {
             mAnimatedAcceleration = mMaximumAcceleration;
             mAnimatedVelocity = mMaximumMajorVelocity;
-            mAnimationPosition = getWidth() - mHandleWidth;
+            mAnimationPosition = 0;
             moveHandle((int) mAnimationPosition);
             mAnimating = true;
             mHandler.removeMessages(MSG_ANIMATE);
@@ -527,14 +526,14 @@ public class SlidingDrawer extends ViewGroup
 
         if (position == EXPANDED_FULL_OPEN)
         {
-            handle.offsetLeftAndRight(-handle.getLeft());
+            handle.offsetLeftAndRight(getRight() - getLeft() - mHandleWidth - handle.getLeft());
             invalidate();
         }
         else
         {
             if (position == COLLAPSED_FULL_CLOSED)
             {
-                handle.offsetLeftAndRight(getRight() - getLeft() - mHandleWidth - handle.getLeft());
+                handle.offsetLeftAndRight(-handle.getLeft());
                 invalidate();
             }
             else
@@ -558,8 +557,8 @@ public class SlidingDrawer extends ViewGroup
                 handle.getHitRect(frame);
                 region.set(frame);
 
-                region.union(frame.left - deltaX, frame.top, frame.right - deltaX, frame.bottom);
-                region.union(frame.right - deltaX, 0, frame.right - deltaX + mContent.getWidth(), getHeight());
+                region.union(frame.left + deltaX, frame.top, frame.right + deltaX, frame.bottom);
+                region.union(frame.left + deltaX - mContent.getWidth(), 0, frame.right + deltaX, getHeight());
 
                 invalidate(region);
             }
@@ -579,7 +578,7 @@ public class SlidingDrawer extends ViewGroup
             final int childWidth = mHandle.getWidth();
             int width = getRight() - getLeft() - childWidth;
             content.measure(MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(getBottom() - getTop(), MeasureSpec.EXACTLY));
-            content.layout(childWidth, 0, childWidth + content.getMeasuredWidth(), content.getMeasuredHeight());
+            content.layout(0, 0, content.getMeasuredWidth(), content.getMeasuredHeight());
         }
 
         // Try only once... we should really loop but it's not a big deal
@@ -596,9 +595,7 @@ public class SlidingDrawer extends ViewGroup
         mTracking = false;
 
         if (mOnDrawerScrollListener != null)
-        {
             mOnDrawerScrollListener.onScrollEnded();
-        }
 
         if (mVelocityTracker != null)
         {
@@ -615,14 +612,14 @@ public class SlidingDrawer extends ViewGroup
             if (mAnimationPosition >= getWidth() - 1)
             {
                 mAnimating = false;
-                closeDrawer();
+                openDrawer();
             }
             else
             {
                 if (mAnimationPosition < 0)
                 {
                     mAnimating = false;
-                    openDrawer();
+                    closeDrawer();
                 }
                 else
                 {
@@ -658,13 +655,9 @@ public class SlidingDrawer extends ViewGroup
     public void toggle()
     {
         if (!mExpanded)
-        {
             openDrawer();
-        }
         else
-        {
             closeDrawer();
-        }
         invalidate();
         requestLayout();
     }

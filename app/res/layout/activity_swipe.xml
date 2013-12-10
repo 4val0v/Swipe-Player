@@ -21,7 +21,6 @@
             android:id="@+id/id_slider_browser"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            swp:orientation="horizontal"
             swp:content="@+id/id_slider_browser_content"
             swp:handle="@+id/id_slider_browser_handle">
 

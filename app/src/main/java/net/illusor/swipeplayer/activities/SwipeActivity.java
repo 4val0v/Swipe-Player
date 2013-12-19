@@ -1,24 +1,34 @@
 package net.illusor.swipeplayer.activities;
 
+import android.app.Service;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.IBinder;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.util.Pair;
+import android.view.Menu;
+import android.view.MenuItem;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.fragments.FolderBrowserFragment;
 import net.illusor.swipeplayer.fragments.PlaylistFragment;
 import net.illusor.swipeplayer.helpers.PreferencesHelper;
+import net.illusor.swipeplayer.services.AudioPlayerState;
+import net.illusor.swipeplayer.services.SoundService;
 
 import java.io.File;
 import java.util.List;
 
 public class SwipeActivity extends FragmentActivity
 {
+    private final SoundServiceConnection connection = new SoundServiceConnection();
     private LocalPagerAdapter pagerAdapter;
     private ViewPager viewPager;
     private PlaylistFragment playlistFragment;
@@ -40,7 +50,7 @@ public class SwipeActivity extends FragmentActivity
             if (lastBrowsedFolder != null)
                 this.pagerAdapter.setCurrentFolder(lastBrowsedFolder);
             else
-                this.pagerAdapter.addFolder(Environment.getExternalStorageDirectory());
+                this.pagerAdapter.addFolder(Environment.getRootDirectory());
 
             this.viewPager.setAdapter(this.pagerAdapter);
             this.viewPager.setCurrentItem(this.pagerAdapter.getCount() - 1);
@@ -67,11 +77,36 @@ public class SwipeActivity extends FragmentActivity
     }
 
     @Override
+    protected void onStart()
+    {
+        super.onStart();
+        this.connection.bind();
+    }
+
+    @Override
     protected void onStop()
     {
         super.onStop();
+        this.connection.unbind();
         Pair<File, File> browsedFolder = this.pagerAdapter.getCurrentFolder();
         PreferencesHelper.setBrowserFolders(this, browsedFolder);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        menu.add(0, 0, 0, R.string.str_application_exit);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        if (this.connection.service != null && this.connection.service.getState() != AudioPlayerState.Stopped)
+            this.connection.service.stop();
+
+        this.finish();
+        return true;
     }
 
     public void openMediaBrowser()
@@ -128,6 +163,34 @@ public class SwipeActivity extends FragmentActivity
         protected Fragment getBrowserFragment(File folder)
         {
             return FolderBrowserFragment.newInstance(folder);
+        }
+    }
+
+    private class SoundServiceConnection implements ServiceConnection
+    {
+        private SoundService.SoundServiceBinder service;
+
+        private void bind()
+        {
+            Intent intent = new Intent(getBaseContext(), SoundService.class);
+            bindService(intent, this, Service.BIND_AUTO_CREATE);
+        }
+
+        private void unbind()
+        {
+            unbindService(this);
+        }
+
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder binder)
+        {
+            this.service = (SoundService.SoundServiceBinder)binder;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName)
+        {
+            this.service = null;
         }
     }
 }

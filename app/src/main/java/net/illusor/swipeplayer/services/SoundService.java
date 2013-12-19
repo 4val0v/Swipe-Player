@@ -164,12 +164,6 @@ public class SoundService extends Service
         }
     }
 
-    private void showErrorNotification(AudioFile audioFile)
-    {
-        NotificationManager service = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        service.notify(NOTIFICATION_CODE_ERROR, notificationHelper.getErrorNotification(audioFile));
-    }
-
     private class AudioFocusChangeListener implements AudioManager.OnAudioFocusChangeListener
     {
         private int lostFocusReason;
@@ -246,16 +240,6 @@ public class SoundService extends Service
             this.soundService.play(file);
         }
 
-        public void playNext()
-        {
-            this.soundService.playNext();
-        }
-
-        public void playPrevious()
-        {
-            this.soundService.playPrevious();
-        }
-
         public void pause()
         {
             this.soundService.pause();
@@ -264,6 +248,11 @@ public class SoundService extends Service
         public void resume()
         {
             this.soundService.resume();
+        }
+
+        public void stop()
+        {
+            this.soundService.stop();
         }
 
         public void startRewind()

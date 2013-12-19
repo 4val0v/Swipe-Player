@@ -51,18 +51,18 @@
     <list default="true" id="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" name="Default" comment="" />
     <ignored path="swipeplayer.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/pom.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386404722059" ignored="false" />
+    <file path="/pom.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387475565184" ignored="false" />
     <file path="/AndroidManifest.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386316672995" ignored="false" />
-    <file path="/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386327956111" ignored="false" />
+    <file path="/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387474103609" ignored="false" />
     <file path="$APPLICATION_HOME_DIR$/plugins/android/lib/android.jar!/org/jetbrains/android/android.xsd" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1381334275064" ignored="false" />
-    <file path="/SwipeActivity.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386177410887" ignored="false" />
+    <file path="/SwipeActivity.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387475862181" ignored="false" />
     <file path="/Dummy.txt" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386412598982" ignored="false" />
     <file path="/SwipeActivity.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1381335237728" ignored="false" />
     <file path="/PlaylistFragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386174163115" ignored="false" />
     <file path="/PlaylistFragment.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1381335503279" ignored="false" />
     <file path="/fragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386415095348" ignored="false" />
     <file path="/swipe_activity.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1385921817482" ignored="false" />
-    <file path="/FolderBrowserFragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386174208607" ignored="false" />
+    <file path="/FolderBrowserFragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387474966079" ignored="false" />
     <file path="/folder_browser_fragment.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1383984630211" ignored="false" />
     <file path="/list_item_folder.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1385283211422" ignored="false" />
     <file path="/a.dummy" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386314972948" ignored="false" />
@@ -93,7 +93,7 @@
     <file path="/list_item_playlist.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1384238001940" ignored="false" />
     <file path="/ListItemPlaylist.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382890989735" ignored="false" />
     <file path="/TimeFormatter.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386314772011" ignored="false" />
-    <file path="/SoundService.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386222461154" ignored="false" />
+    <file path="/SoundService.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387473816655" ignored="false" />
     <file path="/PlaylistItemView.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1384596845912" ignored="false" />
     <file path="/AudioControlView.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1385892798661" ignored="false" />
     <file path="/ExtendedListView.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1382893268451" ignored="false" />
@@ -108,7 +108,7 @@
     <file path="/NotificationHelper.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386311954947" ignored="false" />
     <file path="/SwipePagerAdapter.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386177673835" ignored="false" />
     <file path="/audio_control_view.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1385888893036" ignored="false" />
-    <file path="/AudioFoldersLoader.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386136601991" ignored="false" />
+    <file path="/AudioFoldersLoader.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387474744380" ignored="false" />
     <file path="/AudioFilesLoader.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1385279580082" ignored="false" />
     <file path="/FolderItemView.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1385283252223" ignored="false" />
     <file path="/MediaPlayer.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1385293968633" ignored="false" />
@@ -118,12 +118,12 @@
     <file path="/TrackListAdapter.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386139370796" ignored="false" />
     <file path="/TrackFragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386181802392" ignored="false" />
     <file path="/fragment_track.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1385995828751" ignored="false" />
-    <file path="$PROJECT_DIR$/gen/net/illusor/swipeplayer/R.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386316677294" ignored="false" />
+    <file path="$PROJECT_DIR$/gen/net/illusor/swipeplayer/R.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387475542388" ignored="false" />
     <file path="/ClickableViewPager.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1385891913049" ignored="false" />
     <file path="/AudioBroadcastHandler.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386185014668" ignored="false" />
     <file path="/PreferencesHelper.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386177497022" ignored="false" />
     <file path="/TrackPager.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386587177704" ignored="false" />
-    <file path="/AudioControlFragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386414277891" ignored="false" />
+    <file path="/AudioControlFragment.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387473108307" ignored="false" />
     <file path="/fragment_audio_control.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386405445664" ignored="false" />
     <file path="/PlaylistLoaderCallbacks.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1385922938463" ignored="false" />
     <file path="/MediaButtonReceiver.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386222401490" ignored="false" />
@@ -134,7 +134,7 @@
     <file path="/fragment_playlist.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386075746367" ignored="false" />
     <file path="/dropdown_open.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386094273785" ignored="false" />
     <file path="/merge_preloader.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386049409553" ignored="false" />
-    <file path="/themes.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386148909930" ignored="false" />
+    <file path="/themes.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387475687470" ignored="false" />
     <file path="/listview_track_vertical.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386075502256" ignored="false" />
     <file path="/trackbar_browser.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386075629933" ignored="false" />
     <file path="/NavigationHistoryAdapter.java" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386097951076" ignored="false" />
@@ -159,6 +159,7 @@
     <file path="/anim_fade_in.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386412654034" ignored="false" />
     <file path="/anim_fade_out.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386413260362" ignored="false" />
     <file path="/durations_display.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1386416553281" ignored="false" />
+    <file path="/themes.xaml.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387475208271" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,23 +179,6 @@
     <sortChildren value="false" />
   </component>
   <component name="DebuggerManager">
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="jar://$MAVEN_REPOSITORY$/com/android/support/support-v4/18.0.0/support-v4-18.0.0-sources.jar!/android/support/v4/app/FragmentStatePagerAdapter.java" line="173" class="android.support.v4.app.FragmentStatePagerAdapter" package="android.support.v4.app">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </line_breakpoints>
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
@@ -232,6 +216,23 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
+      <breakpoint url="jar://$MAVEN_REPOSITORY$/com/android/support/support-v4/18.0.0/support-v4-18.0.0-sources.jar!/android/support/v4/app/FragmentStatePagerAdapter.java" line="173" class="android.support.v4.app.FragmentStatePagerAdapter" package="android.support.v4.app">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </line_breakpoints>
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -241,6 +242,95 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="SwipeActivity.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/activities/SwipeActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="0" selection-start="562" selection-end="562" vertical-scroll-proportion="-0.49292454">
+              <folding>
+                <element signature="method#onSaveInstanceState#0;class#SwipeActivity#0" expanded="false" />
+                <element signature="method#onRestoreInstanceState#0;class#SwipeActivity#0" expanded="false" />
+                <element signature="method#onStart#0;class#SwipeActivity#0" expanded="false" />
+                <element signature="method#onStop#0;class#SwipeActivity#0" expanded="false" />
+                <element signature="method#onCreateOptionsMenu#0;class#SwipeActivity#0" expanded="false" />
+                <element signature="method#onOptionsItemSelected#0;class#SwipeActivity#0" expanded="false" />
+                <element signature="method#openMediaBrowser#0;class#SwipeActivity#0" expanded="false" />
+                <element signature="method#playMediaDirectory#0;class#SwipeActivity#0" expanded="false" />
+                <element signature="method#openMediaDirectory#0;class#SwipeActivity#0" expanded="false" />
+                <element signature="method#getBrowserHistory#0;class#SwipeActivity#0" expanded="false" />
+                <element signature="class#LocalPagerAdapter#0;class#SwipeActivity#0" expanded="false" />
+                <element signature="method#LocalPagerAdapter#0;class#LocalPagerAdapter#0;class#SwipeActivity#0" expanded="false" />
+                <element signature="method#getPlaylistFragment#0;class#LocalPagerAdapter#0;class#SwipeActivity#0" expanded="false" />
+                <element signature="method#getBrowserFragment#0;class#LocalPagerAdapter#0;class#SwipeActivity#0" expanded="false" />
+                <element signature="class#SoundServiceConnection#0;class#SwipeActivity#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AudioFoldersLoader.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/AudioFoldersLoader.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="37" column="112" selection-start="1043" selection-end="1043" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="66" column="31" selection-start="2505" selection-end="2505" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="tag#properties#0;tag#project#0" expanded="false" />
+                <element signature="tag#build#0;tag#project#0" expanded="false" />
+                <element signature="tag#dependency#0;tag#dependencies#0;tag#project#0" expanded="false" />
+                <element signature="tag#dependency#1;tag#dependencies#0;tag#project#0" expanded="false" />
+                <element signature="tag#dependency#2;tag#dependencies#0;tag#project#0" expanded="false" />
+                <element signature="tag#dependency#3;tag#dependencies#0;tag#project#0" expanded="false" />
+                <element signature="tag#dependency#4;tag#dependencies#0;tag#project#0" expanded="false" />
+                <element signature="tag#plugins#0;tag#build#0;tag#profile#0;tag#profiles#0;tag#project#0" expanded="false" />
+                <element signature="tag#plugin#0;tag#plugins#0;tag#build#0;tag#profile#0;tag#profiles#0;tag#project#0" expanded="false" />
+                <element signature="tag#configuration#0;tag#plugin#0;tag#plugins#0;tag#build#0;tag#profile#0;tag#profiles#0;tag#project#0" expanded="false" />
+                <element signature="tag#sdk#0;tag#configuration#0;tag#plugin#0;tag#plugins#0;tag#build#0;tag#profile#0;tag#profiles#0;tag#project#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SoundService.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/services/SoundService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="241" column="0" selection-start="8529" selection-end="8529" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="method#onCreate#0;class#SoundService#0" expanded="false" />
+                <element signature="method#onStartCommand#0;class#SoundService#0" expanded="false" />
+                <element signature="method#play#0;class#SoundService#0" expanded="false" />
+                <element signature="method#stop#0;class#SoundService#0" expanded="false" />
+                <element signature="method#playNext#0;class#SoundService#0" expanded="false" />
+                <element signature="method#playPrevious#0;class#SoundService#0" expanded="false" />
+                <element signature="method#pause#0;class#SoundService#0" expanded="false" />
+                <element signature="method#resume#0;class#SoundService#0" expanded="false" />
+                <element signature="class#AudioFocusChangeListener#0;class#SoundService#0" expanded="false" />
+                <element signature="method#onAudioFocusChange#0;class#AudioFocusChangeListener#0;class#SoundService#0" expanded="false" />
+                <element signature="class#NoisyReceiver#0;class#SoundService#0" expanded="false" />
+                <element signature="method#onReceive#0;class#NoisyReceiver#0;class#SoundService#0" expanded="false" />
+                <element signature="method#SoundServiceBinder#0;class#SoundServiceBinder#0;class#SoundService#0" expanded="false" />
+                <element signature="method#play#0;class#SoundServiceBinder#0;class#SoundService#0" expanded="false" />
+                <element signature="method#pause#0;class#SoundServiceBinder#0;class#SoundService#0" expanded="false" />
+                <element signature="method#resume#0;class#SoundServiceBinder#0;class#SoundService#0" expanded="false" />
+                <element signature="method#stop#0;class#SoundServiceBinder#0;class#SoundService#0" expanded="false" />
+                <element signature="method#startRewind#0;class#SoundServiceBinder#0;class#SoundService#0" expanded="false" />
+                <element signature="method#finishRewind#0;class#SoundServiceBinder#0;class#SoundService#0" expanded="false" />
+                <element signature="method#getAudioFile#0;class#SoundServiceBinder#0;class#SoundService#0" expanded="false" />
+                <element signature="method#getState#0;class#SoundServiceBinder#0;class#SoundService#0" expanded="false" />
+                <element signature="method#getPosition#0;class#SoundServiceBinder#0;class#SoundService#0" expanded="false" />
+                <element signature="method#getDuration#0;class#SoundServiceBinder#0;class#SoundService#0" expanded="false" />
+                <element signature="method#setPlaylist#0;class#SoundServiceBinder#0;class#SoundService#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="activity_swipe.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/layout/activity_swipe.xml">
           <provider selected="true" editor-type-id="text-editor">
@@ -256,7 +346,7 @@
       <file leaf-file-name="AudioControlFragment.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/AudioControlFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="145" column="4" selection-start="4570" selection-end="4570" vertical-scroll-proportion="0.0">
+            <state line="220" column="4" selection-start="7212" selection-end="7212" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="method#onCreateView#0;class#AudioControlFragment#0" expanded="false" />
                 <element signature="method#onActivityCreated#0;class#AudioControlFragment#0" expanded="false" />
@@ -278,7 +368,6 @@
                 <element signature="class#SoundServiceConnection#0;class#AudioControlFragment#0" expanded="false" />
                 <element signature="method#bind#0;class#SoundServiceConnection#0;class#AudioControlFragment#0" expanded="false" />
                 <element signature="method#unbind#0;class#SoundServiceConnection#0;class#AudioControlFragment#0" expanded="false" />
-                <element signature="method#onServiceConnected#0;class#SoundServiceConnection#0;class#AudioControlFragment#0" expanded="false" />
                 <element signature="method#onServiceDisconnected#0;class#SoundServiceConnection#0;class#AudioControlFragment#0" expanded="false" />
                 <element signature="class#SoundServiceReceiver#0;class#AudioControlFragment#0" expanded="false" />
                 <element signature="method#onPlayAudioFile#0;class#SoundServiceReceiver#0;class#AudioControlFragment#0" expanded="false" />
@@ -294,15 +383,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TrackPager.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/TrackPager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="69" column="55" selection-start="1917" selection-end="1917" vertical-scroll-proportion="0.16297787">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FindManager">
@@ -313,22 +393,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/AnimatedSeekBar.java" />
-        <option value="$PROJECT_DIR$/res/layout/fragment_audio_control.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/FragmentTiming.java" />
-        <option value="$PROJECT_DIR$/res/layout/fragment_timing.xml" />
-        <option value="$PROJECT_DIR$/res/drawable/fragment_durations_bg.xml" />
-        <option value="$PROJECT_DIR$/res/values/colors.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/FragmentDurations.java" />
-        <option value="$PROJECT_DIR$/res/layout/fragment_durations.xml" />
-        <option value="$PROJECT_DIR$/res/anim/anim_fade_in.xml" />
         <option value="$PROJECT_DIR$/res/anim/anim_fade_out.xml" />
         <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/NavigationItemView.java" />
         <option value="$PROJECT_DIR$/res/layout/durations_display.xml" />
         <option value="$PROJECT_DIR$/res/layout/activity_swipe.xml" />
         <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/DurationDisplayView.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/AudioControlFragment.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/TrackPager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/AudioControlFragment.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/services/SoundService.java" />
+        <option value="$PROJECT_DIR$/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/AudioFoldersLoader.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/FolderBrowserFragment.java" />
+        <option value="$PROJECT_DIR$/res/values-v11/themes.xaml.xml" />
+        <option value="$PROJECT_DIR$/res/values-v11/themes.xml" />
+        <option value="$PROJECT_DIR$/res/values/themes.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/activities/SwipeActivity.java" />
       </list>
     </option>
   </component>
@@ -346,14 +426,38 @@
           <option name="myItemId" value="" />
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
         </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="swipeplayer" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Dependencies" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$DependenciesNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="swipeplayer" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
       </PATH>
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1932" />
-    <option name="height" value="1066" />
+    <option name="x" value="-9" />
+    <option name="y" value="-9" />
+    <option name="width" value="1938" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -381,7 +485,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -623,6 +726,10 @@
               <option name="myItemId" value="res" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -635,10 +742,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -662,6 +765,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -889,35 +993,35 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1932" height="1066" extended-state="0" />
+    <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.309795" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.42337376" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3002283" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287483" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31863284" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31849316" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4429161" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32921812" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19465241" sideWeight="0.57662624" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19423692" sideWeight="0.57662624" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20695187" sideWeight="0.57662624" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20651014" sideWeight="0.6997717" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19797225" sideWeight="0.59246576" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287483" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2087518" sideWeight="0.5639615" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="DSM" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="60" y="131" width="1256" height="686" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19797225" sideWeight="0.59246576" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18292683" sideWeight="0.5639615" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294964" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31086656" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Module Dependencies" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Duplicates" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296582" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -989,95 +1093,9 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/res/layout/activity_swipe.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="66" selection-start="749" selection-end="749" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/AudioControlFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="159" column="35" selection-start="4957" selection-end="4957" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="method#onCreateView#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="method#onActivityCreated#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="method#onClick#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="method#onStart#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="method#onStop#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="method#setPlaylist#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="method#startTrackingProgress#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="method#stopTrackingProgress#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="method#setAudioFile#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="method#animatePause#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="method#animatePlay#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="class#ProgressListener#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="method#onProgressChanged#0;class#ProgressListener#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="method#onStartTrackingTouch#0;class#ProgressListener#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="method#onStopTrackingTouch#0;class#ProgressListener#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="class#TrackSwipeListener#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="method#onPageSelected#0;class#TrackSwipeListener#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="class#SoundServiceConnection#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="method#bind#0;class#SoundServiceConnection#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="method#unbind#0;class#SoundServiceConnection#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="method#onServiceConnected#0;class#SoundServiceConnection#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="method#onServiceDisconnected#0;class#SoundServiceConnection#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="class#SoundServiceReceiver#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="method#onPlayAudioFile#0;class#SoundServiceReceiver#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="method#onPlaybackStop#0;class#SoundServiceReceiver#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="method#onPlaybackPause#0;class#SoundServiceReceiver#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="method#onPlaybackResume#0;class#SoundServiceReceiver#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="method#getClassContext#0;class#SoundServiceReceiver#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="class#ProgressTrackingTask#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="method#ProgressTrackingTask#0;class#ProgressTrackingTask#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="method#run#0;class#ProgressTrackingTask#0;class#AudioControlFragment#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="46" selection-start="999" selection-end="999" vertical-scroll-proportion="0.6424474">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/activities/SwipeActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="13" selection-start="644" selection-end="644" vertical-scroll-proportion="0.122370936">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/PlaylistItemView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="13" selection-start="364" selection-end="364" vertical-scroll-proportion="0.122370936">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/PlaylistFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="159" column="37" selection-start="5505" selection-end="5505" vertical-scroll-proportion="0.22189349">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/drawable/item_playlist_text.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/list_item_folder.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.65217394">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.65217394" />
       </provider>
       <provider editor-type-id="android-designer">
         <state />
@@ -1085,9 +1103,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/list_item_nav_history.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.7826087">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.7826087" />
       </provider>
       <provider editor-type-id="android-designer">
         <state />
@@ -1095,9 +1111,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/list_item_playlist.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
       <provider editor-type-id="android-designer">
         <state />
@@ -1147,9 +1161,62 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/services/SoundService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="241" column="0" selection-start="8529" selection-end="8529" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="method#onCreate#0;class#SoundService#0" expanded="false" />
+            <element signature="method#onStartCommand#0;class#SoundService#0" expanded="false" />
+            <element signature="method#play#0;class#SoundService#0" expanded="false" />
+            <element signature="method#stop#0;class#SoundService#0" expanded="false" />
+            <element signature="method#playNext#0;class#SoundService#0" expanded="false" />
+            <element signature="method#playPrevious#0;class#SoundService#0" expanded="false" />
+            <element signature="method#pause#0;class#SoundService#0" expanded="false" />
+            <element signature="method#resume#0;class#SoundService#0" expanded="false" />
+            <element signature="class#AudioFocusChangeListener#0;class#SoundService#0" expanded="false" />
+            <element signature="method#onAudioFocusChange#0;class#AudioFocusChangeListener#0;class#SoundService#0" expanded="false" />
+            <element signature="class#NoisyReceiver#0;class#SoundService#0" expanded="false" />
+            <element signature="method#onReceive#0;class#NoisyReceiver#0;class#SoundService#0" expanded="false" />
+            <element signature="method#SoundServiceBinder#0;class#SoundServiceBinder#0;class#SoundService#0" expanded="false" />
+            <element signature="method#play#0;class#SoundServiceBinder#0;class#SoundService#0" expanded="false" />
+            <element signature="method#pause#0;class#SoundServiceBinder#0;class#SoundService#0" expanded="false" />
+            <element signature="method#resume#0;class#SoundServiceBinder#0;class#SoundService#0" expanded="false" />
+            <element signature="method#stop#0;class#SoundServiceBinder#0;class#SoundService#0" expanded="false" />
+            <element signature="method#startRewind#0;class#SoundServiceBinder#0;class#SoundService#0" expanded="false" />
+            <element signature="method#finishRewind#0;class#SoundServiceBinder#0;class#SoundService#0" expanded="false" />
+            <element signature="method#getAudioFile#0;class#SoundServiceBinder#0;class#SoundService#0" expanded="false" />
+            <element signature="method#getState#0;class#SoundServiceBinder#0;class#SoundService#0" expanded="false" />
+            <element signature="method#getPosition#0;class#SoundServiceBinder#0;class#SoundService#0" expanded="false" />
+            <element signature="method#getDuration#0;class#SoundServiceBinder#0;class#SoundService#0" expanded="false" />
+            <element signature="method#setPlaylist#0;class#SoundServiceBinder#0;class#SoundService#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/helpers/OverScrollHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="23" selection-start="262" selection-end="262" vertical-scroll-proportion="0.14117648">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/TrackPager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="113" column="98" selection-start="3365" selection-end="3365" vertical-scroll-proportion="-0.33532935">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="51" selection-start="160" selection-end="160" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/AudioControlFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="145" column="4" selection-start="4570" selection-end="4570" vertical-scroll-proportion="0.0">
+        <state line="220" column="4" selection-start="7212" selection-end="7212" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="method#onCreateView#0;class#AudioControlFragment#0" expanded="false" />
             <element signature="method#onActivityCreated#0;class#AudioControlFragment#0" expanded="false" />
@@ -1171,7 +1238,6 @@
             <element signature="class#SoundServiceConnection#0;class#AudioControlFragment#0" expanded="false" />
             <element signature="method#bind#0;class#SoundServiceConnection#0;class#AudioControlFragment#0" expanded="false" />
             <element signature="method#unbind#0;class#SoundServiceConnection#0;class#AudioControlFragment#0" expanded="false" />
-            <element signature="method#onServiceConnected#0;class#SoundServiceConnection#0;class#AudioControlFragment#0" expanded="false" />
             <element signature="method#onServiceDisconnected#0;class#SoundServiceConnection#0;class#AudioControlFragment#0" expanded="false" />
             <element signature="class#SoundServiceReceiver#0;class#AudioControlFragment#0" expanded="false" />
             <element signature="method#onPlayAudioFile#0;class#SoundServiceReceiver#0;class#AudioControlFragment#0" expanded="false" />
@@ -1186,10 +1252,88 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/widgets/TrackPager.java">
+    <entry file="file://$PROJECT_DIR$/res/values/themes.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="55" selection-start="1917" selection-end="1917" vertical-scroll-proportion="0.16297787">
+        <state line="3" column="44" selection-start="96" selection-end="120" vertical-scroll-proportion="0.07272727">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/FolderBrowserFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="147" column="51" selection-start="4823" selection-end="4823" vertical-scroll-proportion="1.7093596">
+          <folding>
+            <element signature="e#737#753#0" expanded="false" />
+            <element signature="method#newInstance#0;class#FolderBrowserFragment#0" expanded="false" />
+            <element signature="method#onCreateView#0;class#FolderBrowserFragment#0" expanded="false" />
+            <element signature="method#onStart#0;class#FolderBrowserFragment#0" expanded="false" />
+            <element signature="method#onStop#0;class#FolderBrowserFragment#0" expanded="false" />
+            <element signature="method#setUserVisibleHint#0;class#FolderBrowserFragment#0" expanded="false" />
+            <element signature="method#onCreateContextMenu#0;class#FolderBrowserFragment#0" expanded="false" />
+            <element signature="e#4059#4090#0" expanded="false" />
+            <element signature="method#onItemSelected#0;class#FolderBrowserFragment#0" expanded="false" />
+            <element signature="method#onNothingSelected#0;class#FolderBrowserFragment#0" expanded="false" />
+            <element signature="method#showLoadingIndicator#0;class#FolderBrowserFragment#0" expanded="false" />
+            <element signature="method#getSwipeActivity#0;class#FolderBrowserFragment#0" expanded="false" />
+            <element signature="class#AudioFilesAdapter#0;class#FolderBrowserFragment#0" expanded="false" />
+            <element signature="method#AudioFilesAdapter#0;class#AudioFilesAdapter#0;class#FolderBrowserFragment#0" expanded="false" />
+            <element signature="method#getView#0;class#AudioFilesAdapter#0;class#FolderBrowserFragment#0" expanded="false" />
+            <element signature="class#AudioLoaderCallbacks#0;class#FolderBrowserFragment#0" expanded="false" />
+            <element signature="method#onCreateLoader#0;class#AudioLoaderCallbacks#0;class#FolderBrowserFragment#0" expanded="false" />
+            <element signature="method#onLoadFinished#0;class#AudioLoaderCallbacks#0;class#FolderBrowserFragment#0" expanded="false" />
+            <element signature="method#onLoaderReset#0;class#AudioLoaderCallbacks#0;class#FolderBrowserFragment#0" expanded="false" />
+            <element signature="method#initLoader#0;class#AudioLoaderCallbacks#0;class#FolderBrowserFragment#0" expanded="false" />
+            <element signature="method#quitLoader#0;class#AudioLoaderCallbacks#0;class#FolderBrowserFragment#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/AudioFoldersLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="112" selection-start="1043" selection-end="1043" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="66" column="31" selection-start="2505" selection-end="2505" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="tag#properties#0;tag#project#0" expanded="false" />
+            <element signature="tag#build#0;tag#project#0" expanded="false" />
+            <element signature="tag#dependency#0;tag#dependencies#0;tag#project#0" expanded="false" />
+            <element signature="tag#dependency#1;tag#dependencies#0;tag#project#0" expanded="false" />
+            <element signature="tag#dependency#2;tag#dependencies#0;tag#project#0" expanded="false" />
+            <element signature="tag#dependency#3;tag#dependencies#0;tag#project#0" expanded="false" />
+            <element signature="tag#dependency#4;tag#dependencies#0;tag#project#0" expanded="false" />
+            <element signature="tag#plugins#0;tag#build#0;tag#profile#0;tag#profiles#0;tag#project#0" expanded="false" />
+            <element signature="tag#plugin#0;tag#plugins#0;tag#build#0;tag#profile#0;tag#profiles#0;tag#project#0" expanded="false" />
+            <element signature="tag#configuration#0;tag#plugin#0;tag#plugins#0;tag#build#0;tag#profile#0;tag#profiles#0;tag#project#0" expanded="false" />
+            <element signature="tag#sdk#0;tag#configuration#0;tag#plugin#0;tag#plugins#0;tag#build#0;tag#profile#0;tag#profiles#0;tag#project#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/activities/SwipeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="0" selection-start="562" selection-end="562" vertical-scroll-proportion="-0.49292454">
+          <folding>
+            <element signature="method#onSaveInstanceState#0;class#SwipeActivity#0" expanded="false" />
+            <element signature="method#onRestoreInstanceState#0;class#SwipeActivity#0" expanded="false" />
+            <element signature="method#onStart#0;class#SwipeActivity#0" expanded="false" />
+            <element signature="method#onStop#0;class#SwipeActivity#0" expanded="false" />
+            <element signature="method#onCreateOptionsMenu#0;class#SwipeActivity#0" expanded="false" />
+            <element signature="method#onOptionsItemSelected#0;class#SwipeActivity#0" expanded="false" />
+            <element signature="method#openMediaBrowser#0;class#SwipeActivity#0" expanded="false" />
+            <element signature="method#playMediaDirectory#0;class#SwipeActivity#0" expanded="false" />
+            <element signature="method#openMediaDirectory#0;class#SwipeActivity#0" expanded="false" />
+            <element signature="method#getBrowserHistory#0;class#SwipeActivity#0" expanded="false" />
+            <element signature="class#LocalPagerAdapter#0;class#SwipeActivity#0" expanded="false" />
+            <element signature="method#LocalPagerAdapter#0;class#LocalPagerAdapter#0;class#SwipeActivity#0" expanded="false" />
+            <element signature="method#getPlaylistFragment#0;class#LocalPagerAdapter#0;class#SwipeActivity#0" expanded="false" />
+            <element signature="method#getBrowserFragment#0;class#LocalPagerAdapter#0;class#SwipeActivity#0" expanded="false" />
+            <element signature="class#SoundServiceConnection#0;class#SwipeActivity#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

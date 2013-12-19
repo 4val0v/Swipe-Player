@@ -6,9 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.*;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.activities.SwipeActivity;
@@ -59,7 +57,9 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
         this.navigationHistory.setOnItemSelectedListener(this);
         this.listAudioFiles.setOnItemClickListener(this);
         this.currentFolder = (File)this.getArguments().getSerializable(PARAM_FOLDER);
+
         OverScrollHelper.overScrollDisable(this.listAudioFiles);
+        this.registerForContextMenu(this.listAudioFiles);
     }
 
     @Override
@@ -89,6 +89,22 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
             this.navigationHistory.setAdapter(adapter);
             this.navigationHistory.setSelection(navigationItems.indexOf(this.currentFolder));
         }
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
+    {
+        menu.add(0, 0, 0, R.string.str_directory_play);
+        super.onCreateContextMenu(menu, v, menuInfo);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item)
+    {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+        AudioFile audioFile = (AudioFile)this.listAudioFiles.getItemAtPosition(info.position);
+        this.getSwipeActivity().playMediaDirectory(audioFile);
+        return true;
     }
 
     //region OnItemClickListener

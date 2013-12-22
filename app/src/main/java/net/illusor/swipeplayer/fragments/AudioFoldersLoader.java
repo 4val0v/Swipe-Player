@@ -35,7 +35,7 @@ class AudioFoldersLoader extends AsyncTaskLoader<List<AudioFile>>
     @Override
     public List<AudioFile> loadInBackground()
     {
-        Cursor cursor = this.getContext().getContentResolver().query(MediaStore.Audio.Media.INTERNAL_CONTENT_URI,
+        Cursor cursor = this.getContext().getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                 new String[]{ MediaStore.Audio.Media.DISPLAY_NAME, MediaStore.Audio.Media.ARTIST, MediaStore.Audio.Media.DURATION, MediaStore.Audio.Media.DATA },
                 MediaStore.Audio.Media.DATA + " like ? and " + MediaStore.Audio.Media.IS_MUSIC + "!=0",
                 new String[]{ this.directory.getAbsolutePath() + "%" }, null);

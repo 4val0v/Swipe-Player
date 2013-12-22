@@ -2,6 +2,7 @@
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android" android:constantSize="true">
     <item android:state_pressed="true" android:drawable="@drawable/drawable_playlist_bg_pressed"/>
+    <item android:state_focused="true" android:drawable="@drawable/drawable_playlist_bg_pressed"/>
     <item android:state_checked="true" android:drawable="@drawable/drawable_playlist_bg_playing"/>
     <item android:drawable="@drawable/drawable_playlist_bg_normal"/>
 </selector>

@@ -60,12 +60,6 @@
             <artifactId>library</artifactId>
             <version>${nineoldandroids.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.holoeverywhere</groupId>
-            <artifactId>library</artifactId>
-            <version>2.0.0</version>
-            <type>aar</type>
-        </dependency>
     </dependencies>
 
     <profiles>
@@ -90,14 +84,5 @@
             </build>
         </profile>
     </profiles>
-
-    <repositories>
-        <repository>
-            <id>holoeverywhereRepo</id>
-            <name>HoloEverywhere Repo</name>
-            <url>https://raw.github.com/Prototik/HoloEverywhere/repo</url>
-            <layout>default</layout>
-        </repository>
-    </repositories>
 
 </project>

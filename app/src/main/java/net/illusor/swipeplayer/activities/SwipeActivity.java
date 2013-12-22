@@ -50,7 +50,7 @@ public class SwipeActivity extends FragmentActivity
             if (lastBrowsedFolder != null)
                 this.pagerAdapter.setCurrentFolder(lastBrowsedFolder);
             else
-                this.pagerAdapter.addFolder(Environment.getRootDirectory());
+                this.pagerAdapter.addFolder(Environment.getExternalStorageDirectory());
 
             this.viewPager.setAdapter(this.pagerAdapter);
             this.viewPager.setCurrentItem(this.pagerAdapter.getCount() - 1);
@@ -107,6 +107,16 @@ public class SwipeActivity extends FragmentActivity
 
         this.finish();
         return true;
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        int index = this.viewPager.getCurrentItem();
+        if (index == 0)
+            super.onBackPressed();
+        else
+            this.viewPager.setCurrentItem(index - 1);
     }
 
     public void openMediaBrowser()

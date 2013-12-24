@@ -5,6 +5,7 @@
   </component>
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="android" url="file://$PROJECT_DIR$/android" />
+    <file type="android" url="file://$PROJECT_DIR$/appcompat" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">

@@ -23,10 +23,13 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="android" />
+        <module name="android (1)" />
+        <module name="appcompat" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="android" target="1.7" />
+      <module name="android (1)" target="1.7" />
       <module name="appcompat" target="1.7" />
       <module name="swipeplayer" target="1.7" />
     </bytecodeTargetLevel>

@@ -7,7 +7,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <name>Swipe Player</name>
-    <groupId>net.illusor</groupId>
+    <groupId>net.illusor.swipeplayer</groupId>
     <artifactId>swipeplayer</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -38,7 +38,7 @@
                 <configuration>
                     <sdk>
                         <platform>16</platform>
-                        <path>C:\android-sdk</path>
+                        <path>F:\android-sdk-tools</path>
                     </sdk>
                     <genDirectory>${project.basedir}/target/generated-sources/r</genDirectory>
                     <genDirectoryAidl>${project.basedir}/target/generated-sources/aidl</genDirectoryAidl>
@@ -82,11 +82,18 @@
                 <artifactId>library</artifactId>
                 <version>2.4.0</version>
             </dependency>
+            <dependency>
+                <groupId>net.illusor.swipeplayer</groupId>
+                <artifactId>appcompat</artifactId>
+                <version>${version}</version>
+                <type>apklib</type>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <modules>
-         <module>android</module>
+        <module>android</module>
+        <module>appcompat</module>
     </modules>
 
 </project>

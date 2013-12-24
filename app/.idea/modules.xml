@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/android/android.iml" filepath="$PROJECT_DIR$/android/android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/appcompat/appcompat.iml" filepath="$PROJECT_DIR$/appcompat/appcompat.iml" />
       <module fileurl="file://$PROJECT_DIR$/swipeplayer.iml" filepath="$PROJECT_DIR$/swipeplayer.iml" />
     </modules>
   </component>

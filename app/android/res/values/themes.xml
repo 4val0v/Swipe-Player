@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.SwipePlayer" parent="android:Theme.NoTitleBar">
+    <style name="Theme.SwipePlayer" parent="@style/Theme.AppCompat.Light">
         <item name="android:listViewStyle">@style/Widget.ListView</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
 
     <style name="Theme.Dialog" parent="android:Theme.Dialog">

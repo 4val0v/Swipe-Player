@@ -3,3 +3,4 @@ syntax: glob
 
 АукцЫон/
 app/target/
+build/

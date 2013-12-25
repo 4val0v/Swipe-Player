@@ -5,14 +5,17 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.*;
 import android.widget.*;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.activities.SwipeActivity;
 import net.illusor.swipeplayer.domain.AudioFile;
+import net.illusor.swipeplayer.helpers.FontHelper;
 import net.illusor.swipeplayer.helpers.OverScrollHelper;
-import net.illusor.swipeplayer.widgets.FolderItemView;
+import net.illusor.swipeplayer.widgets.FormattedTextView;
 
 import java.io.File;
 import java.util.List;
@@ -155,7 +158,7 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
         return (SwipeActivity)this.getActivity();
     }
 
-    private class AudioFilesAdapter extends ArrayAdapter<AudioFile> implements FolderItemView.OnPlayClickListener
+    private class AudioFilesAdapter extends ArrayAdapter<AudioFile>
     {
         private AudioFilesAdapter(Context context, List<AudioFile> files)
         {
@@ -165,28 +168,18 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
         @Override
         public View getView(int position, View convertView, ViewGroup parent)
         {
-            FolderItemView view;
+            View view;
 
             if (convertView != null)
-            {
-                view = (FolderItemView)convertView;
-            }
+                view = convertView;
             else
-            {
-                view = new FolderItemView(this.getContext());
-                view.setOnPlayClickListener(this);
-            }
+                view = LayoutInflater.from(this.getContext()).inflate(R.layout.list_item_folder, null);
 
             AudioFile item = this.getItem(position);
-            view.setAudioFile(item);
+            FormattedTextView text = (FormattedTextView)view.findViewById(R.id.id_file_title);
+            text.setText(item.getTitle());
 
             return view;
-        }
-
-        @Override
-        public void onPlayClick(AudioFile audioFile)
-        {
-            getSwipeActivity().playMediaDirectory(audioFile);
         }
     }
 

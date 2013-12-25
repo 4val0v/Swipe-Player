@@ -27,7 +27,6 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="android" target="1.7" />
-      <module name="appcompat" target="1.7" />
       <module name="swipeplayer" target="1.7" />
     </bytecodeTargetLevel>
   </component>

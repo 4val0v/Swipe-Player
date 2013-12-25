@@ -2,6 +2,7 @@ package net.illusor.swipeplayer.fragments;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.content.AsyncTaskLoader;
 import net.illusor.swipeplayer.domain.AudioFile;
@@ -35,14 +36,14 @@ class AudioFoldersLoader extends AsyncTaskLoader<List<AudioFile>>
     @Override
     public List<AudioFile> loadInBackground()
     {
-        Cursor cursor = this.getContext().getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                new String[]{ MediaStore.Audio.Media.DISPLAY_NAME, MediaStore.Audio.Media.ARTIST, MediaStore.Audio.Media.DURATION, MediaStore.Audio.Media.DATA },
-                MediaStore.Audio.Media.DATA + " like ? and " + MediaStore.Audio.Media.IS_MUSIC + "!=0",
-                new String[]{ this.directory.getAbsolutePath() + "%" }, null);
+        Cursor internal = this.executeQuery(MediaStore.Audio.Media.INTERNAL_CONTENT_URI);
+        this.result = this.getMediaObjects(internal);
+        internal.close();
 
-        this.result = this.getMediaObjects(cursor);
-
-        cursor.close();
+        Cursor external = this.executeQuery(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
+        List<AudioFile> externalContent = this.getMediaObjects(external);
+        this.result.addAll(externalContent);
+        external.close();
 
         Collections.sort(this.result, new AudioFileComparator());
 
@@ -62,6 +63,16 @@ class AudioFoldersLoader extends AsyncTaskLoader<List<AudioFile>>
         }
 
         return result;
+    }
+
+    private Cursor executeQuery(Uri uri)
+    {
+        Cursor cursor = this.getContext().getContentResolver().query(uri,
+                new String[]{ MediaStore.Audio.Media.DISPLAY_NAME, MediaStore.Audio.Media.ARTIST, MediaStore.Audio.Media.DURATION, MediaStore.Audio.Media.DATA },
+                MediaStore.Audio.Media.DATA + " like ? and " + MediaStore.Audio.Media.IS_MUSIC + "!=0",
+                new String[]{ this.directory.getAbsolutePath() + "%" }, null);
+
+        return cursor;
     }
 
     private AudioFile getNextLevelObject(Cursor cursor)

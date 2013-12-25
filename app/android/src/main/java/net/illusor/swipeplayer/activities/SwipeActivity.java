@@ -50,7 +50,7 @@ public class SwipeActivity extends FragmentActivity
             if (lastBrowsedFolder != null)
                 this.pagerAdapter.setCurrentFolder(lastBrowsedFolder);
             else
-                this.pagerAdapter.addFolder(Environment.getExternalStorageDirectory());
+                this.pagerAdapter.addFolder(Environment.getRootDirectory());
 
             this.viewPager.setAdapter(this.pagerAdapter);
             this.viewPager.setCurrentItem(this.pagerAdapter.getCount() - 1);

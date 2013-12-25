@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextPaint;
@@ -29,6 +30,11 @@ public class FormattedTextView extends View implements Checkable
     private boolean isWrapping;
     private ColorStateList colorStateList;
 
+    public FormattedTextView(Context context)
+    {
+        this(context, null);
+    }
+
     public FormattedTextView(Context context, AttributeSet attrs)
     {
         this(context, attrs, 0);
@@ -39,7 +45,7 @@ public class FormattedTextView extends View implements Checkable
         super(context, attrs, defStyle);
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.FormattedTextView, defStyle, 0);
-        int fontName = a.getInt(R.styleable.FormattedTextView_Font, -1);
+        int fontName = a.getInt(R.styleable.FormattedTextView_Font, 0);
         this.lineSpacing = a.getDimensionPixelSize(R.styleable.FormattedTextView_LineSpacing, 5);
         this.charsToEllipsize = a.getInteger(R.styleable.FormattedTextView_CharsToEllipsize, 10);
         this.isWrapping = a.getBoolean(R.styleable.FormattedTextView_IsWrapping, false);
@@ -49,13 +55,15 @@ public class FormattedTextView extends View implements Checkable
         int textColor = a.getColor(R.styleable.FormattedTextView_TextColor, Color.BLACK);
         a.recycle();
 
+        Typeface font = FontHelper.font(fontName);
         this.headerPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
-        this.headerPaint.setTypeface(FontHelper.font(fontName));
+        this.headerPaint.setTypeface(font);
         this.headerPaint.setTextSize(headerTextSize);
         this.headerPaint.setColor(textColor);
         this.headerPaint.density = getResources().getDisplayMetrics().density;
 
         this.linePaint = new TextPaint(this.headerPaint);
+        this.linePaint.setTypeface(font);
         this.linePaint.setTextSize(lineTextSize);
 
         this.updateTextColor(false);

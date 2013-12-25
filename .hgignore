@@ -2,6 +2,7 @@
 syntax: glob
 
 АукцЫон/
+app/out/
 app/target/
 app/*/target/
 app/*/gen-external-apklibs/

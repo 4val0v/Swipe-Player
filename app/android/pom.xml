@@ -18,16 +18,17 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.google.android</groupId>
+            <groupId>android</groupId>
             <artifactId>android</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.android.support</groupId>
-            <artifactId>support-v4</artifactId>
+            <groupId>android.support</groupId>
+            <artifactId>compatibility-v4</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.google.android</groupId>
-            <artifactId>android-test</artifactId>
+            <groupId>android.support</groupId>
+            <artifactId>compatibility-v7-appcompat</artifactId>
+            <type>apklib</type>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -40,11 +41,6 @@
         <dependency>
             <groupId>com.nineoldandroids</groupId>
             <artifactId>library</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>net.illusor.swipeplayer</groupId>
-            <artifactId>appcompat</artifactId>
-            <type>apklib</type>
         </dependency>
     </dependencies>
 

@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/android/android.iml" filepath="$PROJECT_DIR$/android/android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/appcompat/appcompat.iml" filepath="$PROJECT_DIR$/appcompat/appcompat.iml" />
       <module fileurl="file://$PROJECT_DIR$/swipeplayer.iml" filepath="$PROJECT_DIR$/swipeplayer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/gen-external-apklibs/~apklib-android.support_compatibility-v7-appcompat_19.0.1.iml" filepath="$PROJECT_DIR$/android/gen-external-apklibs/~apklib-android.support_compatibility-v7-appcompat_19.0.1.iml" />
     </modules>
   </component>
 </project>

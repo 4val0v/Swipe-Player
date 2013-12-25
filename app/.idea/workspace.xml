@@ -34,96 +34,15 @@
   </component>
   <component name="AndroidExternalApklibDependenciesManager">
     <artifacts>
+      <entry key="android.support_compatibility-v7-appcompat_19.0.1" value="$MAVEN_REPOSITORY$/android/support/compatibility-v7-appcompat/19.0.1/compatibility-v7-appcompat-19.0.1.apklib" />
+      <entry key="net.illusor.swipeplayer_appcompat_1.0-SNAPSHOT" value="$PROJECT_DIR$/appcompat/pom.xml" />
       <entry key="net.illusor_appcompat_1.0-SNAPSHOT" value="$MAVEN_REPOSITORY$/net/illusor/appcompat/1.0-SNAPSHOT/appcompat-1.0-SNAPSHOT.apklib" />
     </artifacts>
     <sdk-infos>
-      <entry key="net.illusor_appcompat_1.0-SNAPSHOT">
+      <entry key="android.support_compatibility-v7-appcompat_19.0.1">
         <value>
           <resolved-info>
-            <option name="apiLevel" value="16" />
-            <dependencies>
-              <MavenDependencyInfo>
-                <option name="artifactId" value="android" />
-                <option name="groupId" value="com.google.android" />
-                <option name="libName" value="Maven: com.google.android:android:2.3.3" />
-                <option name="path" value="$MAVEN_REPOSITORY$/com/google/android/android/2.3.3/android-2.3.3.jar" />
-                <option name="scope" value="provided" />
-                <option name="type" value="jar" />
-                <option name="version" value="2.3.3" />
-              </MavenDependencyInfo>
-              <MavenDependencyInfo>
-                <option name="artifactId" value="commons-logging" />
-                <option name="groupId" value="commons-logging" />
-                <option name="libName" value="Maven: commons-logging:commons-logging:1.1.1" />
-                <option name="path" value="$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar" />
-                <option name="scope" value="provided" />
-                <option name="type" value="jar" />
-                <option name="version" value="1.1.1" />
-              </MavenDependencyInfo>
-              <MavenDependencyInfo>
-                <option name="artifactId" value="httpclient" />
-                <option name="groupId" value="org.apache.httpcomponents" />
-                <option name="libName" value="Maven: org.apache.httpcomponents:httpclient:4.0.1" />
-                <option name="path" value="$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.0.1/httpclient-4.0.1.jar" />
-                <option name="scope" value="provided" />
-                <option name="type" value="jar" />
-                <option name="version" value="4.0.1" />
-              </MavenDependencyInfo>
-              <MavenDependencyInfo>
-                <option name="artifactId" value="httpcore" />
-                <option name="groupId" value="org.apache.httpcomponents" />
-                <option name="libName" value="Maven: org.apache.httpcomponents:httpcore:4.0.1" />
-                <option name="path" value="$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpcore/4.0.1/httpcore-4.0.1.jar" />
-                <option name="scope" value="provided" />
-                <option name="type" value="jar" />
-                <option name="version" value="4.0.1" />
-              </MavenDependencyInfo>
-              <MavenDependencyInfo>
-                <option name="artifactId" value="commons-codec" />
-                <option name="groupId" value="commons-codec" />
-                <option name="libName" value="Maven: commons-codec:commons-codec:1.3" />
-                <option name="path" value="$MAVEN_REPOSITORY$/commons-codec/commons-codec/1.3/commons-codec-1.3.jar" />
-                <option name="scope" value="provided" />
-                <option name="type" value="jar" />
-                <option name="version" value="1.3" />
-              </MavenDependencyInfo>
-              <MavenDependencyInfo>
-                <option name="artifactId" value="opengl-api" />
-                <option name="groupId" value="org.khronos" />
-                <option name="libName" value="Maven: org.khronos:opengl-api:gl1.1-android-2.1_r1" />
-                <option name="path" value="$MAVEN_REPOSITORY$/org/khronos/opengl-api/gl1.1-android-2.1_r1/opengl-api-gl1.1-android-2.1_r1.jar" />
-                <option name="scope" value="provided" />
-                <option name="type" value="jar" />
-                <option name="version" value="gl1.1-android-2.1_r1" />
-              </MavenDependencyInfo>
-              <MavenDependencyInfo>
-                <option name="artifactId" value="xmlParserAPIs" />
-                <option name="groupId" value="xerces" />
-                <option name="libName" value="Maven: xerces:xmlParserAPIs:2.6.2" />
-                <option name="path" value="$MAVEN_REPOSITORY$/xerces/xmlParserAPIs/2.6.2/xmlParserAPIs-2.6.2.jar" />
-                <option name="scope" value="provided" />
-                <option name="type" value="jar" />
-                <option name="version" value="2.6.2" />
-              </MavenDependencyInfo>
-              <MavenDependencyInfo>
-                <option name="artifactId" value="xpp3" />
-                <option name="groupId" value="xpp3" />
-                <option name="libName" value="Maven: xpp3:xpp3:1.1.4c" />
-                <option name="path" value="$MAVEN_REPOSITORY$/xpp3/xpp3/1.1.4c/xpp3-1.1.4c.jar" />
-                <option name="scope" value="provided" />
-                <option name="type" value="jar" />
-                <option name="version" value="1.1.4c" />
-              </MavenDependencyInfo>
-              <MavenDependencyInfo>
-                <option name="artifactId" value="json" />
-                <option name="groupId" value="org.json" />
-                <option name="libName" value="Maven: org.json:json:20080701" />
-                <option name="path" value="$MAVEN_REPOSITORY$/org/json/json/20080701/json-20080701.jar" />
-                <option name="scope" value="provided" />
-                <option name="type" value="jar" />
-                <option name="version" value="20080701" />
-              </MavenDependencyInfo>
-            </dependencies>
+            <option name="apiLevel" value="" />
           </resolved-info>
         </value>
       </entry>
@@ -154,9 +73,95 @@
     <list default="true" id="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" name="Default" comment="" />
     <ignored path="swipeplayer.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/pom.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387907023983" ignored="false" />
-    <file path="/themes.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387905866266" ignored="false" />
-    <file path="F:/apache-maven-3.1.1/conf/settings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387904743000" ignored="false" />
+    <file path="/pom.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955435104" ignored="false" />
+    <file path="/themes.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955076817" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/drawable/abc_textfield_searchview_holo_light.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-af/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-am/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-ar/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-bg/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-ca/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-cs/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-da/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-de/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-el/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-es/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-fa/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-fi/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-fr/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-hi/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-hr/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-hu/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-in/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-it/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-iw/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-ja/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-ko/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-lt/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-lv/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-nb/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-nl/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-pl/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-pt/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-ro/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-ru/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-sk/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-sl/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-sw600dp/config.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-sw600dp/dimens.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-sr/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-sv/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-sw/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-th/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-tl/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-tr/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-uk/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-vi/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-zu/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-v11/themes_base.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-v11/styles_base.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-v14/themes_base.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-land/dimens.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-land/config.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-land/bools.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-large/dimens.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-large/config.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-large/bools.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-en-rGB/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-en-rIN/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-es-rUS/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-et-rEE/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-fr-rCA/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-hy-rAM/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-ka-rGE/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-km-rKH/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-lo-rLA/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-mn-rMN/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-ms-rMY/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-pt-rPT/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-w360dp/dimens.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-w480dp/config.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-w480dp/bools.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-w500dp/dimens.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-w600dp/dimens.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-w720dp/bools.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-xlarge/dimens.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-xlarge/bools.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-zh-rCN/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-zh-rHK/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-zh-rTW/strings.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/layout/abc_action_bar_tab.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/layout/abc_action_menu_item_layout.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/layout/abc_list_menu_item_radio.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/drawable/abc_list_selector_background_transition_holo_light.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969011" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/drawable/abc_ic_clear_holo_light.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969011" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/drawable/abc_search_dropdown_light.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/drawable/abc_textfield_searchview_holo_dark.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/color/abc_search_url_text_holo.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969010" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/drawable/abc_search_dropdown_dark.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969011" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/drawable/abc_textfield_searchview_right_holo_dark.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969011" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/drawable/abc_textfield_searchview_right_holo_light.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969011" ignored="false" />
+    <file path="$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/drawable/abc_ic_clear.xml" changelist="91b9fd60-e942-418b-a7e2-6beed5f5c3a0" time="1387955969011" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,23 +181,7 @@
     <sortChildren value="false" />
   </component>
   <component name="DebuggerManager">
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="jar://$MAVEN_REPOSITORY$/com/android/support/support-v4/18.0.0/support-v4-18.0.0-sources.jar!/android/support/v4/app/FragmentStatePagerAdapter.java" line="173" class="android.support.v4.app.FragmentStatePagerAdapter" package="android.support.v4.app">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </line_breakpoints>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -229,7 +218,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -242,25 +231,43 @@
       <file leaf-file-name="pom.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="85" column="48" selection-start="3395" selection-end="3395" vertical-scroll-proportion="0.0">
+            <state line="29" column="52" selection-start="1207" selection-end="1207" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SwipeApplication.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/android/src/main/java/net/illusor/swipeplayer/SwipeApplication.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="43" selection-start="142" selection-end="142" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SwipeActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/android/src/main/java/net/illusor/swipeplayer/activities/SwipeActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="28" column="39" selection-start="1004" selection-end="1004" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="themes.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/android/res/values/themes.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="56" selection-start="108" selection-end="108" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="pom.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/appcompat/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="35" selection-start="588" selection-end="588" vertical-scroll-proportion="0.4245283">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pom.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/android/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="1" selection-start="40" selection-end="40" vertical-scroll-proportion="0.0">
+            <state line="7" column="46" selection-start="305" selection-end="305" vertical-scroll-proportion="0.18512397">
               <folding />
             </state>
           </provider>
@@ -288,8 +295,8 @@
         <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/activities/SwipeActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/illusor/swipeplayer/fragments/AudioFoldersLoader.java" />
         <option value="$PROJECT_DIR$/android/res/values/styles.xml" />
-        <option value="$PROJECT_DIR$/android/res/values/themes.xml" />
         <option value="$PROJECT_DIR$/appcompat/pom.xml" />
+        <option value="$PROJECT_DIR$/android/res/values/themes.xml" />
         <option value="$PROJECT_DIR$/android/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
       </list>
@@ -301,24 +308,6 @@
         <PATH_ELEMENT>
           <option name="myItemId" value="" />
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Swipe Player Android Core" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Dependencies" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$DependenciesNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Swipe Player Android Core" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
         </PATH_ELEMENT>
       </PATH>
       <PATH>
@@ -345,19 +334,13 @@
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$LifecycleNode" />
         </PATH_ELEMENT>
       </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
-        </PATH_ELEMENT>
-      </PATH>
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
-    <option name="width" value="1938" />
-    <option name="height" value="1050" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1066" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -386,6 +369,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -406,7 +390,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -419,7 +402,7 @@
     <property name="options.lastSelected" value="preferences.sourceCode.XML" />
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/appcompat" />
+    <property name="last_opened_file_path" value="$MAVEN_REPOSITORY$/android/support/compatibility-v7-appcompat/19.0.1/compatibility-v7-appcompat-19.0.1-sources.jar!/" />
     <property name="AndroidLayoutSelectedEditor" value="text-editor" />
     <property name="project.structure.side.proportion" value="0.3487833" />
     <property name="MemberChooser.copyJavadoc" value="false" />
@@ -452,6 +435,24 @@
     </key>
   </component>
   <component name="RunManager" selected="Android Application.Phone 4&quot; (API 16)">
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <method />
+    </configuration>
     <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
       <MavenSettings>
         <option name="myGeneralSettings" />
@@ -472,24 +473,6 @@
           </MavenRunnerParameters>
         </option>
       </MavenSettings>
-      <method />
-    </configuration>
-    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
-      <module name="" />
-      <option name="TESTING_TYPE" value="0" />
-      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="USE_COMMAND_LINE" value="true" />
-      <option name="COMMAND_LINE" value="" />
-      <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
-      <option name="NETWORK_SPEED" value="full" />
-      <option name="NETWORK_LATENCY" value="none" />
-      <option name="CLEAR_LOGCAT" value="false" />
       <method />
     </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
@@ -562,6 +545,22 @@
       <patterns />
       <method />
     </configuration>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="DEPLOY" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <method />
+    </configuration>
     <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
       <option name="BCName" value="" />
       <option name="IOSSimulatorSdkPath" value="" />
@@ -594,22 +593,6 @@
       <option name="screenWidth" value="0" />
       <option name="url" value="http://" />
       <option name="usbDebugPort" value="7936" />
-      <method />
-    </configuration>
-    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
-      <module name="" />
-      <option name="ACTIVITY_CLASS" value="" />
-      <option name="MODE" value="default_activity" />
-      <option name="DEPLOY" value="true" />
-      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="USE_COMMAND_LINE" value="true" />
-      <option name="COMMAND_LINE" value="" />
-      <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
-      <option name="NETWORK_SPEED" value="full" />
-      <option name="NETWORK_LATENCY" value="none" />
-      <option name="CLEAR_LOGCAT" value="false" />
       <method />
     </configuration>
     <configuration default="false" name="Phone 4&quot; (API 16)" type="AndroidRunConfigurationType" factoryName="Android Application">
@@ -667,11 +650,14 @@
       <workItem from="1387861522399" duration="3500000" />
       <workItem from="1387865097470" duration="1352000" />
       <workItem from="1387866518654" duration="237000" />
+      <workItem from="1387949098332" duration="726000" />
+      <workItem from="1387951942082" duration="770000" />
+      <workItem from="1387952763329" duration="599000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5141000" />
+    <option name="totallyTimeSpent" value="7236000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -694,25 +680,26 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="7" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30479452" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3278328" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3042999" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.598677" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31532526" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4429161" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32921812" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1995731" sideWeight="0.6461187" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20330843" sideWeight="0.6957001" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20490928" sideWeight="0.6461187" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35388127" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20437567" sideWeight="0.6957001" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.598677" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2087518" sideWeight="0.5639615" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="DSM" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="60" y="131" width="1256" height="686" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -724,7 +711,6 @@
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294964" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.309795" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31621003" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Module Dependencies" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Duplicates" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296582" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -803,6 +789,20 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
+        <state line="85" column="48" selection-start="3395" selection-end="3395" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="1" selection-start="40" selection-end="40" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
         <state line="61" column="21" selection-start="2323" selection-end="2323" vertical-scroll-proportion="0.0">
           <folding />
         </state>
@@ -820,56 +820,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/appcompat/res/values/themes.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="17" selection-start="3941" selection-end="3941" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/appcompat/project.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/appcompat/README.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/appcompat/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/appcompat/.classpath">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/appcompat/res/values/styles_base.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="83" column="60" selection-start="4256" selection-end="4256" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/appcompat/res/values-v14/styles_base.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="0" selection-start="923" selection-end="923" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/android/res/values/styles.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="42" selection-start="93" selection-end="116" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/res/values/themes.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="11" selection-start="568" selection-end="568" vertical-scroll-proportion="0.4832714" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/swipeplayer.iml">
@@ -877,23 +830,61 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/android/support/compatibility-v4/19.0.1/compatibility-v4-19.0.1-sources.jar!/android/support/v4/app/FragmentActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="74" column="13" selection-start="3235" selection-end="3235" vertical-scroll-proportion="0.3325766" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/src/main/java/net/illusor/swipeplayer/activities/SwipeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="39" selection-start="1004" selection-end="1004" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/android/android/2.3.3_r2/android-2.3.3_r2.jar!/android/app/Application.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="13" selection-start="154" selection-end="154" vertical-scroll-proportion="0.093457945" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/src/main/java/net/illusor/swipeplayer/SwipeApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="43" selection-start="142" selection-end="142" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values/themes.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="79" column="17" selection-start="3941" selection-end="3941" vertical-scroll-proportion="0.3325766">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/res/values/themes.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="56" selection-start="108" selection-end="108" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/gen-external-apklibs/android.support_compatibility-v7-appcompat_19.0.1/res/values-v14/styles_base.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="217" column="99" selection-start="8187" selection-end="8187" vertical-scroll-proportion="1.0235294">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="48" selection-start="3395" selection-end="3395" vertical-scroll-proportion="0.0">
+        <state line="29" column="52" selection-start="1207" selection-end="1207" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/android/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="1" selection-start="40" selection-end="40" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/appcompat/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="35" selection-start="588" selection-end="588" vertical-scroll-proportion="0.4245283">
+        <state line="7" column="46" selection-start="305" selection-end="305" vertical-scroll-proportion="0.18512397">
           <folding />
         </state>
       </provider>
@@ -938,7 +929,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>Maven Android 2.3.3 Platform</last-edited>
+          <last-edited>1.7</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -950,7 +941,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>appcompat</last-edited>
+          <last-edited>~apklib-android.support_compatibility-v7-appcompat_19.0.1</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -974,7 +965,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>Maven: xpp3:xpp3:1.1.4c</last-edited>
+          <last-edited>Maven: android.support:compatibility-v4:19.0.1</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

@@ -22,9 +22,20 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="android" />
         <module name="android (1)" />
-        <module name="appcompat" />
+      </profile>
+      <profile default="false" name="Annotation profile for appcompat" enabled="true">
+        <sourceOutputDir name="..\target\generated-sources\annotations" />
+        <sourceTestOutputDir name="..\target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+      </profile>
+      <profile default="false" name="Annotation profile for android" enabled="true">
+        <sourceOutputDir name="..\target\generated-sources\annotations" />
+        <sourceTestOutputDir name="..\target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="android" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

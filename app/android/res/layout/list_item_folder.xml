@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:swp="http://schemas.android.com/apk/res/net.illusor.swipeplayer"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:background="@drawable/item_folder_bg">
+             xmlns:swp="http://schemas.android.com/apk/res/net.illusor.swipeplayer"
+             android:layout_height="match_parent"
+             android:layout_width="match_parent"
+             android:background="@drawable/item_folder_bg"
+             android:paddingLeft="16dp"
+             android:paddingRight="16dp"
+             android:paddingTop="10dp"
+             android:paddingBottom="10dp">
 
     <net.illusor.swipeplayer.widgets.FormattedTextView
-        android:id="@+id/id_file_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        swp:HeaderTextSize="25sp"
-        swp:LineTextSize="15sp"
-        swp:Font="PTSansNarrow"
-        swp:TextColor="@color/color_folder_text"
-        swp:IsWrapping="true" />
+            android:id="@+id/id_file_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            swp:HeaderTextSize="25sp"
+            swp:LineTextSize="15sp"
+            swp:Font="PTSansNarrow"
+            swp:TextColor="@color/color_folder_text"
+            swp:IsWrapping="true"/>
 
 </FrameLayout>

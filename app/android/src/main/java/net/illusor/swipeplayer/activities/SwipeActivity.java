@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.IBinder;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
@@ -50,7 +49,7 @@ public class SwipeActivity extends FragmentActivity
             if (lastBrowsedFolder != null)
                 this.pagerAdapter.setCurrentFolder(lastBrowsedFolder);
             else
-                this.pagerAdapter.addFolder(Environment.getRootDirectory());
+                this.pagerAdapter.addFolder(new File(File.separator));
 
             this.viewPager.setAdapter(this.pagerAdapter);
             this.viewPager.setCurrentItem(this.pagerAdapter.getCount() - 1);

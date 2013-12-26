@@ -5,3 +5,4 @@ syntax: glob
 app/target/
 app/android/target/
 build/
+app/out/

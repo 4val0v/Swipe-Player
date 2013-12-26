@@ -4,14 +4,11 @@ import android.content.Context;
 import android.graphics.Color;
 import android.text.TextUtils;
 import android.util.TypedValue;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
-import net.illusor.swipeplayer.R;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
 import net.illusor.swipeplayer.helpers.FontHelper;
-import net.illusor.swipeplayer.widgets.FormattedTextView;
 import net.illusor.swipeplayer.widgets.NavigationItemView;
 
 import java.io.File;
@@ -46,7 +43,8 @@ class NavigationHistoryAdapter extends ArrayAdapter<File>
         }
 
         File item = this.getItem(position);
-        view.setText(item.getName());
+        String name = this.getFileName(item);
+        view.setText(name);
 
         return view;
     }
@@ -59,14 +57,21 @@ class NavigationHistoryAdapter extends ArrayAdapter<File>
             view = new NavigationItemView(this.context);
 
         File item = this.getItem(position);
-        view.setText(item.getName());
+        String name = this.getFileName(item);
+        view.setText(name);
         view.setIconVisible(position > 0);
 
         return view;
     }
 
-    List<File> getData()
+    private String getFileName(File file)
     {
-        return navigationHistory;
+        String name = file.getName();
+        return name.length() > 0 ? name : File.separator;
+    }
+
+    public List<File> getData()
+    {
+        return this.navigationHistory;
     }
 }

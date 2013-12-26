@@ -1,7 +1,10 @@
 package net.illusor.swipeplayer.fragments;
 
 import android.app.Service;
-import android.content.*;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;

@@ -247,7 +247,7 @@ abstract class SwipePagerAdapter extends PagerAdapter
             }
             folder = folder.getParentFile();
         }
-        while (!folder.getAbsolutePath().equals(root));
+        while (folder != null && !folder.getAbsolutePath().equals(root));
     }
 
     private void removeFolder(int position)

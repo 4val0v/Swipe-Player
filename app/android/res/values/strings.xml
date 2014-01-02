@@ -7,7 +7,6 @@
     <string name="str_about_version">Версия:</string>
     <string name="str_about_close">Закрыть</string>
 
-    <string name="str_playlist_loading">Загрузка..</string>
     <string name="str_playlist_empty">В плэйлисте отсутствуют музыкальные файлы</string>
     <string name="str_playlist_inflate">Перейти в обозреватель файлов</string>
 
@@ -15,4 +14,13 @@
 
     <string name="time_format_hhmmss" formatted="false">%d:%02d:%02d</string>
     <string name="time_format_mmss" formatted="false">%d:%02d</string>
+
+    <string name="str_state_playing">Воспроизведение</string>
+    <string name="str_state_stopped">Остановлен</string>
+    <string name="str_state_paused">Пауза</string>
+    <string name="str_state_error">Ошибка воспроизведения</string>
+
+    <string name="str_action_resume">Продолжить</string>
+    <string name="str_action_pause">Пауза</string>
+    <string name="str_action_stop">Стоп</string>
 </resources>

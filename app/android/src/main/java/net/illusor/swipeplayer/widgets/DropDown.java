@@ -90,6 +90,16 @@ public class DropDown extends Spinner
             this.setContentView(R.layout.dropdown_open);
             this.listView = (ListView)this.findViewById(R.id.id_dropdown_list);
             this.listView.setOnItemClickListener(new ItemClickListener(this));
+
+            Button button = (Button)this.findViewById(R.id.id_dropdown_close);
+            button.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    dismiss();
+                }
+            });
         }
 
         public void setSingleChoiceItems(ListAdapter adapter, OnClickListener listener)

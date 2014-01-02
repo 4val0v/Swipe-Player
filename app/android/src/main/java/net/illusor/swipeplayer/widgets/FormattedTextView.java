@@ -63,7 +63,6 @@ public class FormattedTextView extends View implements Checkable
         this.headerPaint.density = getResources().getDisplayMetrics().density;
 
         this.linePaint = new TextPaint(this.headerPaint);
-        this.linePaint.setTypeface(font);
         this.linePaint.setTextSize(lineTextSize);
 
         this.updateTextColor(false);
@@ -278,6 +277,14 @@ public class FormattedTextView extends View implements Checkable
         this.text = text;
 
         this.requestLayout();
+        this.invalidate();
+    }
+
+    public void setColor(int color)
+    {
+        this.colorStateList = null;
+        this.headerPaint.setColor(color);
+        this.linePaint.setColor(color);
         this.invalidate();
     }
 

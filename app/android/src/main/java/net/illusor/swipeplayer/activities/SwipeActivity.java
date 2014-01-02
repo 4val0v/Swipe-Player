@@ -19,6 +19,7 @@ import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import net.illusor.swipeplayer.R;
+import net.illusor.swipeplayer.domain.AudioFile;
 import net.illusor.swipeplayer.fragments.AboutDialog;
 import net.illusor.swipeplayer.fragments.FolderBrowserFragment;
 import net.illusor.swipeplayer.fragments.PlaylistFragment;
@@ -213,6 +214,14 @@ public class SwipeActivity extends FragmentActivity
         protected Fragment getBrowserFragment(File folder)
         {
             return FolderBrowserFragment.newInstance(folder);
+        }
+
+        @Override
+        protected void onDataChange(Fragment oldPrimary, Fragment newPrimary)
+        {
+            super.onDataChange(oldPrimary, newPrimary);
+            File previous = ((FolderBrowserFragment)oldPrimary).getCurrentFolder();
+            ((FolderBrowserFragment)newPrimary).setHighlightedFolder(previous);
         }
     }
 

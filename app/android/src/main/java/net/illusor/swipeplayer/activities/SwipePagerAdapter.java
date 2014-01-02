@@ -126,6 +126,7 @@ abstract class SwipePagerAdapter extends PagerAdapter
                 final int index = this.browserFragments.indexOf(primaryFragment);
                 if (index > position)
                 {
+                    this.onDataChange(primaryFragment, fragment);
                     container.postDelayed(new Runnable()
                     {
                         @Override
@@ -219,6 +220,11 @@ abstract class SwipePagerAdapter extends PagerAdapter
     protected abstract Fragment getPlaylistFragment();
 
     protected abstract Fragment getBrowserFragment(File folder);
+
+    protected void onDataChange(Fragment oldPrimary, Fragment newPrimary)
+    {
+
+    }
 
     public int findFolder(File folder)
     {

@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.SwipePlayer.Base" parent="android:Theme.Holo.NoActionBar">
-        <item name="android:buttonStyle">@android:style/Widget.Button</item>
-        <item name="android:textColor">@android:color/primary_text_light</item>
-    </style>
+    <style name="Theme.SwipePlayer.Base" parent="android:Theme.Holo.NoActionBar"/>
 
 </resources>

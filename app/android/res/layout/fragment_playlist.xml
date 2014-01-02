@@ -19,28 +19,15 @@
 
     <include layout="@layout/layout_preloader"/>
 
-    <LinearLayout
+    <TextView
             android:id="@+id/id_playlist_folder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_marginBottom="20dp"
             android:layout_gravity="center"
-            android:visibility="gone">
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:gravity="center_horizontal"
-                android:text="@string/str_playlist_empty"
-                android:textSize="15sp"/>
-
-        <Button
-                android:id="@+id/id_playlist_folder_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/str_playlist_inflate"/>
-    </LinearLayout>
+            android:gravity="center_horizontal"
+            android:text="@string/str_playlist_empty"
+            android:textSize="15sp"
+            android:visibility="gone"/>
 
 </FrameLayout>

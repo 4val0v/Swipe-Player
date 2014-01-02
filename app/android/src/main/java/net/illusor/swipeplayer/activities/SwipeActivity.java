@@ -4,10 +4,13 @@ import android.app.Service;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Parcelable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -16,6 +19,7 @@ import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import net.illusor.swipeplayer.R;
+import net.illusor.swipeplayer.fragments.AboutDialog;
 import net.illusor.swipeplayer.fragments.FolderBrowserFragment;
 import net.illusor.swipeplayer.fragments.PlaylistFragment;
 import net.illusor.swipeplayer.helpers.PreferencesHelper;
@@ -27,6 +31,9 @@ import java.util.List;
 
 public class SwipeActivity extends FragmentActivity
 {
+    private static final int MENU_CODE_QUIT = 0;
+    private static final int MENU_CODE_ABOUT = 1;
+
     private final SoundServiceConnection connection = new SoundServiceConnection();
     private LocalPagerAdapter pagerAdapter;
     private ViewPager viewPager;
@@ -94,18 +101,32 @@ public class SwipeActivity extends FragmentActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        menu.add(0, 0, 0, R.string.str_application_exit);
+        menu.add(0, MENU_CODE_ABOUT, 0, R.string.str_menu_about);
+        menu.add(0, MENU_CODE_QUIT, 0, R.string.str_menu_exit);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        if (this.connection.service != null && this.connection.service.getState() != AudioPlayerState.Stopped)
-            this.connection.service.stop();
+        boolean result = false;
+        switch (item.getItemId())
+        {
+            case MENU_CODE_ABOUT:
+            {
+                this.appAbout();
+                break;
+            }
+            case MENU_CODE_QUIT:
+            {
+                this.appShutdown();
+                break;
+            }
+            default:
+                result = super.onOptionsItemSelected(item);
+        }
 
-        this.finish();
-        return true;
+        return result;
     }
 
     @Override
@@ -115,7 +136,7 @@ public class SwipeActivity extends FragmentActivity
         if (index == 0)
             super.onBackPressed();
         else
-            this.viewPager.setCurrentItem(index - 1);
+            this.viewPager.setCurrentItem(index - 1, true);
     }
 
     public void openMediaBrowser()
@@ -150,6 +171,26 @@ public class SwipeActivity extends FragmentActivity
     public List<File> getBrowserHistory()
     {
         return this.pagerAdapter.getData();
+    }
+
+    private void appAbout()
+    {
+        try
+        {
+            PackageInfo packageInfo = this.getPackageManager().getPackageInfo(this.getPackageName(), 0);
+            DialogFragment about = AboutDialog.newInstance(packageInfo.applicationInfo.nonLocalizedLabel.toString(), packageInfo.versionName);
+            about.show(this.getSupportFragmentManager(), "");
+        }
+        catch (PackageManager.NameNotFoundException ignore)
+        {
+        }
+    }
+
+    private void appShutdown()
+    {
+        if (this.connection.service != null && this.connection.service.getState() != AudioPlayerState.Stopped)
+            this.connection.service.stop();
+        this.finish();
     }
 
     private class LocalPagerAdapter extends SwipePagerAdapter

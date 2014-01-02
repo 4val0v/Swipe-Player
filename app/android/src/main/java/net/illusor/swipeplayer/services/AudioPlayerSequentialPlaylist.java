@@ -30,7 +30,8 @@ class AudioPlayerSequentialPlaylist implements AudioPlayerPlaylist
     @Override
     public void onError(AudioFile audioFile)
     {
-        this.onPlaybackComplete();
+        audioFile.setValid(false);
+        onPlaybackComplete();
     }
 
     @Override
@@ -53,9 +54,9 @@ class AudioPlayerSequentialPlaylist implements AudioPlayerPlaylist
             nextIndex++;
             if (nextIndex >= playlistSize)
                 nextIndex = 0;
-        } while (!newFile.exists() && count < playlistSize);
+        } while ((!newFile.exists() || !newFile.isValid()) && count < playlistSize);
 
-        if (newFile.exists() && !newFile.equals(this.audioPlayer.getAudioFile()))
+        if (newFile.exists() && newFile.isValid() && !newFile.equals(this.audioPlayer.getAudioFile()))
             return newFile;
         else
             return null;
@@ -81,9 +82,9 @@ class AudioPlayerSequentialPlaylist implements AudioPlayerPlaylist
             nextIndex--;
             if (nextIndex < 0)
                 nextIndex = playlistSize - 1;
-        } while (!newFile.exists() && count < playlistSize);
+        } while ((!newFile.exists() || !newFile.isValid()) && count < playlistSize);
 
-        if (newFile.exists() && !newFile.equals(this.audioPlayer.getAudioFile()))
+        if (newFile.exists() && newFile.isValid() && !newFile.equals(this.audioPlayer.getAudioFile()))
             return newFile;
         else
             return null;

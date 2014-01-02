@@ -87,19 +87,7 @@ public class SoundService extends Service
             this.serviceStarted = true;
         }
 
-        try
-        {
-            this.audioPlayer.play(audioFile);
-            this.audioBroadcastHandler.sendPlayAudioFile(audioFile);
-
-            Notification notification = this.notificationHelper.getPlayingNotification(audioFile);
-            this.startForeground(NOTIFICATION_CODE_STATUS, notification);
-        }
-        catch (IOException e)
-        {
-            NotificationManager service = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            service.notify(NOTIFICATION_CODE_ERROR, notificationHelper.getErrorNotification(audioFile));
-        }
+        this.startPlaybackThread(audioFile);
     }
 
     void stop()
@@ -120,6 +108,33 @@ public class SoundService extends Service
 
         NotificationManager service = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
         service.notify(NOTIFICATION_CODE_STATUS, this.notificationHelper.getStoppedNotification());
+    }
+
+    private void startPlaybackThread(final AudioFile audioFile)
+    {
+        //we start playback on the separate thread because of AudioPlayerSequentialPlaylist implementation details
+        //see AudioPlayerSequentialPlaylist.onError() impl; in case of playback errors AudioPlayerSequentialPlaylist calls
+        //SoundService().play() again and again, causing possible StackOverflow if the playlist contains a lot of corrupted files in a row
+        new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                try
+                {
+                    audioPlayer.play(audioFile);
+                    audioBroadcastHandler.sendPlayAudioFile(audioFile);
+
+                    Notification notification = notificationHelper.getPlayingNotification(audioFile);
+                    startForeground(NOTIFICATION_CODE_STATUS, notification);
+                }
+                catch (IOException e)
+                {
+                    NotificationManager service = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                    service.notify(NOTIFICATION_CODE_ERROR, notificationHelper.getErrorNotification(audioFile));
+                }
+            }
+        }).start();
     }
 
     private void playNext()

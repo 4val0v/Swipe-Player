@@ -118,16 +118,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
     {
         this.getView().findViewById(R.id.id_playlist_folder).setVisibility(show ? View.VISIBLE : View.GONE);
         if (show)
-        {
-            this.getView().findViewById(R.id.id_playlist_folder_btn).setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    getSwipeActivity().openMediaBrowser();
-                }
-            });
-        }
+            getSwipeActivity().openMediaBrowser();
     }
 
     private SwipeActivity getSwipeActivity()

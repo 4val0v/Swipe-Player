@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <string name="str_application_exit">Закрыть</string>
+    <string name="str_menu_exit">Закрыть</string>
+    <string name="str_menu_about">О приложении</string>
     <string name="str_directory_play">Воспроизвести</string>
+    <string name="str_about_version">Версия:</string>
+    <string name="str_about_close">Закрыть</string>
 
     <string name="str_playlist_loading">Загрузка..</string>
     <string name="str_playlist_empty">В плэйлисте отсутствуют музыкальные файлы</string>

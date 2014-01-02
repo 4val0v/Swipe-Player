@@ -18,7 +18,7 @@
             swp:HeaderTextSize="25sp"
             swp:LineTextSize="15sp"
             swp:Font="PTSansNarrow"
-            swp:TextColor="@color/color_folder_text"
+            swp:TextColor="@color/color_folder_text_default"
             swp:IsWrapping="true"/>
 
 </FrameLayout>

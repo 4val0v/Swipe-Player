@@ -123,9 +123,18 @@ abstract class SwipePagerAdapter extends PagerAdapter
 
             if (primaryFragment != this.playlistFragment)
             {
-                int index = this.browserFragments.indexOf(primaryFragment);
+                final int index = this.browserFragments.indexOf(primaryFragment);
                 if (index > position)
-                    this.removeFolder(index);
+                {
+                    container.postDelayed(new Runnable()
+                    {
+                        @Override
+                        public void run()
+                        {
+                            removeFolder(index);
+                        }
+                    }, 300);
+                }
             }
 
             this.primaryFragment = fragment;

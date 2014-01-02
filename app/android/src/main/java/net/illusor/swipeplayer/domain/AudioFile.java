@@ -4,6 +4,7 @@ import java.io.File;
 
 public class AudioFile extends File
 {
+    private boolean isValid = true;
     private String title, artist;
     private long duration;
     private boolean hasSubDirectories;
@@ -49,5 +50,15 @@ public class AudioFile extends File
     public long getDuration()
     {
         return duration;
+    }
+
+    public boolean isValid()
+    {
+        return isValid;
+    }
+
+    public void setValid(boolean valid)
+    {
+        isValid = valid;
     }
 }

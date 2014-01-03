@@ -39,6 +39,7 @@ public class SwipeActivity extends FragmentActivity
     private LocalPagerAdapter pagerAdapter;
     private ViewPager viewPager;
     private PlaylistFragment playlistFragment;
+    private File currentMediaDirectory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -50,6 +51,8 @@ public class SwipeActivity extends FragmentActivity
 
         this.viewPager = (ViewPager) this.findViewById(R.id.id_swipe_view_pager);
         this.pagerAdapter = new LocalPagerAdapter(this.getSupportFragmentManager());
+
+        this.currentMediaDirectory = PreferencesHelper.getStoredPlaylist(this);
 
         if (savedInstanceState == null)
         {
@@ -148,6 +151,7 @@ public class SwipeActivity extends FragmentActivity
 
     public void playMediaDirectory(File directory)
     {
+        this.currentMediaDirectory = directory;
         this.playlistFragment.setMediaDirectory(directory);
         this.viewPager.setCurrentItem(this.pagerAdapter.getCount() - 1, true);
     }
@@ -172,6 +176,11 @@ public class SwipeActivity extends FragmentActivity
     public List<File> getBrowserHistory()
     {
         return this.pagerAdapter.getData();
+    }
+
+    public File getCurrentMediaDirectory()
+    {
+        return currentMediaDirectory;
     }
 
     private void appAbout()
@@ -214,14 +223,6 @@ public class SwipeActivity extends FragmentActivity
         protected Fragment getBrowserFragment(File folder)
         {
             return FolderBrowserFragment.newInstance(folder);
-        }
-
-        @Override
-        protected void onDataChange(Fragment oldPrimary, Fragment newPrimary)
-        {
-            super.onDataChange(oldPrimary, newPrimary);
-            File previous = ((FolderBrowserFragment)oldPrimary).getCurrentFolder();
-            ((FolderBrowserFragment)newPrimary).setHighlightedFolder(previous);
         }
     }
 

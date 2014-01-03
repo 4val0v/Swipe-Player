@@ -39,7 +39,6 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
 
     private Spinner navigationHistory;
     private ListView listAudioFiles;
-    private File highlightedFolder;
 
     private File currentFolder;
     private final AudioLoaderCallbacks audioLoaderCallbacks = new AudioLoaderCallbacks();
@@ -92,6 +91,8 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
 
             this.navigationHistory.setAdapter(adapter);
             this.navigationHistory.setSelection(navigationItems.indexOf(this.currentFolder));
+
+            this.listAudioFiles.invalidateViews();
         }
     }
 
@@ -149,17 +150,6 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
 
     //endregion
 
-    public File getCurrentFolder()
-    {
-        return currentFolder;
-    }
-
-    public void setHighlightedFolder(File highlightedFolder)
-    {
-        this.highlightedFolder = highlightedFolder;
-        this.listAudioFiles.invalidateViews();
-    }
-
     private void showLoadingIndicator(boolean show)
     {
         this.getView().findViewById(R.id.id_list_preloader).setVisibility(show ? View.VISIBLE : View.GONE);
@@ -191,9 +181,10 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
             else
                 view = LayoutInflater.from(this.getContext()).inflate(R.layout.list_item_folder, null);
 
+            File playlist = getSwipeActivity().getCurrentMediaDirectory();
             AudioFile item = this.getItem(position);
             FormattedTextView text = (FormattedTextView)view.findViewById(R.id.id_file_title);
-            text.setColor(this.getCount() > 1 && item.equals(highlightedFolder) ? this.highlightColor : this.defaultColor);
+            text.setColor(playlist != null && playlist.getAbsolutePath().startsWith(item.getAbsolutePath()) ? this.highlightColor : this.defaultColor);
             text.setText(item.getTitle());
 
             return view;

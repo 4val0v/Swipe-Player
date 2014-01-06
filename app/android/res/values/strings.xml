@@ -5,10 +5,10 @@
     <string name="str_menu_about">О приложении</string>
     <string name="str_directory_play">Воспроизвести</string>
     <string name="str_about_version">Версия:</string>
+    <string name="str_about_build">Сборка:</string>
     <string name="str_about_close">Закрыть</string>
 
     <string name="str_playlist_empty">В плэйлисте отсутствуют музыкальные файлы</string>
-    <string name="str_playlist_inflate">Перейти в обозреватель файлов</string>
 
     <string name="str_icon_nav">Folder Up</string>
 

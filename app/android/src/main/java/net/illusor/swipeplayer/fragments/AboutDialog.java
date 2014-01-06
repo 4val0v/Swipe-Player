@@ -2,37 +2,31 @@ package net.illusor.swipeplayer.fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.util.Pair;
 import net.illusor.swipeplayer.R;
 
 public class AboutDialog extends DialogFragment
 {
-    private static final String PARAM_NAME = "name";
-    private static final String PARAM_VERSION = "version";
-
-    public static AboutDialog newInstance(String appName, String appVersion)
-    {
-        Bundle bundle = new Bundle();
-        bundle.putString(PARAM_NAME, appName);
-        bundle.putSerializable(PARAM_VERSION, appVersion);
-        AboutDialog dialog = new AboutDialog();
-        dialog.setArguments(bundle);
-        return dialog;
-    }
-
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState)
     {
-        Bundle bundle = this.getArguments();
-        String name = bundle.getString(PARAM_NAME);
-        String version = bundle.getString(PARAM_VERSION);
-        String message = this.getActivity().getResources().getString(R.string.str_about_version);
+        Resources res = this.getActivity().getResources();
+        String versionString = res.getString(R.string.str_about_version);
+        String buildString = res.getString(R.string.str_about_build);
+
+        Pair<String, String> apkInfo = this.getApkInfo();
+        Pair<String, String> versionInfo = this.getVersionInfo(apkInfo.second);
 
         Dialog dialog = new AlertDialog.Builder(this.getActivity())
-                .setTitle(name)
-                .setMessage(String.format("%s %s", message, version))
+                .setTitle(apkInfo.first)
+                .setMessage(String.format("%s %s\r\n%s %s", versionString, versionInfo.first, buildString, versionInfo.second))
                 .setNeutralButton(R.string.str_about_close, new DialogInterface.OnClickListener()
                 {
                     @Override
@@ -43,5 +37,30 @@ public class AboutDialog extends DialogFragment
                 }).create();
 
         return dialog;
+    }
+
+    private Pair<String, String> getApkInfo()
+    {
+        try
+        {
+            Context context = this.getActivity();
+            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            String name = packageInfo.applicationInfo.nonLocalizedLabel.toString();
+            String version = packageInfo.versionName;
+            return new Pair<>(name, version);
+        }
+        catch (PackageManager.NameNotFoundException ignore)
+        {
+        }
+
+        return new Pair<>("Unknown", "Unknown");
+    }
+
+    private Pair<String, String> getVersionInfo(String manifestVersionName)
+    {
+        int separator = manifestVersionName.indexOf("@");
+        String version = manifestVersionName.substring(0, separator);
+        String build = manifestVersionName.substring(separator + 1, manifestVersionName.length());
+        return new Pair<>(version, build);
     }
 }

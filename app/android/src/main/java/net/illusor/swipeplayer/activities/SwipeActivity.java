@@ -185,15 +185,8 @@ public class SwipeActivity extends FragmentActivity
 
     private void appAbout()
     {
-        try
-        {
-            PackageInfo packageInfo = this.getPackageManager().getPackageInfo(this.getPackageName(), 0);
-            DialogFragment about = AboutDialog.newInstance(packageInfo.applicationInfo.nonLocalizedLabel.toString(), packageInfo.versionName);
-            about.show(this.getSupportFragmentManager(), "");
-        }
-        catch (PackageManager.NameNotFoundException ignore)
-        {
-        }
+        DialogFragment about = new AboutDialog();
+        about.show(this.getSupportFragmentManager(), "");
     }
 
     private void appShutdown()

@@ -51,6 +51,12 @@
                                 <goal>zipalign</goal>
                             </goals>
                         </execution>
+                        <execution>
+                            <id>manifest-update</id>
+                            <goals>
+                                <goal>manifest-update</goal>
+                            </goals>
+                        </execution>
                     </executions>
                     <configuration>
                         <sdk>
@@ -76,6 +82,11 @@
                         </zipalign>
                         <device>usb</device>
                         <undeployBeforeDeploy>true</undeployBeforeDeploy>
+                        <manifest>
+                            <versionCodeUpdateFromVersion>true</versionCodeUpdateFromVersion>
+                            <versionName>${project.version}@${env.BUILD_NUMBER}</versionName>
+                            <debuggable>false</debuggable>
+                        </manifest>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -93,7 +104,6 @@
                         </execution>
                     </executions>
                     <configuration>
-                        <verbose>true</verbose>
                         <removeExistingSignatures>true</removeExistingSignatures>
                         <archive>${project.build.directory}/${project.build.finalName}.apk</archive>
                         <keystore>${android.keystore.path}</keystore>

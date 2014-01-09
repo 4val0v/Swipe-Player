@@ -9,17 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import net.illusor.swipeplayer.R;
+import net.illusor.swipeplayer.helpers.DimensionHelper;
 import net.illusor.swipeplayer.helpers.TimeFormatter;
 
 public class DurationDisplayView extends LinearLayout
 {
     private final FormattedTextView textPassed, textLeft;
     private boolean cancelHide;
-
-    public DurationDisplayView(Context context)
-    {
-        this(context, null);
-    }
 
     public DurationDisplayView(Context context, AttributeSet attrs)
     {
@@ -38,16 +34,14 @@ public class DurationDisplayView extends LinearLayout
     @Override
     protected int getSuggestedMinimumHeight()
     {
-        DisplayMetrics metrics = this.getContext().getResources().getDisplayMetrics();
-        int size = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 218, metrics);
+        int size = (int) DimensionHelper.dipToPx(218);
         return size;
     }
 
     @Override
     protected int getSuggestedMinimumWidth()
     {
-        DisplayMetrics metrics = this.getContext().getResources().getDisplayMetrics();
-        int size = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 218, metrics);
+        int size = (int) DimensionHelper.dipToPx(218);
         return size;
     }
 

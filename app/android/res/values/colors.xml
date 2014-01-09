@@ -14,8 +14,8 @@
     <color name="color_fragment_browser">#010129</color>
     <color name="color_controlpanel_bg">#8d004c</color>
 
-    <color name="color_folder_text_default">#ffffff</color>
-    <color name="color_folder_text_highlight">#FFDA84</color>
+    <color name="color_folder_selected">#8d004c</color>
+    <color name="color_folder_text">#ffffff</color>
     <color name="color_trackbar_playlist">#000000</color>
     <color name="color_trackbar_browser">#37ffffff</color>
 

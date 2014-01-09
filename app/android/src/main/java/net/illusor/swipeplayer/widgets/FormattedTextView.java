@@ -30,21 +30,11 @@ public class FormattedTextView extends View implements Checkable
     private boolean isWrapping;
     private ColorStateList colorStateList;
 
-    public FormattedTextView(Context context)
-    {
-        this(context, null);
-    }
-
     public FormattedTextView(Context context, AttributeSet attrs)
     {
-        this(context, attrs, 0);
-    }
+        super(context, attrs);
 
-    public FormattedTextView(Context context, AttributeSet attrs, int defStyle)
-    {
-        super(context, attrs, defStyle);
-
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.FormattedTextView, defStyle, 0);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.FormattedTextView);
         int fontName = a.getInt(R.styleable.FormattedTextView_Font, 0);
         this.lineSpacing = a.getDimensionPixelSize(R.styleable.FormattedTextView_LineSpacing, 5);
         this.charsToEllipsize = a.getInteger(R.styleable.FormattedTextView_CharsToEllipsize, 10);
@@ -286,22 +276,6 @@ public class FormattedTextView extends View implements Checkable
         this.headerPaint.setColor(color);
         this.linePaint.setColor(color);
         this.invalidate();
-    }
-
-    public int getVerticalSize()
-    {
-        int paddingV = this.getPaddingBottom() + this.getPaddingTop();
-
-        Paint.FontMetricsInt metricsHeader = this.headerPaint.getFontMetricsInt();
-        int requestedHeight = metricsHeader.descent - metricsHeader.ascent + paddingV;
-
-        if (this.isWrapping)
-        {
-            Paint.FontMetricsInt metricsLine = this.linePaint.getFontMetricsInt();
-            requestedHeight += metricsLine.descent - metricsLine.ascent - metricsHeader.descent + this.lineSpacing;
-        }
-
-        return requestedHeight;
     }
 
     private class SavedState extends BaseSavedState

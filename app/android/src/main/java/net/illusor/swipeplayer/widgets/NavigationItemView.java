@@ -2,11 +2,11 @@ package net.illusor.swipeplayer.widgets;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import net.illusor.swipeplayer.R;
+import net.illusor.swipeplayer.helpers.DimensionHelper;
 
 public class NavigationItemView extends LinearLayout
 {
@@ -21,15 +21,16 @@ public class NavigationItemView extends LinearLayout
     public NavigationItemView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
-        LayoutInflater.from(context).inflate(R.layout.list_item_nav_history, this);
+
+        int paddingH = (int) DimensionHelper.dipToPx(16);
+        int paddingV = (int) DimensionHelper.dipToPx(14);
+        this.setPadding(paddingH, paddingV, paddingH, paddingV);
         this.setOrientation(LinearLayout.HORIZONTAL);
 
-        this.icon = this.findViewById(R.id.id_nav_history_icon);
-        this.text = (FormattedTextView)this.findViewById(R.id.id_nav_history_title);
+        LayoutInflater.from(context).inflate(R.layout.list_item_nav_history, this);
 
-        int paddingH = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16, context.getResources().getDisplayMetrics());
-        int paddingV = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 14, context.getResources().getDisplayMetrics());
-        this.setPadding(paddingH, paddingV, paddingH, paddingV);
+        this.icon = this.findViewById(R.id.id_nav_history_icon);
+        this.text = (FormattedTextView) this.findViewById(R.id.id_nav_history_title);
     }
 
     public void setIconVisible(boolean visible)
@@ -48,12 +49,10 @@ public class NavigationItemView extends LinearLayout
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-
         if (widthMode == MeasureSpec.AT_MOST)
         {
-            int height = this.getPaddingTop() + this.getPaddingBottom() + this.text.getVerticalSize();
-            this.setMeasuredDimension(widthSize, height);
+            int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+            this.setMeasuredDimension(widthSize, this.getMeasuredHeight());
         }
     }
 }

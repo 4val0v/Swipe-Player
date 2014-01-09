@@ -11,13 +11,14 @@
 
     <net.illusor.swipeplayer.widgets.FormattedTextView
         android:id="@+id/id_play_title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left|center_vertical"
         android:layout_marginLeft="21dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="7dp"
         android:layout_marginBottom="7dp"
+        android:layout_weight="1"
         swp:Font="PTSansNarrow"
         swp:HeaderTextSize="25sp"
         swp:LineTextSize="20sp"

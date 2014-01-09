@@ -132,7 +132,7 @@ abstract class SwipePagerAdapter extends PagerAdapter
                         {
                             removeFolder(index);
                         }
-                    }, 300);
+                    }, 50);
             }
 
             this.primaryFragment = fragment;

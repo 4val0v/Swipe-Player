@@ -3,7 +3,7 @@
 
     <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="16"/>
 
-    <application android:allowBackup="true" android:icon="@drawable/swipe_player_icon" android:label="Swipe Player" android:name=".SwipeApplication">
+    <application android:allowBackup="true" android:debuggable="false" android:icon="@drawable/swipe_player_icon" android:label="Swipe Player" android:name=".SwipeApplication">
 
         <activity android:launchMode="singleTop" android:name=".activities.SwipeActivity" android:screenOrientation="portrait" android:theme="@style/Theme.SwipePlayer">
             <intent-filter>

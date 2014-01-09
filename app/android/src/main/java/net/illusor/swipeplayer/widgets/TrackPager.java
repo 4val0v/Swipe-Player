@@ -4,25 +4,20 @@ import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.MotionEvent;
 import net.illusor.swipeplayer.domain.AudioFile;
 import net.illusor.swipeplayer.fragments.TrackPagerAdapter;
+import net.illusor.swipeplayer.helpers.DimensionHelper;
 
 public class TrackPager extends ViewPager
 {
     private final TouchHandler touchHandler;
     private PageChangeHandler listener;
 
-    public TrackPager(Context context)
-    {
-        this(context, null);
-    }
-
     public TrackPager(Context context, AttributeSet attrs)
     {
         super(context, attrs);
-        this.touchHandler = new TouchHandler(context);
+        this.touchHandler = new TouchHandler();
     }
 
     @Override
@@ -73,9 +68,9 @@ public class TrackPager extends ViewPager
         private int touchThresholdPx;
         private float touchX, touchY;
 
-        private TouchHandler(Context context)
+        private TouchHandler()
         {
-            this.touchThresholdPx = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, TOUCH_THRESHOLD_DP, context.getResources().getDisplayMetrics());
+            this.touchThresholdPx = (int) DimensionHelper.dipToPx(TOUCH_THRESHOLD_DP);
         }
 
         public void handleTouch(MotionEvent ev)

@@ -15,7 +15,7 @@ import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.activities.SwipeActivity;
 import net.illusor.swipeplayer.domain.AudioFile;
 import net.illusor.swipeplayer.helpers.OverScrollHelper;
-import net.illusor.swipeplayer.widgets.FormattedTextView;
+import net.illusor.swipeplayer.widgets.FolderItemView;
 
 import java.io.File;
 import java.util.List;
@@ -162,30 +162,27 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
 
     private class AudioFilesAdapter extends ArrayAdapter<AudioFile>
     {
-        private int defaultColor, highlightColor;
-
         private AudioFilesAdapter(Context context, List<AudioFile> files)
         {
             super(context, 0, files);
-            this.defaultColor = context.getResources().getColor(R.color.color_folder_text_default);
-            this.highlightColor = context.getResources().getColor(R.color.color_folder_text_highlight);
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent)
         {
-            View view;
+            FolderItemView view;
 
             if (convertView != null)
-                view = convertView;
+                view = (FolderItemView)convertView;
             else
-                view = LayoutInflater.from(this.getContext()).inflate(R.layout.list_item_folder, null);
+                view = new FolderItemView(this.getContext());
 
             File playlist = getSwipeActivity().getCurrentMediaDirectory();
             AudioFile item = this.getItem(position);
-            FormattedTextView text = (FormattedTextView)view.findViewById(R.id.id_file_title);
-            text.setColor(playlist != null && playlist.getAbsolutePath().startsWith(item.getAbsolutePath()) ? this.highlightColor : this.defaultColor);
-            text.setText(item.getTitle());
+
+            boolean isSelected = playlist != null && playlist.getAbsolutePath().startsWith(item.getAbsolutePath());
+            view.setSelected(isSelected);
+            view.setText(item.getTitle());
 
             return view;
         }

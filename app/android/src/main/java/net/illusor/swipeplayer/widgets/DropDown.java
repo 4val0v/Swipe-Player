@@ -16,19 +16,9 @@ public class DropDown extends Spinner
 {
     private AlertDialog popup;
 
-    public DropDown(Context context)
-    {
-        super(context);
-    }
-
     public DropDown(Context context, AttributeSet attrs)
     {
         super(context, attrs);
-    }
-
-    public DropDown(Context context, AttributeSet attrs, int defStyle)
-    {
-        super(context, attrs, defStyle);
     }
 
     @Override

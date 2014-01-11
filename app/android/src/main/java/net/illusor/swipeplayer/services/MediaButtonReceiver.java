@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.KeyEvent;
 
+/**
+ * Receives and handles system media buttons broadcast messages
+ */
 public class MediaButtonReceiver extends BroadcastReceiver
 {
     @Override
@@ -39,6 +42,10 @@ public class MediaButtonReceiver extends BroadcastReceiver
         }
     }
 
+    /**
+     * Fires when "Play Next" media button is pressed
+     * @param context Call context
+     */
     protected void onNextTrack(Context context)
     {
         Intent intent = new Intent(context, SoundService.class);
@@ -46,6 +53,10 @@ public class MediaButtonReceiver extends BroadcastReceiver
         context.startService(intent);
     }
 
+    /**
+     * Fires when "Play Previous" media button is pressed
+     * @param context Call context
+     */
     protected void onPreviousTrack(Context context)
     {
         Intent intent = new Intent(context, SoundService.class);
@@ -53,6 +64,10 @@ public class MediaButtonReceiver extends BroadcastReceiver
         context.startService(intent);
     }
 
+    /**
+     * Fires when "Play/Pause" media button is pressed
+     * @param context Call context
+     */
     protected void onPlayPause(Context context)
     {
         Intent intent = new Intent(context, SoundService.class);
@@ -60,6 +75,10 @@ public class MediaButtonReceiver extends BroadcastReceiver
         context.startService(intent);
     }
 
+    /**
+     * Fires when "Stop" media button is pressed
+     * @param context Call context
+     */
     protected void onStop(Context context)
     {
         Intent intent = new Intent(context, SoundService.class);

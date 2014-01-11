@@ -15,12 +15,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Controls the set of fragments, used to browse media directories and play audio files
+ */
 abstract class SwipePagerAdapter extends PagerAdapter
 {
-    private Fragment playlistFragment;
-    private final ArrayList<Fragment> browserFragments = new ArrayList<>();
-    private final ArrayList<Fragment.SavedState> browserStates = new ArrayList<>();
-    private final ArrayList<File> browserFolders = new ArrayList<>();
+    private Fragment playlistFragment;//fragment, used to play audio files
+    private final ArrayList<Fragment> browserFragments = new ArrayList<>();//fragments, used to browse audio directories
+    private final ArrayList<Fragment.SavedState> browserStates = new ArrayList<>();//fragments states
+    private final ArrayList<File> browserFolders = new ArrayList<>();//audio directories being browsed
 
     private final FragmentManager fragmentManager;
     private FragmentTransaction curTransaction = null;
@@ -49,17 +52,23 @@ abstract class SwipePagerAdapter extends PagerAdapter
     {
         Fragment fragment;
 
+        //the last fragment in the list - is always playlistFragment
+        //check, if we should return it
         if (this.isPlaylistIndex(position))
             fragment = this.playlistFragment;
         else
             fragment = this.browserFragments.get(position);
 
+        //if fragment is null means fragment was disposed to reduce app
+        //memory footprint, and we should restore it from its saved state
+        //(or this is the first run of the adapter, and there are no fragments initialized)
         if (fragment != null)
             return fragment;
 
         if (this.curTransaction == null)
             this.curTransaction = this.fragmentManager.beginTransaction();
 
+        //creating a new fragment
         if (this.isPlaylistIndex(position))
         {
             fragment = this.getPlaylistFragment();
@@ -78,8 +87,7 @@ abstract class SwipePagerAdapter extends PagerAdapter
             this.browserStates.set(position, null);
         }
 
-        fragment.setMenuVisibility(false);
-        fragment.setUserVisibleHint(false);
+        this.activateFragment(fragment, false);
 
         this.curTransaction.add(container.getId(), fragment);
 
@@ -109,30 +117,42 @@ abstract class SwipePagerAdapter extends PagerAdapter
     @Override
     public void setPrimaryItem(ViewGroup container, int position, Object object)
     {
-        Fragment fragment = (Fragment)object;
+        final Fragment fragment = (Fragment)object;
         if (!fragment.equals(this.primaryFragment))
         {
             if (this.primaryFragment != null)
-            {
-                this.primaryFragment.setMenuVisibility(false);
-                this.primaryFragment.setUserVisibleHint(false);
-            }
+                activateFragment(this.primaryFragment, false);
 
-            fragment.setMenuVisibility(true);
-            fragment.setUserVisibleHint(true);
-
+            //here we implement the feature of removing folder-browser fragments, if we swipe the ViewPager Left-To-Right
+            //(but we never remove the playlistFragment)
             if (primaryFragment != this.playlistFragment)
             {
+                //detect Left-To-Right swipe
+                //if detected, remove folder-browser fragment, which got moved to the right of the screen
                 final int index = this.browserFragments.indexOf(primaryFragment);
                 if (index > position)
+                {
+                    //make a delayed call, to allow the viewPager to play "Swipe" animation to the end
                     container.postDelayed(new Runnable()
                     {
                         @Override
                         public void run()
                         {
                             removeFolder(index);
+                            activateFragment(fragment, true);
                         }
                     }, 50);
+                }
+                else
+                {
+                    //if not detected, activating the newly displayed fragment
+                    //we may call this without any delays - we haven't done any modifications
+                    this.activateFragment(fragment, true);
+                }
+            }
+            else
+            {
+                this.activateFragment(fragment, true);
             }
 
             this.primaryFragment = fragment;
@@ -161,6 +181,10 @@ abstract class SwipePagerAdapter extends PagerAdapter
         return ((Fragment)object).getView() == view;
     }
 
+    /**
+     * Saves the current object state
+     * @return Object, containing the current state of the class
+     */
     public Parcelable saveObjectState()
     {
         Bundle state = new Bundle();
@@ -179,6 +203,10 @@ abstract class SwipePagerAdapter extends PagerAdapter
         return state;
     }
 
+    /**
+     * Restores object from its saved state
+     * @param state Object, containing the saved state of the class
+     */
     public void restoreObjectState(Parcelable state)
     {
         Bundle bundle = (Bundle)state;
@@ -209,21 +237,34 @@ abstract class SwipePagerAdapter extends PagerAdapter
         }
     }
 
-    public List<File> getData()
-    {
-        return new ArrayList<>(this.browserFolders);
-    }
-
+    /**
+     * Creates a fragment, used to display audio files to play
+     * @return Playlist fragment
+     */
     protected abstract Fragment getPlaylistFragment();
 
+    /**
+     * Creates a fragment, used to browse audio files stored in the device
+     * @param folder Directory to browse
+     * @return Fragment used to browse audio directory
+     */
     protected abstract Fragment getBrowserFragment(File folder);
 
+    /**
+     * Searches this for the specified folder and returns the index of the first occurrence
+     * @param folder Folder to search
+     * @return Index of the first occurrence, or -1
+     */
     public int findFolder(File folder)
     {
         int value = this.browserFolders.indexOf(folder);
         return value;
     }
 
+    /**
+     * Opens a new folder browser fragment and browses the specified folder
+     * @param folder Folder to browse
+     */
     public void addFolder(File folder)
     {
         this.browserFragments.add(null);
@@ -233,6 +274,10 @@ abstract class SwipePagerAdapter extends PagerAdapter
         this.notifyDataSetChanged();
     }
 
+    /**
+     * Gets information about currently browsed folders
+     * @return Pair of files: (root of the browsed hierarchy, last element of the browsed hierarchy)
+     */
     public Pair<File, File> getCurrentFolder()
     {
         File first = this.browserFolders.get(0);
@@ -240,6 +285,10 @@ abstract class SwipePagerAdapter extends PagerAdapter
         return new Pair<>(first, second);
     }
 
+    /**
+     * Restores class state using information about browsed folders
+     * @param files Pair of files: (root of the browsed hierarchy, last element of the browsed hierarchy)
+     */
     public void setCurrentFolder(Pair<File, File> files)
     {
         String root = files.first.getParent();
@@ -257,6 +306,20 @@ abstract class SwipePagerAdapter extends PagerAdapter
         while (folder != null && !folder.getAbsolutePath().equals(root));
     }
 
+    /**
+     * Gets list of currently browsed folders
+     * @return
+     */
+    public List<File> getData()
+    {
+        //wrap browser folders into the new List, to prevent modifications outside of this class
+        return new ArrayList<>(this.browserFolders);
+    }
+
+    /**
+     * Removes folder from folder browser
+     * @param position index of the folder to remove
+     */
     private void removeFolder(int position)
     {
         this.browserFragments.remove(position);
@@ -265,6 +328,22 @@ abstract class SwipePagerAdapter extends PagerAdapter
         this.notifyDataSetChanged();
     }
 
+    /**
+     * Activates/deactivates fragment
+     * @param fragment Fragment to activate
+     * @param activate activate or deactivate
+     */
+    private void activateFragment(Fragment fragment, boolean activate)
+    {
+        fragment.setMenuVisibility(activate);
+        fragment.setUserVisibleHint(activate);
+    }
+
+    /**
+     * Checks if provided index should be treated as index of the playlistFragment
+     * @param index index to check
+     * @return <b>true</b> if should;<br><b>false</b> if not
+     */
     private boolean isPlaylistIndex(int index)
     {
         return index == this.browserFolders.size();

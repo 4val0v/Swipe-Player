@@ -20,12 +20,20 @@ import net.illusor.swipeplayer.widgets.FolderItemView;
 import java.io.File;
 import java.util.List;
 
+/**
+ * Displays contents of music folder
+ */
 public class FolderBrowserFragment extends Fragment implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener
 {
     //region Factory
 
     private static final String PARAM_FOLDER = "folder";
 
+    /**
+     * Creates a new instance of {@link FolderBrowserFragment}
+     * @param folder Folder to browse
+     * @return Created fragment
+     */
     public static FolderBrowserFragment newInstance(File folder)
     {
         Bundle args = new Bundle();
@@ -37,10 +45,10 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
 
     //endregion
 
-    private Spinner navigationHistory;
-    private ListView listAudioFiles;
+    private Spinner navigationHistory;//dropdown with the history of navigation
+    private ListView listAudioFiles;//list of audio folders into the current directory
 
-    private File currentFolder;
+    private File currentDirectory;//directory being browsed
     private final AudioLoaderCallbacks audioLoaderCallbacks = new AudioLoaderCallbacks();
 
     @Override
@@ -59,7 +67,7 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
 
         this.navigationHistory.setOnItemSelectedListener(this);
         this.listAudioFiles.setOnItemClickListener(this);
-        this.currentFolder = (File)this.getArguments().getSerializable(PARAM_FOLDER);
+        this.currentDirectory = (File)this.getArguments().getSerializable(PARAM_FOLDER);
 
         OverScrollHelper.overScrollDisable(this.listAudioFiles);
         this.registerForContextMenu(this.listAudioFiles);
@@ -84,13 +92,15 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
     {
         super.setUserVisibleHint(isVisibleToUser);
 
+        //called when current fragment is brought into screen by owning ViewPager
+        //here we update the navigationHistory dropdown box
         if (isVisibleToUser && this.navigationHistory != null)
         {
             List<File> navigationItems = this.getSwipeActivity().getBrowserHistory();
             NavigationHistoryAdapter adapter = new NavigationHistoryAdapter(this.getActivity(), navigationItems);
 
             this.navigationHistory.setAdapter(adapter);
-            this.navigationHistory.setSelection(navigationItems.indexOf(this.currentFolder));
+            this.navigationHistory.setSelection(navigationItems.indexOf(this.currentDirectory));
 
             this.listAudioFiles.invalidateViews();
         }
@@ -117,6 +127,8 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
     {
+        //if selected directory has subfolders with music - navigate there
+        //if not - inflate the playlist with the contents of the directory
         AudioFile selected = (AudioFile) adapterView.getItemAtPosition(i);
         if (selected.hasSubDirectories())
             this.getSwipeActivity().openMediaDirectory(selected);
@@ -132,14 +144,14 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
     {
         NavigationHistoryAdapter adapter = (NavigationHistoryAdapter)adapterView.getAdapter();
-        if (this.currentFolder == adapter.getData().get(i))
+        if (this.currentDirectory == adapter.getData().get(i))
             return;
 
-        Log.d("SWIPE", this.currentFolder.toString() + " " + i);
+        Log.d("SWIPE", this.currentDirectory.toString() + " " + i);
         File selected = (File) adapterView.getItemAtPosition(i);
         this.getSwipeActivity().openMediaDirectory(selected);
 
-        this.navigationHistory.setSelection(adapter.getData().indexOf(this.currentFolder));
+        this.navigationHistory.setSelection(adapter.getData().indexOf(this.currentDirectory));
     }
 
     @Override
@@ -150,16 +162,27 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
 
     //endregion
 
+    /**
+     * Show/Hide "Loading" indicator while loading the contents of the fragment
+     * @param show <b>true</b> to show, <b>false</b> to hide
+     */
     private void showLoadingIndicator(boolean show)
     {
         this.getView().findViewById(R.id.id_list_preloader).setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
+    /**
+     * Gets the parent activity
+     * @return Parent activity
+     */
     private SwipeActivity getSwipeActivity()
     {
         return (SwipeActivity)this.getActivity();
     }
 
+    /**
+     * Manages the content of the fragment
+     */
     private class AudioFilesAdapter extends ArrayAdapter<AudioFile>
     {
         private AudioFilesAdapter(Context context, List<AudioFile> files)
@@ -180,6 +203,7 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
             File playlist = getSwipeActivity().getCurrentMediaDirectory();
             AudioFile item = this.getItem(position);
 
+            //check if this folder is one of the current playlist`s ancestors
             boolean isSelected = playlist != null && playlist.getAbsolutePath().startsWith(item.getAbsolutePath());
             view.setSelected(isSelected);
             view.setText(item.getTitle());
@@ -188,6 +212,9 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
         }
     }
 
+    /**
+     * Manages loading of the fragment contents
+     */
     private class AudioLoaderCallbacks implements LoaderManager.LoaderCallbacks<List<AudioFile>>
     {
         private static final String ARGS_DIRECTORY = "folder";
@@ -216,7 +243,7 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
         public void initLoader()
         {
             Bundle args = new Bundle();
-            args.putSerializable(AudioLoaderCallbacks.ARGS_DIRECTORY, currentFolder);
+            args.putSerializable(AudioLoaderCallbacks.ARGS_DIRECTORY, currentDirectory);
             getLoaderManager().initLoader(0, args, this);
         }
 

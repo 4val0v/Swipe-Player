@@ -3,6 +3,9 @@ package net.illusor.swipeplayer.helpers;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.SwipeApplication;
 
+/**
+ * Provides time formatting features
+ */
 public class TimeFormatter
 {
     private static final long hourSize = 3600000;
@@ -12,6 +15,11 @@ public class TimeFormatter
     private static final String timeFormatHHMMSS = SwipeApplication.getAppContext().getString(R.string.time_format_hhmmss);
     private static final String timeFormatMMSS = SwipeApplication.getAppContext().getString(R.string.time_format_mmss);
 
+    /**
+     * Outputs input time in form of hh:mm:ss
+     * @param milliseconds time milliseconds value
+     * @return Formatted output
+     */
     public static String hhmmss(long milliseconds)
     {
         long hours = milliseconds / hourSize;

@@ -9,12 +9,20 @@ import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.domain.AudioFile;
 import net.illusor.swipeplayer.widgets.FormattedTextView;
 
-public class TrackFragment extends Fragment
+/**
+ * Represents a music file info item of the {@link AudioControlFragment}
+ */
+class TrackFragment extends Fragment
 {
     //region Factory
 
     private static final String KEY_ARGS = "args";
 
+    /**
+     * Creates a new instance of {@link TrackFragment}
+     * @param audioFile Music file, represented by the fragment
+     * @return Created fragment
+     */
     public static TrackFragment newInstance(AudioFile audioFile)
     {
         Bundle bundle = new Bundle();
@@ -43,7 +51,7 @@ public class TrackFragment extends Fragment
 
         title1.setText(audioFile.getTitle());
 
-        if (!audioFile.getArtist().equals("<unknown>"))
+        if (!audioFile.getArtist().equals("<unknown>"))//when artist is unknown, it has text "<unknown>"; do not know, if android has some general resource for this string
         {
             title2.setText(audioFile.getArtist());
             title2.setVisibility(View.VISIBLE);

@@ -6,15 +6,23 @@ import net.illusor.swipeplayer.domain.AudioFile;
 
 import java.io.IOException;
 
+/**
+ * Performs audio playback/stop/pause/rewind features
+ */
 class AudioPlayer
 {
     private MediaPlayer mediaPlayer;
-    private AudioFile audioFile;
-    private AudioPlayerPlaylist audioPlaylist;
-    private boolean wasPlayingWhenRewindStarted;
-    private int pausedPosition;
+    private AudioFile audioFile;//current playing music file
+    private AudioPlayerPlaylist audioPlaylist;//current playlist instance
+    private boolean wasPlayingWhenRewindStarted;//if player was playing when rewind started
+    private int pausedPosition;//time mark, where player was pauser
     private float volume = 1;
 
+    /**
+     * Starts the music file playback
+     * @param audioFile Music file to play
+     * @throws IOException
+     */
     public void play(AudioFile audioFile) throws IOException
     {
         try
@@ -43,7 +51,7 @@ class AudioPlayer
                 public void onCompletion(MediaPlayer player)
                 {
                     if (audioPlaylist != null)
-                        audioPlaylist.onPlaybackComplete();
+                        audioPlaylist.onPlaybackComplete(audioPlayer.audioFile);
                     else
                         stop();
                 }
@@ -71,6 +79,9 @@ class AudioPlayer
         }
     }
 
+    /**
+     * Stops the playback
+     */
     public void stop()
     {
         if (this.mediaPlayer.isPlaying())
@@ -80,22 +91,35 @@ class AudioPlayer
         this.mediaPlayer = null;
     }
 
+    /**
+     * Pauses the playback
+     */
     public void pause()
     {
         this.pausedPosition = this.mediaPlayer.getCurrentPosition();
         this.mediaPlayer.pause();
     }
 
+    /**
+     * Resumes the playback
+     */
     public void resume()
     {
         this.mediaPlayer.start();
     }
 
+    /**
+     * Starts audio file rewind
+     */
     public void startRewind()
     {
         this.wasPlayingWhenRewindStarted = this.mediaPlayer.isPlaying();
     }
 
+    /**
+     * Commits audio file rewind
+     * @param milliseconds time where the file should be rewound to
+     */
     public void finishRewind(int milliseconds)
     {
         this.mediaPlayer.seekTo(milliseconds);
@@ -103,6 +127,10 @@ class AudioPlayer
             this.mediaPlayer.start();
     }
 
+    /**
+     * Sets the playback volume
+     * @param volume value form 0.0 to 1.0
+     */
     public void setVolume(float volume)
     {
         this.volume = volume;
@@ -110,11 +138,19 @@ class AudioPlayer
             this.mediaPlayer.setVolume(volume, volume);
     }
 
+    /**
+     * Gets currently played audio file
+     * @return Current audio file
+     */
     public AudioFile getAudioFile()
     {
         return audioFile;
     }
 
+    /**
+     * Gets the state of audio player
+     * @return State of the player
+     */
     public AudioPlayerState getState()
     {
         if (mediaPlayer == null)
@@ -125,6 +161,10 @@ class AudioPlayer
             return AudioPlayerState.Paused;
     }
 
+    /**
+     * Get overall playback progress (from 0 to getDuration())
+     * @return Current playback time
+     */
     public int getPosition()
     {
         try
@@ -141,16 +181,28 @@ class AudioPlayer
         }
     }
 
+    /**
+     * Gets current audio file duration
+     * @return Current audio file duration (milliseconds)
+     */
     public int getDuration()
     {
         return this.audioFile == null ? 0 : (int)this.audioFile.getDuration();
     }
 
+    /**
+     * Get playlist assigned to the player
+     * @return Playlist instance
+     */
     public AudioPlayerPlaylist getPlaylist()
     {
         return this.audioPlaylist;
     }
 
+    /**
+     * Assigns a playlist to the player
+     * @param playlist playlist instance
+     */
     public void setPlaylist(AudioPlayerPlaylist playlist)
     {
         this.audioPlaylist = playlist;

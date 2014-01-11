@@ -5,8 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v4.content.LocalBroadcastManager;
+import net.illusor.swipeplayer.SwipeApplication;
 import net.illusor.swipeplayer.domain.AudioFile;
 
+/**
+ * Wrapper for sending and receiving messages using android message system
+ */
 public class AudioBroadcastHandler extends BroadcastReceiver
 {
     private static final String ACTION_PLAY_AUDIO = "net.illusor.swipeplayer.services.SoundService.Play";
@@ -18,13 +22,12 @@ public class AudioBroadcastHandler extends BroadcastReceiver
 
     public AudioBroadcastHandler()
     {
+        this.context = SwipeApplication.getAppContext();
     }
 
-    public AudioBroadcastHandler(Context context)
-    {
-        this.context = context;
-    }
-
+    /**
+     * Registers current instance of the class as local message receiver
+     */
     public void register()
     {
         IntentFilter filter = new IntentFilter();
@@ -32,12 +35,15 @@ public class AudioBroadcastHandler extends BroadcastReceiver
         filter.addAction(ACTION_PLAY_STOP);
         filter.addAction(ACTION_PLAY_PAUSE);
         filter.addAction(ACTION_PLAY_RESUME);
-        LocalBroadcastManager.getInstance(this.getClassContext()).registerReceiver(this, filter);
+        LocalBroadcastManager.getInstance(this.context).registerReceiver(this, filter);
     }
 
+    /**
+     * Unregisters current instance of the class as local message receiver
+     */
     public void unregister()
     {
-        LocalBroadcastManager.getInstance(this.getClassContext()).unregisterReceiver(this);
+        LocalBroadcastManager.getInstance(this.context).unregisterReceiver(this);
     }
 
     @Override
@@ -69,6 +75,10 @@ public class AudioBroadcastHandler extends BroadcastReceiver
         }
     }
 
+    /**
+     * Sends a message: Playback of the new AudioFile has started
+     * @param audioFile Audio file which is played now
+     */
     void sendPlayAudioFile(AudioFile audioFile)
     {
         Intent intent = new Intent(ACTION_PLAY_AUDIO);
@@ -76,46 +86,63 @@ public class AudioBroadcastHandler extends BroadcastReceiver
         LocalBroadcastManager.getInstance(this.context).sendBroadcast(intent);
     }
 
+    /**
+     * Sends a message: Playback stopped
+     */
     void sendPlaybackStop()
     {
         Intent intent = new Intent(ACTION_PLAY_STOP);
         LocalBroadcastManager.getInstance(this.context).sendBroadcast(intent);
     }
 
+    /**
+     * Sends a message: Playback is paused
+     */
     void sendPlaybackPause()
     {
         Intent intent = new Intent(ACTION_PLAY_PAUSE);
         LocalBroadcastManager.getInstance(this.context).sendBroadcast(intent);
     }
 
+    /**
+     * Sends a message: Playback is resumed
+     */
     void sendPlaybackResume()
     {
         Intent intent = new Intent(ACTION_PLAY_RESUME);
         LocalBroadcastManager.getInstance(this.context).sendBroadcast(intent);
     }
 
+    /**
+     * Fires when playback of the new file has started
+     * @param audioFile AudioFile playing now
+     */
     protected void onPlayAudioFile(AudioFile audioFile)
     {
 
     }
 
+    /**
+     * Fires when playback bas been stopped
+     */
     protected void onPlaybackStop()
     {
 
     }
 
+    /**
+     * Fires when playback bas been paused
+     */
     protected void onPlaybackPause()
     {
 
     }
 
+    /**
+     * Fires when playback bas been resumed
+     */
     protected void onPlaybackResume()
     {
 
-    }
-
-    protected Context getClassContext()
-    {
-        return this.context;
     }
 }

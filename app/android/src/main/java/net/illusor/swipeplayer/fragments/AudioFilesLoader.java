@@ -9,8 +9,16 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Gets all the music files contained into the directory
+ */
 class AudioFilesLoader extends AudioFoldersLoader
 {
+    /**
+     * Creates a new instance of {@link AudioFilesLoader}
+     * @param context Current activity context
+     * @param directory Directory to load audio files from
+     */
     public AudioFilesLoader(Context context, File directory)
     {
         super(context, directory);
@@ -32,6 +40,11 @@ class AudioFilesLoader extends AudioFoldersLoader
         return result;
     }
 
+    /**
+     * Reads the {@link Cursor} entry and creates an {@link AudioFile} from it
+     * @param cursor Cursor to read
+     * @return Resulting audio file
+     */
     private AudioFile getNextLevelObject(Cursor cursor)
     {
         String fileName = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));

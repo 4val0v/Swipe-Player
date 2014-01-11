@@ -11,6 +11,9 @@ import net.illusor.swipeplayer.activities.SwipeActivity;
 import net.illusor.swipeplayer.domain.AudioFile;
 import net.illusor.swipeplayer.services.SoundService;
 
+/**
+ * Provides methods for displaying system notifications
+ */
 public class NotificationHelper
 {
     private Context context;
@@ -20,6 +23,11 @@ public class NotificationHelper
         this.context = context;
     }
 
+    /**
+     * Creates notification: "Playing audio.."
+     * @param file Playing audio file
+     * @return Notification instance
+     */
     public Notification getPlayingNotification(AudioFile file)
     {
         PendingIntent activityIntent = this.getActivityIntent();
@@ -39,6 +47,11 @@ public class NotificationHelper
         return notification;
     }
 
+    /**
+     * Creates notification: "Audio paused.."
+     * @param file Paused audio file
+     * @return Notification instance
+     */
     public Notification getPausedNotification(AudioFile file)
     {
         PendingIntent activityIntent = this.getActivityIntent();
@@ -58,6 +71,10 @@ public class NotificationHelper
         return notification;
     }
 
+    /**
+     * Creates notification: "Audio stopped.."
+     * @return Notification instance
+     */
     public Notification getStoppedNotification()
     {
         PendingIntent activityIntent = this.getActivityIntent();
@@ -73,6 +90,11 @@ public class NotificationHelper
         return notification;
     }
 
+    /**
+     * Creates notification: "Error playing file.."
+     * @param file Audio file which caused an error
+     * @return Notification
+     */
     public Notification getErrorNotification(AudioFile file)
     {
         Resources r = this.context.getResources();
@@ -86,6 +108,10 @@ public class NotificationHelper
         return notification;
     }
 
+    /**
+     * Creates an instance of {@link PendingIntent}, which opens the {@link SwipeActivity} on activation
+     * @return Pending intent instance
+     */
     private PendingIntent getActivityIntent()
     {
         Intent intent = new Intent(this.context, SwipeActivity.class);
@@ -93,6 +119,11 @@ public class NotificationHelper
         return pendingIntent;
     }
 
+    /**
+     * Creates an instance of {@link PendingIntent} which sends an action intent on activation
+     * @param action Action to send on activation
+     * @return Pending intent instance
+     */
     private PendingIntent getActionIntent(String action)
     {
         Intent intent = new Intent(this.context, SoundService.class);

@@ -2,7 +2,6 @@ package net.illusor.swipeplayer.fragments;
 
 import android.app.Service;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
@@ -27,11 +26,14 @@ import net.illusor.swipeplayer.widgets.PlaylistItemView;
 import java.io.File;
 import java.util.List;
 
+/**
+ * Fragment displays the actual application playlist
+ */
 public class PlaylistFragment extends Fragment implements AdapterView.OnItemClickListener
 {
-    private ListView listView;
-    private File currentMediaDirectory;
-    private AudioControlFragment audioControlFragment;
+    private ListView listView;//playlist
+    private File currentMediaDirectory;//directory to look audio files for in
+    private AudioControlFragment audioControlFragment;//fragment used to display progress and info about playing track
     private final AudioLoaderCallbacks audioLoaderCallbacks = new AudioLoaderCallbacks();
     private final SoundServiceConnection connection = new SoundServiceConnection();
     private final SoundServiceReceiver receiver = new SoundServiceReceiver();
@@ -65,7 +67,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         if (this.currentMediaDirectory != null)
             this.audioLoaderCallbacks.initLoader(this.currentMediaDirectory);
         else
-            this.showFolderButton(true);
+            this.showEmptyPlaylistMessage(true);
     }
 
     @Override
@@ -87,12 +89,20 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         this.connection.service.play(audioFile);
     }
 
+    /**
+     * Sets provided directory as the application playlist, and load music files from there
+     * @param folder Directory to treat as the playlist root
+     */
     public void setMediaDirectory(File folder)
     {
         this.currentMediaDirectory = folder;
         this.audioLoaderCallbacks.restartLoader(folder);
     }
 
+    /**
+     * Mark playlist item as "Currently playing" and focus it
+     * @param audioFile
+     */
     private void setItemChecked(AudioFile audioFile)
     {
         final PlaylistAdapter adapter = (PlaylistAdapter)this.listView.getAdapter();
@@ -101,6 +111,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         {
             this.listView.setItemChecked(index, true);
 
+            //if we have to scroll to much - just jump to the necessary item
             int pos = this.listView.getFirstVisiblePosition();
             if ((Math.abs(pos - index)) < 20)
                 this.listView.smoothScrollToPosition(index);
@@ -109,23 +120,38 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         }
     }
 
+    /**
+     * Show/Hide "loading" indicator
+     * @param show <b>true</b> to show, <b>false</b> - to hide
+     */
     private void showLoadingIndicator(boolean show)
     {
         this.getView().findViewById(R.id.id_list_preloader).setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
-    private void showFolderButton(boolean show)
+    /**
+     * Displays message "Playlist is empty" and opens the folder browser
+     * @param show <b>true</b> to show, <b>false</b> to hide
+     */
+    private void showEmptyPlaylistMessage(boolean show)
     {
         this.getView().findViewById(R.id.id_playlist_folder).setVisibility(show ? View.VISIBLE : View.GONE);
         if (show)
             getSwipeActivity().openMediaBrowser();
     }
 
+    /**
+     * Gets parent activity
+     * @return Parent activity
+     */
     private SwipeActivity getSwipeActivity()
     {
         return (SwipeActivity)this.getActivity();
     }
 
+    /**
+     * Handles loading of music files into the playlist
+     */
     private class AudioLoaderCallbacks implements LoaderManager.LoaderCallbacks<List<AudioFile>>
     {
         private static final String ARGS_DIRECTORY = "folder";
@@ -136,7 +162,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
             listView.setAdapter(null);
 
             showLoadingIndicator(true);
-            showFolderButton(false);
+            showEmptyPlaylistMessage(false);
 
             File directory = (File) bundle.getSerializable(ARGS_DIRECTORY);
             return new AudioFilesLoader(getActivity(), directory);
@@ -146,7 +172,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         public void onLoadFinished(Loader<List<AudioFile>> listLoader, List<AudioFile> audioFiles)
         {
             if (audioFiles.size() == 0)
-                showFolderButton(true);
+                showEmptyPlaylistMessage(true);
 
             showLoadingIndicator(false);
 
@@ -195,6 +221,9 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         }
     }
 
+    /**
+     * Handles interrogation with the sound service
+     */
     private class SoundServiceConnection implements ServiceConnection
     {
         private SoundService.SoundServiceBinder service;
@@ -234,6 +263,9 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         }
     }
 
+    /**
+     * Receives messages from the sound service
+     */
     private class SoundServiceReceiver extends AudioBroadcastHandler
     {
         @Override
@@ -241,12 +273,6 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         {
             super.onPlayAudioFile(audioFile);
             setItemChecked(audioFile);
-        }
-
-        @Override
-        protected Context getClassContext()
-        {
-            return getActivity();
         }
     }
 }

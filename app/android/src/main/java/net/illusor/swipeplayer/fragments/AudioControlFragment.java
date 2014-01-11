@@ -2,7 +2,6 @@ package net.illusor.swipeplayer.fragments;
 
 import android.app.Service;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
@@ -27,13 +26,16 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Fragment used to display info about currently played audio file, display progress and play/pause the playback
+ */
 public class AudioControlFragment extends Fragment implements View.OnClickListener
 {
-    private final SoundServiceConnection connection = new SoundServiceConnection();
-    private final SoundServiceReceiver receiver = new SoundServiceReceiver();
-    private TrackPager trackList;
-    private SeekBar progress;
-    private Timer progressTimer;
+    private final SoundServiceConnection connection = new SoundServiceConnection();//provides interrogation with the sound service
+    private final SoundServiceReceiver receiver = new SoundServiceReceiver();//receives messages from the sound service
+    private TrackPager trackList;//provides current playing track change by "swipe" gesture
+    private SeekBar progress;//progressbar to track and change playback progress
+    private Timer progressTimer;//timer to update the progressbar
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -46,11 +48,11 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
     {
         super.onActivityCreated(savedInstanceState);
 
-        this.trackList = (TrackPager)this.getView().findViewById(R.id.id_audio_control_track);
+        this.trackList = (TrackPager) this.getView().findViewById(R.id.id_audio_control_track);
         this.trackList.setOnClickListener(this);
         this.trackList.setOnPageChangeListener(new TrackSwipeListener());
 
-        this.progress = (SeekBar)this.getView().findViewById(R.id.id_audio_control_progress);
+        this.progress = (SeekBar) this.getView().findViewById(R.id.id_audio_control_progress);
         this.progress.setOnSeekBarChangeListener(new ProgressListener());
         this.progress.setMax(Integer.MAX_VALUE);
         this.progress.setThumbOffset(0);
@@ -59,6 +61,7 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
     @Override
     public void onClick(View view)
     {
+        //play/pause feature by simple click
         AudioPlayerState state = this.connection.service.getState();
         switch (state)
         {
@@ -95,6 +98,11 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
         this.stopTrackingProgress();
     }
 
+    /**
+     * Sets the set of music files, which are treated as a playlist
+     *
+     * @param playlist List of music files
+     */
     public void setPlaylist(List<AudioFile> playlist)
     {
         trackList.setAdapter(new TrackPagerAdapter(playlist, getFragmentManager()));
@@ -102,6 +110,9 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
             setAudioFile(connection.service.getAudioFile());
     }
 
+    /**
+     * Starts updating the progressbar, according to the playback progress
+     */
     private void startTrackingProgress()
     {
         if (this.progressTimer == null)
@@ -112,6 +123,9 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
         }
     }
 
+    /**
+     * Stops updating the progressbar
+     */
     private void stopTrackingProgress()
     {
         if (this.progressTimer != null)
@@ -123,6 +137,11 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
         }
     }
 
+    /**
+     * Sets the currently playing audio file
+     *
+     * @param audioFile Currently playing music file
+     */
     private void setAudioFile(AudioFile audioFile)
     {
         if (audioFile != null)
@@ -136,33 +155,42 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
         }
     }
 
+    /**
+     * Play animation of "Paused" playback state
+     */
     private void animatePause()
     {
         ViewPropertyAnimator.animate(this.progress).alpha(0.5f).setDuration(100);
         ViewPropertyAnimator.animate(this.trackList).alpha(0.5f).setDuration(100);
     }
 
+    //Play animation of "Playing" playback state
     private void animatePlay()
     {
         ViewPropertyAnimator.animate(this.progress).alpha(1.0f).setDuration(100);
         ViewPropertyAnimator.animate(this.trackList).alpha(1.0f).setDuration(100);
     }
 
+    /**
+     * Provides interrogation with the progressbar, tracking and changing the playback progress
+     */
     private class ProgressListener implements SeekBar.OnSeekBarChangeListener
     {
-        private final DurationDisplayView display = (DurationDisplayView)getActivity().findViewById(R.id.id_audio_durations);
-        private boolean isRewinding;
-        private AudioPlayerState stateWhenRewindStarted;
+        private final DurationDisplayView display = (DurationDisplayView) getActivity().findViewById(R.id.id_audio_durations);//view used to display playback progress, when user is rewinding manually
+        private boolean isRewinding;//is user rewinding the audio file
+        private AudioPlayerState stateWhenRewindStarted;//was the playback running, when user started to rewind?
 
         @Override
         public void onProgressChanged(SeekBar seekBar, int i, boolean b)
         {
             Log.d("SWIPE", "Manual rewind " + i + " of " + seekBar.getMax() + " b=" + b);
+
+            //if user is rewinding manually
             if (this.isRewinding)
             {
                 AudioFile file = connection.service.getAudioFile();
-                int duration = (int)file.getDuration();
-                int played = (int)(duration * (1.0f * i / seekBar.getMax()));
+                int duration = (int) file.getDuration();
+                int played = (int) (duration * (1.0f * i / seekBar.getMax()));
                 this.display.setDuration(played, duration);
             }
         }
@@ -187,8 +215,8 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
         public void onStopTrackingTouch(SeekBar seekBar)
         {
             Log.d("SWIPE", "Finished manual rewind");
-            final float percent = (float)(1.0 * seekBar.getProgress() / seekBar.getMax());
-            final int milliseconds = (int)(connection.service.getDuration() * percent);
+            final float percent = (float) (1.0 * seekBar.getProgress() / seekBar.getMax());
+            final int milliseconds = (int) (connection.service.getDuration() * percent);
 
             connection.service.finishRewind(milliseconds);
 
@@ -200,6 +228,9 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
         }
     }
 
+    /**
+     * Used to detect changes of playing track, which user made using "Swipe" gesture
+     */
     private class TrackSwipeListener extends ViewPager.SimpleOnPageChangeListener
     {
         @Override
@@ -215,10 +246,12 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
                     connection.service.play(audioFile);
                 }
             }, 300);
-
         }
     }
 
+    /**
+     * Provides interrogation with the sound service
+     */
     private class SoundServiceConnection implements ServiceConnection
     {
         private SoundService.SoundServiceBinder service;
@@ -237,16 +270,17 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder binder)
         {
-            this.service = (SoundService.SoundServiceBinder)binder;
+            this.service = (SoundService.SoundServiceBinder) binder;
 
             AudioFile audioFile = this.service.getAudioFile();
             setAudioFile(audioFile);
 
             AudioPlayerState state = service.getState();
             if (state == AudioPlayerState.Playing)
-                startTrackingProgress();
-            else if (state == AudioPlayerState.Paused)
-                new ProgressTrackingTask().run();
+                startTrackingProgress();//if service is playing audio - start tracking
+            else
+                if (state == AudioPlayerState.Paused)
+                    new ProgressTrackingTask().run();//if not - just update the progressbar once
         }
 
         @Override
@@ -256,6 +290,9 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
         }
     }
 
+    /**
+     * Receives messages sent by the sound service
+     */
     private class SoundServiceReceiver extends AudioBroadcastHandler
     {
         @Override
@@ -290,14 +327,11 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
             startTrackingProgress();
             animatePlay();
         }
-
-        @Override
-        protected Context getClassContext()
-        {
-            return getActivity();
-        }
     }
 
+    /**
+     * Tracks the playback progress
+     */
     private class ProgressTrackingTask extends TimerTask
     {
         private final int maxProgress;
@@ -314,7 +348,7 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
             int played = connection.service.getPosition();
             long duration = file.getDuration();
 
-            final int percent = (int)(1.0 * maxProgress * played / duration);
+            final int percent = (int) (1.0 * maxProgress * played / duration);
             getView().post(new Runnable()
             {
                 @Override

@@ -13,6 +13,9 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
 
+/**
+ * Controls set of fragments, representing playlist tracks of the {@link AudioControlFragment}
+ */
 public class TrackPagerAdapter extends PagerAdapter
 {
     private final List<AudioFile> audioFiles;
@@ -97,11 +100,20 @@ public class TrackPagerAdapter extends PagerAdapter
         return ((Fragment)object).getView() == view;
     }
 
+    /**
+     * Gets adapter contents
+     * @return Adapter contents
+     */
     public List<AudioFile> getData()
     {
         return this.audioFiles;
     }
 
+    /**
+     * Coerces the input index to provide cycle-scrolling effect
+     * @param position Requested fragment position
+     * @return Real fragment position
+     */
     private int coerceCyclicPosition(int position)
     {
         if (this.audioFiles.size() > 1)

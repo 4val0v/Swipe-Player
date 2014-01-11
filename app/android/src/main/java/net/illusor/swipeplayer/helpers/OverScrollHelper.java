@@ -9,6 +9,10 @@ import java.lang.reflect.Field;
 
 public class OverScrollHelper
 {
+    /**
+     * Disables the overscroll effect of the ListView
+     * @param listView ListView to process
+     */
     public static void overScrollDisable(ListView listView)
     {
         //http://stackoverflow.com/questions/7777803/listview-top-highlight-on-scrolling/17569996#17569996
@@ -24,6 +28,12 @@ public class OverScrollHelper
         }
     }
 
+    /**
+     * Find and process internal fields of the lestview
+     * @param sender ListView to process
+     * @param absListView Its class
+     * @param glow Private field name to process
+     */
     private static void disableGlow(ListView sender, Class<?> absListView, String glow)
     {
         try

@@ -14,6 +14,9 @@ import net.illusor.swipeplayer.widgets.NavigationItemView;
 import java.io.File;
 import java.util.List;
 
+/**
+ * Provides contents for NavigationHistory dropdown box of the {@link FolderBrowserFragment}
+ */
 class NavigationHistoryAdapter extends ArrayAdapter<File>
 {
     private Context context;

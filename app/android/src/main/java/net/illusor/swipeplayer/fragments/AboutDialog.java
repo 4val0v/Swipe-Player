@@ -12,6 +12,9 @@ import android.support.v4.app.DialogFragment;
 import android.util.Pair;
 import net.illusor.swipeplayer.R;
 
+/**
+ * Displays the general information about the application
+ */
 public class AboutDialog extends DialogFragment
 {
     @Override
@@ -39,6 +42,10 @@ public class AboutDialog extends DialogFragment
         return dialog;
     }
 
+    /**
+     * Gets the general information about the app
+     * @return Pair of strings (app name - e.g. "Swipe Player", version info - version@build)
+     */
     private Pair<String, String> getApkInfo()
     {
         try
@@ -46,7 +53,7 @@ public class AboutDialog extends DialogFragment
             Context context = this.getActivity();
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
             String name = packageInfo.applicationInfo.nonLocalizedLabel.toString();
-            String version = packageInfo.versionName;
+            String version = packageInfo.versionName;//manifest contains string looking like version@build
             return new Pair<>(name, version);
         }
         catch (PackageManager.NameNotFoundException ignore)
@@ -56,6 +63,11 @@ public class AboutDialog extends DialogFragment
         return new Pair<>("Unknown", "Unknown");
     }
 
+    /**
+     * Parses version info
+     * @param manifestVersionName VersionName from manifest (version@build string)
+     * @return Pair of strings (version, build number)
+     */
     private Pair<String, String> getVersionInfo(String manifestVersionName)
     {
         int separator = manifestVersionName.indexOf("@");

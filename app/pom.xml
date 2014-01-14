@@ -84,7 +84,7 @@
                         <undeployBeforeDeploy>true</undeployBeforeDeploy>
                         <manifest>
                             <versionCodeUpdateFromVersion>true</versionCodeUpdateFromVersion>
-                            <versionName>${project.version}@${env.BUILD_NUMBER}</versionName>
+                            <versionName>${project.version}:${env.BUILD_NUMBER}</versionName>
                             <debuggable>false</debuggable>
                         </manifest>
                     </configuration>

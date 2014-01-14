@@ -44,7 +44,7 @@ public class AboutDialog extends DialogFragment
 
     /**
      * Gets the general information about the app
-     * @return Pair of strings (app name - e.g. "Swipe Player", version info - version@build)
+     * @return Pair of strings (app name - e.g. "Swipe Player", version info - version:build)
      */
     private Pair<String, String> getApkInfo()
     {
@@ -65,12 +65,12 @@ public class AboutDialog extends DialogFragment
 
     /**
      * Parses version info
-     * @param manifestVersionName VersionName from manifest (version@build string)
+     * @param manifestVersionName VersionName from manifest (version:build string)
      * @return Pair of strings (version, build number)
      */
     private Pair<String, String> getVersionInfo(String manifestVersionName)
     {
-        int separator = manifestVersionName.indexOf("@");
+        int separator = manifestVersionName.indexOf(":");
         String version = manifestVersionName.substring(0, separator);
         String build = manifestVersionName.substring(separator + 1, manifestVersionName.length());
         return new Pair<>(version, build);

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:swp="http://schemas.android.com/apk/res/net.illusor.swipeplayer"
+              android:layout_height="match_parent"
+              android:layout_width="match_parent"
+              android:orientation="horizontal"
+              android:background="@drawable/item_folder_bg"
+              android:paddingLeft="16dp"
+              android:paddingRight="16dp"
+              android:paddingTop="10dp"
+              android:paddingBottom="10dp">-->
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:swp="http://schemas.android.com/apk/res/net.illusor.swipeplayer">
+
+    <net.illusor.swipeplayer.widgets.FormattedTextView
+            android:id="@+id/id_folder_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            swp:HeaderTextSize="25sp"
+            swp:LineTextSize="15sp"
+            swp:Font="PTSansNarrow"
+            swp:TextColor="@color/color_folder_text"
+            swp:IsWrapping="true"/>
+
+    <View android:id="@+id/id_folder_selected"
+          android:layout_width="7dp"
+          android:layout_height="7dp"
+          android:layout_gravity="center_vertical"
+          android:layout_marginLeft="5dp"
+          android:background="@drawable/item_folder_selected"/>
+
+</merge>
+
+<!--</LinearLayout>-->

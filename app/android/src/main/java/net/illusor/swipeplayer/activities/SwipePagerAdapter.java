@@ -129,32 +129,12 @@ abstract class SwipePagerAdapter extends PagerAdapter
             {
                 //detect Left-To-Right swipe
                 //if detected, remove folder-browser fragment, which got moved to the right of the screen
-                final int index = this.browserFragments.indexOf(primaryFragment);
+                int index = this.browserFragments.indexOf(primaryFragment);
                 if (index > position)
-                {
-                    //make a delayed call, to allow the viewPager to play "Swipe" animation to the end
-                    container.postDelayed(new Runnable()
-                    {
-                        @Override
-                        public void run()
-                        {
-                            removeFolder(index);
-                            activateFragment(fragment, true);
-                        }
-                    }, 50);
-                }
-                else
-                {
-                    //if not detected, activating the newly displayed fragment
-                    //we may call this without any delays - we haven't done any modifications
-                    this.activateFragment(fragment, true);
-                }
-            }
-            else
-            {
-                this.activateFragment(fragment, true);
+                    removeFolder(index);
             }
 
+            this.activateFragment(fragment, true);
             this.primaryFragment = fragment;
         }
     }

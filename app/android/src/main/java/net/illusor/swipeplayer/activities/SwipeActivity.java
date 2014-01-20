@@ -141,7 +141,7 @@ public class SwipeActivity extends FragmentActivity
         if (index == 0)
             super.onBackPressed();
         else
-            this.viewPager.setCurrentItem(index - 1);
+            this.viewPager.setCurrentItem(index - 1, true);
     }
 
     /**

@@ -46,6 +46,9 @@ import java.util.List;
  */
 public class SwipeActivity extends FragmentActivity
 {
+    //which directory we will use as the folder browser root
+    private static final String rootMusicDirectory = File.separator;
+
     //options menu codes
     private static final int MENU_CODE_QUIT = 0;//quit application
     private static final int MENU_CODE_ABOUT = 1;//show "About" dialog
@@ -66,20 +69,6 @@ public class SwipeActivity extends FragmentActivity
 
         this.viewPager = (ViewPager) this.findViewById(R.id.id_swipe_view_pager);
         this.pagerAdapter = new LocalPagerAdapter(this.getSupportFragmentManager());
-
-        this.currentMediaDirectory = PreferencesHelper.getStoredPlaylist(this);
-
-        if (savedInstanceState == null)
-        {
-            Pair<File, File> lastBrowsedFolder = PreferencesHelper.getBrowserFolders(this);
-            if (lastBrowsedFolder != null)
-                this.pagerAdapter.setCurrentFolder(lastBrowsedFolder);
-            else
-                this.pagerAdapter.addFolder(new File(File.separator));
-
-            this.viewPager.setAdapter(this.pagerAdapter);
-            this.viewPager.setCurrentItem(this.pagerAdapter.getCount() - 1);
-        }
     }
 
     @Override
@@ -106,6 +95,13 @@ public class SwipeActivity extends FragmentActivity
     {
         super.onStart();
         this.connection.bind();
+
+        this.handleIncomingIntent();
+
+        //if pagerAdapter contains no data - inflate it
+        Pair<File, File> structure = this.pagerAdapter.getFolderStructure();
+        if (structure != null) return;
+        this.initializeFolderBrowser();
     }
 
     @Override
@@ -113,8 +109,9 @@ public class SwipeActivity extends FragmentActivity
     {
         super.onStop();
         this.connection.unbind();
-        Pair<File, File> browsedFolder = this.pagerAdapter.getCurrentFolder();
-        PreferencesHelper.setBrowserFolders(this, browsedFolder);
+
+        Pair<File, File> browsedFolder = this.pagerAdapter.getFolderStructure();
+        PreferencesHelper.setBrowserFolderStructure(this, browsedFolder);
     }
 
     @Override
@@ -218,6 +215,46 @@ public class SwipeActivity extends FragmentActivity
     public File getCurrentMediaDirectory()
     {
         return currentMediaDirectory;
+    }
+
+    /**
+     * Handles the intent which the activity was started with
+     */
+    private void handleIncomingIntent()
+    {
+        Intent intent = this.getIntent();
+        //if the activity was started as usual, the intent will contain no data
+        //but if it was started via "open with dialog", the intent will contain data about the file user wanted to open with the application
+        if (Intent.ACTION_VIEW.equals(intent.getAction()) && intent.getData() != null)
+        {
+            File file = new File(intent.getData().getPath());
+            File folder = file.getParentFile();
+            //we use file grandparent to show as the navigation history "end"
+            File folderParent = folder.getParentFile();
+            if (folderParent == null) folderParent = folder;//folder can have a null parent, if folder is device root "/"
+
+            //replace saved app settings - other settings consumers run only after this code executes, and will get corrected data
+            Pair<File, File> structure = new Pair<>(new File(rootMusicDirectory), folderParent);
+            PreferencesHelper.setBrowserFolderStructure(this, structure);
+            PreferencesHelper.setStoredPlaylist(this, folder);
+
+            //reload the navigation history - see onStart();
+            this.pagerAdapter.clear();
+        }
+    }
+
+    private void initializeFolderBrowser()
+    {
+        this.currentMediaDirectory = PreferencesHelper.getStoredPlaylist(this);
+
+        Pair<File, File> structure = PreferencesHelper.getBrowserFolderStructure(this);
+        if (structure != null)
+            this.pagerAdapter.setFolderStructure(structure);
+        else
+            this.pagerAdapter.addFolder(new File(rootMusicDirectory));
+
+        this.viewPager.setAdapter(this.pagerAdapter);
+        this.viewPager.setCurrentItem(this.pagerAdapter.getCount() - 1);
     }
 
     /**

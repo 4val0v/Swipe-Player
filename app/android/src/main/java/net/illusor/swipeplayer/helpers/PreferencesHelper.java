@@ -55,7 +55,7 @@ public class PreferencesHelper
      * @param context Current activity context
      * @return Pair of files: (root of the opened hierarchy, last child of the opened hierarchy)
      */
-    public static Pair<File, File> getBrowserFolders(Context context)
+    public static Pair<File, File> getBrowserFolderStructure(Context context)
     {
         File start = getFileByKey(context, SHARED_PREF_FOLDER_KEY_START);
         if (start == null) return null;
@@ -68,7 +68,7 @@ public class PreferencesHelper
      * @param context Current activity context
      * @param files Pair of files: (root of the opened hierarchy, last child of the opened hierarchy)
      */
-    public static void setBrowserFolders(Context context, Pair<File, File> files)
+    public static void setBrowserFolderStructure(Context context, Pair<File, File> files)
     {
         setFileByKey(context, SHARED_PREF_FOLDER_KEY_START, files.first);
         setFileByKey(context, SHARED_PREF_FOLDER_KEY_END, files.second);

@@ -115,7 +115,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
 
     /**
      * Mark playlist item as "Currently playing" and focus it
-     * @param audioFile
+     * @param audioFile The item of the playlist that should be marked as checked
      */
     private void setItemChecked(AudioFile audioFile)
     {
@@ -163,6 +163,25 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         return (SwipeActivity)this.getActivity();
     }
 
+    private boolean handleIncomingIntent()
+    {
+        Intent intent = this.getActivity().getIntent();
+        if (Intent.ACTION_VIEW.equals(intent.getAction()) && intent.getData() != null)
+        {
+            File file = new File(intent.getData().getPath());
+            PlaylistAdapter adapter = (PlaylistAdapter)this.listView.getAdapter();
+            int index = adapter.getData().indexOf(file);
+
+            if (index > 0)
+            {
+                AudioFile audioFile = adapter.getItem(index);
+                this.connection.service.play(audioFile);
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Handles loading of music files into the playlist
      */
@@ -199,8 +218,12 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
             {
                 connection.service.setPlaylist(audioFiles);
 
-                AudioFile audioFile = connection.service.getAudioFile();
-                if (audioFile != null) setItemChecked(audioFile);
+                boolean playIntentAudio = handleIncomingIntent();
+                if (!playIntentAudio)
+                {
+                    AudioFile audioFile = connection.service.getAudioFile();
+                    if (audioFile != null) setItemChecked(audioFile);
+                }
             }
         }
 
@@ -265,8 +288,12 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
                 PlaylistAdapter adapter = (PlaylistAdapter)listView.getAdapter();
                 service.setPlaylist(adapter.getData());
 
-                AudioFile audioFile = connection.service.getAudioFile();
-                if (audioFile != null) setItemChecked(audioFile);
+                boolean playIntentAudio = handleIncomingIntent();
+                if (!playIntentAudio)
+                {
+                    AudioFile audioFile = connection.service.getAudioFile();
+                    if (audioFile != null) setItemChecked(audioFile);
+                }
             }
         }
 

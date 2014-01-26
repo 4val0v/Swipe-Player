@@ -270,10 +270,13 @@ abstract class SwipePagerAdapter extends PagerAdapter
 
     /**
      * Gets information about currently browsed folders
-     * @return Pair of files: (root of the browsed hierarchy, last element of the browsed hierarchy)
+     * @return Pair of files: (root of the browsed hierarchy, last element of the browsed hierarchy) or null, if the adapter is empty
      */
-    public Pair<File, File> getCurrentFolder()
+    public Pair<File, File> getFolderStructure()
     {
+        if (this.browserFolders.size() == 0)
+            return null;
+
         File first = this.browserFolders.get(0);
         File second = this.browserFolders.get(this.browserFolders.size() - 1);
         return new Pair<>(first, second);
@@ -283,7 +286,7 @@ abstract class SwipePagerAdapter extends PagerAdapter
      * Restores class state using information about browsed folders
      * @param files Pair of files: (root of the browsed hierarchy, last element of the browsed hierarchy)
      */
-    public void setCurrentFolder(Pair<File, File> files)
+    public void setFolderStructure(Pair<File, File> files)
     {
         String root = files.first.getParent();
         File folder = files.second;
@@ -308,6 +311,17 @@ abstract class SwipePagerAdapter extends PagerAdapter
     {
         //wrap browser folders into the new List, to prevent modifications outside of this class
         return new ArrayList<>(this.browserFolders);
+    }
+
+    /**
+     * Removes all content from the adapter instance
+     */
+    public void clear()
+    {
+        this.browserFolders.clear();
+        this.browserFragments.clear();
+        this.browserStates.clear();
+        this.notifyDataSetChanged();
     }
 
     /**

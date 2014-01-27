@@ -314,17 +314,6 @@ abstract class SwipePagerAdapter extends PagerAdapter
     }
 
     /**
-     * Removes all content from the adapter instance
-     */
-    public void clear()
-    {
-        this.browserFolders.clear();
-        this.browserFragments.clear();
-        this.browserStates.clear();
-        this.notifyDataSetChanged();
-    }
-
-    /**
      * Removes folder from folder browser
      * @param position index of the folder to remove
      */

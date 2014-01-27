@@ -77,11 +77,10 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         this.receiver.register();
 
         this.currentMediaDirectory = PreferencesHelper.getStoredPlaylist(this.getActivity());
-
-        if (this.currentMediaDirectory != null)
-            this.audioLoaderCallbacks.initLoader(this.currentMediaDirectory);
-        else
+        if (this.currentMediaDirectory == null)
             this.showEmptyPlaylistMessage(true);
+        else
+            this.audioLoaderCallbacks.initLoader(this.currentMediaDirectory);
     }
 
     @Override
@@ -119,8 +118,8 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
      */
     private void setItemChecked(AudioFile audioFile)
     {
-        final PlaylistAdapter adapter = (PlaylistAdapter)this.listView.getAdapter();
-        final int index = adapter.getData().indexOf(audioFile);
+        PlaylistAdapter adapter = (PlaylistAdapter)this.listView.getAdapter();
+        int index = adapter.getData().indexOf(audioFile);
         if (index >= 0)
         {
             this.listView.setItemChecked(index, true);
@@ -163,23 +162,27 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         return (SwipeActivity)this.getActivity();
     }
 
-    private boolean handleIncomingIntent()
+    /**
+     * Inflates the Sound Service playlist with the actual data and scrolls the visible playlist to the currently playing audio file
+     * @param playlist Actual set of audio files
+     */
+    private void synchronizePlaylist(List<AudioFile> playlist)
     {
-        Intent intent = this.getActivity().getIntent();
-        if (Intent.ACTION_VIEW.equals(intent.getAction()) && intent.getData() != null)
-        {
-            File file = new File(intent.getData().getPath());
-            PlaylistAdapter adapter = (PlaylistAdapter)this.listView.getAdapter();
-            int index = adapter.getData().indexOf(file);
+        this.connection.service.setPlaylist(playlist);
 
-            if (index > 0)
-            {
-                AudioFile audioFile = adapter.getItem(index);
-                this.connection.service.play(audioFile);
-                return true;
-            }
+        int index = playlist.indexOf(this.getSwipeActivity().PLAYBACK_ON_LOAD);
+        if (index >= 0)
+        {
+            AudioFile audioFile = playlist.get(index);
+            this.connection.service.play(audioFile);
         }
-        return false;
+        else
+        {
+            AudioFile audioFile = this.connection.service.getAudioFile();
+            if (audioFile != null) setItemChecked(audioFile);
+        }
+
+        this.getSwipeActivity().PLAYBACK_ON_LOAD = null;
     }
 
     /**
@@ -215,16 +218,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
             //we do not know, what fires faster: music loader or service connection
             //so we duplicate service playlist inflation code here and inside the service connection
             if (connection.service != null)
-            {
-                connection.service.setPlaylist(audioFiles);
-
-                boolean playIntentAudio = handleIncomingIntent();
-                if (!playIntentAudio)
-                {
-                    AudioFile audioFile = connection.service.getAudioFile();
-                    if (audioFile != null) setItemChecked(audioFile);
-                }
-            }
+                synchronizePlaylist(audioFiles);
         }
 
         @Override
@@ -286,14 +280,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
             if (listView.getAdapter() != null)
             {
                 PlaylistAdapter adapter = (PlaylistAdapter)listView.getAdapter();
-                service.setPlaylist(adapter.getData());
-
-                boolean playIntentAudio = handleIncomingIntent();
-                if (!playIntentAudio)
-                {
-                    AudioFile audioFile = connection.service.getAudioFile();
-                    if (audioFile != null) setItemChecked(audioFile);
-                }
+                synchronizePlaylist(adapter.getData());
             }
         }
 
@@ -312,8 +299,19 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         @Override
         protected void onPlayAudioFile(AudioFile audioFile)
         {
-            super.onPlayAudioFile(audioFile);
-            setItemChecked(audioFile);
+            //in some cases (when this method gets called by synchronizePlaylist()) calls chain,
+            //setItemChecked() doesn't scroll the listView to selected item
+            //to fix it we use a delayed call, though we do not need it when this method gets
+            //called from somewhere outside synchronizePlaylist()
+            final AudioFile file = audioFile;
+            listView.postDelayed(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    setItemChecked(file);
+                }
+            }, 50);
         }
     }
 }

@@ -19,6 +19,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.media.AudioManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Parcelable;
@@ -46,6 +47,8 @@ import java.util.List;
  */
 public class SwipeActivity extends FragmentActivity
 {
+    //sometimes we should start playback of some track on playlistFragment loading (when we open a music file with the application)
+    public File PLAYBACK_ON_LOAD;
     //which directory we will use as the folder browser root
     private static final String rootMusicDirectory = File.separator;
 
@@ -69,6 +72,8 @@ public class SwipeActivity extends FragmentActivity
 
         this.viewPager = (ViewPager) this.findViewById(R.id.id_swipe_view_pager);
         this.pagerAdapter = new LocalPagerAdapter(this.getSupportFragmentManager());
+
+        this.handleIncomingIntent(this.getIntent());
     }
 
     @Override
@@ -91,12 +96,17 @@ public class SwipeActivity extends FragmentActivity
     }
 
     @Override
+    protected void onNewIntent(Intent intent)
+    {
+        super.onNewIntent(intent);
+        this.handleIncomingIntent(intent);
+    }
+
+    @Override
     protected void onStart()
     {
         super.onStart();
         this.connection.bind();
-
-        this.handleIncomingIntent();
 
         //if pagerAdapter contains no data - inflate it
         Pair<File, File> structure = this.pagerAdapter.getFolderStructure();
@@ -219,28 +229,26 @@ public class SwipeActivity extends FragmentActivity
 
     /**
      * Handles the intent which the activity was started with
+     * @param intent
      */
-    private void handleIncomingIntent()
+    private void handleIncomingIntent(Intent intent)
     {
-        Intent intent = this.getIntent();
         //if the activity was started as usual, the intent will contain no data
         //but if it was started via "open with dialog", the intent will contain data about the file user wanted to open with the application
-        if (Intent.ACTION_VIEW.equals(intent.getAction()) && intent.getData() != null)
-        {
-            File file = new File(intent.getData().getPath());
-            File folder = file.getParentFile();
-            //we use file grandparent to show as the navigation history "end"
-            File folderParent = folder.getParentFile();
-            if (folderParent == null) folderParent = folder;//folder can have a null parent, if folder is device root "/"
+        if (!Intent.ACTION_VIEW.equals(intent.getAction()) || intent.getData() == null)
+            return;
 
-            //replace saved app settings - other settings consumers run only after this code executes, and will get corrected data
-            Pair<File, File> structure = new Pair<>(new File(rootMusicDirectory), folderParent);
-            PreferencesHelper.setBrowserFolderStructure(this, structure);
-            PreferencesHelper.setStoredPlaylist(this, folder);
+        File audioFile = new File(intent.getData().getPath());
+        File playlistFolder = audioFile.getParentFile();
 
-            //reload the navigation history - see onStart();
-            this.pagerAdapter.clear();
-        }
+        this.PLAYBACK_ON_LOAD = audioFile;
+
+        //if the playlistFragment is online - just tell it to load the new playlist
+        //if not,-override the application settings, and playlistFragment will read them when loading
+        if (this.playlistFragment != null)
+            this.playMediaDirectory(playlistFolder);
+        else
+            PreferencesHelper.setStoredPlaylist(this, playlistFolder);
     }
 
     private void initializeFolderBrowser()

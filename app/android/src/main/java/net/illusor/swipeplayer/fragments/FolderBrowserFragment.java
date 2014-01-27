@@ -130,6 +130,9 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
     @Override
     public boolean onContextItemSelected(MenuItem item)
     {
+        if (!this.getUserVisibleHint())
+            return false;
+
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
         AudioFile audioFile = (AudioFile)this.listAudioFiles.getItemAtPosition(info.position);
         this.getSwipeActivity().playMediaDirectory(audioFile);

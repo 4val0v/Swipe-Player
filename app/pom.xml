@@ -98,7 +98,7 @@
                         <device>usb</device>
                         <undeployBeforeDeploy>true</undeployBeforeDeploy>
                         <manifest>
-                            <manifestVersionCodeAutoIncrement>true</manifestVersionCodeAutoIncrement>
+                            <versionCodeAutoIncrement>true</versionCodeAutoIncrement>
                             <versionName>${project.version}:${env.BUILD_NUMBER}</versionName>
                             <debuggable>false</debuggable>
                         </manifest>

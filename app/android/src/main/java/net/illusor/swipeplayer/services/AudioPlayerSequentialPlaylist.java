@@ -25,7 +25,6 @@ class AudioPlayerSequentialPlaylist implements AudioPlayerPlaylist
 {
     private final List<AudioFile> playlist;
     private final SoundService soundService;
-    private AudioFile currentAudioFile;
 
     /**
      * Creates instance of {@link AudioPlayerSequentialPlaylist}
@@ -38,11 +37,10 @@ class AudioPlayerSequentialPlaylist implements AudioPlayerPlaylist
         this.soundService = soundService;
     }
 
+
     @Override
     public void onPlaybackComplete(AudioFile audioFile)
     {
-        this.currentAudioFile = audioFile;
-
         AudioFile file = this.getNext();
         if (file != null)
             this.soundService.play(file);
@@ -64,7 +62,8 @@ class AudioPlayerSequentialPlaylist implements AudioPlayerPlaylist
             return null;
 
         int playlistSize = this.playlist.size();
-        int nextIndex = this.playlist.indexOf(this.currentAudioFile) + 1;
+        AudioFile currentAudioFile = this.soundService.getAudioFile();
+        int nextIndex = this.playlist.indexOf(currentAudioFile) + 1;
         if (nextIndex < 0 || nextIndex >= playlistSize)
             nextIndex = 0;
 
@@ -80,7 +79,7 @@ class AudioPlayerSequentialPlaylist implements AudioPlayerPlaylist
                 nextIndex = 0;
         } while ((!newFile.exists() || !newFile.isValid()) && count < playlistSize);
 
-        if (newFile.exists() && newFile.isValid() && !newFile.equals(this.currentAudioFile))
+        if (newFile.exists() && newFile.isValid() && !newFile.equals(currentAudioFile))
             return newFile;
         else
             return null;
@@ -93,7 +92,8 @@ class AudioPlayerSequentialPlaylist implements AudioPlayerPlaylist
             return null;
 
         int playlistSize = this.playlist.size();
-        int nextIndex = this.playlist.indexOf(this.currentAudioFile) - 1;
+        AudioFile currentAudioFile = this.soundService.getAudioFile();
+        int nextIndex = this.playlist.indexOf(currentAudioFile) - 1;
         if (nextIndex < 0 || nextIndex >= playlistSize)
             nextIndex = playlistSize - 1;
 
@@ -109,7 +109,7 @@ class AudioPlayerSequentialPlaylist implements AudioPlayerPlaylist
                 nextIndex = playlistSize - 1;
         } while ((!newFile.exists() || !newFile.isValid()) && count < playlistSize);
 
-        if (newFile.exists() && newFile.isValid() && !newFile.equals(this.currentAudioFile))
+        if (newFile.exists() && newFile.isValid() && !newFile.equals(currentAudioFile))
             return newFile;
         else
             return null;

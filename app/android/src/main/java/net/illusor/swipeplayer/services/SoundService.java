@@ -136,6 +136,15 @@ public class SoundService extends Service
     }
 
     /**
+     * Gets currently played audio file
+     * @return Current audio file
+     */
+    AudioFile getAudioFile()
+    {
+        return this.audioPlayer.getAudioFile();
+    }
+
+    /**
      * Starts actual audio playback
      * @param audioFile Audio file to play
      */
@@ -353,7 +362,7 @@ public class SoundService extends Service
          */
         public AudioFile getAudioFile()
         {
-            return this.soundService.audioPlayer.getAudioFile();
+            return this.soundService.getAudioFile();
         }
 
         /**

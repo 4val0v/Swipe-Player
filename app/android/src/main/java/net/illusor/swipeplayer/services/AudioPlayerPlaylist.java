@@ -22,7 +22,7 @@ import net.illusor.swipeplayer.domain.AudioFile;
 interface AudioPlayerPlaylist
 {
     /**
-     * Notifies the playlist that playback of the audio file has been completed
+     * Notifies the playlist that playback of the audio file has completed
      * @param audioFile Audio file completed
      */
     public void onPlaybackComplete(AudioFile audioFile);

@@ -64,15 +64,6 @@ class TrackFragment extends Fragment
         AudioFile audioFile = (AudioFile)this.getArguments().getSerializable(KEY_ARGS);
 
         title1.setText(audioFile.getTitle());
-
-        if (!audioFile.getArtist().equals("<unknown>"))//when artist is unknown, it has text "<unknown>"; do not know, if android has some general resource for this string
-        {
-            title2.setText(audioFile.getArtist());
-            title2.setVisibility(View.VISIBLE);
-        }
-        else
-        {
-            title2.setVisibility(View.GONE);
-        }
+        title2.setText(audioFile.getArtist());
     }
 }

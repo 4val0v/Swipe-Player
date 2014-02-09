@@ -11,11 +11,12 @@
     distributed under the License is distributed on an "AS IS" BASIS,
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
-    limitations under the License.--><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1000001" android:versionName="1.0-SNAPSHOT:${env.BUILD_NUMBER}" package="net.illusor.swipeplayer">
+    limitations under the License.-->
+    <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1000001" android:versionName="1.0-SNAPSHOT:${env.BUILD_NUMBER}" package="net.illusor.swipeplayer">
 
     <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="16"/>
 
-    <application android:allowBackup="true" android:debuggable="false" android:icon="@drawable/swipe_player_icon" android:label="Swipe Player" android:name=".SwipeApplication">
+    <application android:allowBackup="true" android:debuggable="true" android:icon="@drawable/swipe_player_icon" android:label="Swipe Player" android:name=".SwipeApplication">
 
         <activity android:launchMode="singleTask" android:name=".activities.SwipeActivity" android:screenOrientation="portrait" android:theme="@style/Theme.SwipePlayer">
             <intent-filter>
@@ -39,6 +40,13 @@
             <intent-filter android:priority="2147483647">
                 <action android:name="android.intent.action.MEDIA_BUTTON"/>
             </intent-filter>
+        </receiver>
+
+        <receiver android:name=".widget.SwipeWidgetProvider" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/screen_widget_prowider_info" />
         </receiver>
 
     </application>

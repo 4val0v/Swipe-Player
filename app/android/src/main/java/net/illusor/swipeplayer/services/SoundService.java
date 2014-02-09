@@ -23,6 +23,7 @@ import android.os.Binder;
 import android.os.IBinder;
 import net.illusor.swipeplayer.domain.AudioFile;
 import net.illusor.swipeplayer.helpers.NotificationHelper;
+import net.illusor.swipeplayer.widget.SwipeWidgetHelper;
 
 import java.io.IOException;
 import java.util.List;
@@ -38,6 +39,7 @@ public class SoundService extends Service
     public static final String INTENT_CODE_RESUME = "net.illusor.swipeplayer.services.SoundService.PLAY";
     public static final String INTENT_CODE_NEXT = "net.illusor.swipeplayer.services.SoundService.NEXT";
     public static final String INTENT_CODE_PREVIOUS = "net.illusor.swipeplayer.services.SoundService.PREVIOUS";
+    public static final String INTENT_CODE_WIDGET_UPDATE = "net.illusor.swipeplayer.services.SoundService.WIDGET_UPDATE";
 
     //system notification codes
     private static final int NOTIFICATION_CODE_STATUS = 753951;
@@ -46,6 +48,7 @@ public class SoundService extends Service
     private final AudioPlayer audioPlayer = new AudioPlayer();
     private final NoisyReceiver noisyReceiver = new NoisyReceiver();
     private final NotificationHelper notificationHelper = new NotificationHelper(this);
+    private final SwipeWidgetHelper widgetHelper = new SwipeWidgetHelper(this);
     private final AudioFocusChangeListener audioFocusChangeListener = new AudioFocusChangeListener();
     private AudioBroadcastHandler audioBroadcastHandler = new AudioBroadcastHandler();
     private AudioManager audioManager;
@@ -78,6 +81,9 @@ public class SoundService extends Service
                     break;
                 case INTENT_CODE_PREVIOUS:
                     this.playPrevious();
+                    break;
+                case INTENT_CODE_WIDGET_UPDATE:
+                    this.updateWidgetState();
                     break;
             }
         }
@@ -119,6 +125,7 @@ public class SoundService extends Service
     {
         this.audioPlayer.stop();
         this.audioBroadcastHandler.sendPlaybackStop();
+        this.widgetHelper.setStopped();
 
         if (this.serviceStarted)
         {
@@ -162,6 +169,7 @@ public class SoundService extends Service
                 {
                     audioPlayer.play(audioFile);
                     audioBroadcastHandler.sendPlayAudioFile(audioFile);
+                    widgetHelper.setPlaying(audioFile);
 
                     Notification notification = notificationHelper.getPlayingNotification(audioFile);
                     startForeground(NOTIFICATION_CODE_STATUS, notification);
@@ -210,7 +218,11 @@ public class SoundService extends Service
         {
             this.audioPlayer.pause();
             this.audioBroadcastHandler.sendPlaybackPause();
-            Notification notification = this.notificationHelper.getPausedNotification(this.audioPlayer.getAudioFile());
+
+            AudioFile audioFile = this.audioPlayer.getAudioFile();
+            this.widgetHelper.setPaused(audioFile);
+
+            Notification notification = this.notificationHelper.getPausedNotification(audioFile);
             this.startForeground(NOTIFICATION_CODE_STATUS, notification);
         }
     }
@@ -224,8 +236,38 @@ public class SoundService extends Service
         {
             this.audioPlayer.resume();
             this.audioBroadcastHandler.sendPlaybackResume();
-            Notification notification = this.notificationHelper.getPlayingNotification(this.audioPlayer.getAudioFile());
+
+            AudioFile audioFile = this.audioPlayer.getAudioFile();
+            this.widgetHelper.setPlaying(audioFile);
+
+            Notification notification = this.notificationHelper.getPlayingNotification(audioFile);
             this.startForeground(NOTIFICATION_CODE_STATUS, notification);
+        }
+    }
+
+    /**
+     * Updates state of the screen widgets
+     */
+    private void updateWidgetState()
+    {
+        switch (this.audioPlayer.getState())
+        {
+            case Playing:
+            {
+                this.widgetHelper.setPlaying(this.audioPlayer.getAudioFile());
+                break;
+            }
+            case Paused:
+            {
+                this.widgetHelper.setPaused(this.audioPlayer.getAudioFile());
+                break;
+            }
+            case Stopped:
+            {
+                this.widgetHelper.setStopped();
+                this.stopSelf();
+                break;
+            }
         }
     }
 

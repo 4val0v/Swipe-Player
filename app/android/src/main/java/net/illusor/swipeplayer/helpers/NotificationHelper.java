@@ -30,7 +30,7 @@ import net.illusor.swipeplayer.services.SoundService;
  */
 public class NotificationHelper
 {
-    private Context context;
+    private final Context context;
 
     public NotificationHelper(Context context)
     {

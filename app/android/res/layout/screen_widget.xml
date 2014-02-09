@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:padding="@dimen/padding_screen_widget">
+
+<LinearLayout android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/appwidget_dark_bg">
+
+    <LinearLayout android:layout_width="wrap_content"
+                  android:layout_height="match_parent"
+                  android:layout_weight="1"
+                  android:id="@+id/id_appwidget_contet"
+                  android:orientation="vertical"
+                  android:gravity="center_vertical"
+                  android:layout_marginLeft="8dp"
+                  android:layout_marginTop="4dp"
+                  android:layout_marginBottom="4dp">
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/id_appwidget_title"
+                  android:text="Music title"
+                  android:singleLine="true"/>
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/id_appwidget_artist"
+                  android:text="Music artist"
+                  android:singleLine="true"/>
+
+    </LinearLayout>
+
+    <ImageButton android:layout_width="56dp"
+                 android:layout_height="match_parent"
+                 android:layout_gravity="center_vertical"
+                 android:id="@+id/id_appwidget_button"
+                 android:src="@android:drawable/ic_media_play"
+                 android:contentDescription="@string/str_icon_nav"
+                 android:background="@drawable/appwidget_button_right"/>
+
+</LinearLayout>
+
+</FrameLayout>

@@ -57,7 +57,7 @@ public class AudioFile extends File
             throw new IllegalStateException("This constructor is for audio files. Do not use it to declare directories");
 
         this.title = title;
-        this.artist = artist;
+        this.artist = "<unknown>".equals(artist)? "" : artist;//when artist is unknown, it has text "<unknown>"; do not know, if android has some general resource for this string
         this.duration = duration;
     }
 
@@ -72,7 +72,7 @@ public class AudioFile extends File
 
     /**
      * Music file title
-     * @return
+     * @return title strng
      */
     public String getTitle()
     {
@@ -81,7 +81,7 @@ public class AudioFile extends File
 
     /**
      * Music file artist
-     * @return
+     * @return Artist name
      */
     public String getArtist()
     {
@@ -90,7 +90,7 @@ public class AudioFile extends File
 
     /**
      * Music file duration
-     * @return
+     * @return duration (milliseconds)
      */
     public long getDuration()
     {

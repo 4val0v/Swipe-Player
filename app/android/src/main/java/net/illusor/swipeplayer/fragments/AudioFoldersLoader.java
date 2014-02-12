@@ -61,14 +61,20 @@ class AudioFoldersLoader extends AsyncTaskLoader<List<AudioFile>>
     {
         //scan internal storage for music files
         Cursor internal = this.executeQuery(MediaStore.Audio.Media.INTERNAL_CONTENT_URI);
-        this.result = this.getMediaObjects(internal);
-        internal.close();
+        if (internal != null)
+        {
+            this.result = this.getMediaObjects(internal);
+            internal.close();
+        }
 
         //scan external storage
         Cursor external = this.executeQuery(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
-        List<AudioFile> externalContent = this.getMediaObjects(external);
-        this.result.addAll(externalContent);
-        external.close();
+        if (external != null)
+        {
+            List<AudioFile> externalContent = this.getMediaObjects(external);
+            this.result.addAll(externalContent);
+            external.close();
+        }
 
         Collections.sort(this.result, new AudioFileComparator());
 

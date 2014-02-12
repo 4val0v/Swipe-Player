@@ -15,6 +15,8 @@ limitations under the License.*/
 package net.illusor.swipeplayer.widgets;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +42,12 @@ public class NavigationItemView extends LinearLayout
         int paddingV = (int) DimensionHelper.dipToPx(14);
         this.setPadding(paddingH, paddingV, paddingH, paddingV);
         this.setOrientation(LinearLayout.HORIZONTAL);
+
+        Drawable bg = context.getResources().getDrawable(R.drawable.item_folder_bg);
+        if (Build.VERSION.SDK_INT < 16)
+            this.setBackgroundDrawable(bg);
+        else
+            this.setBackground(bg);
 
         LayoutInflater.from(context).inflate(R.layout.list_item_nav_history, this);
 

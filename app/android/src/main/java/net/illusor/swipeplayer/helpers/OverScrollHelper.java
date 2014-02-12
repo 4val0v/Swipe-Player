@@ -60,10 +60,10 @@ public class OverScrollHelper
                 Class glowClass = edgeGlow.getClass();
                 Field edgeDrawable = glowClass.getDeclaredField("mEdge");
                 edgeDrawable.setAccessible(true);
-                edgeDrawable.set(edgeGlow, new ColorDrawable(android.R.color.transparent));
+                edgeDrawable.set(edgeGlow, new ColorDrawable(android.R.color.holo_green_light));
                 Field glowDrawable = glowClass.getDeclaredField("mGlow");
                 glowDrawable.setAccessible(true);
-                glowDrawable.set(edgeGlow, new ColorDrawable(android.R.color.transparent));
+                glowDrawable.set(edgeGlow, new ColorDrawable(android.R.color.holo_green_light));
             }
         }
         catch (Exception ignored)

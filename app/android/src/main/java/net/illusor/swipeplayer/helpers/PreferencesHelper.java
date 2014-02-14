@@ -17,6 +17,8 @@ package net.illusor.swipeplayer.helpers;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Pair;
+import net.illusor.swipeplayer.domain.PlaybackMode;
+import net.illusor.swipeplayer.domain.RepeatMode;
 
 import java.io.File;
 
@@ -28,6 +30,8 @@ public class PreferencesHelper
     private static final String SHARED_PREF_PLAYLIST_KEY = "net.illusor.swipeplayer.playlist";
     private static final String SHARED_PREF_FOLDER_KEY_START = "net.illusor.swipeplayer.folder-start";
     private static final String SHARED_PREF_FOLDER_KEY_END = "net.illusor.swipeplayer.folder-end";
+    private static final String SHARED_PREF_PLAYBACK_MODE = "net.illusor.swipeplayer.playback";
+    private static final String SHARED_PREF_REPEAT_MODE = "net.illusor.swipeplayer.repeat";
 
     /**
      * Gets information about the directory where audio files should be looked for in
@@ -72,6 +76,46 @@ public class PreferencesHelper
     {
         setFileByKey(context, SHARED_PREF_FOLDER_KEY_START, files.first);
         setFileByKey(context, SHARED_PREF_FOLDER_KEY_END, files.second);
+    }
+
+    public static PlaybackMode getPlaybackMode(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(SHARED_PREF_PLAYBACK_MODE, Context.MODE_PRIVATE);
+        if (preferences.contains(SHARED_PREF_PLAYBACK_MODE))
+        {
+            String mode = preferences.getString(SHARED_PREF_PLAYBACK_MODE, PlaybackMode.Sequential.toString());
+            PlaybackMode result =PlaybackMode.valueOf(mode);
+            return result;
+        }
+        return null;
+    }
+
+    public static void setPlaybackMode(Context context, PlaybackMode mode)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(SHARED_PREF_PLAYBACK_MODE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(SHARED_PREF_PLAYBACK_MODE, mode.toString());
+        editor.commit();
+    }
+
+    public static RepeatMode getRepeatMode(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(SHARED_PREF_REPEAT_MODE, Context.MODE_PRIVATE);
+        if (preferences.contains(SHARED_PREF_REPEAT_MODE))
+        {
+            String mode = preferences.getString(SHARED_PREF_REPEAT_MODE, RepeatMode.None.toString());
+            RepeatMode result = RepeatMode.valueOf(mode);
+            return result;
+        }
+        return null;
+    }
+
+    public static void setRepeatMode(Context context, RepeatMode mode)
+    {
+        SharedPreferences preferences = context.getSharedPreferences(SHARED_PREF_REPEAT_MODE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(SHARED_PREF_REPEAT_MODE, mode.toString());
+        editor.commit();
     }
 
     /**

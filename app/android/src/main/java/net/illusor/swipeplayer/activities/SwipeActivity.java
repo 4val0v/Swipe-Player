@@ -27,9 +27,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ToggleButton;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.fragments.AboutDialog;
 import net.illusor.swipeplayer.fragments.FolderBrowserFragment;
@@ -60,6 +63,7 @@ public class SwipeActivity extends FragmentActivity
     private ViewPager viewPager;//fragments container
     private PlaylistFragment playlistFragment;//fragment which shows list of music files playing
     private File currentMediaDirectory;//which directory we look music files in
+    private DrawerLayout options;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -71,6 +75,7 @@ public class SwipeActivity extends FragmentActivity
 
         this.viewPager = (ViewPager) this.findViewById(R.id.id_swipe_view_pager);
         this.pagerAdapter = new LocalPagerAdapter(this.getSupportFragmentManager());
+        this.options = (DrawerLayout)this.findViewById(R.id.id_playlist_options);
 
         this.handleIncomingIntent(this.getIntent());
     }
@@ -163,6 +168,7 @@ public class SwipeActivity extends FragmentActivity
         else
             this.viewPager.setCurrentItem(index - 1, true);
     }
+
 
     /**
      * Opens top folder of the folder browser

@@ -48,6 +48,9 @@ public class FormattedTextView extends View implements Checkable
     {
         super(context, attrs);
 
+        if (this.isInEditMode())
+            return;
+
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.FormattedTextView);
         int fontName = a.getInt(R.styleable.FormattedTextView_Font, 0);
         this.lineSpacing = a.getDimensionPixelSize(R.styleable.FormattedTextView_LineSpacing, 5);

@@ -26,7 +26,7 @@ import net.illusor.swipeplayer.widgets.FormattedTextView;
 /**
  * Represents a music file info item of the {@link AudioControlFragment}
  */
-public class TrackFragment extends Fragment
+class TrackFragment extends Fragment
 {
     //region Factory
 
@@ -37,7 +37,7 @@ public class TrackFragment extends Fragment
      * @param audioFile Music file, represented by the fragment
      * @return Created fragment
      */
-    public static TrackFragment newInstance(AudioFile audioFile)
+    static TrackFragment newInstance(AudioFile audioFile)
     {
         Bundle bundle = new Bundle();
         bundle.putSerializable(KEY_ARGS, audioFile);

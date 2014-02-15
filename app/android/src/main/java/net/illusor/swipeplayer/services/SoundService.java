@@ -63,6 +63,7 @@ public class SoundService extends Service
         this.audioPlayer.setPlaybackListener(new PlaybackListener());
     }
 
+    @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
         if (intent != null && intent.getAction() != null)
@@ -214,7 +215,7 @@ public class SoundService extends Service
     /**
      * Pauses the playback
      */
-    private void pause()
+    void pause()
     {
         if (this.audioPlayer.getState() == AudioPlayerState.Playing)
         {
@@ -232,7 +233,7 @@ public class SoundService extends Service
     /**
      * Resumes the playback
      */
-    private void resume()
+    void resume()
     {
         if (this.audioPlayer.getState() == AudioPlayerState.Paused)
         {

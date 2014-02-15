@@ -22,18 +22,18 @@ import android.media.AudioManager;
 import android.os.Binder;
 import android.os.IBinder;
 import net.illusor.swipeplayer.domain.AudioFile;
+import net.illusor.swipeplayer.domain.AudioPlaylist;
 import net.illusor.swipeplayer.helpers.NotificationHelper;
 import net.illusor.swipeplayer.widget.SwipeWidgetHelper;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Service, performing audio playback
  */
 public class SoundService extends Service
 {
-    //codes for system notification intent codes
+    //intent codes for remote service control
     public static final String INTENT_CODE_STOP = "net.illusor.swipeplayer.services.SoundService.STOP";
     public static final String INTENT_CODE_PAUSE = "net.illusor.swipeplayer.services.SoundService.PAUSE";
     public static final String INTENT_CODE_RESUME = "net.illusor.swipeplayer.services.SoundService.PLAY";
@@ -50,6 +50,7 @@ public class SoundService extends Service
     private final NotificationHelper notificationHelper = new NotificationHelper(this);
     private final SwipeWidgetHelper widgetHelper = new SwipeWidgetHelper(this);
     private final AudioFocusChangeListener audioFocusChangeListener = new AudioFocusChangeListener();
+    private final SoundServicePlaylist playlist = new SoundServicePlaylist();
     private AudioBroadcastHandler audioBroadcastHandler = new AudioBroadcastHandler();
     private AudioManager audioManager;
     private boolean serviceStarted;
@@ -59,6 +60,7 @@ public class SoundService extends Service
     {
         super.onCreate();
         this.audioManager = (AudioManager)this.getSystemService(Context.AUDIO_SERVICE);
+        this.audioPlayer.setPlaybackListener(new PlaybackListener());
     }
 
     public int onStartCommand(Intent intent, int flags, int startId)
@@ -157,9 +159,9 @@ public class SoundService extends Service
      */
     private void startPlaybackThread(final AudioFile audioFile)
     {
-        //we start playback on the separate thread because of AudioPlayerSequentialPlaylist implementation details
-        //see AudioPlayerSequentialPlaylist.onError() impl; in case of playback errors AudioPlayerSequentialPlaylist calls
-        //SoundService().play() again and again, causing possible StackOverflow if the playlist contains a lot of corrupted files in a row
+        //we start playback on the separate thread because of PlaybackListener implementation details
+        //see PlaybackListener.onError() impl; in case of playback errors PlaybackListener calls
+        //play() again and again, causing possible StackOverflow if the playlist contains a lot of corrupted files in a row
         new Thread(new Runnable()
         {
             @Override
@@ -190,7 +192,7 @@ public class SoundService extends Service
     {
         if (this.audioPlayer.getState() != AudioPlayerState.Stopped)
         {
-            AudioFile audioFile = this.audioPlayer.getPlaylist().getNext();
+            AudioFile audioFile = this.playlist.getNext(this.audioPlayer.getAudioFile());
             if (audioFile != null)
                 this.play(audioFile);
         }
@@ -203,7 +205,7 @@ public class SoundService extends Service
     {
         if (this.audioPlayer.getState() != AudioPlayerState.Stopped)
         {
-            AudioFile audioFile = this.audioPlayer.getPlaylist().getPrevious();
+            AudioFile audioFile = this.playlist.getPrevious(this.audioPlayer.getAudioFile());
             if (audioFile != null)
                 this.play(audioFile);
         }
@@ -336,6 +338,26 @@ public class SoundService extends Service
         }
     }
 
+    private class PlaybackListener implements AudioPlayer.PlaybackListener
+    {
+        @Override
+        public void onComplete(AudioFile audioFile)
+        {
+            AudioFile file = playlist.getNext(audioFile);
+            if (file != null)
+                play(file);
+            else
+                stop();
+        }
+
+        @Override
+        public void onError(AudioFile audioFile)
+        {
+            audioFile.setValid(false);
+            this.onComplete(audioFile);
+        }
+    }
+
     /**
      * {@link SoundService} communication interface
      */
@@ -438,10 +460,14 @@ public class SoundService extends Service
          * Sets a list of files as the {@link SoundService} playlist
          * @param playlist Playlist files
          */
-        public void setPlaylist(List<AudioFile> playlist)
+        public void setPlaylist(AudioPlaylist playlist)
         {
-            AudioPlayerPlaylist behavior = new AudioPlayerSequentialPlaylist(playlist, this.soundService);
-            this.soundService.audioPlayer.setPlaylist(behavior);
+            this.soundService.playlist.Playlist(playlist);
+        }
+
+        public void setPlaybackStrategy(PlaybackStrategy strategy)
+        {
+            this.soundService.playlist.setPlaybackStrategy(strategy);
         }
    }
 }

@@ -87,7 +87,7 @@ public class PreferencesHelper
             PlaybackMode result =PlaybackMode.valueOf(mode);
             return result;
         }
-        return null;
+        return PlaybackMode.Sequential;
     }
 
     public static void setPlaybackMode(Context context, PlaybackMode mode)
@@ -107,7 +107,7 @@ public class PreferencesHelper
             RepeatMode result = RepeatMode.valueOf(mode);
             return result;
         }
-        return null;
+        return RepeatMode.None;
     }
 
     public static void setRepeatMode(Context context, RepeatMode mode)

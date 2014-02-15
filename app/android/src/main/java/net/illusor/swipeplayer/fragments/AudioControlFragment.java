@@ -30,13 +30,13 @@ import android.widget.SeekBar;
 import com.nineoldandroids.view.ViewPropertyAnimator;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.domain.AudioFile;
+import net.illusor.swipeplayer.domain.AudioPlaylist;
 import net.illusor.swipeplayer.services.AudioBroadcastHandler;
 import net.illusor.swipeplayer.services.AudioPlayerState;
 import net.illusor.swipeplayer.services.SoundService;
 import net.illusor.swipeplayer.widgets.DurationDisplayView;
 import net.illusor.swipeplayer.widgets.TrackPager;
 
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -117,9 +117,9 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
      *
      * @param playlist List of music files
      */
-    public void setPlaylist(List<AudioFile> playlist)
+    public void setPlaylist(AudioPlaylist playlist)
     {
-        trackList.setAdapter(new TrackPagerAdapter(playlist, getFragmentManager()));
+        trackList.setAdapter(new TrackPagerAdapter(playlist.getAudioFiles(), getFragmentManager()));
         if (this.connection.service != null)
             setAudioFile(connection.service.getAudioFile());
     }

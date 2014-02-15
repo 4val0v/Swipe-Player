@@ -31,6 +31,7 @@ import android.widget.ListView;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.activities.SwipeActivity;
 import net.illusor.swipeplayer.domain.AudioFile;
+import net.illusor.swipeplayer.domain.AudioPlaylist;
 import net.illusor.swipeplayer.helpers.OverScrollHelper;
 import net.illusor.swipeplayer.helpers.PreferencesHelper;
 import net.illusor.swipeplayer.services.AudioBroadcastHandler;
@@ -119,7 +120,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
     private void setItemChecked(AudioFile audioFile)
     {
         PlaylistAdapter adapter = (PlaylistAdapter)this.listView.getAdapter();
-        int index = adapter.getData().indexOf(audioFile);
+        int index = adapter.getData().getAudioFiles().indexOf(audioFile);
         if (index >= 0)
         {
             this.listView.setItemChecked(index, true);
@@ -166,14 +167,15 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
      * Inflates the Sound Service playlist with the actual data and scrolls the visible playlist to the currently playing audio file
      * @param playlist Actual set of audio files
      */
-    private void synchronizePlaylist(List<AudioFile> playlist)
+    private void synchronizePlaylist(AudioPlaylist playlist)
     {
         this.connection.service.setPlaylist(playlist);
 
-        int index = playlist.indexOf(this.getSwipeActivity().PLAYBACK_ON_LOAD);
+        List<AudioFile> audioFiles = playlist.getAudioFiles();
+        int index = audioFiles.indexOf(this.getSwipeActivity().PLAYBACK_ON_LOAD);
         if (index >= 0)
         {
-            AudioFile audioFile = playlist.get(index);
+            AudioFile audioFile = audioFiles.get(index);
             this.connection.service.play(audioFile);
         }
         else
@@ -188,12 +190,12 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
     /**
      * Handles loading of music files into the playlist
      */
-    private class AudioLoaderCallbacks implements LoaderManager.LoaderCallbacks<List<AudioFile>>
+    private class AudioLoaderCallbacks implements LoaderManager.LoaderCallbacks<AudioPlaylist>
     {
         private static final String ARGS_DIRECTORY = "folder";
 
         @Override
-        public Loader<List<AudioFile>> onCreateLoader(int i, Bundle bundle)
+        public Loader<AudioPlaylist> onCreateLoader(int i, Bundle bundle)
         {
             listView.setAdapter(null);
 
@@ -205,24 +207,24 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         }
 
         @Override
-        public void onLoadFinished(Loader<List<AudioFile>> listLoader, List<AudioFile> audioFiles)
+        public void onLoadFinished(Loader<AudioPlaylist> listLoader, AudioPlaylist playlist)
         {
-            if (audioFiles.size() == 0)
+            if (playlist.getAudioFiles().size() == 0)
                 showEmptyPlaylistMessage(true);
 
             showLoadingIndicator(false);
 
-            listView.setAdapter(new PlaylistAdapter(getActivity(), audioFiles));
-            audioControlFragment.setPlaylist(audioFiles);
+            listView.setAdapter(new PlaylistAdapter(getActivity(), playlist));
+            audioControlFragment.setPlaylist(playlist);
 
             //we do not know, what fires faster: music loader or service connection
             //so we duplicate service playlist inflation code here and inside the service connection
             if (connection.service != null)
-                synchronizePlaylist(audioFiles);
+                synchronizePlaylist(playlist);
         }
 
         @Override
-        public void onLoaderReset(Loader<List<AudioFile>> listLoader)
+        public void onLoaderReset(Loader<AudioPlaylist> listLoader)
         {
             listView.setAdapter(null);
         }

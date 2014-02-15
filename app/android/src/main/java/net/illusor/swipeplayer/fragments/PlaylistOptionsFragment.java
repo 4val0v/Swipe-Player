@@ -16,12 +16,14 @@ import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.domain.PlaybackMode;
 import net.illusor.swipeplayer.domain.RepeatMode;
 import net.illusor.swipeplayer.helpers.PreferencesHelper;
+import net.illusor.swipeplayer.services.PlaybackStrategy;
+import net.illusor.swipeplayer.services.RandomPlaybackStrategy;
+import net.illusor.swipeplayer.services.SequentialPlaybackStrategy;
 import net.illusor.swipeplayer.services.SoundService;
 
 public class PlaylistOptionsFragment extends Fragment implements View.OnClickListener
 {
     private final SoundServiceConnection connection = new SoundServiceConnection();
-    private ToggleButton btnShuffle, btnRepeat;
     private PlaybackMode playbackMode;
     private RepeatMode repeatMode;
 
@@ -38,12 +40,18 @@ public class PlaylistOptionsFragment extends Fragment implements View.OnClickLis
 
         View view = this.getView();
 
-        this.btnShuffle = (ToggleButton)view.findViewById(R.id.id_playlist_shuffle);
-        this.btnRepeat = (ToggleButton)view.findViewById(R.id.id_playlist_repeat);
+        ToggleButton btnShuffle = (ToggleButton) view.findViewById(R.id.id_playlist_shuffle);
+        ToggleButton btnRepeat = (ToggleButton) view.findViewById(R.id.id_playlist_repeat);
 
+        btnShuffle.setOnClickListener(this);
+        btnRepeat.setOnClickListener(this);
 
-        this.btnShuffle.setOnClickListener(this);
-        this.btnRepeat.setOnClickListener(this);
+        Context context = this.getActivity();
+        this.playbackMode = PreferencesHelper.getPlaybackMode(context);
+        this.repeatMode = PreferencesHelper.getRepeatMode(context);
+
+        btnShuffle.setChecked(this.playbackMode == PlaybackMode.Random);
+        btnRepeat.setChecked(this.repeatMode == RepeatMode.Playlist);
     }
 
     @Override
@@ -51,10 +59,6 @@ public class PlaylistOptionsFragment extends Fragment implements View.OnClickLis
     {
         super.onStart();
         this.connection.bind();
-
-        Context context = this.getActivity();
-        this.playbackMode = PreferencesHelper.getPlaybackMode(context);
-        this.repeatMode = PreferencesHelper.getRepeatMode(context);
     }
 
     @Override
@@ -71,13 +75,24 @@ public class PlaylistOptionsFragment extends Fragment implements View.OnClickLis
         {
             case R.id.id_playlist_repeat:
             {
+                this.repeatMode = (this.repeatMode == RepeatMode.None) ? RepeatMode.Playlist : RepeatMode.None;
+                PreferencesHelper.setRepeatMode(this.getActivity(), this.repeatMode);
                 break;
             }
             case R.id.id_playlist_shuffle:
             {
+                this.playbackMode = (this.playbackMode == PlaybackMode.Sequential) ? PlaybackMode.Random : PlaybackMode.Sequential;
+                PreferencesHelper.setPlaybackMode(this.getActivity(), this.playbackMode);
+                this.updatePlaybackStrategy();
                 break;
             }
         }
+    }
+
+    void updatePlaybackStrategy()
+    {
+        PlaybackStrategy strategy = (this.playbackMode == PlaybackMode.Sequential) ? new SequentialPlaybackStrategy() : new RandomPlaybackStrategy();
+        this.connection.service.setPlaybackStrategy(strategy);
     }
 
     private class SoundServiceConnection implements ServiceConnection
@@ -99,6 +114,7 @@ public class PlaylistOptionsFragment extends Fragment implements View.OnClickLis
         public void onServiceConnected(ComponentName componentName, IBinder binder)
         {
             this.service = (SoundService.SoundServiceBinder)binder;
+            updatePlaybackStrategy();
         }
 
         @Override

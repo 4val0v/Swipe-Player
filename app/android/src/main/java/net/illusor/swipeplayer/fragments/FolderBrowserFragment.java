@@ -28,6 +28,7 @@ import android.widget.Spinner;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.activities.SwipeActivity;
 import net.illusor.swipeplayer.domain.AudioFile;
+import net.illusor.swipeplayer.domain.AudioPlaylist;
 import net.illusor.swipeplayer.helpers.OverScrollHelper;
 import net.illusor.swipeplayer.widgets.FolderItemView;
 
@@ -232,12 +233,12 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
     /**
      * Manages loading of the fragment contents
      */
-    private class AudioLoaderCallbacks implements LoaderManager.LoaderCallbacks<List<AudioFile>>
+    private class AudioLoaderCallbacks implements LoaderManager.LoaderCallbacks<AudioPlaylist>
     {
         private static final String ARGS_DIRECTORY = "folder";
 
         @Override
-        public Loader<List<AudioFile>> onCreateLoader(int i, Bundle bundle)
+        public Loader<AudioPlaylist> onCreateLoader(int i, Bundle bundle)
         {
             showLoadingIndicator(true);
             File directory = (File) bundle.getSerializable(ARGS_DIRECTORY);
@@ -245,14 +246,14 @@ public class FolderBrowserFragment extends Fragment implements AdapterView.OnIte
         }
 
         @Override
-        public void onLoadFinished(Loader<List<AudioFile>> listLoader, List<AudioFile> audioFiles)
+        public void onLoadFinished(Loader<AudioPlaylist> listLoader, AudioPlaylist playlist)
         {
             showLoadingIndicator(false);
-            listAudioFiles.setAdapter(new AudioFilesAdapter(getActivity(), audioFiles));
+            listAudioFiles.setAdapter(new AudioFilesAdapter(getActivity(), playlist.getAudioFiles()));
         }
 
         @Override
-        public void onLoaderReset(Loader<List<AudioFile>> listLoader)
+        public void onLoaderReset(Loader<AudioPlaylist> listLoader)
         {
             listAudioFiles.setAdapter(null);
         }

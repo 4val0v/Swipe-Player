@@ -19,17 +19,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import net.illusor.swipeplayer.domain.AudioFile;
+import net.illusor.swipeplayer.domain.AudioPlaylist;
 import net.illusor.swipeplayer.widgets.PlaylistItemView;
-
-import java.util.List;
 
 class PlaylistAdapter extends ArrayAdapter<AudioFile>
 {
-    private List<AudioFile> data;
+    private final AudioPlaylist data;
 
-    PlaylistAdapter(Context context, List<AudioFile> data)
+    PlaylistAdapter(Context context, AudioPlaylist data)
     {
-        super(context, 0, data);
+        super(context, 0, data.getAudioFiles());
         this.data = data;
     }
 
@@ -54,7 +53,7 @@ class PlaylistAdapter extends ArrayAdapter<AudioFile>
         return view;
     }
 
-    List<AudioFile> getData()
+    AudioPlaylist getData()
     {
         return data;
     }

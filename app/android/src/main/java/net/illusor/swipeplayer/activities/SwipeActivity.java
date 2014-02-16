@@ -24,14 +24,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
 import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.fragments.AboutDialog;
 import net.illusor.swipeplayer.fragments.FolderBrowserFragment;
 import net.illusor.swipeplayer.fragments.PlaylistFragment;
+import net.illusor.swipeplayer.helpers.DimensionHelper;
 import net.illusor.swipeplayer.helpers.PreferencesHelper;
 import net.illusor.swipeplayer.services.AudioPlayerState;
 import net.illusor.swipeplayer.services.SoundServiceConnection;
@@ -59,7 +60,7 @@ public class SwipeActivity extends FragmentActivity
     private ViewPager viewPager;//fragments container
     private PlaylistFragment playlistFragment;//fragment which shows list of music files playing
     private File currentMediaDirectory;//which directory we look music files in
-    private DrawerLayout options;
+    private SlidingMenu menuOptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -69,9 +70,15 @@ public class SwipeActivity extends FragmentActivity
         this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
         this.setContentView(R.layout.activity_swipe);
 
+        menuOptions = (SlidingMenu)this.findViewById(R.id.id_playlist_menu);
+        menuOptions.setBehindWidth((int)DimensionHelper.dipToPx(110));
+        menuOptions.setMode(SlidingMenu.RIGHT);
+        menuOptions.setContent(R.layout.activity_swipe_frame);
+        menuOptions.setMenu(R.layout.activity_swipe_opts);
+
         this.viewPager = (ViewPager) this.findViewById(R.id.id_swipe_view_pager);
+        this.viewPager.setOnPageChangeListener(new OnSwipeListener());
         this.pagerAdapter = new LocalPagerAdapter(this.getSupportFragmentManager());
-        this.options = (DrawerLayout)this.findViewById(R.id.id_playlist_options);
 
         this.handleIncomingIntent(this.getIntent());
     }
@@ -322,6 +329,16 @@ public class SwipeActivity extends FragmentActivity
         public Context getContext()
         {
             return this.context;
+        }
+    }
+
+    private class OnSwipeListener extends ViewPager.SimpleOnPageChangeListener
+    {
+        @Override
+        public void onPageSelected(int position)
+        {
+            int playlistFragmentPos = viewPager.getAdapter().getCount() - 1;
+            menuOptions.setTouchModeAbove(position == playlistFragmentPos ? SlidingMenu.TOUCHMODE_FULLSCREEN : SlidingMenu.TOUCHMODE_NONE);
         }
     }
 }

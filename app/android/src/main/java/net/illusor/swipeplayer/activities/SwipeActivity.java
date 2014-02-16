@@ -70,12 +70,7 @@ public class SwipeActivity extends FragmentActivity
         this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
         this.setContentView(R.layout.activity_swipe);
 
-        menuOptions = (SlidingMenu)this.findViewById(R.id.id_playlist_menu);
-        menuOptions.setBehindWidth((int)DimensionHelper.dipToPx(110));
-        menuOptions.setMode(SlidingMenu.RIGHT);
-        menuOptions.setContent(R.layout.activity_swipe_frame);
-        menuOptions.setMenu(R.layout.activity_swipe_opts);
-
+        this.menuOptions = (SlidingMenu)this.findViewById(R.id.id_playlist_menu);
         this.viewPager = (ViewPager) this.findViewById(R.id.id_swipe_view_pager);
         this.viewPager.setOnPageChangeListener(new OnSwipeListener());
         this.pagerAdapter = new LocalPagerAdapter(this.getSupportFragmentManager());

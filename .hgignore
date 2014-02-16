@@ -3,7 +3,7 @@ syntax: glob
 
 АукцЫон/
 app/target/
-app/android/target/
+app/*/target/
 build/
 app/out/
 app/.idea/

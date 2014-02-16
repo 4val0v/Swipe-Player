@@ -2,7 +2,7 @@
 
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
           android:id="@+id/id_fragment_options"
-          android:layout_width="110dp"
+          android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:layout_gravity="right"
           android:name="net.illusor.swipeplayer.fragments.PlaylistOptionsFragment"/>

@@ -20,10 +20,15 @@ limitations under the License.-->
               android:layout_height="match_parent">
 
     <com.jeremyfeinstein.slidingmenu.lib.SlidingMenu
+            xmlns:sl="http://schemas.android.com/apk/res/net.illusor.swipeplayer"
             android:id="@+id/id_playlist_menu"
             android:layout_width="match_parent"
             android:layout_height="0dip"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            sl:mode="right"
+            sl:viewAbove="@layout/activity_swipe_frame"
+            sl:viewBehind="@layout/activity_swipe_opts"
+            sl:behindWidth="110dp"/>
 
     <fragment
             android:id="@+id/id_audio_control"

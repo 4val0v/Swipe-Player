@@ -14,7 +14,7 @@
         android:background="@drawable/btn_shuffle_mode"
         android:layout_marginBottom="7dp"
         android:textOff=""
-        android:textOn="" />
+        android:textOn=""/>
 
     <ToggleButton
         android:layout_width="80dp"

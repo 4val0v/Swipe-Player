@@ -465,10 +465,5 @@ public class SoundService extends Service
         {
             this.soundService.playlist.Playlist(playlist);
         }
-
-        public void setPlaybackStrategy(PlaybackStrategy strategy)
-        {
-            this.soundService.playlist.setPlaybackStrategy(strategy);
-        }
    }
 }

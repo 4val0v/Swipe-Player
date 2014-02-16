@@ -14,10 +14,8 @@ limitations under the License.*/
 
 package net.illusor.swipeplayer.fragments;
 
-import android.app.Service;
 import android.content.ComponentName;
-import android.content.Intent;
-import android.content.ServiceConnection;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
@@ -33,7 +31,7 @@ import net.illusor.swipeplayer.domain.AudioFile;
 import net.illusor.swipeplayer.domain.AudioPlaylist;
 import net.illusor.swipeplayer.services.AudioBroadcastHandler;
 import net.illusor.swipeplayer.services.AudioPlayerState;
-import net.illusor.swipeplayer.services.SoundService;
+import net.illusor.swipeplayer.services.SoundServiceConnection;
 import net.illusor.swipeplayer.widgets.DurationDisplayView;
 import net.illusor.swipeplayer.widgets.TrackPager;
 
@@ -45,7 +43,7 @@ import java.util.TimerTask;
  */
 public class AudioControlFragment extends Fragment implements View.OnClickListener
 {
-    private final SoundServiceConnection connection = new SoundServiceConnection();//provides interrogation with the sound service
+    private final SoundServiceConnection connection = new LocalServiceConnection(this);//provides interrogation with the sound service
     private final SoundServiceReceiver receiver = new SoundServiceReceiver();//receives messages from the sound service
     private TrackPager trackList;//provides current playing track change by "swipe" gesture
     private SeekBar progress;//progressbar to track and change playback progress
@@ -266,25 +264,19 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
     /**
      * Provides interrogation with the sound service
      */
-    private class SoundServiceConnection implements ServiceConnection
+    private class LocalServiceConnection extends SoundServiceConnection
     {
-        private SoundService.SoundServiceBinder service;
+        private final Fragment fragment;
 
-        public void bind()
+        private LocalServiceConnection(Fragment fragment)
         {
-            Intent intent = new Intent(getActivity(), SoundService.class);
-            getActivity().bindService(intent, this, Service.BIND_AUTO_CREATE);
-        }
-
-        public void unbind()
-        {
-            getActivity().unbindService(this);
+            this.fragment = fragment;
         }
 
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder binder)
         {
-            this.service = (SoundService.SoundServiceBinder) binder;
+            super.onServiceConnected(componentName, binder);
 
             AudioFile audioFile = this.service.getAudioFile();
             setAudioFile(audioFile);
@@ -298,9 +290,9 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
         }
 
         @Override
-        public void onServiceDisconnected(ComponentName componentName)
+        public Context getContext()
         {
-            this.service = null;
+            return this.fragment.getActivity();
         }
     }
 

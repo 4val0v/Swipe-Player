@@ -1,31 +1,25 @@
 package net.illusor.swipeplayer.fragments;
 
-import android.app.Service;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ToggleButton;
 import net.illusor.swipeplayer.R;
-import net.illusor.swipeplayer.domain.PlaybackMode;
+import net.illusor.swipeplayer.activities.SwipeActivity;
 import net.illusor.swipeplayer.domain.RepeatMode;
 import net.illusor.swipeplayer.helpers.PreferencesHelper;
-import net.illusor.swipeplayer.services.PlaybackStrategy;
-import net.illusor.swipeplayer.services.RandomPlaybackStrategy;
-import net.illusor.swipeplayer.services.SequentialPlaybackStrategy;
-import net.illusor.swipeplayer.services.SoundService;
+import net.illusor.swipeplayer.services.SoundServiceConnection;
+
+import java.io.File;
 
 public class PlaylistOptionsFragment extends Fragment implements View.OnClickListener
 {
-    private final SoundServiceConnection connection = new SoundServiceConnection();
-    private PlaybackMode playbackMode;
+    private final SoundServiceConnection connection = new LocalServiceConnection(this);
     private RepeatMode repeatMode;
+    private int shuffleKey;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -47,10 +41,10 @@ public class PlaylistOptionsFragment extends Fragment implements View.OnClickLis
         btnRepeat.setOnClickListener(this);
 
         Context context = this.getActivity();
-        this.playbackMode = PreferencesHelper.getPlaybackMode(context);
+        this.shuffleKey = PreferencesHelper.getShuffleKey(context);
         this.repeatMode = PreferencesHelper.getRepeatMode(context);
 
-        btnShuffle.setChecked(this.playbackMode == PlaybackMode.Random);
+        btnShuffle.setChecked(this.shuffleKey != SwipeActivity.SHUFFLE_KEY_NOSHUFFLE);
         btnRepeat.setChecked(this.repeatMode == RepeatMode.Playlist);
     }
 
@@ -81,46 +75,32 @@ public class PlaylistOptionsFragment extends Fragment implements View.OnClickLis
             }
             case R.id.id_playlist_shuffle:
             {
-                this.playbackMode = (this.playbackMode == PlaybackMode.Sequential) ? PlaybackMode.Random : PlaybackMode.Sequential;
-                PreferencesHelper.setPlaybackMode(this.getActivity(), this.playbackMode);
-                this.updatePlaybackStrategy();
+                this.shuffleKey = this.shuffleKey != SwipeActivity.SHUFFLE_KEY_NOSHUFFLE ? SwipeActivity.SHUFFLE_KEY_NOSHUFFLE : (int)(Math.random() * Integer.MAX_VALUE);
+                PreferencesHelper.setShuffleKey(this.getActivity(), this.shuffleKey);
+
+                SwipeActivity swipeActivity = (SwipeActivity)this.getActivity();
+                File directory = swipeActivity.getCurrentMediaDirectory();
+                if (directory != null && directory.exists())
+                    swipeActivity.playMediaDirectory(directory);
+
                 break;
             }
         }
     }
 
-    void updatePlaybackStrategy()
+    private class LocalServiceConnection extends SoundServiceConnection
     {
-        PlaybackStrategy strategy = (this.playbackMode == PlaybackMode.Sequential) ? new SequentialPlaybackStrategy() : new RandomPlaybackStrategy();
-        this.connection.service.setPlaybackStrategy(strategy);
-    }
+        private final Fragment fragment;
 
-    private class SoundServiceConnection implements ServiceConnection
-    {
-        private SoundService.SoundServiceBinder service;
-
-        public void bind()
+        private LocalServiceConnection(Fragment fragment)
         {
-            Intent intent = new Intent(getActivity(), SoundService.class);
-            getActivity().bindService(intent, this, Service.BIND_AUTO_CREATE);
-        }
-
-        public void unbind()
-        {
-            getActivity().unbindService(this);
+            this.fragment = fragment;
         }
 
         @Override
-        public void onServiceConnected(ComponentName componentName, IBinder binder)
+        public Context getContext()
         {
-            this.service = (SoundService.SoundServiceBinder)binder;
-            updatePlaybackStrategy();
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName componentName)
-        {
-            this.service = null;
+            return this.fragment.getActivity();
         }
     }
 }

@@ -32,7 +32,6 @@ import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.fragments.AboutDialog;
 import net.illusor.swipeplayer.fragments.FolderBrowserFragment;
 import net.illusor.swipeplayer.fragments.PlaylistFragment;
-import net.illusor.swipeplayer.helpers.DimensionHelper;
 import net.illusor.swipeplayer.helpers.PreferencesHelper;
 import net.illusor.swipeplayer.services.AudioPlayerState;
 import net.illusor.swipeplayer.services.SoundServiceConnection;

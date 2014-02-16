@@ -1,14 +1,13 @@
 package com.jeremyfeinstein.slidingmenu.lib.app;
 
-import android.app.Activity;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
-import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-
-public class SlidingActivity extends Activity implements SlidingActivityBase {
+public class SlidingPreferenceActivity extends PreferenceActivity implements SlidingActivityBase {
 
 	private SlidingActivityHelper mHelper;
 
@@ -17,8 +16,8 @@ public class SlidingActivity extends Activity implements SlidingActivityBase {
 	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		mHelper = new SlidingActivityHelper(this);
+		super.onCreate(savedInstanceState);
 		mHelper.onCreate(savedInstanceState);
 	}
 
@@ -124,7 +123,7 @@ public class SlidingActivity extends Activity implements SlidingActivityBase {
 	public void showMenu() {
 		mHelper.showMenu();
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.jeremyfeinstein.slidingmenu.lib.app.SlidingActivityBase#showSecondaryMenu()
 	 */
@@ -148,5 +147,4 @@ public class SlidingActivity extends Activity implements SlidingActivityBase {
 		if (b) return b;
 		return super.onKeyUp(keyCode, event);
 	}
-
 }

@@ -34,6 +34,7 @@ public class DurationDisplayView extends LinearLayout
     public DurationDisplayView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
+
         LayoutInflater.from(context).inflate(R.layout.durations_display, this);
         this.setBackgroundResource(R.drawable.durations_display_bg);
         this.setOrientation(LinearLayout.VERTICAL);

@@ -14,6 +14,7 @@ limitations under the License.*/
 
 package net.illusor.swipeplayer.widgets;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -24,6 +25,7 @@ import android.widget.LinearLayout;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.helpers.DimensionHelper;
 
+@TargetApi(16)
 public class NavigationItemView extends LinearLayout
 {
     private View icon;

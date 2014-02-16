@@ -26,7 +26,7 @@ import net.illusor.swipeplayer.widgets.FormattedTextView;
 /**
  * Represents a music file info item of the {@link AudioControlFragment}
  */
-class TrackFragment extends Fragment
+public class TrackFragment extends Fragment
 {
     //region Factory
 

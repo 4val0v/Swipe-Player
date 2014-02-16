@@ -20,20 +20,18 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.content.AsyncTaskLoader;
 import net.illusor.swipeplayer.domain.AudioFile;
+import net.illusor.swipeplayer.domain.AudioPlaylist;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Gets the list of music folders, contained into the current directory
  */
-class AudioFoldersLoader extends AsyncTaskLoader<List<AudioFile>>
+class AudioFoldersLoader extends AsyncTaskLoader<AudioPlaylist>
 {
     private final File directory;
-    private List<AudioFile> result;
+    private AudioPlaylist result;
 
     /**
      * Creates a new instance of {@link AudioFoldersLoader}
@@ -57,13 +55,16 @@ class AudioFoldersLoader extends AsyncTaskLoader<List<AudioFile>>
     }
 
     @Override
-    public List<AudioFile> loadInBackground()
+    public AudioPlaylist loadInBackground()
     {
+        List<AudioFile> audioFiles = new ArrayList<>();
+
         //scan internal storage for music files
         Cursor internal = this.executeQuery(MediaStore.Audio.Media.INTERNAL_CONTENT_URI);
         if (internal != null)
         {
-            this.result = this.getMediaObjects(internal);
+            List<AudioFile> internalContent = this.getMediaObjects(internal);
+            audioFiles.addAll(internalContent);
             internal.close();
         }
 
@@ -72,12 +73,14 @@ class AudioFoldersLoader extends AsyncTaskLoader<List<AudioFile>>
         if (external != null)
         {
             List<AudioFile> externalContent = this.getMediaObjects(external);
-            this.result.addAll(externalContent);
+            audioFiles.addAll(externalContent);
             external.close();
         }
 
-        Collections.sort(this.result, new AudioFileComparator());
+        Comparator<AudioFile> comparator = this.getResultsSortComparator();
+        Collections.sort(audioFiles, comparator);
 
+        this.result = new AudioPlaylist(this.directory, audioFiles);
         return this.result;
     }
 
@@ -88,7 +91,7 @@ class AudioFoldersLoader extends AsyncTaskLoader<List<AudioFile>>
      */
     protected List<AudioFile> getMediaObjects(Cursor cursor)
     {
-        List<AudioFile> result = new ArrayList<>();
+        List<AudioFile> result = new LinkedList<>();
         if (cursor == null) return result;
 
         while (cursor.moveToNext())
@@ -99,6 +102,11 @@ class AudioFoldersLoader extends AsyncTaskLoader<List<AudioFile>>
         }
 
         return result;
+    }
+
+    protected Comparator<AudioFile> getResultsSortComparator()
+    {
+        return new AudioFileComparator();
     }
 
     /**

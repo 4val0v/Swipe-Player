@@ -15,33 +15,28 @@ limitations under the License.*/
 package net.illusor.swipeplayer.services;
 
 import net.illusor.swipeplayer.domain.AudioFile;
+import net.illusor.swipeplayer.domain.AudioPlaylist;
+
+import java.util.List;
 
 /**
  * Provides playback management for a list of audio files
  */
-interface AudioPlayerPlaylist
+public interface PlaybackStrategy
 {
-    /**
-     * Notifies the playlist that playback of the audio file has completed
-     * @param audioFile Audio file completed
-     */
-    public void onPlaybackComplete(AudioFile audioFile);
-
-    /**
-     * Notifies the playlist that playback of the audio file caused an error
-     * @param audioFile Audio file caused an error
-     */
-    public void onError(AudioFile audioFile);
-
     /**
      * Gets the next element into the playlist
      * @return Next audio file to play
+     * @param current
      */
-    public AudioFile getNext();
+    public AudioFile getNext(AudioFile current);
 
     /**
      * Gets the previous element into the playlist
      * @return Previous audio file to play
+     * @param current
      */
-    public AudioFile getPrevious();
+    public AudioFile getPrevious(AudioFile current);
+
+    public void setPlaylist(AudioPlaylist playlist);
 }

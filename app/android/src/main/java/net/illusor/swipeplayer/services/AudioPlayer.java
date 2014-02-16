@@ -27,7 +27,7 @@ class AudioPlayer
 {
     private MediaPlayer mediaPlayer;
     private AudioFile audioFile;//current playing music file
-    private AudioPlayerPlaylist audioPlaylist;//current playlist instance
+    private PlaybackListener playbackListener;
     private boolean wasPlayingWhenRewindStarted;//if player was playing when rewind started
     private int pausedPosition;//time mark, where player was pauser
     private float volume = 1;
@@ -64,8 +64,8 @@ class AudioPlayer
                 @Override
                 public void onCompletion(MediaPlayer player)
                 {
-                    if (audioPlaylist != null)
-                        audioPlaylist.onPlaybackComplete(audioPlayer.audioFile);
+                    if (playbackListener != null)
+                        playbackListener.onComplete(audioPlayer.audioFile);
                     else
                         stop();
                 }
@@ -75,8 +75,8 @@ class AudioPlayer
                 @Override
                 public boolean onError(MediaPlayer mediaPlayer, int cause, int extra)
                 {
-                    if (audioPlaylist != null)
-                        audioPlaylist.onError(audioPlayer.audioFile);
+                    if (playbackListener != null)
+                        playbackListener.onError(audioPlayer.audioFile);
 
                     mediaPlayer.release();
                     return true;
@@ -86,8 +86,8 @@ class AudioPlayer
         }
         catch (IOException e)
         {
-            if (audioPlaylist != null)
-                audioPlaylist.onError(audioFile);
+            if (playbackListener != null)
+                playbackListener.onError(audioFile);
 
             throw e;
         }
@@ -204,21 +204,15 @@ class AudioPlayer
         return this.audioFile == null ? 0 : (int)this.audioFile.getDuration();
     }
 
-    /**
-     * Get playlist assigned to the player
-     * @return Playlist instance
-     */
-    public AudioPlayerPlaylist getPlaylist()
+    public void setPlaybackListener(PlaybackListener listener)
     {
-        return this.audioPlaylist;
+        this.playbackListener = listener;
     }
 
-    /**
-     * Assigns a playlist to the player
-     * @param playlist playlist instance
-     */
-    public void setPlaylist(AudioPlayerPlaylist playlist)
+    interface PlaybackListener
     {
-        this.audioPlaylist = playlist;
+        void onComplete(AudioFile audioFile);
+
+        void onError(AudioFile audioFile);
     }
 }

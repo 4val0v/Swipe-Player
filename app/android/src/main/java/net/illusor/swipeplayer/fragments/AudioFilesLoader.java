@@ -20,7 +20,8 @@ import android.provider.MediaStore;
 import net.illusor.swipeplayer.domain.AudioFile;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -28,20 +29,24 @@ import java.util.List;
  */
 class AudioFilesLoader extends AudioFoldersLoader
 {
+    private final Comparator<AudioFile> comparator;
+
     /**
      * Creates a new instance of {@link AudioFilesLoader}
      * @param context Current activity context
      * @param directory Directory to load audio files from
+     * @param comparator Comparator used to sort resulting files list
      */
-    public AudioFilesLoader(Context context, File directory)
+    public AudioFilesLoader(Context context, File directory, Comparator<AudioFile> comparator)
     {
         super(context, directory);
+        this.comparator = comparator;
     }
 
     @Override
     protected List<AudioFile> getMediaObjects(Cursor cursor)
     {
-        List<AudioFile> result = new ArrayList<>();
+        List<AudioFile> result = new LinkedList<>();
         if (cursor == null) return result;
 
         while (cursor.moveToNext())
@@ -52,6 +57,12 @@ class AudioFilesLoader extends AudioFoldersLoader
         }
 
         return result;
+    }
+
+    @Override
+    protected Comparator<AudioFile> getResultsSortComparator()
+    {
+        return this.comparator != null ? this.comparator : super.getResultsSortComparator();
     }
 
     /**
@@ -67,5 +78,32 @@ class AudioFilesLoader extends AudioFoldersLoader
         long duration = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION));
         AudioFile result = new AudioFile(fileName, title, author, duration);
         return result;
+    }
+
+    public static class AudioRandomComparator implements Comparator<AudioFile>
+    {
+        private final int shuffle;
+
+        public AudioRandomComparator(int shuffle)
+        {
+            this.shuffle = shuffle;
+        }
+
+        @Override
+        public int compare(AudioFile audioFile, AudioFile audioFile2)
+        {
+            int h1 = audioFile.getTitle().hashCode();
+            int h2 = audioFile2.getTitle().hashCode();
+
+            int x1 = h1 ^ shuffle;
+            int x2 = h2 ^ shuffle;
+
+            if (x1 == x2)
+                return 0;
+            if (x1 > x2)
+                return -1;
+
+            return 1;
+        }
     }
 }

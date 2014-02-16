@@ -14,10 +14,8 @@ limitations under the License.*/
 
 package net.illusor.swipeplayer.fragments;
 
-import android.app.Service;
 import android.content.ComponentName;
-import android.content.Intent;
-import android.content.ServiceConnection;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
@@ -35,10 +33,11 @@ import net.illusor.swipeplayer.domain.AudioPlaylist;
 import net.illusor.swipeplayer.helpers.OverScrollHelper;
 import net.illusor.swipeplayer.helpers.PreferencesHelper;
 import net.illusor.swipeplayer.services.AudioBroadcastHandler;
-import net.illusor.swipeplayer.services.SoundService;
+import net.illusor.swipeplayer.services.SoundServiceConnection;
 import net.illusor.swipeplayer.widgets.PlaylistItemView;
 
 import java.io.File;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -50,7 +49,7 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
     private File currentMediaDirectory;//directory to look audio files for in
     private AudioControlFragment audioControlFragment;//fragment used to display progress and info about playing track
     private final AudioLoaderCallbacks audioLoaderCallbacks = new AudioLoaderCallbacks();
-    private final SoundServiceConnection connection = new SoundServiceConnection();
+    private final SoundServiceConnection connection = new LocalServiceConnection(this);
     private final SoundServiceReceiver receiver = new SoundServiceReceiver();
 
     @Override
@@ -202,8 +201,11 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
             showLoadingIndicator(true);
             showEmptyPlaylistMessage(false);
 
+            int shuffleKey = PreferencesHelper.getShuffleKey(getActivity());
+            Comparator<AudioFile> comparator = shuffleKey == SwipeActivity.SHUFFLE_KEY_NOSHUFFLE ? null : new AudioFilesLoader.AudioRandomComparator(shuffleKey);
+
             File directory = (File) bundle.getSerializable(ARGS_DIRECTORY);
-            return new AudioFilesLoader(getActivity(), directory);
+            return new AudioFilesLoader(getActivity(), directory, comparator);
         }
 
         @Override
@@ -257,25 +259,19 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
     /**
      * Handles interrogation with the sound service
      */
-    private class SoundServiceConnection implements ServiceConnection
+    private class LocalServiceConnection extends SoundServiceConnection
     {
-        private SoundService.SoundServiceBinder service;
+        private final Fragment fragment;
 
-        public void bind()
+        private LocalServiceConnection(Fragment fragment)
         {
-            Intent intent = new Intent(getActivity(), SoundService.class);
-            getActivity().bindService(intent, this, Service.BIND_AUTO_CREATE);
-        }
-
-        public void unbind()
-        {
-            getActivity().unbindService(this);
+            this.fragment = fragment;
         }
 
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder binder)
         {
-            this.service = (SoundService.SoundServiceBinder)binder;
+            super.onServiceConnected(componentName, binder);
 
             //we do not know, what fires faster: music loader or service connection
             //so we duplicate service playlist inflation code here and inside the music loader
@@ -287,9 +283,9 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
         }
 
         @Override
-        public void onServiceDisconnected(ComponentName componentName)
+        public Context getContext()
         {
-            this.service = null;
+            return this.fragment.getActivity();
         }
     }
 

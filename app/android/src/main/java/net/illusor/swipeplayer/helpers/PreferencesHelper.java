@@ -17,7 +17,6 @@ package net.illusor.swipeplayer.helpers;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Pair;
-import net.illusor.swipeplayer.domain.PlaybackMode;
 import net.illusor.swipeplayer.domain.RepeatMode;
 
 import java.io.File;
@@ -30,7 +29,7 @@ public class PreferencesHelper
     private static final String SHARED_PREF_PLAYLIST_KEY = "net.illusor.swipeplayer.playlist";
     private static final String SHARED_PREF_FOLDER_KEY_START = "net.illusor.swipeplayer.folder-start";
     private static final String SHARED_PREF_FOLDER_KEY_END = "net.illusor.swipeplayer.folder-end";
-    private static final String SHARED_PREF_PLAYBACK_MODE = "net.illusor.swipeplayer.playback";
+    private static final String SHARED_PREF_SHUFFLE_KEY = "net.illusor.swipeplayer.playback";
     private static final String SHARED_PREF_REPEAT_MODE = "net.illusor.swipeplayer.repeat";
 
     /**
@@ -78,23 +77,22 @@ public class PreferencesHelper
         setFileByKey(context, SHARED_PREF_FOLDER_KEY_END, files.second);
     }
 
-    public static PlaybackMode getPlaybackMode(Context context)
+    public static int getShuffleKey(Context context)
     {
-        SharedPreferences preferences = context.getSharedPreferences(SHARED_PREF_PLAYBACK_MODE, Context.MODE_PRIVATE);
-        if (preferences.contains(SHARED_PREF_PLAYBACK_MODE))
+        SharedPreferences preferences = context.getSharedPreferences(SHARED_PREF_SHUFFLE_KEY, Context.MODE_PRIVATE);
+        if (preferences.contains(SHARED_PREF_SHUFFLE_KEY))
         {
-            String mode = preferences.getString(SHARED_PREF_PLAYBACK_MODE, PlaybackMode.Sequential.toString());
-            PlaybackMode result =PlaybackMode.valueOf(mode);
-            return result;
+            int key = preferences.getInt(SHARED_PREF_SHUFFLE_KEY, 0);
+            return key;
         }
-        return PlaybackMode.Sequential;
+        return 0;
     }
 
-    public static void setPlaybackMode(Context context, PlaybackMode mode)
+    public static void setShuffleKey(Context context, int key)
     {
-        SharedPreferences preferences = context.getSharedPreferences(SHARED_PREF_PLAYBACK_MODE, Context.MODE_PRIVATE);
+        SharedPreferences preferences = context.getSharedPreferences(SHARED_PREF_SHUFFLE_KEY, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(SHARED_PREF_PLAYBACK_MODE, mode.toString());
+        editor.putInt(SHARED_PREF_SHUFFLE_KEY, key);
         editor.commit();
     }
 

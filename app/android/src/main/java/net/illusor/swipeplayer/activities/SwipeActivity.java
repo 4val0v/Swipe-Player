@@ -14,13 +14,10 @@ limitations under the License.*/
 
 package net.illusor.swipeplayer.activities;
 
-import android.app.Service;
-import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.os.Parcelable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -31,15 +28,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ToggleButton;
 import net.illusor.swipeplayer.R;
 import net.illusor.swipeplayer.fragments.AboutDialog;
 import net.illusor.swipeplayer.fragments.FolderBrowserFragment;
 import net.illusor.swipeplayer.fragments.PlaylistFragment;
 import net.illusor.swipeplayer.helpers.PreferencesHelper;
 import net.illusor.swipeplayer.services.AudioPlayerState;
-import net.illusor.swipeplayer.services.SoundService;
+import net.illusor.swipeplayer.services.SoundServiceConnection;
 
 import java.io.File;
 import java.util.List;
@@ -51,6 +46,7 @@ public class SwipeActivity extends FragmentActivity
 {
     //sometimes we should start playback of some track on playlistFragment loading (when we open a music file with the application)
     public File PLAYBACK_ON_LOAD;
+    public static final int SHUFFLE_KEY_NOSHUFFLE = 0;
     //which directory we will use as the folder browser root
     private static final String rootMusicDirectory = File.separator;
 
@@ -58,7 +54,7 @@ public class SwipeActivity extends FragmentActivity
     private static final int MENU_CODE_QUIT = 0;//quit application
     private static final int MENU_CODE_ABOUT = 1;//show "About" dialog
 
-    private final SoundServiceConnection connection = new SoundServiceConnection();//connection to the sound service
+    private final SoundServiceConnection connection = new LocalServiceConnection(this);//connection to the sound service
     private LocalPagerAdapter pagerAdapter;//provides activity fragments sliding logic
     private ViewPager viewPager;//fragments container
     private PlaylistFragment playlistFragment;//fragment which shows list of music files playing
@@ -169,7 +165,6 @@ public class SwipeActivity extends FragmentActivity
             this.viewPager.setCurrentItem(index - 1, true);
     }
 
-
     /**
      * Opens top folder of the folder browser
      */
@@ -234,7 +229,7 @@ public class SwipeActivity extends FragmentActivity
 
     /**
      * Handles the intent which the activity was started with
-     * @param intent
+     * @param intent incoming intent
      */
     private void handleIncomingIntent(Intent intent)
     {
@@ -314,31 +309,19 @@ public class SwipeActivity extends FragmentActivity
         }
     }
 
-    private class SoundServiceConnection implements ServiceConnection
+    private class LocalServiceConnection extends SoundServiceConnection
     {
-        private SoundService.SoundServiceBinder service;
+        private final Context context;
 
-        private void bind()
+        private LocalServiceConnection(Context context)
         {
-            Intent intent = new Intent(getBaseContext(), SoundService.class);
-            bindService(intent, this, Service.BIND_AUTO_CREATE);
-        }
-
-        private void unbind()
-        {
-            unbindService(this);
+            this.context = context;
         }
 
         @Override
-        public void onServiceConnected(ComponentName componentName, IBinder binder)
+        public Context getContext()
         {
-            this.service = (SoundService.SoundServiceBinder)binder;
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName componentName)
-        {
-            this.service = null;
+            return this.context;
         }
     }
 }

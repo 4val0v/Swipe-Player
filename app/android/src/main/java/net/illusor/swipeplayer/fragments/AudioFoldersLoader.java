@@ -77,7 +77,8 @@ class AudioFoldersLoader extends AsyncTaskLoader<AudioPlaylist>
             external.close();
         }
 
-        Collections.sort(audioFiles, new AudioFileComparator());
+        Comparator<AudioFile> comparator = this.getResultsSortComparator();
+        Collections.sort(audioFiles, comparator);
 
         this.result = new AudioPlaylist(this.directory, audioFiles);
         return this.result;
@@ -101,6 +102,11 @@ class AudioFoldersLoader extends AsyncTaskLoader<AudioPlaylist>
         }
 
         return result;
+    }
+
+    protected Comparator<AudioFile> getResultsSortComparator()
+    {
+        return new AudioFileComparator();
     }
 
     /**

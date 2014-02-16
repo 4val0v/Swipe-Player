@@ -1,24 +1,23 @@
 package com.jeremyfeinstein.slidingmenu.lib.app;
 
-import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
+import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
-public class SlidingPreferenceActivity extends PreferenceActivity implements SlidingActivityBase {
+public class SlidingFragmentActivity extends FragmentActivity implements SlidingActivityBase {
 
 	private SlidingActivityHelper mHelper;
 
 	/* (non-Javadoc)
-	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 * @see android.support.v4.app.FragmentActivity#onCreate(android.os.Bundle)
 	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		mHelper = new SlidingActivityHelper(this);
 		super.onCreate(savedInstanceState);
+		mHelper = new SlidingActivityHelper(this);
 		mHelper.onCreate(savedInstanceState);
 	}
 
@@ -43,7 +42,7 @@ public class SlidingPreferenceActivity extends PreferenceActivity implements Sli
 	}
 
 	/* (non-Javadoc)
-	 * @see android.app.Activity#onSaveInstanceState(android.os.Bundle)
+	 * @see android.support.v4.app.FragmentActivity#onSaveInstanceState(android.os.Bundle)
 	 */
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
@@ -124,7 +123,7 @@ public class SlidingPreferenceActivity extends PreferenceActivity implements Sli
 	public void showMenu() {
 		mHelper.showMenu();
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.jeremyfeinstein.slidingmenu.lib.app.SlidingActivityBase#showSecondaryMenu()
 	 */
@@ -148,4 +147,5 @@ public class SlidingPreferenceActivity extends PreferenceActivity implements Sli
 		if (b) return b;
 		return super.onKeyUp(keyCode, event);
 	}
+
 }

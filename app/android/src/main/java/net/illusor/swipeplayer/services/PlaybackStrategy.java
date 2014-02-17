@@ -20,23 +20,27 @@ import net.illusor.swipeplayer.domain.AudioPlaylist;
 import java.util.List;
 
 /**
- * Provides playback management for a list of audio files
+ * Provides control over the playlist and "peek logic" for previous/next track playback
  */
 public interface PlaybackStrategy
 {
     /**
-     * Gets the next element into the playlist
-     * @return Next audio file to play
-     * @param current
+     * Gets the next audio file for playback
+     * @param current Currently played audio file
+     * @return Next audio file in the queue
      */
     public AudioFile getNext(AudioFile current);
 
     /**
-     * Gets the previous element into the playlist
-     * @return Previous audio file to play
-     * @param current
+     * Gets the previous audio file for playback
+     * @param current Currently played audio file
+     * @return Previous audio file in the queue
      */
     public AudioFile getPrevious(AudioFile current);
 
+    /**
+     * Sets the playlist to use as the playback queue
+     * @param playlist Playback audio files
+     */
     public void setPlaylist(AudioPlaylist playlist);
 }

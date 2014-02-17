@@ -80,10 +80,17 @@ class AudioFilesLoader extends AudioFoldersLoader
         return result;
     }
 
+    /**
+     * Comparator used for random sorting of {@link AudioFile} objects
+     */
     public static class AudioRandomComparator implements Comparator<AudioFile>
     {
         private final int shuffle;
 
+        /**
+         * Creates an instance of {@link AudioRandomComparator}
+         * @param shuffle random number used as a sort key; Each unique key provides a constant unique sort order
+         */
         public AudioRandomComparator(int shuffle)
         {
             this.shuffle = shuffle;

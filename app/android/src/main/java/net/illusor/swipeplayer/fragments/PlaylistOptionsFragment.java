@@ -15,11 +15,14 @@ import net.illusor.swipeplayer.services.SoundServiceConnection;
 
 import java.io.File;
 
+/**
+ * Displays playlist options: "Shuffle" and "Repeat"
+ */
 public class PlaylistOptionsFragment extends Fragment implements View.OnClickListener
 {
     private final SoundServiceConnection connection = new LocalServiceConnection(this);
-    private RepeatMode repeatMode;
-    private int shuffleKey;
+    private RepeatMode repeatMode;//playback repeat mode: repeat/not repeat
+    private int shuffleKey;//a key used for playlist pseudo random sorting
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -75,9 +78,13 @@ public class PlaylistOptionsFragment extends Fragment implements View.OnClickLis
             }
             case R.id.id_playlist_shuffle:
             {
+                //check if we should shuffle the playlist
                 this.shuffleKey = this.shuffleKey != SwipeActivity.SHUFFLE_KEY_NOSHUFFLE ? SwipeActivity.SHUFFLE_KEY_NOSHUFFLE : (int)(Math.random() * Integer.MAX_VALUE);
+
+                //save the value - the PlaylistFragment will read it on playlist reload and act accordingly
                 PreferencesHelper.setShuffleKey(this.getActivity(), this.shuffleKey);
 
+                //reload the playlist
                 SwipeActivity swipeActivity = (SwipeActivity)this.getActivity();
                 File directory = swipeActivity.getCurrentMediaDirectory();
                 if (directory != null && directory.exists())

@@ -204,15 +204,30 @@ class AudioPlayer
         return this.audioFile == null ? 0 : (int)this.audioFile.getDuration();
     }
 
+    /**
+     * Sets the AudioPlayer playback callback
+     * @param listener callback object
+     */
     public void setPlaybackListener(PlaybackListener listener)
     {
         this.playbackListener = listener;
     }
 
+    /**
+     * Callback interface of the {@link AudioPlayer}
+     */
     interface PlaybackListener
     {
+        /**
+         * Fires when playback of an audio file has completed
+         * @param audioFile Audio file completed
+         */
         void onComplete(AudioFile audioFile);
 
+        /**
+         * Fires when playback of an audio file caused an error
+         * @param audioFile Erroneous audio file
+         */
         void onError(AudioFile audioFile);
     }
 }

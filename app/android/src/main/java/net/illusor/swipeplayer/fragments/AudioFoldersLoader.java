@@ -148,6 +148,9 @@ class AudioFoldersLoader extends AsyncTaskLoader<AudioPlaylist>
         return result;
     }
 
+    /**
+     * Provides alphabetical sorting of {@link AudioFile} objects, and makes a list of files to follow the list of directories
+     */
     private class AudioFileComparator implements Comparator<AudioFile>
     {
         @Override

@@ -176,7 +176,9 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
         ViewPropertyAnimator.animate(this.trackList).alpha(0.5f).setDuration(100);
     }
 
-    //Play animation of "Playing" playback state
+    /**
+     * Play animation of "Playing" playback state
+     */
     private void animatePlay()
     {
         ViewPropertyAnimator.animate(this.progress).alpha(1.0f).setDuration(100);

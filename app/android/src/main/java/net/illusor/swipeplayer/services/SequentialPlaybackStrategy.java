@@ -5,6 +5,9 @@ import net.illusor.swipeplayer.domain.AudioPlaylist;
 
 import java.util.List;
 
+/**
+ * Provides "Sequential" peek logic for previous/next peek of audio files
+ */
 public class SequentialPlaybackStrategy implements PlaybackStrategy
 {
     private List<AudioFile> audioFiles;

@@ -46,7 +46,10 @@ public class SwipeActivity extends FragmentActivity
 {
     //sometimes we should start playback of some track on playlistFragment loading (when we open a music file with the application)
     public File PLAYBACK_ON_LOAD;
+
+    //a key used by the playlist sorting system to indicate that we do not need to shuffle the playlist (see PlaylistOptionsFragment)
     public static final int SHUFFLE_KEY_NOSHUFFLE = 0;
+
     //which directory we will use as the folder browser root
     private static final String rootMusicDirectory = File.separator;
 
@@ -59,7 +62,7 @@ public class SwipeActivity extends FragmentActivity
     private ViewPager viewPager;//fragments container
     private PlaylistFragment playlistFragment;//fragment which shows list of music files playing
     private File currentMediaDirectory;//which directory we look music files in
-    private SlidingMenu menuOptions;
+    private SlidingMenu menuOptions;//sliding menu with "Shuffle" and "Repeat" buttons
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -252,6 +255,9 @@ public class SwipeActivity extends FragmentActivity
             PreferencesHelper.setStoredPlaylist(this, playlistFolder);
     }
 
+    /**
+     * Sets the initial stare of the folder browser using previously saved settings
+     */
     private void initializeFolderBrowser()
     {
         this.currentMediaDirectory = PreferencesHelper.getStoredPlaylist(this);

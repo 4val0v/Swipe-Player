@@ -50,7 +50,7 @@ public class SoundService extends Service
     private final NotificationHelper notificationHelper = new NotificationHelper(this);
     private final SwipeWidgetHelper widgetHelper = new SwipeWidgetHelper(this);
     private final AudioFocusChangeListener audioFocusChangeListener = new AudioFocusChangeListener();
-    private final SoundServicePlaylist playlist = new SoundServicePlaylist();
+    private final PlaybackStrategy playlist = new SequentialPlaybackStrategy();
     private AudioBroadcastHandler audioBroadcastHandler = new AudioBroadcastHandler();
     private AudioManager audioManager;
     private boolean serviceStarted;
@@ -463,7 +463,7 @@ public class SoundService extends Service
          */
         public void setPlaylist(AudioPlaylist playlist)
         {
-            this.soundService.playlist.Playlist(playlist);
+            this.soundService.playlist.setPlaylist(playlist);
         }
    }
 }

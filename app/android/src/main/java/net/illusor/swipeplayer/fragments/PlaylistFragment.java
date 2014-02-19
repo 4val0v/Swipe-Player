@@ -119,6 +119,8 @@ public class PlaylistFragment extends Fragment implements AdapterView.OnItemClic
     private void setItemChecked(AudioFile audioFile)
     {
         PlaylistAdapter adapter = (PlaylistAdapter)this.listView.getAdapter();
+        if (adapter == null) return;
+
         int index = adapter.getData().getAudioFiles().indexOf(audioFile);
         if (index >= 0)
         {

@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import net.illusor.swipeplayer.services.SoundService;
 
-public class SwipeWidgetProvider extends AppWidgetProvider
+public class WidgetSmallProvider extends AppWidgetProvider
 {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds)

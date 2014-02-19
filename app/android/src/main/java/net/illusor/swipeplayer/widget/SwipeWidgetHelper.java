@@ -31,7 +31,8 @@ public class SwipeWidgetHelper
     public void setPlaying(AudioFile audioFile)
     {
         PendingIntent intent = this.getButtonIntent(SoundService.INTENT_CODE_PAUSE);
-        this.setWidgetState(audioFile.getName(), audioFile.getArtist(), true, android.R.drawable.ic_media_pause, intent);
+        this.setSmallWidgetState(audioFile.getTitle(), audioFile.getArtist(), true, android.R.drawable.ic_media_pause, intent);
+        this.setFullWidgetState(audioFile.getTitle(), audioFile.getArtist(), true, android.R.drawable.ic_media_pause, intent);
     }
 
     /**
@@ -41,7 +42,8 @@ public class SwipeWidgetHelper
     public void setPaused(AudioFile audioFile)
     {
         PendingIntent intent = this.getButtonIntent(SoundService.INTENT_CODE_RESUME);
-        this.setWidgetState(audioFile.getName(), audioFile.getArtist(), true, android.R.drawable.ic_media_play, intent);
+        this.setSmallWidgetState(audioFile.getTitle(), audioFile.getArtist(), true, android.R.drawable.ic_media_play, intent);
+        this.setFullWidgetState(audioFile.getTitle(), audioFile.getArtist(), true, android.R.drawable.ic_media_play, intent);
     }
 
     /**
@@ -49,41 +51,89 @@ public class SwipeWidgetHelper
      */
     public void setStopped()
     {
-        this.setWidgetState(context.getApplicationInfo().nonLocalizedLabel, context.getResources().getString(R.string.str_state_stopped), false, 0, null);
+        CharSequence title = context.getApplicationInfo().nonLocalizedLabel;
+        CharSequence artist = context.getResources().getString(R.string.str_state_stopped);
+        this.setSmallWidgetState(title, artist, false, 0, null);
+        this.setFullWidgetState(title, artist, false, 0, null);
     }
 
     /**
-     * Sets the screen widget state
+     * Sets the small screen widget state
      * @param title Title of the currently played music
      * @param artist Music artist who's music is being played now
      * @param buttonVisible whether or not show "play/pause" button
      * @param buttonIcon which icon should the "play/pause" button have, if visible
      * @param buttonIntent which action should the "play/pause" button do, if visible
      */
-    private void setWidgetState(CharSequence title, CharSequence artist, boolean buttonVisible, int buttonIcon, PendingIntent buttonIntent)
+    private void setSmallWidgetState(CharSequence title, CharSequence artist, boolean buttonVisible, int buttonIcon, PendingIntent buttonIntent)
     {
         AppWidgetManager manager = AppWidgetManager.getInstance(this.context);
-        ComponentName widget = new ComponentName(this.context, SwipeWidgetProvider.class);
+        ComponentName widget = new ComponentName(this.context, WidgetSmallProvider.class);
         int[] ids = manager.getAppWidgetIds(widget);
 
         PendingIntent contentIntent = this.getContentIntent();
 
         for (int id : ids)
         {
-            RemoteViews views = new RemoteViews(this.context.getPackageName(), R.layout.screen_widget);
+            RemoteViews views = new RemoteViews(this.context.getPackageName(), R.layout.screen_widget_small);
             views.setTextViewText(R.id.id_appwidget_title, title);
             views.setTextViewText(R.id.id_appwidget_artist, artist);
-            views.setOnClickPendingIntent(R.id.id_appwidget_contet, contentIntent);
+            views.setOnClickPendingIntent(R.id.id_appwidget_content, contentIntent);
 
             if (buttonVisible)
             {
-                views.setImageViewResource(R.id.id_appwidget_button, buttonIcon);
-                views.setViewVisibility(R.id.id_appwidget_button, View.VISIBLE);
-                views.setOnClickPendingIntent(R.id.id_appwidget_button, buttonIntent);
+                views.setImageViewResource(R.id.id_appwidget_playpause_small, buttonIcon);
+                views.setViewVisibility(R.id.id_appwidget_playpause_small, View.VISIBLE);
+                views.setOnClickPendingIntent(R.id.id_appwidget_playpause_small, buttonIntent);
             }
             else
             {
-                views.setViewVisibility(R.id.id_appwidget_button, View.GONE);
+                views.setViewVisibility(R.id.id_appwidget_playpause_small, View.GONE);
+            }
+
+            manager.updateAppWidget(id, views);
+        }
+    }
+
+    /**
+     * Sets the full screen widget state
+     * @param title Title of the currently played music
+     * @param artist Music artist who's music is being played now
+     * @param buttonsEnabled whether or not enable widget buttons
+     * @param playPauseIcon which icon should the "play/pause" button have, if visible
+     * @param playPauseIntent which action should the "play/pause" button do, if visible
+     */
+    private void setFullWidgetState(CharSequence title, CharSequence artist, boolean buttonsEnabled, int playPauseIcon, PendingIntent playPauseIntent)
+    {
+        AppWidgetManager manager = AppWidgetManager.getInstance(this.context);
+        ComponentName widget = new ComponentName(this.context, WidgetFullProvider.class);
+        int[] ids = manager.getAppWidgetIds(widget);
+
+        PendingIntent contentIntent = this.getContentIntent();
+
+        for (int id : ids)
+        {
+            RemoteViews views = new RemoteViews(this.context.getPackageName(), R.layout.screen_widget_full);
+            views.setTextViewText(R.id.id_appwidget_title, title);
+            views.setTextViewText(R.id.id_appwidget_artist, artist);
+            views.setOnClickPendingIntent(R.id.id_appwidget_content, contentIntent);
+
+            if (buttonsEnabled)
+            {
+                views.setViewVisibility(R.id.id_appwidget_enabled, View.VISIBLE);
+
+                views.setImageViewResource(R.id.id_appwidget_playpause_full, playPauseIcon);
+                views.setOnClickPendingIntent(R.id.id_appwidget_playpause_full, playPauseIntent);
+
+                PendingIntent nextIntent = this.getButtonIntent(SoundService.INTENT_CODE_NEXT);
+                PendingIntent prevIntent = this.getButtonIntent(SoundService.INTENT_CODE_PREVIOUS);
+
+                views.setOnClickPendingIntent(R.id.id_appwidget_next, nextIntent);
+                views.setOnClickPendingIntent(R.id.id_appwidget_prev, prevIntent);
+            }
+            else
+            {
+                views.setViewVisibility(R.id.id_appwidget_enabled, View.GONE);
             }
 
             manager.updateAppWidget(id, views);

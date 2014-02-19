@@ -11,28 +11,18 @@
         android:layout_height="match_parent"
         android:background="@drawable/appwidget_dark_bg">
 
-        <LinearLayout
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:id="@+id/id_appwidget_contet"
+            android:id="@+id/id_appwidget_content"
             android:orientation="vertical"
             android:gravity="center_vertical"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/id_appwidget_title"
-                android:singleLine="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/id_appwidget_artist"
-                android:singleLine="true" />
+            <include layout="@layout/screen_widget_track" />
 
         </LinearLayout>
 
@@ -40,9 +30,9 @@
             android:layout_width="56dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:id="@+id/id_appwidget_button"
+            android:id="@+id/id_appwidget_playpause_small"
             android:src="@android:drawable/ic_media_play"
-            android:contentDescription="@string/str_icon_nav"
+            android:contentDescription="@string/str_action_resume"
             android:background="@drawable/appwidget_button_right" />
 
     </LinearLayout>

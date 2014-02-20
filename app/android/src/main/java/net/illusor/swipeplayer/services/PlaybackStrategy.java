@@ -16,8 +16,7 @@ package net.illusor.swipeplayer.services;
 
 import net.illusor.swipeplayer.domain.AudioFile;
 import net.illusor.swipeplayer.domain.AudioPlaylist;
-
-import java.util.List;
+import net.illusor.swipeplayer.domain.RepeatMode;
 
 /**
  * Provides control over the playlist and "peek logic" for previous/next track playback
@@ -43,4 +42,10 @@ public interface PlaybackStrategy
      * @param playlist Playback audio files
      */
     public void setPlaylist(AudioPlaylist playlist);
+
+    /**
+     * Sets the playback cycling mode
+     * @param mode playback mode
+     */
+    public void setRepeatMode(RepeatMode mode);
 }

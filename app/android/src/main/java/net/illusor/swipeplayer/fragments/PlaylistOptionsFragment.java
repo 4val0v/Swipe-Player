@@ -1,7 +1,9 @@
 package net.illusor.swipeplayer.fragments;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,6 +76,7 @@ public class PlaylistOptionsFragment extends Fragment implements View.OnClickLis
             {
                 this.repeatMode = (this.repeatMode == RepeatMode.None) ? RepeatMode.Playlist : RepeatMode.None;
                 PreferencesHelper.setRepeatMode(this.getActivity(), this.repeatMode);
+                this.connection.service.setRepeatMode(this.repeatMode);
                 break;
             }
             case R.id.id_playlist_shuffle:
@@ -102,6 +105,13 @@ public class PlaylistOptionsFragment extends Fragment implements View.OnClickLis
         private LocalServiceConnection(Fragment fragment)
         {
             this.fragment = fragment;
+        }
+
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder binder)
+        {
+            super.onServiceConnected(componentName, binder);
+            this.service.setRepeatMode(repeatMode);
         }
 
         @Override

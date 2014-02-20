@@ -23,6 +23,7 @@ import android.os.Binder;
 import android.os.IBinder;
 import net.illusor.swipeplayer.domain.AudioFile;
 import net.illusor.swipeplayer.domain.AudioPlaylist;
+import net.illusor.swipeplayer.domain.RepeatMode;
 import net.illusor.swipeplayer.helpers.NotificationHelper;
 import net.illusor.swipeplayer.widget.SwipeWidgetHelper;
 
@@ -464,6 +465,15 @@ public class SoundService extends Service
         public void setPlaylist(AudioPlaylist playlist)
         {
             this.soundService.playlist.setPlaylist(playlist);
+        }
+
+        /**
+         * Sets the playback cycling mode
+         * @param mode playback mode
+         */
+        public void setRepeatMode(RepeatMode mode)
+        {
+            this.soundService.playlist.setRepeatMode(mode);
         }
    }
 }

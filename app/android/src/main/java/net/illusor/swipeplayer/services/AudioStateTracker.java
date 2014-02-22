@@ -6,13 +6,16 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
 
-import java.util.EnumSet;
-
+/**
+ * Defines application behavior when user plugs/unplugs wired headphones or audio focus gets changed for some reason
+ */
 class AudioStateTracker extends BroadcastReceiver implements AudioManager.OnAudioFocusChangeListener
 {
     private final SoundService service;
-    private EnumSet<AudioStates> audioState = EnumSet.noneOf(AudioStates.class);
-    private EnumSet<AudioStates> storedAudioState;
+    private boolean isDucking;//if we have forced ducking mode
+    private boolean waitUntilFocusGot;//if we had lost audio focus before
+    private boolean waitForHeadphonesIn;//if user had unplugged headphones
+    private boolean pausedByUs;//if we had stopped the playback
 
     public AudioStateTracker(SoundService service)
     {
@@ -24,18 +27,25 @@ class AudioStateTracker extends BroadcastReceiver implements AudioManager.OnAudi
     {
         if (AudioManager.ACTION_AUDIO_BECOMING_NOISY.equals(intent.getAction()))
         {
-            EnumSet<AudioStates> newState = EnumSet.copyOf(this.audioState);
-            newState.remove(AudioStates.HeadphonesPlugged);
-            this.behaveAccordingToState(newState);
+            //user unplugs headphones while playing - pause playback
+            this.waitForHeadphonesIn = true;
+            if (this.service.getState() == AudioPlayerState.Playing)
+            {
+                this.service.pause();
+                this.pausedByUs = true;
+            }
         }
         else if (Intent.ACTION_HEADSET_PLUG.equals(intent.getAction()) && intent.getIntExtra("state", -1) == 1)
         {
-            EnumSet<AudioStates> newState = EnumSet.copyOf(this.audioState);
+            //user plugs in headphones
+            this.waitForHeadphonesIn = false;
+            AudioPlayerState state = this.service.getState();
 
-            if (!newState.contains(AudioStates.HeadphonesPlugged))
+            //Had audio focus been lost? Did we force playback pause? Is playback paused now?
+            if (!this.waitUntilFocusGot && this.pausedByUs && state == AudioPlayerState.Paused)
             {
-                newState.add(AudioStates.HeadphonesPlugged);
-                this.behaveAccordingToState(newState);
+                this.pausedByUs = false;
+                this.service.resume();
             }
         }
     }
@@ -43,39 +53,63 @@ class AudioStateTracker extends BroadcastReceiver implements AudioManager.OnAudi
     @Override
     public void onAudioFocusChange(int i)
     {
-        EnumSet<AudioStates> newState = EnumSet.copyOf(this.audioState);
-
         switch (i)
         {
             case AudioManager.AUDIOFOCUS_LOSS:
             {
-                newState.clear();
+                //we lost audio focus completely - stop, if not stopped already
+                if (this.service.getState() != AudioPlayerState.Stopped)
+                    this.service.stop();
+
                 break;
             }
             case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
             {
-                newState.remove(AudioStates.FocusGained);
+                //temporally lost audio focus (e.g. call incoming) - pause
+                this.waitUntilFocusGot = true;
+                if (this.service.getState() == AudioPlayerState.Playing)
+                {
+                    this.service.pause();
+                    this.pausedByUs = true;
+                }
+
                 break;
             }
             case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
             {
-                if (!newState.contains(AudioStates.Duck))
-                    newState.add(AudioStates.Duck);
+                //we should get a bit more quiet
+                this.service.setVolume(0.2f);
+                this.isDucking = true;
                 break;
             }
             case AudioManager.AUDIOFOCUS_GAIN:
             {
-                if (!newState.contains(AudioStates.FocusGained))
-                    newState.add(AudioStates.FocusGained);
+                //if we were quiet - get loud
+                if (this.isDucking)
+                {
+                    this.service.setVolume(1.0f);
+                    this.isDucking = false;
+                    return;
+                }
 
-                newState.remove(AudioStates.Duck);
+                //if incoming call is over
+                this.waitUntilFocusGot = false;
+                AudioPlayerState state = this.service.getState();
+                //User could unplug headphones to answer the call, had he plugged them back? Did we force playback pause? Is playback paused now?
+                if (!this.waitForHeadphonesIn && this.pausedByUs && state == AudioPlayerState.Paused)
+                {
+                    this.pausedByUs = false;
+                    this.service.resume();
+                }
+
                 break;
             }
         }
-
-        this.behaveAccordingToState(newState);
     }
 
+    /**
+     * Registers current instance of {@link net.illusor.swipeplayer.services.AudioStateTracker} as a {@link android.content.BroadcastReceiver}
+     */
     public void registerReceiver()
     {
         IntentFilter filter = new IntentFilter();
@@ -84,64 +118,21 @@ class AudioStateTracker extends BroadcastReceiver implements AudioManager.OnAudi
         this.service.registerReceiver(this, filter);
     }
 
+    /**
+     * Unregisters current instance of {@link net.illusor.swipeplayer.services.AudioStateTracker} as a {@link android.content.BroadcastReceiver}
+     */
     public void unregisterReceiver()
     {
         this.service.unregisterReceiver(this);
     }
 
-    public void startTracking()
+    /**
+     * Resets the internal state of {@link net.illusor.swipeplayer.services.AudioStateTracker}
+     */
+    public void reset()
     {
-        EnumSet<AudioStates> newState = EnumSet.copyOf(this.audioState);
-
-        if (!newState.contains(AudioStates.FocusGained))
-            newState.add(AudioStates.FocusGained);
-
-        this.behaveAccordingToState(newState);
-    }
-
-    private void behaveAccordingToState(EnumSet<AudioStates> newState)
-    {
-        if (newState.isEmpty())
-        {
-            this.service.stop();
-            this.audioState = newState;
-            return;
-        }
-
-        if (!newState.contains(AudioStates.FocusGained) || (!newState.contains(AudioStates.HeadphonesPlugged) && this.audioState.contains(AudioStates.HeadphonesPlugged)))
-        {
-            if (this.service.getState() != AudioPlayerState.Paused)
-                this.service.pause();
-
-            this.storedAudioState = this.audioState;
-            this.audioState = newState;
-            return;
-        }
-        else if (this.storedAudioState != null)
-        {
-            if (newState.contains(AudioStates.FocusGained) && (newState.contains(AudioStates.HeadphonesPlugged) || newState.contains(AudioStates.HeadphonesPlugged) == this.storedAudioState.contains(AudioStates.HeadphonesPlugged)))
-            {
-                if (this.service.getState() == AudioPlayerState.Paused)
-                    this.service.resume();
-
-                this.service.resume();
-                this.audioState = newState;
-                this.storedAudioState = null;
-            }
-        }
-
-        if (newState.contains(AudioStates.Duck) && !this.audioState.contains(this.service))
-            this.service.setVolume(0.2f);
-        else if (!newState.contains(AudioStates.Duck) && this.audioState.contains(this.service))
-            this.service.setVolume(1.0f);
-
-        this.audioState = newState;
-    }
-
-    private enum AudioStates
-    {
-        HeadphonesPlugged,
-        FocusGained,
-        Duck
+        this.waitForHeadphonesIn = false;
+        this.waitUntilFocusGot = false;
+        this.pausedByUs = false;
     }
 }

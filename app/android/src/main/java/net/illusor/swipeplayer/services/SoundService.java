@@ -110,7 +110,7 @@ public class SoundService extends Service
         if (gain != AudioManager.AUDIOFOCUS_REQUEST_GRANTED)
             return;
 
-        this.audioStateTracker.startTracking();
+        this.audioStateTracker.reset();
 
         if (!this.serviceStarted)
         {
@@ -283,71 +283,6 @@ public class SoundService extends Service
                 this.stopSelf();
                 break;
             }
-        }
-    }
-
-    /**
-     * Handles changes of audio focus
-     */
-    private class AudioFocusChangeListener implements AudioManager.OnAudioFocusChangeListener
-    {
-        private int lostFocusReason;//why we lost focus last time?
-        private AudioPlayerState audioPlayerState;//which state did we have when we lost focus
-
-        @Override
-        public void onAudioFocusChange(int i)
-        {
-            switch (i)
-            {
-                case AudioManager.AUDIOFOCUS_LOSS:
-                {
-                    this.lostFocusReason = i;
-                    this.audioPlayerState = audioPlayer.getState();
-                    stop();
-                    break;
-                }
-                case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
-                {
-                    this.lostFocusReason = i;
-                    this.audioPlayerState = audioPlayer.getState();
-                    pause();
-                    break;
-                }
-                case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
-                {
-                    this.lostFocusReason = i;
-                    audioPlayer.setVolume(0.2f);
-                    break;
-                }
-                case AudioManager.AUDIOFOCUS_GAIN:
-                {
-                    switch (this.lostFocusReason)
-                    {
-                        case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
-                        {
-                            if (this.audioPlayerState == AudioPlayerState.Playing)
-                                resume();
-                            break;
-                        }
-                        case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
-                        {
-                            audioPlayer.setVolume(1.0f);
-                            break;
-                        }
-                    }
-                    break;
-                }
-            }
-        }
-    }
-
-    private class NoisyReceiver extends BroadcastReceiver
-    {
-        @Override
-        public void onReceive(Context context, Intent intent)
-        {
-            if (AudioManager.ACTION_AUDIO_BECOMING_NOISY.equals(intent.getAction()))
-                pause();
         }
     }
 

@@ -47,12 +47,11 @@ public class SoundService extends Service
     private static final int NOTIFICATION_CODE_ERROR = 753950;
 
     private final AudioPlayer audioPlayer = new AudioPlayer();
-    private final NoisyReceiver noisyReceiver = new NoisyReceiver();
     private final NotificationHelper notificationHelper = new NotificationHelper(this);
     private final SwipeWidgetHelper widgetHelper = new SwipeWidgetHelper(this);
-    private final AudioFocusChangeListener audioFocusChangeListener = new AudioFocusChangeListener();
     private final PlaybackStrategy playlist = new SequentialPlaybackStrategy();
-    private AudioBroadcastHandler audioBroadcastHandler = new AudioBroadcastHandler();
+    private final AudioBroadcastHandler audioBroadcastHandler = new AudioBroadcastHandler();
+    private final AudioStateTracker audioStateTracker = new AudioStateTracker(this);
     private AudioManager audioManager;
     private boolean serviceStarted;
 
@@ -107,15 +106,17 @@ public class SoundService extends Service
      */
     void play(AudioFile audioFile)
     {
-        int gain = this.audioManager.requestAudioFocus(this.audioFocusChangeListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
+        int gain = this.audioManager.requestAudioFocus(this.audioStateTracker, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
         if (gain != AudioManager.AUDIOFOCUS_REQUEST_GRANTED)
             return;
+
+        this.audioStateTracker.startTracking();
 
         if (!this.serviceStarted)
         {
             this.startService(new Intent(this, SoundService.class));
-            this.registerReceiver(this.noisyReceiver, new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY));
             this.audioManager.registerMediaButtonEventReceiver(new ComponentName(this, MediaButtonReceiver.class));
+            this.audioStateTracker.registerReceiver();
             this.serviceStarted = true;
         }
 
@@ -133,8 +134,8 @@ public class SoundService extends Service
 
         if (this.serviceStarted)
         {
-            this.unregisterReceiver(this.noisyReceiver);
-            this.audioManager.abandonAudioFocus(this.audioFocusChangeListener);
+            this.audioStateTracker.unregisterReceiver();
+            this.audioManager.abandonAudioFocus(this.audioStateTracker);
             this.audioManager.unregisterMediaButtonEventReceiver(new ComponentName(this, MediaButtonReceiver.class));
             this.serviceStarted = false;
         }
@@ -247,6 +248,16 @@ public class SoundService extends Service
             Notification notification = this.notificationHelper.getPlayingNotification(audioFile);
             this.startForeground(NOTIFICATION_CODE_STATUS, notification);
         }
+    }
+
+    void setVolume(float volume)
+    {
+        this.audioPlayer.setVolume(volume);
+    }
+
+    AudioPlayerState getState()
+    {
+        return this.audioPlayer.getState();
     }
 
     /**

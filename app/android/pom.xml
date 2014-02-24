@@ -67,12 +67,79 @@
                 <artifactId>maven-compiler-plugin</artifactId>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jarsigner-plugin</artifactId>
-            </plugin>
-            <plugin>
                 <groupId>com.jayway.maven.plugins.android.generation2</groupId>
                 <artifactId>android-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>lint</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>lint</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>zipalign</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>zipalign</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>manifest-update</id>
+                        <goals>
+                            <goal>manifest-update</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <lint>
+                        <skip>false</skip>
+                        <enableXml>true</enableXml>
+                        <enableHtml>true</enableHtml>
+                    </lint>
+                    <sign>
+                        <debug>false</debug>
+                    </sign>
+                    <zipalign>
+                        <skip>false</skip>
+                        <verbose>true</verbose>
+                        <inputApk>${project.build.directory}/${project.build.finalName}.apk</inputApk>
+                        <outputApk>${project.build.directory}/${project.build.finalName}-signed-aligned.apk</outputApk>
+                    </zipalign>
+                    <device>usb</device>
+                    <undeployBeforeDeploy>true</undeployBeforeDeploy>
+                    <manifest>
+                        <versionCode>100000${env.BUILD_NUMBER}</versionCode>
+                        <versionName>${project.version}:${env.BUILD_NUMBER}</versionName>
+                        <debuggable>false</debuggable>
+                    </manifest>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jarsigner-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>signing</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>sign</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <removeExistingSignatures>true</removeExistingSignatures>
+                    <archive>${project.build.directory}/${project.build.finalName}.apk</archive>
+                    <keystore>${android.keystore.path}</keystore>
+                    <storepass>${android.keystore.storepass}</storepass>
+                    <alias>${android.keystore.alias}</alias>
+                    <keypass>${android.keystore.keypass}</keypass>
+                    <arguments>
+                        <argument>-sigalg</argument><argument>MD5withRSA</argument>
+                        <argument>-digestalg</argument><argument>SHA1</argument>
+                    </arguments>
+                </configuration>
             </plugin>
         </plugins>
     </build>

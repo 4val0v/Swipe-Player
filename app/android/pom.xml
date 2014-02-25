@@ -106,8 +106,6 @@
                         <inputApk>${project.build.directory}/${project.build.finalName}.apk</inputApk>
                         <outputApk>${project.build.directory}/${project.build.finalName}-signed-aligned.apk</outputApk>
                     </zipalign>
-                    <device>usb</device>
-                    <undeployBeforeDeploy>true</undeployBeforeDeploy>
                     <manifest>
                         <versionCode>100000${env.BUILD_NUMBER}</versionCode>
                         <versionName>${project.version}:${env.BUILD_NUMBER}</versionName>

@@ -5,16 +5,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
+import android.telephony.PhoneStateListener;
+import android.telephony.TelephonyManager;
 
 /**
  * Defines application behavior when user plugs/unplugs wired headphones or audio focus gets changed for some reason
  */
 class AudioStateTracker extends BroadcastReceiver implements AudioManager.OnAudioFocusChangeListener
 {
+    private final TelephonyStateListener telephonyListener = new TelephonyStateListener(this);
     private final SoundService service;
+    private TelephonyManager telephonyManager;
     private boolean isDucking;//if we have forced ducking mode
     private boolean waitUntilFocusGot;//if we had lost audio focus before
     private boolean waitForHeadphonesIn;//if user had unplugged headphones
+    private boolean waitForCallEnds;//if we have a call in progress
     private boolean pausedByUs;//if we had stopped the playback
 
     public AudioStateTracker(SoundService service)
@@ -41,8 +46,8 @@ class AudioStateTracker extends BroadcastReceiver implements AudioManager.OnAudi
             this.waitForHeadphonesIn = false;
             AudioPlayerState state = this.service.getState();
 
-            //Had audio focus been lost? Did we force playback pause? Is playback paused now?
-            if (!this.waitUntilFocusGot && this.pausedByUs && state == AudioPlayerState.Paused)
+            //Had audio focus been lost? Are there any running calls? Did we force playback pause? Is playback paused now?
+            if (!this.waitUntilFocusGot && !this.waitForCallEnds && this.pausedByUs && state == AudioPlayerState.Paused)
             {
                 this.pausedByUs = false;
                 this.service.resume();
@@ -95,8 +100,8 @@ class AudioStateTracker extends BroadcastReceiver implements AudioManager.OnAudi
                 //if incoming call is over
                 this.waitUntilFocusGot = false;
                 AudioPlayerState state = this.service.getState();
-                //User could unplug headphones to answer the call, had he plugged them back? Did we force playback pause? Is playback paused now?
-                if (!this.waitForHeadphonesIn && this.pausedByUs && state == AudioPlayerState.Paused)
+                //User could unplug headphones to answer the call, had he plugged them back? Are there any calls running? Did we force playback pause? Is playback paused now?
+                if (!this.waitForHeadphonesIn && !this.waitForCallEnds && this.pausedByUs && state == AudioPlayerState.Paused)
                 {
                     this.pausedByUs = false;
                     this.service.resume();
@@ -112,10 +117,15 @@ class AudioStateTracker extends BroadcastReceiver implements AudioManager.OnAudi
      */
     public void registerReceiver()
     {
+        //react on headphones plug/unplug
         IntentFilter filter = new IntentFilter();
         filter.addAction(AudioManager.ACTION_AUDIO_BECOMING_NOISY);
         filter.addAction(Intent.ACTION_HEADSET_PLUG);
         this.service.registerReceiver(this, filter);
+
+        //react on calls
+        this.telephonyManager = (TelephonyManager)service.getSystemService(Context.TELEPHONY_SERVICE);
+        this.telephonyManager.listen(this.telephonyListener, PhoneStateListener.LISTEN_CALL_STATE);
     }
 
     /**
@@ -124,6 +134,7 @@ class AudioStateTracker extends BroadcastReceiver implements AudioManager.OnAudi
     public void unregisterReceiver()
     {
         this.service.unregisterReceiver(this);
+        this.telephonyManager.listen(this.telephonyListener, PhoneStateListener.LISTEN_NONE);
     }
 
     /**
@@ -133,6 +144,50 @@ class AudioStateTracker extends BroadcastReceiver implements AudioManager.OnAudi
     {
         this.waitForHeadphonesIn = false;
         this.waitUntilFocusGot = false;
+        this.waitForCallEnds = false;
         this.pausedByUs = false;
+    }
+
+    /**
+     * Detects and handles phone calls
+     */
+    private class TelephonyStateListener extends PhoneStateListener
+    {
+        private final AudioStateTracker tracker;
+
+        private TelephonyStateListener(AudioStateTracker tracker)
+        {
+            this.tracker = tracker;
+        }
+
+        @Override
+        public void onCallStateChanged(int state, String incomingNumber)
+        {
+            super.onCallStateChanged(state, incomingNumber);
+
+            if (state == TelephonyManager.CALL_STATE_RINGING)
+            {
+                //a call is started
+                this.tracker.waitForCallEnds = true;
+                if (this.tracker.service.getState() == AudioPlayerState.Playing)
+                {
+                    this.tracker.service.pause();
+                    this.tracker.pausedByUs = true;
+                }
+            }
+            else if (state == TelephonyManager.CALL_STATE_IDLE)
+            {
+                //a call has ended
+                this.tracker.waitForCallEnds = false;
+                AudioPlayerState audioState = this.tracker.service.getState();
+
+                //Had audio focus been lost? User could unplug headphones to answer the call, had he plugged them back? Did we force playback pause? Is playback paused now?
+                if (!this.tracker.waitUntilFocusGot && !this.tracker.waitForHeadphonesIn && this.tracker.pausedByUs && audioState == AudioPlayerState.Paused)
+                {
+                    this.tracker.pausedByUs = false;
+                    this.tracker.service.resume();
+                }
+            }
+        }
     }
 }

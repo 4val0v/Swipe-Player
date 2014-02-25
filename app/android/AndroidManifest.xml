@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<!--Copyright 2013 Nikita Kobzev
+<?xml version="1.0" encoding="utf-8"?><!--Copyright 2013 Nikita Kobzev
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -22,6 +20,8 @@
     <uses-sdk
         android:minSdkVersion="10"
         android:targetSdkVersion="16" />
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"

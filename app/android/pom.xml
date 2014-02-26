@@ -90,7 +90,6 @@
                         <argument>-sigalg</argument><argument>MD5withRSA</argument>
                         <argument>-digestalg</argument><argument>SHA1</argument>
                     </arguments>
-                    <verbose>true</verbose>
                 </configuration>
             </plugin>
             <plugin>

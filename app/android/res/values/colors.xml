@@ -37,4 +37,10 @@
     <color name="color_durations_passed">#ffffff</color>
     <color name="color_durations_left">#808094</color>
 
+    <color name="color_widget_small">#8d1a4f</color>
+    <color name="color_widget_title">@android:color/white</color>
+    <color name="color_widget_artist">@android:color/black</color>
+    <drawable name="color_widget_button_idle">#ef4b4d</drawable>
+    <drawable name="color_widget_button_pressed">#0f0e26</drawable>
+
 </resources>

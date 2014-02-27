@@ -9,18 +9,19 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/appwidget_dark_bg">
+        android:background="@color/color_widget_small">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <LinearLayout
             android:layout_width="0dip"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/id_appwidget_content"
             android:orientation="vertical"
             android:gravity="center_vertical"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp">
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
 
             <include layout="@layout/screen_widget_track" />
 
@@ -33,7 +34,7 @@
             android:id="@+id/id_appwidget_playpause_small"
             android:src="@android:drawable/ic_media_play"
             android:contentDescription="@string/str_action_resume"
-            android:background="@drawable/appwidget_button_right" />
+            android:background="@drawable/appwidget_button2" />
 
     </LinearLayout>
 

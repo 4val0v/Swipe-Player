@@ -1,0 +1,9 @@
+# use glob syntax
+syntax: glob
+
+АукцЫон/
+app/target/
+app/*/target/
+build/
+app/out/
+app/.idea/

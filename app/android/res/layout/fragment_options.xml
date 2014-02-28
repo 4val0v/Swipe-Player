@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/color_fragment_browser">
+
+    <ToggleButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/id_playlist_shuffle"
+        android:background="@drawable/btn_shuffle_mode"
+        android:layout_marginBottom="7dp"
+        android:textOff=""
+        android:textOn=""/>
+
+    <ToggleButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/id_playlist_repeat"
+        android:src="@drawable/ic_playlist_repeat_off"
+        android:background="@drawable/btn_repeat_mode"
+        android:layout_marginTop="7dp"
+        android:textOff=""
+        android:textOn="" />
+
+</LinearLayout>

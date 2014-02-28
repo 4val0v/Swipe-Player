@@ -58,22 +58,13 @@
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".widget.WidgetSmallProvider">
+        <receiver android:name=".widget.WidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/widget_small_prowider_info" />
-        </receiver>
-
-        <receiver android:name=".widget.WidgetFullProvider">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_full_provider_info" />
+                android:resource="@xml/widget_prowider_info" />
         </receiver>
 
     </application>

@@ -16,7 +16,9 @@ package net.illusor.swipeplayer.fragments;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.media.MediaMetadataRetriever;
 import android.provider.MediaStore;
+import android.util.Log;
 import net.illusor.swipeplayer.domain.AudioFile;
 
 import java.io.File;
@@ -29,7 +31,9 @@ import java.util.List;
  */
 class AudioFilesLoader extends AudioFoldersLoader
 {
+    private static final String logKey = AudioFilesLoader.class.getName();
     private final Comparator<AudioFile> comparator;
+    private final MediaMetadataRetriever metadataRetriever = new MediaMetadataRetriever();
 
     /**
      * Creates a new instance of {@link AudioFilesLoader}
@@ -73,10 +77,31 @@ class AudioFilesLoader extends AudioFoldersLoader
     private AudioFile getNextLevelObject(Cursor cursor)
     {
         String fileName = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));
-        String title = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME));
-        String author = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));
+
+        String title;
+
+        try
+        {
+            Log.d(logKey, "Resolving metadata for file: " + fileName);
+
+            this.metadataRetriever.setDataSource(fileName);
+            title = this.metadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
+
+            if (title == null || title.length() == 0)
+                title = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME));
+        }
+        catch (RuntimeException ex)
+        {
+            Log.e(logKey, "Error resolving metadata for file: " + fileName, ex);
+
+            title = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME));
+        }
+
+        String artist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));
         long duration = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION));
-        AudioFile result = new AudioFile(fileName, title, author, duration);
+
+        AudioFile result = new AudioFile(fileName, title, artist, duration);
+
         return result;
     }
 

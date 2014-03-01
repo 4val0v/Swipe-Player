@@ -38,4 +38,6 @@
     <string name="str_action_pause">Пауза</string>
     <string name="str_action_stop">Стоп</string>
 
+    <string name="str_artist_unknown">Неизвестный исполнитель</string>
+
 </resources>

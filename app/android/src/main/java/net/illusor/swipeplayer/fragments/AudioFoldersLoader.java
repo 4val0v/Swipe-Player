@@ -117,7 +117,7 @@ class AudioFoldersLoader extends AsyncTaskLoader<AudioPlaylist>
     private Cursor executeQuery(Uri uri)
     {
         Cursor cursor = this.getContext().getContentResolver().query(uri,
-                new String[]{ MediaStore.Audio.Media.DISPLAY_NAME, MediaStore.Audio.Media.ARTIST, MediaStore.Audio.Media.DURATION, MediaStore.Audio.Media.DATA },
+                new String[]{ MediaStore.Audio.Media.TITLE, MediaStore.Audio.Media.ARTIST, MediaStore.Audio.Media.DURATION, MediaStore.Audio.Media.DATA },
                 MediaStore.Audio.Media.DATA + " like ? and " + MediaStore.Audio.Media.IS_MUSIC + "!=0",
                 new String[]{ this.directory.getAbsolutePath() + "%" }, null);
 
@@ -157,7 +157,7 @@ class AudioFoldersLoader extends AsyncTaskLoader<AudioPlaylist>
         public int compare(AudioFile audioFile1, AudioFile audioFile2)
         {
             if (audioFile1.isFile() == audioFile2.isFile())
-                return audioFile1.getAbsolutePath().compareTo(audioFile2.getAbsolutePath());
+                return audioFile1.getTitle().compareTo(audioFile2.getTitle());
             else
             {
                 if (audioFile1.isFile())

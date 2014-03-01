@@ -37,7 +37,5 @@
     <string name="str_action_resume">Продолжить</string>
     <string name="str_action_pause">Пауза</string>
     <string name="str_action_stop">Стоп</string>
-    <string name="str_action_prev">Предыдущий трэк</string>
-    <string name="str_action_next">Следующий трэк</string>
 
 </resources>

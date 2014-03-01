@@ -20,7 +20,6 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:id="@+id/id_playlist_repeat"
-        android:src="@drawable/ic_playlist_repeat_off"
         android:background="@drawable/btn_repeat_mode"
         android:layout_marginTop="7dp"
         android:textOff=""

@@ -37,7 +37,5 @@
     <string name="str_action_resume">Resume</string>
     <string name="str_action_pause">Pause</string>
     <string name="str_action_stop">Stop</string>
-    <string name="str_action_prev">Previous</string>
-    <string name="str_action_next">Next</string>
 
 </resources>

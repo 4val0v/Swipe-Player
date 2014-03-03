@@ -14,12 +14,6 @@
     See the License for the specific language governing permissions and
     limitations under the License.-->
 
-<!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:swp="http://schemas.android.com/apk/res/net.illusor.swipeplayer"
-             android:orientation="vertical"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">-->
-
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
        xmlns:swp="http://schemas.android.com/apk/res/net.illusor.swipeplayer">
 
@@ -27,7 +21,6 @@
             android:id="@+id/id_duration_passed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            swp:TextColor="@color/color_durations_passed"
             swp:Font="PTSerifItalic"
             swp:HeaderTextSize="54dp"/>
 
@@ -35,10 +28,7 @@
             android:id="@+id/id_duration_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            swp:TextColor="@color/color_durations_left"
             swp:Font="PTSerifItalic"
             swp:HeaderTextSize="27dp"/>
 
 </merge>
-
-<!--</FrameLayout>-->

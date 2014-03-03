@@ -36,6 +36,8 @@
 
     <color name="color_durations_passed">#ffffff</color>
     <color name="color_durations_left">#808094</color>
+    <color name="color_durations_passed_inverse">#010129</color>
+    <color name="color_durations_left_inverse">#808094</color>
 
     <color name="color_widget_small">#8d1a4f</color>
     <color name="color_widget_title">@android:color/white</color>

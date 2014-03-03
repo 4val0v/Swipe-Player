@@ -35,6 +35,7 @@ import net.illusor.swipeplayer.fragments.PlaylistFragment;
 import net.illusor.swipeplayer.helpers.PreferencesHelper;
 import net.illusor.swipeplayer.services.AudioPlayerState;
 import net.illusor.swipeplayer.services.SoundServiceConnection;
+import net.illusor.swipeplayer.widgets.DurationDisplayView;
 
 import java.io.File;
 import java.util.List;
@@ -63,6 +64,7 @@ public class SwipeActivity extends FragmentActivity
     private PlaylistFragment playlistFragment;//fragment which shows list of music files playing
     private File currentMediaDirectory;//which directory we look music files in
     private SlidingMenu menuOptions;//sliding menu with "Shuffle" and "Repeat" buttons
+    private DurationDisplayView durationDisplay;//displays audio timing while audio track being rewound
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -76,6 +78,7 @@ public class SwipeActivity extends FragmentActivity
         this.viewPager = (ViewPager) this.findViewById(R.id.id_swipe_view_pager);
         this.viewPager.setOnPageChangeListener(new OnSwipeListener());
         this.pagerAdapter = new LocalPagerAdapter(this.getSupportFragmentManager());
+        this.durationDisplay = (DurationDisplayView)this.findViewById(R.id.id_audio_durations);
 
         this.handleIncomingIntent(this.getIntent());
     }
@@ -337,8 +340,12 @@ public class SwipeActivity extends FragmentActivity
         @Override
         public void onPageSelected(int position)
         {
+            //enable options menu only when playlist active
             int playlistFragmentPos = viewPager.getAdapter().getCount() - 1;
             menuOptions.setTouchModeAbove(position == playlistFragmentPos ? SlidingMenu.TOUCHMODE_FULLSCREEN : SlidingMenu.TOUCHMODE_NONE);
+
+            //when background is dark (folder browser selected), invert colors of duration display view
+            durationDisplay.setColorsInverse(position != playlistFragmentPos);
         }
     }
 }

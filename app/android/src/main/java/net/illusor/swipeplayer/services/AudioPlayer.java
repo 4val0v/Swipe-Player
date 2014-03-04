@@ -103,6 +103,7 @@ class AudioPlayer
 
         this.mediaPlayer.release();
         this.mediaPlayer = null;
+        this.audioFile = null;
     }
 
     /**

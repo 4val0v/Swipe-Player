@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <!--Copyright 2014 Nikita Kobzev
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+	     http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>Android Core</name>
+    <artifactId>android</artifactId>
+    <packaging>apk</packaging>
+
+	<parent>
+		<groupId>net.illusor</groupId>
+		<artifactId>swipeplayer</artifactId>
+		<version>1.1</version>
+	</parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>android</groupId>
+            <artifactId>android</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>android.support</groupId>
+            <artifactId>compatibility-v4</artifactId>
+        </dependency>      
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.nineoldandroids</groupId>
+            <artifactId>library</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jeremyfeinstein.slidingmenu</groupId>
+            <artifactId>slidingmenu</artifactId>
+            <type>apklib</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jarsigner-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>signing</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>sign</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <removeExistingSignatures>true</removeExistingSignatures>
+                    <archive>${project.build.directory}/${project.build.finalName}.apk</archive>
+                    <keystore>${android.keystore.path}</keystore>
+                    <storepass>${android.keystore.storepass}</storepass>
+                    <alias>${android.keystore.alias}</alias>
+                    <keypass>${android.keystore.keypass}</keypass>
+                    <arguments>
+                        <argument>-sigalg</argument><argument>MD5withRSA</argument>
+                        <argument>-digestalg</argument><argument>SHA1</argument>
+                    </arguments>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+                <artifactId>android-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>lint</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>lint</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>zipalign</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>zipalign</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>manifest-update</id>
+                        <goals>
+                            <goal>manifest-update</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <lint>
+                        <skip>false</skip>
+                        <enableXml>true</enableXml>
+                        <enableHtml>true</enableHtml>
+                    </lint>
+                    <sign>
+                        <debug>false</debug>
+                    </sign>
+                    <zipalign>
+                        <skip>false</skip>
+                        <verbose>true</verbose>
+                        <inputApk>${project.build.directory}/${project.build.finalName}.apk</inputApk>
+                        <outputApk>${project.build.directory}/${project.build.finalName}-signed-aligned.apk</outputApk>
+                    </zipalign>
+                    <manifest>
+                        <versionCode>100100${env.BUILD_NUMBER}</versionCode>
+                        <versionName>${project.version}:${env.BUILD_NUMBER}</versionName>
+                        <debuggable>false</debuggable>
+                    </manifest>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--Copyright 2014 Nikita Kobzev
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.-->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding_screen_widget">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_widget_small">
+
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/id_appwidget_content"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/id_appwidget_title"
+                    android:singleLine="true"
+                    android:textSize="16sp"
+                    android:textColor="@color/color_widget_title"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/id_appwidget_artist"
+                    android:singleLine="true"
+                    android:textColor="@color/color_widget_artist"/>
+
+        </LinearLayout>
+
+        <ImageButton
+            android:layout_width="56dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/id_appwidget_playpause"
+            android:src="@drawable/ic_widget_play"
+            android:contentDescription="@string/str_action_resume"
+            android:background="@drawable/btn_widget_bg"
+            android:layout_marginRight="0.75dp" />
+
+        <ImageButton
+                android:layout_width="56dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:id="@+id/id_appwidget_ffwd"
+                android:src="@drawable/ic_widget_fwd"
+                android:contentDescription="@string/str_action_resume"
+                android:background="@drawable/btn_widget_bg" />
+
+    </LinearLayout>
+
+</FrameLayout>

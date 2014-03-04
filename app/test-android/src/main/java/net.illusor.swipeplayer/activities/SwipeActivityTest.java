@@ -1,11 +1,23 @@
+/*Copyright 2014 Nikita Kobzev
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.*/
+
 package net.illusor.swipeplayer.activities;
 
-import android.app.Instrumentation;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.test.ActivityInstrumentationTestCase2;
-import android.test.TouchUtils;
 import android.test.suitebuilder.annotation.SmallTest;
 import android.view.View;
 import android.widget.ListAdapter;
@@ -43,13 +55,13 @@ public class SwipeActivityTest extends ActivityInstrumentationTestCase2<SwipeAct
 
         this.activity = this.getActivity();
         FragmentManager fragmentManager = this.activity.getSupportFragmentManager();
-        this.slidingMenu = (SlidingMenu)this.activity.findViewById(R.id.id_playlist_menu);
-        this.audioControlFragment = (AudioControlFragment)fragmentManager.findFragmentById(R.id.id_audio_control);
-        this.playlistOptionsFragment = (PlaylistOptionsFragment)fragmentManager.findFragmentById(R.id.id_fragment_options);
-        this.viewPager = (ViewPager)this.activity.findViewById(R.id.id_swipe_view_pager);
-        this.durationDisplayView = (DurationDisplayView)this.activity.findViewById(R.id.id_audio_durations);
-        this.btnShuffle = (ToggleButton)this.activity.findViewById(R.id.id_playlist_shuffle);
-        this.btnRepeat = (ToggleButton)this.activity.findViewById(R.id.id_playlist_repeat);
+        this.slidingMenu = (SlidingMenu) this.activity.findViewById(R.id.id_playlist_menu);
+        this.audioControlFragment = (AudioControlFragment) fragmentManager.findFragmentById(R.id.id_audio_control);
+        this.playlistOptionsFragment = (PlaylistOptionsFragment) fragmentManager.findFragmentById(R.id.id_fragment_options);
+        this.viewPager = (ViewPager) this.activity.findViewById(R.id.id_swipe_view_pager);
+        this.durationDisplayView = (DurationDisplayView) this.activity.findViewById(R.id.id_audio_durations);
+        this.btnShuffle = (ToggleButton) this.activity.findViewById(R.id.id_playlist_shuffle);
+        this.btnRepeat = (ToggleButton) this.activity.findViewById(R.id.id_playlist_repeat);
     }
 
     @SmallTest
@@ -68,7 +80,7 @@ public class SwipeActivityTest extends ActivityInstrumentationTestCase2<SwipeAct
     @SmallTest
     public void testInitialActivityState() throws Exception
     {
-        assertEquals("Sliding menu should be initially hidden" ,false, this.slidingMenu.isMenuShowing());
+        assertEquals("Sliding menu should be initially hidden", false, this.slidingMenu.isMenuShowing());
         assertEquals("AudioControlFragment should be initially hidden", View.GONE, this.audioControlFragment.getView().getVisibility());
 
         PagerAdapter adapter = this.viewPager.getAdapter();
@@ -93,14 +105,14 @@ public class SwipeActivityTest extends ActivityInstrumentationTestCase2<SwipeAct
     {
         View folderBrowserView = this.viewPager.getChildAt(1);
 
-        DropDown dropDown = (DropDown)folderBrowserView.findViewById(R.id.id_fb_nav_history);
+        DropDown dropDown = (DropDown) folderBrowserView.findViewById(R.id.id_fb_nav_history);
         assertNotNull("FolderBrowser dropdown is null", dropDown);
 
         SpinnerAdapter spinnerAdapter = dropDown.getAdapter();
         assertNotNull("FolderBrowser dropdown adapter is null", spinnerAdapter);
         assertEquals("FolderBrowser dropdown adapter should initially contain 1 item", 1, spinnerAdapter.getCount());
 
-        ListView listView = (ListView)folderBrowserView.findViewById(R.id.id_fb_audio_files);
+        ListView listView = (ListView) folderBrowserView.findViewById(R.id.id_fb_audio_files);
         assertNotNull("FolderBrowser list is null", listView);
 
         ListAdapter listAdapter = listView.getAdapter();

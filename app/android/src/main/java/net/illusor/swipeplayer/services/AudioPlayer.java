@@ -41,10 +41,10 @@ class AudioPlayer
     {
         try
         {
-            this.audioFile = audioFile;
-
             if (this.mediaPlayer != null)
                 this.stop();
+
+            this.audioFile = audioFile;
 
             final AudioPlayer audioPlayer = this;
             this.mediaPlayer = new MediaPlayer();

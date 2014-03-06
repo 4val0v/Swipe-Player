@@ -203,6 +203,7 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
             if (this.isRewinding)
             {
                 AudioFile file = connection.service.getAudioFile();
+                if (file == null) return;
                 int duration = (int) file.getDuration();
                 int played = (int) (duration * (1.0f * i / seekBar.getMax()));
                 this.display.setDuration(played, duration);
@@ -353,6 +354,7 @@ public class AudioControlFragment extends Fragment implements View.OnClickListen
         public void run()
         {
             AudioFile file = connection.service.getAudioFile();
+            if (file == null) return;
             int played = connection.service.getPosition();
             long duration = file.getDuration();
 

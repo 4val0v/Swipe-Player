@@ -14,8 +14,6 @@ limitations under the License.*/
 
 package net.illusor.swipeplayer.activities;
 
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -27,7 +25,6 @@ import android.view.ViewGroup;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Controls the set of fragments, used to browse media directories and play audio files
@@ -173,62 +170,6 @@ abstract class SwipePagerAdapter extends PagerAdapter
     public boolean isViewFromObject(View view, Object object)
     {
         return ((Fragment)object).getView() == view;
-    }
-
-    /**
-     * Saves the current object state
-     * @return Object, containing the current state of the class
-     */
-    public Parcelable saveObjectState()
-    {
-        Bundle state = new Bundle();
-
-        for (int i = 0; i < this.browserFolders.size(); i++)
-        {
-            Fragment fragment = this.browserFragments.get(i);
-            if (fragment == null) continue;
-
-            this.fragmentManager.putFragment(state, "fs"+i, fragment);
-        }
-
-        state.putSerializable("states", this.browserStates);
-        state.putSerializable("folders", this.browserFolders);
-
-        return state;
-    }
-
-    /**
-     * Restores object from its saved state
-     * @param state Object, containing the saved state of the class
-     */
-    public void restoreObjectState(Parcelable state)
-    {
-        Bundle bundle = (Bundle)state;
-        ArrayList<Fragment.SavedState> fragmentStates = (ArrayList)bundle.getSerializable("states");
-        ArrayList<File> folderStates = (ArrayList)bundle.getSerializable("folders");
-
-        this.browserStates.clear();
-        for (Fragment.SavedState fs : fragmentStates)
-            this.browserStates.add(fs);
-
-        this.browserFragments.clear();
-        this.browserFolders.clear();
-        for (File folder : folderStates)
-        {
-            this.browserFolders.add(folder);
-            this.browserFragments.add(null);
-
-        }
-
-        Set<String> keys = ((Bundle) state).keySet();
-        for (String key : keys)
-        {
-            if (!key.startsWith("fs")) continue;
-
-            Fragment fragment = this.fragmentManager.getFragment(bundle, key);
-            int index = Integer.valueOf(key.substring(2));
-            this.browserFragments.set(index, fragment);
-        }
     }
 
     /**

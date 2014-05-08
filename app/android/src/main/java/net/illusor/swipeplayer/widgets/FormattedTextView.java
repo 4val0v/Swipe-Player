@@ -89,7 +89,7 @@ public class FormattedTextView extends View implements Checkable
         int width, height;
         boolean needsWrap = false;
 
-        int requestedWidth = (int)(this.headerPaint.measureText(this.text, 0, this.text.length())) + paddingH;
+        int requestedWidth = (int) (this.headerPaint.measureText(this.text, 0, this.text.length())) + paddingH;
         switch (widthMode)
         {
             case MeasureSpec.UNSPECIFIED:
@@ -225,7 +225,7 @@ public class FormattedTextView extends View implements Checkable
             return;
         }
 
-        SavedState savedState = (SavedState)superState;
+        SavedState savedState = (SavedState) superState;
         super.onRestoreInstanceState(savedState.getSuperState());
 
         this.text = savedState.text;
@@ -295,7 +295,7 @@ public class FormattedTextView extends View implements Checkable
         this.invalidate();
     }
 
-    private class SavedState extends BaseSavedState
+    private static class SavedState extends BaseSavedState
     {
         private CharSequence text;
         private boolean isChecked;
@@ -317,7 +317,21 @@ public class FormattedTextView extends View implements Checkable
         {
             super.writeToParcel(dest, flags);
             dest.writeString(this.text.toString());
-            dest.writeByte(this.isChecked ? (byte)1 : 0);
+            dest.writeByte(this.isChecked ? (byte) 1 : 0);
         }
+
+        public static final Parcelable.Creator<SavedState> CREATOR =
+                new Parcelable.Creator<SavedState>()
+                {
+                    public SavedState createFromParcel(Parcel in)
+                    {
+                        return new SavedState(in);
+                    }
+
+                    public SavedState[] newArray(int size)
+                    {
+                        return new SavedState[size];
+                    }
+                };
     }
 }

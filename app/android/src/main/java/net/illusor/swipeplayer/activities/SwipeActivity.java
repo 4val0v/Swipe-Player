@@ -83,7 +83,7 @@ public class SwipeActivity extends FragmentActivity
         this.handleIncomingIntent(this.getIntent());
     }
 
-    @Override
+    /*@Override
     protected void onSaveInstanceState(Bundle outState)
     {
         super.onSaveInstanceState(outState);
@@ -100,7 +100,7 @@ public class SwipeActivity extends FragmentActivity
         this.pagerAdapter.restoreObjectState(state);
 
         this.viewPager.setAdapter(this.pagerAdapter);
-    }
+    }*/
 
     @Override
     protected void onNewIntent(Intent intent)

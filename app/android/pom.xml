@@ -28,7 +28,7 @@
 	<parent>
 		<groupId>net.illusor</groupId>
 		<artifactId>swipeplayer</artifactId>
-		<version>1.1-SNAPSHOT</version>
+		<version>1.2-SNAPSHOT</version>
 	</parent>
 
     <dependencies>
@@ -133,7 +133,7 @@
                         <outputApk>${project.build.directory}/${project.build.finalName}-signed-aligned.apk</outputApk>
                     </zipalign>
                     <manifest>
-                        <versionCode>100100${env.BUILD_NUMBER}</versionCode>
+                        <versionCode>100200${env.BUILD_NUMBER}</versionCode>
                         <versionName>${project.version}:${env.BUILD_NUMBER}</versionName>
                         <debuggable>false</debuggable>
                     </manifest>

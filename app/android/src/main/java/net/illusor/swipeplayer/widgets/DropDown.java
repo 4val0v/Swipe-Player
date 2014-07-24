@@ -23,6 +23,7 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.*;
 import net.illusor.swipeplayer.R;
 
@@ -52,7 +53,10 @@ public class DropDown extends Spinner
     {
         final ListAdapter adapter = new DropDownAdapter(this.getAdapter());
         DropDownDialog dialog = new DropDownDialog(this.getContext());
-        dialog.getWindow().setGravity(Gravity.TOP);
+
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.TOP);
+        window.setLayout(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 
         dialog.setSingleChoiceItems(adapter, this);
         dialog.show();

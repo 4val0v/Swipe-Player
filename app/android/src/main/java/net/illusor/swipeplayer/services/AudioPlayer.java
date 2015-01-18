@@ -29,7 +29,7 @@ class AudioPlayer
     private AudioFile audioFile;//current playing music file
     private PlaybackListener playbackListener;
     private boolean wasPlayingWhenRewindStarted;//if player was playing when rewind started
-    private int pausedPosition;//time mark, where player was pauser
+    private int pausedPosition;//time mark, where player was paused
     private float volume = 1;
 
     /**
@@ -55,8 +55,15 @@ class AudioPlayer
                 @Override
                 public void onPrepared(MediaPlayer player)
                 {
-                    player.setVolume(volume, volume);
-                    player.start();
+                    try
+                    {
+                        player.setVolume(volume, volume);
+                        player.start();
+                    }
+                    catch (IllegalStateException ignore)
+                    {
+                        //occurres when user starts "monkey-swiping" music tracks
+                    }
                 }
             });
             this.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
@@ -75,10 +82,11 @@ class AudioPlayer
                 @Override
                 public boolean onError(MediaPlayer mediaPlayer, int cause, int extra)
                 {
+                    mediaPlayer.reset();
+
                     if (playbackListener != null)
                         playbackListener.onError(audioPlayer.audioFile);
 
-                    mediaPlayer.release();
                     return true;
                 }
             });
@@ -91,6 +99,14 @@ class AudioPlayer
 
             throw e;
         }
+        catch (IllegalStateException ignore)
+        {
+            //occures when user starts "monkey-swiping" music tracks
+        }
+        catch (NullPointerException ignore)
+        {
+            //occures when user starts "monkey-swiping" music tracks
+        }
     }
 
     /**
@@ -98,9 +114,6 @@ class AudioPlayer
      */
     public void stop()
     {
-        if (this.mediaPlayer.isPlaying())
-            this.mediaPlayer.stop();
-
         this.mediaPlayer.release();
         this.mediaPlayer = null;
         this.audioFile = null;
@@ -168,12 +181,19 @@ class AudioPlayer
      */
     public AudioPlayerState getState()
     {
-        if (mediaPlayer == null)
-            return AudioPlayerState.Stopped;
-        else if (mediaPlayer.isPlaying())
-            return AudioPlayerState.Playing;
-        else
-            return AudioPlayerState.Paused;
+        try
+        {
+            if (this.mediaPlayer == null)
+                return AudioPlayerState.Stopped;
+            else if (this.mediaPlayer.isPlaying())
+                return AudioPlayerState.Playing;
+            else
+                return AudioPlayerState.Paused;
+        }
+        catch (IllegalStateException ex)
+        {
+            return AudioPlayerState.Paused;//means this.mediaPlayer is in "Error" state;
+        }
     }
 
     /**

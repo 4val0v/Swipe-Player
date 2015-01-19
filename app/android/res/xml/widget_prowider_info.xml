@@ -20,6 +20,8 @@ limitations under the License.-->
     android:resizeMode="horizontal"
     android:previewImage="@drawable/ic_widget_preview"
     android:minHeight="40dp"
-    android:minWidth="250dp">
+    android:minWidth="250dp"
+    android:minResizeWidth="180dp"
+    android:widgetCategory="home_screen|keyguard">
 
 </appwidget-provider>
